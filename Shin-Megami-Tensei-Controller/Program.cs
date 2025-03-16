@@ -21,8 +21,6 @@ using Shin_Megami_Tensei;
  *      var view = View.BuildConsoleView();
  */
 
-
-
 string testFolder = SelectTestFolder();
 string test = SelectTest(testFolder);
 string teamsFolder = testFolder.Replace("-Tests","");
