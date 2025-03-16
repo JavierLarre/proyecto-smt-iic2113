@@ -1,19 +1,37 @@
-﻿namespace Shin_Megami_Tensei.Samurais;
+﻿using Shin_Megami_Tensei.Common;
+using Shin_Megami_Tensei.Skills;
+
+namespace Shin_Megami_Tensei.Samurais;
 
 public class Samurai
 {
     public string Name = "";
-    public BaseStats BaseStats = new BaseStats();
-    public Affinities Affinities = new Affinities();
+    public BaseStats BaseStats = new();
+    public Affinities Affinities = new();
+    public Skill[] Skills = [];
 
-    public static Samurai FromInfo(SamuraiInfo samuraiInfo)
+    public Samurai(string name)
     {
-        Samurai samurai = new Samurai
-        {
-            Name = samuraiInfo.Name,
-            BaseStats = BaseStats.FromInfo(samuraiInfo.StatsInfo),
-            Affinities = Affinities.FromInfo(samuraiInfo.AffinityInfo),
-        };
-        return samurai;
+        SamuraiData samuraiData = SamuraiDatabase.Find(name);
+        FromData(samuraiData);
+    }
+
+    public void AddSkills(string[] skills)
+    {
+        Skills = skills
+            .Select(skill => new Skill(skill))
+            .ToArray();
+    }
+
+    private void FromData(SamuraiData samuraiData)
+    {
+        Name = samuraiData.name;
+        BaseStats = BaseStats.FromInfo(samuraiData.stats);
+        Affinities = Affinities.FromInfo(samuraiData.affinity);
+    }
+
+    public new string ToString()
+    {
+        return $"{Name} ({string.Join<Skill>(",", Skills)})";
     }
 }

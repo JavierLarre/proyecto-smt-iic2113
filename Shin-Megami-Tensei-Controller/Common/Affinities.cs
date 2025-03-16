@@ -1,6 +1,6 @@
 ﻿using Shin_Megami_Tensei.ClassesForParsing;
 
-namespace Shin_Megami_Tensei;
+namespace Shin_Megami_Tensei.Common;
 
 public class Affinities
 {

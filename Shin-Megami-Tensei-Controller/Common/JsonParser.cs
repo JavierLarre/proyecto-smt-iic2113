@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Shin_Megami_Tensei;
+namespace Shin_Megami_Tensei.Common;
 
 public class JsonParser
 {
