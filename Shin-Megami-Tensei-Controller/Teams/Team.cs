@@ -5,10 +5,15 @@ namespace Shin_Megami_Tensei.Teams;
 
 public class Team
 {
-    private Samurai Samurai;
-    private Monster[] Monsters;
+    public Samurai Samurai;
+    public Monster[] Monsters;
 
-    public Team(TeamParser parser)
+    public static Team FromParser(TeamParser parser)
+    {
+        return new Team(parser);
+    }
+
+    private Team(TeamParser parser)
     {
         Samurai = parser.Samurais.First();
         Monsters = parser.Monsters.ToArray();

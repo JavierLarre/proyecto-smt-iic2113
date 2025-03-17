@@ -42,25 +42,23 @@ public class TeamParser
     private void AddSamurai(string line)
     {
         string name = GetSamuraiName(line);
-        string[] skills = GetSkills(line);
+        string[] skills = GetSamuraiSkills(line);
         Samurai samurai = Samurai.FromName(name);
         samurai.SetSkills(skills);
         Samurais.Add(samurai);
     }
 
-    private string GetSamuraiName(string line)
+    private static string GetSamuraiName(string line)
     {
         Regex pattern = new Regex(@"^\[Samurai\] (?<name>[A-Za-z\-]+)");
         Match match = pattern.Match(line);
-        Console.WriteLine(line);
-        Console.WriteLine(match.Groups["name"].Value);
         return match.Groups["name"].Value;
     }
 
-    private string[] GetSkills(string line)
+    private static string[] GetSamuraiSkills(string line)
     {
-        Regex pattern = new Regex(@"^\[Samurai\] [A-Za-z\-]+ \(([A-Za-z\-,]+)\)");
-        Match match = pattern.Match(line);
-        return match.Groups["name"].Value.Split(",");
+        Regex skillPattern = new Regex(@"^\[Samurai\] [A-Za-z\-]+ \((?<skills>[A-Za-z\-,]+)\)");
+        Match match = skillPattern.Match(line);
+        return match.Groups["skills"].Value.Split(",");
     }
 }

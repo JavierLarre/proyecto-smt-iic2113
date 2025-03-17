@@ -22,7 +22,7 @@ public class TeamsFile
     public Team[] GetTeams()
     {
         return Parsers
-            .Select(parser => new Team(parser))
+            .Select(Team.FromParser)
             .ToArray();
     }
 

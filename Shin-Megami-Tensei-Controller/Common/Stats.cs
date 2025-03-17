@@ -2,16 +2,16 @@
 
 namespace Shin_Megami_Tensei.Common;
 
-public class BaseStats
+public class Stats
 {
     private Dictionary<string, int> StatsMap;
 
-    public static BaseStats FromData(StatsDataFromJson data)
+    public static Stats FromData(StatsDataFromJson data)
     {
-        return new BaseStats(data);
+        return new Stats(data);
     }
 
-    private BaseStats(StatsDataFromJson data)
+    private Stats(StatsDataFromJson data)
     {
         StatsMap = new Dictionary<string, int>
         {

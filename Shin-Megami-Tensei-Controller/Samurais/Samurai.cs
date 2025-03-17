@@ -6,7 +6,7 @@ namespace Shin_Megami_Tensei.Samurais;
 public class Samurai
 {
     public string Name;
-    public BaseStats BaseStats;
+    public Stats Stats;
     public Affinities Affinities;
     public Skill[] Skills = [];
 
@@ -27,7 +27,7 @@ public class Samurai
     private Samurai(SamuraiDataFromJson data)
     {
         Name = data.name;
-        BaseStats = BaseStats.FromData(data.stats);
+        Stats = Stats.FromData(data.stats);
         Affinities = Affinities.FromInfo(data.affinity);
     }
 }

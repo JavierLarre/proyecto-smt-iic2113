@@ -14,9 +14,8 @@ public class TeamsFolder
 
     public string PrintFileNames()
     {
-        List<string> fileNames = FileNames.
-            Select((name, index) => $"{index}: {name}")
-            .ToList();
+        var fileNames = FileNames.
+            Select((name, index) => $"{index}: {name}");
         return string.Join("\n", fileNames);
     }
 
