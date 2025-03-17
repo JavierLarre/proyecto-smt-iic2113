@@ -8,18 +8,9 @@ public class Team
     private Samurai Samurai;
     private Monster[] Monsters;
 
-    public static Team FromStringLines(string[] lines)
+    public Team(TeamParser parser)
     {
-        TeamParser teamParser = new TeamParser(lines);
-        return new Team(
-            teamParser.Samurais.First(),
-            teamParser.Monsters.ToArray()
-            );
-    }
-    
-    private Team(Samurai samurai, Monster[] monsters)
-    {
-        Samurai = samurai;
-        Monsters = monsters;
+        Samurai = parser.Samurais.First();
+        Monsters = parser.Monsters.ToArray();
     }
 }

@@ -19,6 +19,7 @@ public class Samurai
     public void AddSkills(string[] skills)
     {
         Skills = skills
+            .Where(skill => skill != "")
             .Select(skill => new Skill(skill))
             .ToArray();
     }

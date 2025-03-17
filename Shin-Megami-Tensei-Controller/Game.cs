@@ -5,23 +5,41 @@ namespace Shin_Megami_Tensei;
 
 public class Game
 {
-    private TeamFiles TeamFiles;
+    private View View;
+    private TeamsFolder Folder;
     private Team[] Teams;
     public Game(View view, string teamsFolder)
     {
-        TeamFiles = new TeamFiles(teamsFolder);
+        View = view;
+        Folder = new TeamsFolder(teamsFolder);
     }
     
     public void Play()
     {
-        ChooseTeam();
+        TeamsFile file = ChooseTeamFromInput();
+        if (file.IsFileValid())
+            Teams = file.GetTeams();
+        else
+            View.WriteLine("Archivo de equipos inválido");
+        
     }
 
-    private void ChooseTeam()
+    private TeamsFile ChooseTeamFromInput()
     {
-        Console.WriteLine("Elige un archivo para cargar los equipos");
-        Console.WriteLine(TeamFiles.TeamNames());
-        string? input = Console.ReadLine();
-        int teamNumber = int.Parse(input);
+        int teamNumber = GetInput();
+        return Folder.ReadTeamFile(teamNumber);
+    }
+
+    private int GetInput()
+    {
+        string? input = null;
+        while (input == null)
+        {
+            View.WriteLine("Elige un archivo para cargar los equipos");
+            View.WriteLine(Folder.PrintFileNames());
+            input = View.ReadLine();
+        }
+
+        return int.Parse(input);
     }
 }
