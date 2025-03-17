@@ -1,6 +1,6 @@
 ﻿namespace Shin_Megami_Tensei.ClassesForParsing;
 
-public class AffinityInfo
+public class AffinityDataFromJson
 {
     public string Phys { get; set; }
     public string Gun { get; set; }

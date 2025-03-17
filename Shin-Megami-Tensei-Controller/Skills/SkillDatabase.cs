@@ -4,20 +4,12 @@ namespace Shin_Megami_Tensei.Skills;
 
 public static class SkillDatabase
 {
-    private static string JsonFile = "skills.json";
-    private static List<SkillData> SkillDatas = [];
+    private const string JsonFile = "skills.json";
+    private static List<SkillDataFromJson> DataList => 
+        JsonDeserializer.DeserializeList<SkillDataFromJson>(JsonFile);
 
-    private static void GetList()
+    public static SkillDataFromJson Find(string skillName)
     {
-        if (SkillDatas.Count == 0)
-        {
-            SkillDatas = JsonParser.DeserializeList<SkillData>(JsonFile);
-        }
-    }
-
-    public static SkillData Find(string skillName)
-    {
-        GetList();
-        return SkillDatas.First(skill => skill.name == skillName);
+        return DataList.First(skill => skill.name == skillName);
     }
 }

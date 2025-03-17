@@ -34,17 +34,18 @@ public class TeamParser
         }
     }
 
-    private void AddMonster(string line)
+    private void AddMonster(string name)
     {
-        Monsters.Add(new Monster(line));
+        Monsters.Add(Monster.FromName(name));
     }
 
     private void AddSamurai(string line)
     {
-        Samurai samurai = new Samurai(GetSamuraiName(line));
-        Samurais.Add(samurai);
+        string name = GetSamuraiName(line);
         string[] skills = GetSkills(line);
-        samurai.AddSkills(skills);
+        Samurai samurai = Samurai.FromName(name);
+        samurai.SetSkills(skills);
+        Samurais.Add(samurai);
     }
 
     private string GetSamuraiName(string line)

@@ -2,33 +2,29 @@
 
 public class Skill
 {
-    public string Name = "";
-    public string Type = "";
-    public int Cost = 0;
-    public int Power = 0;
-    public string Target = "";
-    public string Hits = "";
-    public string Effect = "";
+    public string Name;
+    public string Type;
+    public int Cost;
+    public int Power;
+    public string Target;
+    public string Hits;
+    public string Effect;
 
-    public void FromData(SkillData skillData)
+
+    public static Skill FromName(string name)
     {
-        Name = skillData.name;
-        Type = skillData.type;
-        Cost = skillData.cost;
-        Power = skillData.power;
-        Target = skillData.target;
-        Hits = skillData.hits;
-        Effect = skillData.effect;
+        SkillDataFromJson data = SkillDatabase.Find(name);
+        return new Skill(data);
     }
 
-    public Skill(string name)
+    private Skill(SkillDataFromJson data)
     {
-        SkillData skillData = SkillDatabase.Find(name);
-        FromData(skillData);
-    }
-
-    public new string ToString()
-    {
-        return Name;
+        Name = data.name;
+        Type = data.type;
+        Cost = data.cost;
+        Power = data.power;
+        Target = data.target;
+        Hits = data.hits;
+        Effect = data.effect;
     }
 }

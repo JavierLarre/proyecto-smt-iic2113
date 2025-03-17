@@ -5,24 +5,24 @@ namespace Shin_Megami_Tensei.Monsters;
 
 public class Monster
 {
-    public string Name = "";
-    public BaseStats BaseStats = new();
-    public Affinities Affinities = new();
-    public Skill[] Skills = [];
+    public string Name;
+    public BaseStats BaseStats;
+    public Affinities Affinities;
+    public Skill[] Skills;
 
-    public void FromData(MonsterData monsterData)
+    public static Monster FromName(string name)
     {
-        Name = monsterData.name;
-        BaseStats = BaseStats.FromInfo(monsterData.stats);
-        Affinities = Affinities.FromInfo(monsterData.affinity);
-        Skills = monsterData.skills
-            .Select(skill => new Skill(skill))
-            .ToArray();
+        MonsterDataFromJson data = MonsterDatabase.Find(name);
+        return new Monster(data);
     }
 
-    public Monster(string name)
+    private Monster(MonsterDataFromJson data)
     {
-        MonsterData data = MonsterDatabase.Find(name);
-        FromData(data);
+        Name = data.name;
+        BaseStats = BaseStats.FromData(data.stats);
+        Affinities = Affinities.FromInfo(data.affinity);
+        Skills = data.skills
+            .Select(Skill.FromName)
+            .ToArray();
     }
 }

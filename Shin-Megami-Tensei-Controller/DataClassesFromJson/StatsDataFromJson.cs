@@ -1,6 +1,6 @@
 ﻿namespace Shin_Megami_Tensei.ClassesForParsing;
 
-public class StatsInfo
+public class StatsDataFromJson
 {
     public int HP { get; set; }
     public int MP { get; set; }

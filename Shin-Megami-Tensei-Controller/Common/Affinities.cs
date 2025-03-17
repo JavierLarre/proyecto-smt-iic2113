@@ -4,22 +4,25 @@ namespace Shin_Megami_Tensei.Common;
 
 public class Affinities
 {
-    private Dictionary<string, string> AffinityMap = new();
+    private Dictionary<string, string> AffinityMap;
 
-    public static Affinities FromInfo(AffinityInfo affinityInfo)
+    public static Affinities FromInfo(AffinityDataFromJson data)
     {
-        Affinities affinities = new Affinities();
-        affinities.AffinityMap = new Dictionary<string, string>
+        return new Affinities(data);
+    }
+
+    private Affinities(AffinityDataFromJson data)
+    {
+        AffinityMap = new Dictionary<string, string>
         {
-            ["Phys"] = affinityInfo.Phys,
-            ["Gun"] = affinityInfo.Gun,
-            ["Fire"] = affinityInfo.Fire,
-            ["Ice"] = affinityInfo.Ice,
-            ["Elec"] = affinityInfo.Elec,
-            ["Force"] = affinityInfo.Force,
-            ["Light"] = affinityInfo.Light,
-            ["Dark"] = affinityInfo.Dark
+            ["Phys"] = data.Phys,
+            ["Gun"] = data.Gun,
+            ["Fire"] = data.Fire,
+            ["Ice"] = data.Ice,
+            ["Elec"] = data.Elec,
+            ["Force"] = data.Force,
+            ["Light"] = data.Light,
+            ["Dark"] = data.Dark
         };
-        return affinities;
     }
 }

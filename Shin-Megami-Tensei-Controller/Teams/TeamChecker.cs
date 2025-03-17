@@ -1,4 +1,5 @@
 ﻿using Shin_Megami_Tensei.Common;
+using Shin_Megami_Tensei.Samurais;
 using Shin_Megami_Tensei.Skills;
 
 namespace Shin_Megami_Tensei.Teams;
@@ -31,12 +32,13 @@ public class TeamChecker(TeamParser team)
 
     private bool SamuraiHasLessThanMaxSkills()
     {
-        return Team.Samurais.First().Skills.Length <= Constants.MaxSkillSize;
+        Samurai samurai = Team.Samurais.First();
+        return samurai.Skills.Length <= Constants.MaxSkillSize;
     }
 
     private bool AllSkillsAreUnique()
     {
         Skill[] skills = Team.Samurais.First().Skills;
-        return skills.Distinct().Count() != skills.Count();
+        return skills.Distinct().Count() != skills.Length;
     }
 }

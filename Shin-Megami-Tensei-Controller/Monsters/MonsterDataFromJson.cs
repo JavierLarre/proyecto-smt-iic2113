@@ -2,10 +2,10 @@
 
 namespace Shin_Megami_Tensei.Monsters;
 
-public class MonsterData
+public class MonsterDataFromJson
 {
     public string name { get; set; }
-    public StatsInfo stats { get; set; }
-    public AffinityInfo affinity { get; set; }
+    public StatsDataFromJson stats { get; set; }
+    public AffinityDataFromJson affinity { get; set; }
     public List<string> skills { get; set; }
 }

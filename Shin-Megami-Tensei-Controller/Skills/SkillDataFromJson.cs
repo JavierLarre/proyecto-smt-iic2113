@@ -1,6 +1,6 @@
 ﻿namespace Shin_Megami_Tensei.Skills;
 
-public class SkillData
+public class SkillDataFromJson
 {
     public string name { get; set; }
     public string type { get; set; }

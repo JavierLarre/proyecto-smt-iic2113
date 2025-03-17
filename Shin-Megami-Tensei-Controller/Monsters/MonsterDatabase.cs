@@ -4,19 +4,13 @@ namespace Shin_Megami_Tensei.Monsters;
 
 public static class MonsterDatabase
 {
-    private static string JsonFile = "monsters.json";
-    private static List<MonsterData> MonsterDatas = [];
+    private const string JsonFile = "monsters.json";
 
-    private static void GetList()
+    private static List<MonsterDataFromJson> DataList => 
+        JsonDeserializer.DeserializeList<MonsterDataFromJson>(JsonFile);
+
+    public static MonsterDataFromJson Find(string monsterName)
     {
-        if (MonsterDatas.Count == 0)
-        {
-            MonsterDatas = JsonParser.DeserializeList<MonsterData>(JsonFile);
-        }
-    }
-
-    public static MonsterData Find(string monsterName){
-        GetList();
-        return MonsterDatas.First(monster => monster.name == monsterName);
+        return DataList.First(monster => monster.name == monsterName);
     }
 }

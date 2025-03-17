@@ -4,54 +4,24 @@ namespace Shin_Megami_Tensei.Common;
 
 public class BaseStats
 {
-    private Dictionary<string, int> Stats;
+    private Dictionary<string, int> StatsMap;
 
-    public BaseStats()
+    public static BaseStats FromData(StatsDataFromJson data)
     {
-        Stats = new Dictionary<string, int>();
+        return new BaseStats(data);
     }
 
-    public static BaseStats FromInfo(StatsInfo statsInfo)
+    private BaseStats(StatsDataFromJson data)
     {
-        BaseStats baseStats = new BaseStats();
-        baseStats.Stats = new Dictionary<string, int>
+        StatsMap = new Dictionary<string, int>
         {
-            ["HP"] = statsInfo.HP,
-            ["MP"] = statsInfo.MP,
-            ["Str"] = statsInfo.Str,
-            ["Skl"] = statsInfo.Skl,
-            ["Mag"] = statsInfo.Mag,
-            ["Spd"] = statsInfo.Spd,
-            ["Lck"] = statsInfo.Lck
+            ["HP"] = data.HP,
+            ["MP"] = data.MP,
+            ["Str"] = data.Str,
+            ["Skl"] = data.Skl,
+            ["Mag"] = data.Mag,
+            ["Spd"] = data.Spd,
+            ["Lck"] = data.Lck
         };
-        return baseStats;
     }
 }
-
-/*
-public class BaseStats
-{
-    public int HP = 0;
-    public int MP = 0;
-    public int Str = 0;
-    public int Skl = 0;
-    public int Mag = 0;
-    public int Spd = 0;
-    public int Lck = 0;
-
-    public static BaseStats FromInfo(StatsInfo statsInfo)
-    {
-        BaseStats baseStats = new BaseStats
-        {
-            HP = statsInfo.HP,
-            MP = statsInfo.MP,
-            Str = statsInfo.Str,
-            Skl = statsInfo.Skl,
-            Mag = statsInfo.Mag,
-            Spd = statsInfo.Spd,
-            Lck = statsInfo.Lck
-        };
-        return baseStats;
-    }
-}
-*/

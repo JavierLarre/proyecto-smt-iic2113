@@ -2,25 +2,15 @@
 
 namespace Shin_Megami_Tensei.Samurais;
 
-public class SamuraiDatabase
+public static class SamuraiDatabase
 {
-    private static string JsonFile = "samurai.json";
-    private static List<SamuraiData> SamuraiDatas = [];
+    private const string JsonFile = "samurai.json";
 
-    private static void GetList()
-    {
-        if (SamuraiDatas.Count == 0)
-        {
-            SamuraiDatas = JsonParser.DeserializeList<SamuraiData>(JsonFile);
-        }
-    }
+    private static List<SamuraiDataFromJson> DataList => 
+        JsonDeserializer.DeserializeList<SamuraiDataFromJson>(JsonFile);
     
-    public static SamuraiData Find(string samuraiName){
-        GetList();
-        return SamuraiDatas.First(samurai => samurai.name == samuraiName);
-    }
-
-    private SamuraiDatabase()
+    public static SamuraiDataFromJson FindByName(string samuraiName)
     {
+        return DataList.First(samurai => samurai.name == samuraiName);
     }
 }
