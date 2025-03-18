@@ -1,4 +1,4 @@
-﻿using Shin_Megami_Tensei.ClassesForParsing;
+﻿using Shin_Megami_Tensei.DataClassesFromJson;
 
 namespace Shin_Megami_Tensei.Common;
 

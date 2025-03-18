@@ -3,28 +3,17 @@ using Shin_Megami_Tensei.Skills;
 
 namespace Shin_Megami_Tensei.Monsters;
 
-public class Monster
+public class Monster : AbstractFighter
 {
-    public string Name;
-    public Stats Stats;
-    public Affinities Affinities;
-    public Skill[] Skills;
-    public int HP;
-    public int MP;
+    public new Skill[] Skills;
 
-    public static Monster FromName(string name)
-    {
-        MonsterDataFromJson data = MonsterDatabase.Find(name);
-        return new Monster(data);
-    }
-
-    private Monster(MonsterDataFromJson data)
+    public Monster(MonsterDataFromJson data)
     {
         Name = data.name;
         Stats = Stats.FromData(data.stats);
-        Affinities = Affinities.FromInfo(data.affinity);
+        Affinities = Affinities.FromData(data.affinity);
         Skills = data.skills
-            .Select(Skill.FromName)
+            .Select(SkillFactory.FromName)
             .ToArray();
     }
 }

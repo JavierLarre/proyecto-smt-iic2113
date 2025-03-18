@@ -36,14 +36,14 @@ public class TeamParser
 
     private void AddMonster(string name)
     {
-        Monsters.Add(Monster.FromName(name));
+        Monsters.Add(MonsterFactory.FromName(name));
     }
 
     private void AddSamurai(string line)
     {
         string name = GetSamuraiName(line);
         string[] skills = GetSamuraiSkills(line);
-        Samurai samurai = Samurai.FromName(name);
+        Samurai samurai = SamuraiFactory.FromName(name);
         samurai.SetSkills(skills);
         Samurais.Add(samurai);
     }

@@ -1,4 +1,4 @@
-﻿using Shin_Megami_Tensei.ClassesForParsing;
+﻿using Shin_Megami_Tensei.DataClassesFromJson;
 
 namespace Shin_Megami_Tensei.Common;
 
@@ -6,10 +6,8 @@ public class Affinities
 {
     private Dictionary<string, string> AffinityMap;
 
-    public static Affinities FromInfo(AffinityDataFromJson data)
-    {
-        return new Affinities(data);
-    }
+    public static Affinities FromData(AffinityDataFromJson data) =>
+        new (data);
 
     private Affinities(AffinityDataFromJson data)
     {

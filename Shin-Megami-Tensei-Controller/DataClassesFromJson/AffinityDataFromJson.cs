@@ -1,4 +1,4 @@
-﻿namespace Shin_Megami_Tensei.ClassesForParsing;
+﻿namespace Shin_Megami_Tensei.DataClassesFromJson;
 
 public class AffinityDataFromJson
 {

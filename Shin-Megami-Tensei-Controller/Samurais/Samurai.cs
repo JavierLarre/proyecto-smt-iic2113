@@ -3,31 +3,20 @@ using Shin_Megami_Tensei.Skills;
 
 namespace Shin_Megami_Tensei.Samurais;
 
-public class Samurai
+public class Samurai : AbstractFighter
 {
-    public string Name;
-    public Stats Stats;
-    public Affinities Affinities;
-    public Skill[] Skills = [];
-
-    public static Samurai FromName(string name)
+    public Samurai(SamuraiDataFromJson data)
     {
-        SamuraiDataFromJson data = SamuraiDatabase.FindByName(name);
-        return new Samurai(data);
+        Name = data.name;
+        Stats = Stats.FromData(data.stats);
+        Affinities = Affinities.FromData(data.affinity);
     }
-    
+
     public void SetSkills(string[] skills)
     {
         Skills = skills
             .Where(skill => skill != "")
-            .Select(Skill.FromName)
+            .Select(SkillFactory.FromName)
             .ToArray();
-    }
-
-    private Samurai(SamuraiDataFromJson data)
-    {
-        Name = data.name;
-        Stats = Stats.FromData(data.stats);
-        Affinities = Affinities.FromInfo(data.affinity);
     }
 }

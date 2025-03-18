@@ -10,14 +10,7 @@ public class Skill
     public string Hits;
     public string Effect;
 
-
-    public static Skill FromName(string name)
-    {
-        SkillDataFromJson data = SkillDatabase.Find(name);
-        return new Skill(data);
-    }
-
-    private Skill(SkillDataFromJson data)
+    public Skill(SkillDataFromJson data)
     {
         Name = data.name;
         Type = data.type;
