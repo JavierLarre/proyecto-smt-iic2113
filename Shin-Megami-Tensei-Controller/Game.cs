@@ -1,33 +1,46 @@
 ﻿using Shin_Megami_Tensei_View;
+using Shin_Megami_Tensei.Battles;
 using Shin_Megami_Tensei.Teams;
 
 namespace Shin_Megami_Tensei;
 
 public class Game
 {
-    private View View;
-    private TeamsFolder Folder;
-    private Team[] Teams;
+    private View _view;
+    private TeamsFolder _folder;
+    private Team[] _teams;
+    private BattleFrontend _frontend;
     public Game(View view, string teamsFolder)
     {
-        View = view;
-        Folder = new TeamsFolder(teamsFolder);
+        _view = view;
+        _folder = new TeamsFolder(teamsFolder);
     }
     
     public void Play()
     {
         TeamsFile file = ChooseTeamFromInput();
         if (file.IsFileValid())
-            Teams = file.GetTeams();
+            Initialize(file.GetTeams());
         else
-            View.WriteLine("Archivo de equipos inválido");
+            _view.WriteLine("Archivo de equipos inválido");
         
+    }
+
+    private void Initialize(Team[] teams)
+    {
+        _frontend = new BattleFrontend(teams.First(), 1);
+        Fight();
+    }
+    private void Fight()
+    {
+
+        _view.WriteLine(_frontend.PrintRound());
     }
 
     private TeamsFile ChooseTeamFromInput()
     {
         int teamNumber = GetInput();
-        return Folder.ReadTeamFile(teamNumber);
+        return _folder.ReadTeamFile(teamNumber);
     }
 
     private int GetInput()
@@ -35,9 +48,9 @@ public class Game
         string? input = null;
         while (input == null)
         {
-            View.WriteLine("Elige un archivo para cargar los equipos");
-            View.WriteLine(Folder.PrintFileNames());
-            input = View.ReadLine();
+            _view.WriteLine("Elige un archivo para cargar los equipos");
+            _view.WriteLine(_folder.PrintFileNames());
+            input = _view.ReadLine();
         }
 
         return int.Parse(input);

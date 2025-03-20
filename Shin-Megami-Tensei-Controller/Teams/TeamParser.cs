@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
-using Shin_Megami_Tensei.Monsters;
-using Shin_Megami_Tensei.Samurais;
+using Shin_Megami_Tensei.Fighters.Monsters;
+using Shin_Megami_Tensei.Fighters.Samurais;
 
 namespace Shin_Megami_Tensei.Teams;
 

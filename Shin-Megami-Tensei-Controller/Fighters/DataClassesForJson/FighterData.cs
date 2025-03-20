@@ -1,8 +1,6 @@
-﻿using Shin_Megami_Tensei.ClassesForParsing;
+﻿namespace Shin_Megami_Tensei.Fighters.DataClassesForJson;
 
-namespace Shin_Megami_Tensei.Samurais;
-
-public class SamuraiDataFromJson
+public abstract class FighterData
 {
     public string name { get; set; }
     public StatsDataFromJson stats { get; set; }

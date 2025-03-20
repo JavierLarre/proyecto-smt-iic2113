@@ -1,6 +1,6 @@
-﻿using Shin_Megami_Tensei.Common;
+﻿using Shin_Megami_Tensei.Fighters.DataClassesForJson;
 
-namespace Shin_Megami_Tensei.Skills;
+namespace Shin_Megami_Tensei.Fighters.Skills;
 
 public static class SkillFactory
 {

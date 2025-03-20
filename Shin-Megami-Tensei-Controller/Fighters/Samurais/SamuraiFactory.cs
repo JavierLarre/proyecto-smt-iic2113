@@ -1,6 +1,6 @@
-﻿using Shin_Megami_Tensei.Common;
+﻿using Shin_Megami_Tensei.Fighters.DataClassesForJson;
 
-namespace Shin_Megami_Tensei.Samurais;
+namespace Shin_Megami_Tensei.Fighters.Samurais;
 
 public static class SamuraiFactory
 {

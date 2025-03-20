@@ -1,14 +1,15 @@
-﻿using Shin_Megami_Tensei.Common;
-using Shin_Megami_Tensei.Skills;
+﻿
 
-namespace Shin_Megami_Tensei.Samurais;
+using Shin_Megami_Tensei.Fighters.Skills;
 
-public class Samurai : AbstractFighter
+namespace Shin_Megami_Tensei.Fighters.Samurais;
+
+public class Samurai : Fighter
 {
     public Samurai(SamuraiDataFromJson data)
     {
         Name = data.name;
-        Stats = Stats.FromData(data.stats);
+        Stats = new Stats(data.stats);
         Affinities = Affinities.FromData(data.affinity);
     }
 

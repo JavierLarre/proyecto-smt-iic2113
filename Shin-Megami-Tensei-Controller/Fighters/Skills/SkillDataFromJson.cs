@@ -1,4 +1,4 @@
-﻿namespace Shin_Megami_Tensei.Skills;
+﻿namespace Shin_Megami_Tensei.Fighters.Skills;
 
 public class SkillDataFromJson
 {

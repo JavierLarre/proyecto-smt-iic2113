@@ -1,4 +1,4 @@
-﻿namespace Shin_Megami_Tensei.DataClassesFromJson;
+﻿namespace Shin_Megami_Tensei.Fighters.DataClassesForJson;
 
 public class AffinityDataFromJson
 {

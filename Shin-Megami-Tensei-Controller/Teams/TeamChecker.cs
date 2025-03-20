@@ -1,6 +1,6 @@
-﻿using Shin_Megami_Tensei.Common;
-using Shin_Megami_Tensei.Samurais;
-using Shin_Megami_Tensei.Skills;
+﻿using Shin_Megami_Tensei.Fighters.Samurais;
+using Shin_Megami_Tensei.Fighters.Skills;
+
 
 namespace Shin_Megami_Tensei.Teams;
 
@@ -39,6 +39,6 @@ public class TeamChecker(TeamParser team)
     private bool AllSkillsAreUnique()
     {
         Skill[] skills = Team.Samurais.First().Skills;
-        return skills.Distinct().Count() != skills.Length;
+        return skills.Distinct().Count() == skills.Length;
     }
 }

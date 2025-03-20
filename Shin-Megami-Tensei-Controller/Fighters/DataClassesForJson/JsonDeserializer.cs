@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Shin_Megami_Tensei.Common;
+namespace Shin_Megami_Tensei.Fighters.DataClassesForJson;
 
 public static class JsonDeserializer
 {

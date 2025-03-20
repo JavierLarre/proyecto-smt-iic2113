@@ -1,6 +1,6 @@
-﻿using Shin_Megami_Tensei.DataClassesFromJson;
+﻿using Shin_Megami_Tensei.Fighters.DataClassesForJson;
 
-namespace Shin_Megami_Tensei.Common;
+namespace Shin_Megami_Tensei.Fighters;
 
 public class Affinities
 {
