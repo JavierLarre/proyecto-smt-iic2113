@@ -11,20 +11,45 @@ public class TableRow
 
     private int _fightersAmount;
     private const string RowPositions = "ABCDEFGHI"; //alphabet
-    public int TurnsLeft;
+
+    public int TurnsLeft
+    {
+        get
+        {
+            if (_fighters[0].Stats.HpLeft == 0) return _fightersAmount - 1;
+            return _fightersAmount;
+        }
+    }
 
     public static TableRow FromTeam(Team team) => 
         new (team);
-
-    public int TotalFullTurns() => _fightersAmount;
 
     private TableRow(Team team)
     {
         AddSamurai(team.Samurai);
         AddMonstersUntilFull(team.Monsters);
-        TurnsLeft = TotalFullTurns();
     }
 
+    public void Clear()
+    {
+        for (int i = 0; i < _fighters.Length; i++)
+        {
+            _fighters[i] = null;
+        }
+    }
+
+    public void Clean()
+    {
+        for (int i = 1; i < _fighters.Length; i++)
+        {
+            if (_fighters[i]?.Stats.HpLeft == 0)
+            {
+                _fighters[i] = null;
+                _fightersAmount--;
+            }
+        }
+
+    }
 
     public override string ToString()
     {
@@ -33,11 +58,17 @@ public class TableRow
         return string.Join('\n', rowStrings);
     }
 
-    public Fighter[] TurnOrder()
+    public IEnumerable<Fighter> TurnOrder()
     {
         return _fighters
             .Where(fighter => fighter is not null)
-            .OrderBy(fighter => fighter.Stats.Spd).ToArray();
+            .Where(fighter => fighter.Stats.HpLeft > 0) 
+            .OrderBy(fighter => fighter.Stats.Spd * -1);
+    }
+
+    public Fighter?[] Units()
+    {
+        return _fighters;
     }
 
     private static char RowPosition(int position) =>

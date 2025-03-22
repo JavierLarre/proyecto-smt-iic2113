@@ -14,6 +14,8 @@ public class Team
 
     public static Team FromParser(TeamParser parser) =>
         new (parser);
+    
+    public override string ToString() =>_row.ToString();
 
     private Team(TeamParser parser)
     {
@@ -22,10 +24,32 @@ public class Team
         _row = TableRow.FromTeam(this);
     }
 
-    public override string ToString()
+    public Fighter?[] Units() => _row.Units();
+
+    public bool HasLost()
     {
-        return _row.ToString();
+        foreach(var fighter in _row.Units())
+            if (fighter is not null)
+                if(fighter.Stats.HpLeft != 0)
+                    return false;
+        return true;
     }
 
-    public Fighter[] TurnOrder() => _row.TurnOrder();
+    public void Clear()
+    {
+        _row.Clear();
+    }
+
+    public bool HasFighter(Fighter fighter)
+    {
+        if (Samurai == fighter) return true;
+        return Monsters.Contains(fighter);
+    }
+
+    public void CleanRows()
+    {
+        _row.Clean();
+    }
+
+    public IEnumerable<Fighter> TurnOrder() => _row.TurnOrder();
 }

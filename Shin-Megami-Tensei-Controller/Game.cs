@@ -8,8 +8,7 @@ public class Game
 {
     private View _view;
     private TeamsFolder _folder;
-    private Team[] _teams;
-    private BattleFrontend _frontend;
+    private BattleDriver _driver;
     public Game(View view, string teamsFolder)
     {
         _view = view;
@@ -20,30 +19,34 @@ public class Game
     {
         TeamsFile file = ChooseTeamFromInput();
         if (file.IsFileValid())
-            Initialize(file.GetTeams());
+            StartFight(file.GetTeams());
         else
             _view.WriteLine("Archivo de equipos inválido");
         
     }
 
-    private void Initialize(Team[] teams)
+    private void StartFight(Team[] teams)
     {
-        _frontend = new BattleFrontend(teams.First(), 1);
+        _driver = new BattleDriver(teams, _view);
         Fight();
     }
     private void Fight()
     {
+        while (!_driver.HasBattleFinished())
+        {
+            _driver.StartRound();
+        }
 
-        _view.WriteLine(_frontend.PrintRound());
+        _driver.End();
     }
 
     private TeamsFile ChooseTeamFromInput()
     {
-        int teamNumber = GetInput();
+        int teamNumber = ChooseTeamFile();
         return _folder.ReadTeamFile(teamNumber);
     }
 
-    private int GetInput()
+    private int ChooseTeamFile()
     {
         string? input = null;
         while (input == null)

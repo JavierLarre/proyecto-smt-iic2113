@@ -1,11 +1,10 @@
-﻿using Shin_Megami_Tensei.Fighters.Skills;
+﻿using Shin_Megami_Tensei.Fighters.Actions;
+using Shin_Megami_Tensei.Fighters.Skills;
 
 namespace Shin_Megami_Tensei.Fighters.Monsters;
 
 public class Monster : Fighter
 {
-    public new Skill[] Skills;
-
     public Monster(MonsterDataFromJson data)
     {
         Name = data.name;
@@ -14,5 +13,11 @@ public class Monster : Fighter
         Skills = data.skills
             .Select(SkillFactory.FromName)
             .ToArray();
+        Actions = [
+            new Attack(),
+            new UseSkill(),
+            new Invoke(),
+            new Pass()
+        ];
     }
 }

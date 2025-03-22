@@ -27,18 +27,22 @@ public class TeamChecker(TeamParser team)
 
     private bool AllUnitsAreUnique()
     {
-        return Team.Monsters.Distinct().Count() == Team.Monsters.Count;
+        var monsterNames = Team.Monsters.Select(monster => monster.Name);
+        return monsterNames.Distinct().Count() == Team.Monsters.Count;
     }
 
     private bool SamuraiHasLessThanMaxSkills()
     {
+        if (Team.Samurais.Count == 0) return false;
         Samurai samurai = Team.Samurais.First();
         return samurai.Skills.Length <= Constants.MaxSkillSize;
     }
 
     private bool AllSkillsAreUnique()
     {
+        if (Team.Samurais.Count == 0) return false;
         Skill[] skills = Team.Samurais.First().Skills;
-        return skills.Distinct().Count() == skills.Length;
+        var skillNames = skills.Select(skill => skill.Name).ToArray();
+        return skillNames.Distinct().Count() == skills.Length;
     }
 }

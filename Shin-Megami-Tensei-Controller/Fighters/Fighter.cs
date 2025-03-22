@@ -1,4 +1,5 @@
-﻿using Shin_Megami_Tensei.Fighters.Skills;
+﻿using Shin_Megami_Tensei.Fighters.Actions;
+using Shin_Megami_Tensei.Fighters.Skills;
 
 namespace Shin_Megami_Tensei.Fighters;
 
@@ -8,6 +9,7 @@ public abstract class Fighter
     public Stats Stats;
     public Affinities Affinities;
     public Skill[] Skills = [];
+    public IAction[] Actions = [];
     
     public override string ToString() => 
         $"{Name} {Stats}";
@@ -16,4 +18,10 @@ public abstract class Fighter
     {
         return Skills.Select(skill => skill.ToString());
     }
+
+    public void RecieveDamage(int damage)
+    {
+        Stats.HpLeft = int.Max(0, Stats.HpLeft - damage);
+    }
+    
 }
