@@ -12,31 +12,36 @@ public class BattleFrontend
 {
     private readonly View _view;
     private readonly Table _table;
-    private Team _currentTeam; //TODO: logica que no deberia estar acá
-    private int _round;
-    private int _turnsPlayed = 0;
     private readonly string _indent = new ('-', 40);
     private Fighter[] _inOrder = [];
+
+    private int PlayerTurnForPrinting => _table.PlayerTurn + 1;
 
     public BattleFrontend(Table table, View view)
     {
         _table = table;
-        _currentTeam = table.Teams.First();
         _view = view;
     }
-    
-    public void PrintRound()
+
+    public void WriteLines(IEnumerable<string> lines)
     {
-        //TODO: no queda claro qué es todo esto
-        var infoStringsWithIndents = PrintOrder().
-            Select(info => $"{_indent}\n{info}");
-        string joinedStringsWithNewlines = string.
-            Join('\n', infoStringsWithIndents);
-        _view.WriteLine(joinedStringsWithNewlines);
+        PrintIndent();
+        foreach (var line in lines)
+        {
+            _view.WriteLine(line);
+        }
     }
+
+    public void WriteLine(string line)
+    {
+        PrintIndent();
+        _view.WriteLine(line);
+    }
+    private void PrintIndent() => _view.WriteLine(_indent);
 
     public void FighterTurn(Fighter fighter)
     {
+        StartTurn();
         IAction? selectedAction = null;
         bool isDone = false;
         //TODO: mover a método de acción
@@ -66,8 +71,27 @@ public class BattleFrontend
         if(selectedAction?.GetType() != new GiveUp().GetType())
             EndTurn();
         //TODO: esto es solo para el print del orden de turnos
-        _turnsPlayed++;
         
+    }
+    
+    public void StartTurn()
+    {
+        //TODO: no queda claro qué es todo esto
+        var infoStringsWithIndents = PrintOrder().
+            Select(info => $"{_indent}\n{info}");
+        string joinedStringsWithNewlines = string.
+            Join('\n', infoStringsWithIndents);
+        _view.WriteLine(joinedStringsWithNewlines);
+    }
+
+    //TODO: print order de que
+    private IEnumerable<string> PrintOrder()
+    {
+        return [
+            _table.PrintInfo(),
+            TurnsLeft(),
+            PrintTeamInOrder(),
+        ];
     }
 
     public void PrintAttack(Fighter attacker, Fighter reciever, int dmg)
@@ -90,10 +114,9 @@ public class BattleFrontend
     //TODO: mover esto a la clase GiveUp
     public void PrintGiveUp(Fighter loser)
     {
-        PrintIndent();
         Team losers = _table.GetTeamFromFighter(loser);
-        int player = _table.GetPlayerFromTeam(losers);
-        _view.WriteLine($"{loser.Name} (J{player}) se rinde");
+        int player = _table.GetPlayerFromTeam(losers) + 1;
+        WriteLine($"{loser.Name} (J{player}) se rinde");
     }
 
     public void EndTurn()
@@ -152,12 +175,6 @@ public class BattleFrontend
         _view.WriteLine($"{fighter.Skills.Count(skill => skill.Cost <= fighter.Stats.MpLeft)+1}-Cancelar");
     }
 
-    public void ChangeStatus(Team team, int round)
-    {
-        _currentTeam = team;
-        _round = round;
-        _turnsPlayed = 0;
-    }
 
     public void PrintFighterActions(Fighter fighter)
     {
@@ -170,7 +187,7 @@ public class BattleFrontend
         
         _view.WriteLine(_indent);
         //TODO: esto no deberia estar aqui
-        Team enemyTeam = _table.GetEnemyTeam(_currentTeam);
+        Team enemyTeam = _table.EnemyTeam;
         //TODO: logica para las unidades validas no deberia estar aqui
         var targets = enemyTeam.Units()
             .Where(fighter => fighter is not null)
@@ -198,43 +215,29 @@ public class BattleFrontend
         return targets[index-1];
     }
 
-    //TODO: print order de que
-    private IEnumerable<string> PrintOrder()
-    {
-        return [
-            _table.ToString(),
-            PrintTurns(),
-            PrintTeamInOrder(),
-        ];
-    }
-
     //TODO: no es especifico
-    public void RoundBanner()
-    {
-        //TODO: encapsular writeline
-        PrintIndent();
-        _view.WriteLine(
-            $"Ronda de {_currentTeam.Samurai.Name}" +
-            $" (J{_round})");
-    }
+    public void StartRound() =>
+        WriteLine($"Ronda de {_table.CurrentTeam.Samurai.Name} (J{PlayerTurnForPrinting})");
+    
         
     //TODO: es turns LEFT, y aqui hay lógica que no deberia estar
-    private string PrintTurns() =>
-        $"Full Turns: {_currentTeam.TurnsLeft - _turnsPlayed}\n" +
+    private string TurnsLeft() =>
+        $"Full Turns: {_table.TurnsLeft}\n" +
         $"Blinking Turns: 0";
 
     private string PrintTeamInOrder()
     {
         // var orderStrings = _inOrder
         //     .Select((fighter, i) => $"{i+1}-{fighter.Name}");
-        _inOrder = _currentTeam.TurnOrder().ToArray();
-        List<string> orderStrings = [];
+        _inOrder = _table.GetFightOrder().ToArray();
+        //List<string> orderStrings = [];
+        var orderStrings = _inOrder.Select((fighter, i) => $"{i + 1}-{fighter.Name}");
         //TODO: de nuevo, logica que no deberia ser
-        for (int i = 0; i < _inOrder.Length; i++)
-        {
-            string fighterString = $"{i+1}-{_inOrder[(i + _turnsPlayed) % _inOrder.Length].Name}";
-            orderStrings.Add(fighterString);
-        }
+        // for (int i = 0; i < _inOrder.Length; i++)
+        // {
+        //     string fighterString = $"{i+1}-{_inOrder[(i + _turnsPlayed) % _inOrder.Length].Name}";
+        //     orderStrings.Add(fighterString);
+        // }
         //TODO: algunos metodos printean, otros retornan un string
         string orderedTeamInString = string.Join('\n', orderStrings);
         return $"Orden:\n{orderedTeamInString}";
@@ -242,10 +245,8 @@ public class BattleFrontend
 
     public void PrintWinner(Team winner)
     {
-        PrintIndent();
         //TODO: deberia entregar el player
         int player = _table.GetPlayerFromTeam(winner);
-        _view.WriteLine($"Ganador: {winner.Samurai.Name} (J{player})");
+        WriteLine($"Ganador: {winner.Samurai.Name} (J{player+1})");
     }
-    private void PrintIndent() => _view.WriteLine(_indent);
 }

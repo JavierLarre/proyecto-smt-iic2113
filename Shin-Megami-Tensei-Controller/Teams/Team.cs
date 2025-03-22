@@ -10,7 +10,7 @@ public class Team
     public Samurai Samurai;
     public Monster[] Monsters;
     private TableRow _row;
-    public int TurnsLeft => _row.TurnsLeft; //TODO: mal
+    public int FullTurns => _row.TurnsLeft; //TODO: mal
 
     public static Team FromParser(TeamParser parser) =>
         new (parser);

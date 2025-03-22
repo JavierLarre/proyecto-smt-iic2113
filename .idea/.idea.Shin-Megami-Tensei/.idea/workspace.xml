@@ -7,13 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c2bf468a-8d45-4359-ad58-a882c4d46f13" name="Changes" comment="Pasan todos los tests">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Shin-Megami-Tensei/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shin-Megami-Tensei/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Battles/BattleDriver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Battles/BattleDriver.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Battles/BattleFrontend.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Battles/BattleFrontend.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Game.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Teams/Team.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Teams/Team.cs" afterDir="false" />
-    </list>
+    <list default="true" id="c2bf468a-8d45-4359-ad58-a882c4d46f13" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,24 +33,7 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/95d4cd8ea6ea8f44fbdc0a169635d1c3b635eb0c4c6ef1be04861a7f4f8/DirectoryNotFoundException.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Common/Affinities.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Common/BaseStats.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Common/Stats.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Monsters/Monster.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Monsters/Monster.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Monsters/MonsterDatabase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Samurais/Samurai.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Samurais/Samurai.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Samurais/SamuraiDatabase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Skills/Skill.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Skills/SkillDatabase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Teams/Team.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Teams/TeamChecker.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Teams/TeamParser.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Teams/TeamParser.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Teams/TeamsFile.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Teams/TeamsFolder.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/javol/Desktop/Diseño Detallado de Software/Proyecto-Megaten-IIC2113/Shin-Megami-Tensei-Controller/Fighters/Actions/Attack.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -129,7 +106,7 @@
       <workItem from="1742480164916" duration="13654000" />
       <workItem from="1742522005179" duration="1195000" />
       <workItem from="1742555173792" duration="25321000" />
-      <workItem from="1742608919257" duration="5104000" />
+      <workItem from="1742608919257" duration="6075000" />
     </task>
     <task id="LOCAL-00001" summary="ya volvió la luz">
       <option name="closed" value="true" />
@@ -179,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742620993101</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added todos">
+      <option name="closed" value="true" />
+      <created>1742623077584</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742623077584</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,6 +180,7 @@
     <MESSAGE value="Name Refactor, Battle File Added" />
     <MESSAGE value="huge refactor" />
     <MESSAGE value="Pasan todos los tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pasan todos los tests" />
+    <MESSAGE value="added todos" />
+    <option name="LAST_COMMIT_MESSAGE" value="added todos" />
   </component>
 </project>

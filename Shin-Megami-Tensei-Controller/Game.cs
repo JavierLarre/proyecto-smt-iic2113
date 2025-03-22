@@ -8,7 +8,7 @@ public class Game
 {
     private View _view;
     private TeamsFolder _folder;
-    private BattleDriver _driver;
+    private BattleBackend _backend;
     public Game(View view, string teamsFolder)
     {
         _view = view;
@@ -27,18 +27,18 @@ public class Game
 
     private void StartFight(Team[] teams)
     {
-        _driver = new BattleDriver(teams, _view);
+        _backend = new BattleBackend(teams, _view);
         Fight();
     }
     private void Fight()
     {
         //TODO: mover a método de driver
-        while (!_driver.HasBattleFinished())
+        while (!_backend.HasBattleFinished())
         {
-            _driver.StartRound();
+            _backend.StartRound();
         }
 
-        _driver.End();
+        _backend.End();
     }
 
     private TeamsFile ChooseTeamFromInput()
