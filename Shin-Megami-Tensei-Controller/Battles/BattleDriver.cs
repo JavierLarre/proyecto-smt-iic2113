@@ -21,14 +21,17 @@ public class BattleDriver
     public void StartRound()
     {
         _round++;
+        //TODO: guardar esta variable para modificarla
         IEnumerable<Fighter> turnOrder = CurrentTeam.TurnOrder().ToList();
+        //TODO: estoy seguro que hay una mejor manera de implementar esto
         _frontend.ChangeStatus(CurrentTeam, PlayerTurn);
         _frontend.RoundBanner();
         foreach (var fighter in turnOrder)
         {
+            //TODO: cual es la diferencia entre round banner y print round
             _frontend.PrintRound();
             _frontend.FighterTurn(fighter);
-            if (HasBattleFinished()) break;
+            if (HasBattleFinished()) break; //TODO: cambiar a IsROundDone
         }
     }
 

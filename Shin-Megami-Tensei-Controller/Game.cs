@@ -32,6 +32,7 @@ public class Game
     }
     private void Fight()
     {
+        //TODO: mover a método de driver
         while (!_driver.HasBattleFinished())
         {
             _driver.StartRound();

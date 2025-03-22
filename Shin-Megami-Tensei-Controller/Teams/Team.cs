@@ -10,7 +10,7 @@ public class Team
     public Samurai Samurai;
     public Monster[] Monsters;
     private TableRow _row;
-    public int TurnsLeft => _row.TurnsLeft;
+    public int TurnsLeft => _row.TurnsLeft; //TODO: mal
 
     public static Team FromParser(TeamParser parser) =>
         new (parser);
@@ -28,6 +28,7 @@ public class Team
 
     public bool HasLost()
     {
+        //TODO: agregar metodo IsDead a Fighter
         foreach(var fighter in _row.Units())
             if (fighter is not null)
                 if(fighter.Stats.HpLeft != 0)

@@ -7,8 +7,10 @@ public class Table(Team[] teams)
 {
     public Team[] Teams = teams;
 
+    //TODO: cambiar a método
     public override string ToString()
     {
+        //TODO: estoy seguro que esto puede ser mejor
         var playersTeamInString = Teams.Select(PrintPlayerTeamBanner);
         return string.Join('\n', playersTeamInString);
     }
@@ -31,7 +33,8 @@ public class Table(Team[] teams)
     {
         return Teams.Any(team => team.HasLost());
     }
-
+    
+    //TODO: que significa clean rows
     public void CleanRows()
     {
         foreach (var team in Teams)
@@ -40,7 +43,7 @@ public class Table(Team[] teams)
         }
     }
 
-    public Team GetWinner()
+    public Team GetWinner() //TODO: solo retorna al que no está perdiendo
     {
         return Teams.First(team => !team.HasLost());
     }

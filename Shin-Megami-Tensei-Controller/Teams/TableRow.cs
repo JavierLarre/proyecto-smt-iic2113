@@ -17,7 +17,7 @@ public class TableRow
         get
         {
             if (_fighters[0].Stats.HpLeft == 0) return _fightersAmount - 1;
-            return _fightersAmount;
+            return _fightersAmount; //TODO: notar dependencias
         }
     }
 
@@ -38,6 +38,7 @@ public class TableRow
         }
     }
 
+    //TODO: diferencia de clean y clear
     public void Clean()
     {
         for (int i = 1; i < _fighters.Length; i++)
@@ -51,6 +52,7 @@ public class TableRow
 
     }
 
+    //TODO: cambiar a metodo
     public override string ToString()
     {
         var rowStrings = _fighters
@@ -58,6 +60,7 @@ public class TableRow
         return string.Join('\n', rowStrings);
     }
 
+    //TODO: dependencias
     public IEnumerable<Fighter> TurnOrder()
     {
         return _fighters
