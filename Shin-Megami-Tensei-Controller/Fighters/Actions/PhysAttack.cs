@@ -5,7 +5,7 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public abstract class PhysAttack: IAction
 {
-    protected bool _isDone = false;
+    private bool _isDone = false;
     private const double PhysicalDamageMultiplier = 0.0114;
 
     protected abstract int Modifier();
@@ -26,6 +26,5 @@ public abstract class PhysAttack: IAction
         target.RecieveDamage(damage);
         PrintAttack(frontend, target);
         _isDone = true;
-        table.CleanRows();
     }
 }

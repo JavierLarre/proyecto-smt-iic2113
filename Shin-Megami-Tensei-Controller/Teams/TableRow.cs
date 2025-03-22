@@ -6,20 +6,16 @@ namespace Shin_Megami_Tensei.Teams;
 
 public class TableRow
 {
+    private const int MaxActiveFighters = 4;
     private Fighter?[] _fighters =
-        new Fighter[Constants.MaxActiveFighters];
+        new Fighter[MaxActiveFighters];
 
     private int _fightersAmount;
     private const string RowPositions = "ABCDEFGHI"; //alphabet
 
-    public int FullTurns
-    {
-        get
-        {
-            if (_fighters[0].Stats.HpLeft == 0) return _fightersAmount - 1;
-            return _fightersAmount; //TODO: notar dependencias
-        }
-    }
+    public int FullTurns => _fighters
+        .Where(fighter => fighter is not null)
+        .Count(fighter => fighter.IsAlive());
 
     public static TableRow FromTeam(Team team) => 
         new (team);
@@ -38,20 +34,6 @@ public class TableRow
         }
     }
 
-    //TODO: diferencia de clean y clear
-    public void Clean()
-    {
-        for (int i = 1; i < _fighters.Length; i++)
-        {
-            if (_fighters[i]?.Stats.HpLeft == 0)
-            {
-                _fighters[i] = null;
-                _fightersAmount--;
-            }
-        }
-
-    }
-
     //TODO: cambiar a metodo
     public override string ToString()
     {
@@ -65,7 +47,7 @@ public class TableRow
     {
         return _fighters
             .Where(fighter => fighter is not null)
-            .Where(fighter => fighter.Stats.HpLeft > 0) 
+            .Where(fighter => fighter.IsAlive()) 
             .OrderBy(fighter => fighter.Stats.Spd * -1);
     }
 
@@ -92,7 +74,7 @@ public class TableRow
 
     private void AddMonster(Monster monster)
     {
-        if (_fightersAmount >= Constants.MaxActiveFighters)
+        if (_fightersAmount >= MaxActiveFighters)
             return;
         _fighters[_fightersAmount] = monster;
         _fightersAmount++;

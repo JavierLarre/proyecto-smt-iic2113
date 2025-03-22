@@ -47,10 +47,5 @@ public class Team
         return Monsters.Contains(fighter);
     }
 
-    public void CleanRows()
-    {
-        _row.Clean();
-    }
-
     public IEnumerable<Fighter> TurnOrder() => _row.TurnOrder();
 }

@@ -20,4 +20,9 @@ public class Monster : Fighter
             new Pass()
         ];
     }
+
+    public override string ToString()
+    {
+        return IsAlive() ? base.ToString() : "";
+    }
 }

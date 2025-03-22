@@ -20,7 +20,7 @@ public class Table(Team[] teams)
     public string PrintInfo()
     {
         //TODO: estoy seguro que esto puede ser mejor
-        var playersTeamInString = Teams.Select(PrintPlayerTeamBanner);
+        var playersTeamInString = Teams.Select(PrintPlayerBanner);
         return string.Join('\n', playersTeamInString);
     }
 
@@ -45,20 +45,13 @@ public class Table(Team[] teams)
     {
         return Teams.Any(team => team.HasLost());
     }
-    
-    //TODO: que significa clean rows
-    public void CleanRows()
-    {
-        foreach (var team in Teams)
-        {
-            team.CleanRows();
-        }
-    }
 
     public Team GetWinner() //TODO: solo retorna al que no está perdiendo
     {
         return Teams.First(team => !team.HasLost());
     }
-    private string PrintPlayerTeamBanner(Team team) =>
+    private string PrintPlayerBanner(Team team) =>
         $"Equipo de {team.Samurai.Name} (J{GetPlayerFromTeam(team)+1})\n{team}";
+    
+    
 }

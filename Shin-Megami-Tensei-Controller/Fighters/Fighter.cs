@@ -19,6 +19,8 @@ public abstract class Fighter
         return Skills.Select(skill => skill.ToString());
     }
 
+    public bool IsAlive() => Stats.HpLeft > 0;
+
     public void RecieveDamage(int damage)
     {
         Stats.HpLeft = int.Max(0, Stats.HpLeft - damage);
