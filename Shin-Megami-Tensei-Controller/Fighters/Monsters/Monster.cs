@@ -14,7 +14,7 @@ public class Monster : Fighter
             .Select(SkillFactory.FromName)
             .ToArray();
         Actions = [
-            new Attack(),
+            new Attack(this),
             new UseSkill(),
             new Invoke(),
             new Pass()

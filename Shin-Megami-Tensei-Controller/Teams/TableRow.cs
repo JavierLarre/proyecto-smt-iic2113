@@ -12,7 +12,7 @@ public class TableRow
     private int _fightersAmount;
     private const string RowPositions = "ABCDEFGHI"; //alphabet
 
-    public int TurnsLeft
+    public int FullTurns
     {
         get
         {

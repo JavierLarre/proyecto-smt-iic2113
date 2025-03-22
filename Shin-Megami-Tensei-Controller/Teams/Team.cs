@@ -7,10 +7,10 @@ namespace Shin_Megami_Tensei.Teams;
 
 public class Team
 {
-    public Samurai Samurai;
-    public Monster[] Monsters;
-    private TableRow _row;
-    public int FullTurns => _row.TurnsLeft; //TODO: mal
+    public readonly Samurai Samurai;
+    public readonly Monster[] Monsters;
+    private readonly TableRow _row;
+    public int FullTurns => _row.FullTurns; 
 
     public static Team FromParser(TeamParser parser) =>
         new (parser);

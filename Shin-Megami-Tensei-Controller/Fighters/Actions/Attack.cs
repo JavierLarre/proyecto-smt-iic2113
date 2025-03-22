@@ -3,35 +3,23 @@ using Shin_Megami_Tensei.Teams;
 
 namespace Shin_Megami_Tensei.Fighters.Actions;
 
-public class Attack: IAction
+public class Attack(Fighter attacker): PhysAttack
 {
-    private bool _isDone = false;
+    private readonly Fighter _attacker = attacker;
+    private const int _modifier = 54;
+
     public override string ToString()
     {
         return "Atacar";
     }
-
-    public bool IsDone() => _isDone;
-
-    public void Act(Table table, Fighter fighter, BattleFrontend frontend)
-        //TODO: mismo codigo que shoot
+    protected override int Modifier() => _modifier;
+    protected override int FighterStat() => _attacker.Stats.Str;
+    protected override void PrintAttack(BattleFrontend frontend, Fighter reciever)
     {
-        Fighter? target = frontend.ChooseTargetFromUser(fighter);
-        if (target is null) return;
-        int damage = CalculateDamage(fighter);
-        target.RecieveDamage(damage);
-        frontend.PrintAttack(fighter, target, damage);
-        table.CleanRows();
-        _isDone = true;
-        //TODO: funcion muy larga
+        frontend.WriteLines([
+            $"{_attacker.Name} ataca a {reciever.Name}",
+            $"{reciever.Name} recibe {CalculateDamage()} de daño",
+            $"{reciever.Name} termina con {reciever.Stats.PrintHp()}"
+        ]);
     }
-
-    private int CalculateDamage(Fighter atacker)
-    {
-        int stat = atacker.Stats.Str;
-        const int modifier = 54;
-        //TODO: constante se puede mover a clase
-        return (int) Math.Floor(stat * modifier * Constants.PhysicalDamageMultiplier);
-    }
-    public void End() => _isDone = false;
 }

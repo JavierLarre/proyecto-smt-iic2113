@@ -1,8 +1,6 @@
-﻿using System.Globalization;
-using Shin_Megami_Tensei_View;
+﻿using Shin_Megami_Tensei_View;
 using Shin_Megami_Tensei.Fighters;
 using Shin_Megami_Tensei.Fighters.Actions;
-using Shin_Megami_Tensei.Fighters.Samurais;
 using Shin_Megami_Tensei.Fighters.Skills;
 using Shin_Megami_Tensei.Teams;
 
@@ -13,7 +11,6 @@ public class BattleFrontend
     private readonly View _view;
     private readonly Table _table;
     private readonly string _indent = new ('-', 40);
-    private Fighter[] _inOrder = [];
 
     private int PlayerTurnForPrinting => _table.PlayerTurn + 1;
 
@@ -27,9 +24,7 @@ public class BattleFrontend
     {
         PrintIndent();
         foreach (var line in lines)
-        {
             _view.WriteLine(line);
-        }
     }
 
     public void WriteLine(string line)
@@ -70,37 +65,16 @@ public class BattleFrontend
         //TODO: algo hacer aquí
         if(selectedAction?.GetType() != new GiveUp().GetType())
             EndTurn();
-        //TODO: esto es solo para el print del orden de turnos
         
     }
     
     public void StartTurn()
     {
-        //TODO: no queda claro qué es todo esto
-        var infoStringsWithIndents = PrintOrder().
-            Select(info => $"{_indent}\n{info}");
-        string joinedStringsWithNewlines = string.
-            Join('\n', infoStringsWithIndents);
-        _view.WriteLine(joinedStringsWithNewlines);
+        WriteLine(_table.PrintInfo());
+        PrintTurnsLeft();
+        PrintTeamInOrder();
     }
 
-    //TODO: print order de que
-    private IEnumerable<string> PrintOrder()
-    {
-        return [
-            _table.PrintInfo(),
-            TurnsLeft(),
-            PrintTeamInOrder(),
-        ];
-    }
-
-    public void PrintAttack(Fighter attacker, Fighter reciever, int dmg)
-    {
-        _view.WriteLine(_indent);
-        _view.WriteLine($"{attacker.Name} ataca a {reciever.Name}");
-        _view.WriteLine($"{reciever.Name} recibe {dmg} de daño");
-        _view.WriteLine($"{reciever.Name} termina con {reciever.Stats.PrintHp()}");
-    }
     //TODO: seguramente puedo refactorizar esto
     
     public void PrintShoot(Fighter attacker, Fighter reciever, int dmg)
@@ -119,12 +93,11 @@ public class BattleFrontend
         WriteLine($"{loser.Name} (J{player}) se rinde");
     }
 
-    public void EndTurn()
-    {
-        _view.WriteLine(_indent);
-        _view.WriteLine("Se han consumido 1 Full Turn(s) y 0 Blinking Turn(s)");
-        _view.WriteLine("Se han obtenido 0 Blinking Turn(s)");
-    }
+    public void EndTurn() =>
+        WriteLines([
+            "Se han consumido 1 Full Turn(s) y 0 Blinking Turn(s)",
+            "Se han obtenido 0 Blinking Turn(s)"
+        ]);
 
     public Skill? ChooseSkillFromUser(Fighter fighter)
     {
@@ -175,13 +148,6 @@ public class BattleFrontend
         _view.WriteLine($"{fighter.Skills.Count(skill => skill.Cost <= fighter.Stats.MpLeft)+1}-Cancelar");
     }
 
-
-    public void PrintFighterActions(Fighter fighter)
-    {
-        _view.WriteLine($"Seleccione una acción para {fighter.Name}");
-        _view.WriteLine("");
-    }
-
     public Fighter? ChooseTargetFromUser(Fighter attacker)
     {
         
@@ -219,28 +185,19 @@ public class BattleFrontend
     public void StartRound() =>
         WriteLine($"Ronda de {_table.CurrentTeam.Samurai.Name} (J{PlayerTurnForPrinting})");
     
-        
-    //TODO: es turns LEFT, y aqui hay lógica que no deberia estar
-    private string TurnsLeft() =>
-        $"Full Turns: {_table.TurnsLeft}\n" +
-        $"Blinking Turns: 0";
+    private void PrintTurnsLeft() =>
+        WriteLines([
+            $"Full Turns: {_table.TurnsLeft}",
+            "Blinking Turns: 0"]);
 
-    private string PrintTeamInOrder()
+    private void PrintTeamInOrder()
     {
-        // var orderStrings = _inOrder
-        //     .Select((fighter, i) => $"{i+1}-{fighter.Name}");
-        _inOrder = _table.GetFightOrder().ToArray();
-        //List<string> orderStrings = [];
-        var orderStrings = _inOrder.Select((fighter, i) => $"{i + 1}-{fighter.Name}");
-        //TODO: de nuevo, logica que no deberia ser
-        // for (int i = 0; i < _inOrder.Length; i++)
-        // {
-        //     string fighterString = $"{i+1}-{_inOrder[(i + _turnsPlayed) % _inOrder.Length].Name}";
-        //     orderStrings.Add(fighterString);
-        // }
-        //TODO: algunos metodos printean, otros retornan un string
-        string orderedTeamInString = string.Join('\n', orderStrings);
-        return $"Orden:\n{orderedTeamInString}";
+        var fighterNames = _table.GetFightOrder()
+            .ToArray()
+            .Select((fighter, i) => $"{i + 1}-{fighter.Name}")
+            .ToList();
+        fighterNames.Insert(0, "Orden:");
+        WriteLines(fighterNames);
     }
 
     public void PrintWinner(Team winner)

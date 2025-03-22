@@ -14,8 +14,8 @@ public class Samurai: Fighter
         Affinities = Affinities.FromData(data.affinity);
         Skills = [];
         Actions = [
-            new Attack(),
-            new Shoot(),
+            new Attack(this),
+            new Shoot(this),
             new UseSkill(),
             new Invoke(),
             new Pass(),
