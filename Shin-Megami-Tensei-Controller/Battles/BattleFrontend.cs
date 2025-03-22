@@ -164,7 +164,7 @@ public class BattleFrontend
         int i = 1;
         foreach (var target in targets)
         { 
-            _view.WriteLine($"{i++}-{target}");
+            _view.WriteLine($"{i++}-{target.PrintNameAndStats()}");
         }
         _view.WriteLine($"{i}-Cancelar");
         //TODO: metodo elegir opcion

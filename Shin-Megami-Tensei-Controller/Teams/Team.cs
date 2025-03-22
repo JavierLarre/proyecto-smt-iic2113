@@ -15,7 +15,7 @@ public class Team
     public static Team FromParser(TeamParser parser) =>
         new (parser);
     
-    public override string ToString() =>_row.ToString();
+    public string PrintFighters() =>_row.PrintFighters();
 
     private Team(TeamParser parser)
     {

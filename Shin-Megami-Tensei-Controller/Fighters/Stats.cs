@@ -14,9 +14,10 @@ public class Stats(StatsDataFromJson data)
     public int Spd = data.Spd;
     public int Lck = data.Lck;
 
-    public override string ToString() =>
-        $"{PrintHp()} MP:{MpLeft}/{Mp}";
-    
+    public string PrintStats() =>
+        $"{PrintHp()} {PrintMp()}";
+
+    public string PrintMp() => $"MP:{MpLeft}/{Mp}";
     public string PrintHp() =>
         $"HP:{HpLeft}/{Hp}";
 }

@@ -5,19 +5,14 @@ namespace Shin_Megami_Tensei.Fighters;
 
 public abstract class Fighter
 {
-    public string Name;
+    public string Name = "";
     public Stats Stats;
     public Affinities Affinities;
     public Skill[] Skills = [];
     public IAction[] Actions = [];
     
-    public override string ToString() => 
-        $"{Name} {Stats}";
-
-    public IEnumerable<string> SkillsInString()
-    {
-        return Skills.Select(skill => skill.ToString());
-    }
+    public virtual string PrintNameAndStats() => 
+        $"{Name} {Stats.PrintStats()}";
 
     public bool IsAlive() => Stats.HpLeft > 0;
 

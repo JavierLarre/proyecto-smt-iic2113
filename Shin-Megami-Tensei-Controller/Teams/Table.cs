@@ -28,7 +28,7 @@ public class Table(Team[] teams)
     {
         Fighter[] fightOrder = CurrentTeam.TurnOrder().ToArray();
         return fightOrder
-            .Select((fighter, i) => fightOrder[(i + _turnsPlayed) % fightOrder.Length]);
+            .Select((_, i) => fightOrder[(i + _turnsPlayed) % fightOrder.Length]);
     }
     public int GetPlayerFromTeam(Team team) => Array.IndexOf(Teams, team);
     public Team GetTeamFromPlayer(int player) => Teams[player - 1];
@@ -51,7 +51,7 @@ public class Table(Team[] teams)
         return Teams.First(team => !team.HasLost());
     }
     private string PrintPlayerBanner(Team team) =>
-        $"Equipo de {team.Samurai.Name} (J{GetPlayerFromTeam(team)+1})\n{team}";
+        $"Equipo de {team.Samurai.Name} (J{GetPlayerFromTeam(team)+1})\n{team.PrintFighters()}";
     
     
 }

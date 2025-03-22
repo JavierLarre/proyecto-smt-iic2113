@@ -21,8 +21,8 @@ public class Monster : Fighter
         ];
     }
 
-    public override string ToString()
+    public override string PrintNameAndStats()
     {
-        return IsAlive() ? base.ToString() : "";
+        return IsAlive() ? base.PrintNameAndStats() : "";
     }
 }

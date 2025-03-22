@@ -7,7 +7,7 @@ namespace Shin_Megami_Tensei.Teams;
 public class TableRow
 {
     private const int MaxActiveFighters = 4;
-    private Fighter?[] _fighters =
+    private readonly Fighter?[] _fighters =
         new Fighter[MaxActiveFighters];
 
     private int _fightersAmount;
@@ -35,14 +35,16 @@ public class TableRow
     }
 
     //TODO: cambiar a metodo
-    public override string ToString()
+    public string PrintFighters()
     {
         var rowStrings = _fighters
-            .Select((fighter, i) => $"{RowPosition(i)}-{fighter}");
+            .Select(FighterPosition);
         return string.Join('\n', rowStrings);
     }
 
-    //TODO: dependencias
+    private string FighterPosition(Fighter? fighter, int i) =>
+         fighter is null ? $"{RowPosition(i)}-" : $"{RowPosition(i)}-{fighter.PrintNameAndStats()}";
+
     public IEnumerable<Fighter> TurnOrder()
     {
         return _fighters
