@@ -5,8 +5,8 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public interface IAction
 {
-    public string ToString();
+    public string ActionName();
     public bool IsDone();
-    public void Act(Table table, Fighter fighter, BattleFrontend frontend);
+    public void Act(Table table, BattleFrontend frontend);
     public void Reset();
 }

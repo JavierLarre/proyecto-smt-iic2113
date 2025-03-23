@@ -8,10 +8,7 @@ public class Shoot(Fighter attacker): PhysAttack
     private readonly Fighter _attacker = attacker;
     private const int _modifier = 80;
 
-    public override string ToString()
-    {
-        return "Disparar";
-    }
+    public override string ActionName() => "Disparar";
     protected override int Modifier() => _modifier;
     protected override int FighterStat() => _attacker.Stats.Skl;
     protected override void PrintAttack(BattleFrontend frontend, Fighter reciever)

@@ -7,16 +7,12 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 public class UseSkill: IAction
 {
     private bool _isDone = false;
-    
-    public override string ToString()
-    {
-        return "Usar Habilidad";
-    }
-
+    public string ActionName() => "Usar Habilidad";
     public bool IsDone() => _isDone;
 
-    public void Act(Table table, Fighter fighter, BattleFrontend frontend)
+    public void Act(Table table, BattleFrontend frontend)
     {
+        Fighter fighter = table.NextFighterInOrder();
         Skill? skill = frontend.ChooseSkillFromUser(fighter);
         if (skill is null) return;
         //implementar para prox entrega

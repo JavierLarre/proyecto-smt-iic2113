@@ -21,7 +21,7 @@ public class BattleBackend
         while (!HasBattleFinished())
             StartRound();
         
-        End();
+        EndGame();
     }
 
     private void StartRound()
@@ -37,7 +37,7 @@ public class BattleBackend
     private bool IsRoundDone() => HasBattleFinished() || _table.IsRoundDone();
     private bool HasBattleFinished() => _table.HasTeamLost();
     
-    private void End()
+    private void EndGame()
     {
         _frontend.PrintWinner();
     }
@@ -56,7 +56,7 @@ public class BattleBackend
         bool isDone;
         do {
             action = _frontend.ChooseActionFromUser(nextFighter);
-            action.Act(_table, nextFighter, _frontend);
+            action.Act(_table, _frontend);
             isDone = action.IsDone();
         } while (!isDone);
         action.Reset();

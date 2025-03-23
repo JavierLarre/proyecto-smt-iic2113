@@ -76,7 +76,7 @@ public class BattleFrontend(Table table, View view)
     private void ShowActionsToUser(Fighter fighter)
     {
         List<string> actionStrings = fighter.Actions
-            .Select((action, i) => $"{i + 1}: {action}")
+            .Select((action, i) => $"{i + 1}: {action.ActionName()}")
             .ToList();
         actionStrings.Insert(0, $"Seleccione una acción para {fighter.Name}");
         WriteLines(actionStrings);

@@ -10,7 +10,7 @@ public abstract class PhysAttack: IAction
 
     protected abstract int Modifier();
     protected abstract int FighterStat();
-    public abstract override string ToString();
+    public abstract string ActionName();
     public bool IsDone() => _isDone;
     protected abstract void PrintAttack(BattleFrontend frontend, Fighter reciever);
     protected int CalculateDamage() =>
@@ -18,9 +18,10 @@ public abstract class PhysAttack: IAction
     
     public void Reset() => _isDone = false;
 
-    public void Act(Table table, Fighter fighter, BattleFrontend frontend)
+    public void Act(Table table, BattleFrontend frontend)
     {
-        Fighter? target = frontend.ChooseTargetFromUser(fighter);
+        Fighter attacker = table.NextFighterInOrder();
+        Fighter? target = frontend.ChooseTargetFromUser(attacker);
         if (target is null) return;
         int damage = CalculateDamage();
         target.RecieveDamage(damage);
