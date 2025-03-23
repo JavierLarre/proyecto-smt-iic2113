@@ -10,7 +10,7 @@ public class Skill(SkillDataFromJson data)
     public string Hits = data.hits;
     public string Effect = data.effect;
 
-    public override string ToString()
+    public string PrintNameAndCost()
     {
         return $"{Name} MP:{Cost}";
     }

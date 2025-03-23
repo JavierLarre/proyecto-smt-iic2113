@@ -13,7 +13,8 @@ public abstract class Fighter
     
     public virtual string PrintNameAndStats() => 
         $"{Name} {Stats.PrintStats()}";
-
+    public IEnumerable<Skill> AvailableSkills() => Skills.Where(IsUsable);
+    public bool IsUsable(Skill skill) => skill.Cost <= Stats.MpLeft;
     public bool IsAlive() => Stats.HpLeft > 0;
 
     public void RecieveDamage(int damage)

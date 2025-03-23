@@ -16,7 +16,7 @@ public abstract class PhysAttack: IAction
     protected int CalculateDamage() =>
         (int)Math.Floor(FighterStat() * Modifier() * PhysicalDamageMultiplier);
     
-    public void End() => _isDone = false;
+    public void Reset() => _isDone = false;
 
     public void Act(Table table, Fighter fighter, BattleFrontend frontend)
     {

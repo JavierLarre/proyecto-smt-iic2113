@@ -14,8 +14,6 @@ public class Team
 
     public static Team FromParser(TeamParser parser) =>
         new (parser);
-    
-    public string PrintFighters() =>_row.PrintFighters();
 
     private Team(TeamParser parser)
     {
@@ -24,28 +22,10 @@ public class Team
         _row = TableRow.FromTeam(this);
     }
 
-    public Fighter?[] Units() => _row.Units();
-
-    public bool HasLost()
-    {
-        //TODO: agregar metodo IsDead a Fighter
-        foreach(var fighter in _row.Units())
-            if (fighter is not null)
-                if(fighter.Stats.HpLeft != 0)
-                    return false;
-        return true;
-    }
-
-    public void Clear()
-    {
-        _row.Clear();
-    }
-
-    public bool HasFighter(Fighter fighter)
-    {
-        if (Samurai == fighter) return true;
-        return Monsters.Contains(fighter);
-    }
-
+    public string PrintFighters() =>_row.PrintFighters();
+    public IEnumerable<Fighter> ValidTargets() => _row.ValidTargets();
+    public bool HasLost() => !_row.ValidTargets().Any();
+    public void Clear() => _row.Clear();
     public IEnumerable<Fighter> TurnOrder() => _row.TurnOrder();
+    public bool HasFighter(Fighter fighter) => Samurai == fighter || Monsters.Contains(fighter);
 }

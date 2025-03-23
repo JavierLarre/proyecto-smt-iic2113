@@ -16,10 +16,11 @@ public class GiveUp: IAction
     {
         Team loser = table.GetTeamFromFighter(fighter);
         loser.Clear();
-        frontend.PrintGiveUp(fighter);
+        int player = table.GetPlayerFromTeam(loser);
+        frontend.WriteLine($"{loser.Samurai.Name} (J{player+1}) se rinde");
     }
 
-    public void End()
+    public void Reset()
     {
     }
 }

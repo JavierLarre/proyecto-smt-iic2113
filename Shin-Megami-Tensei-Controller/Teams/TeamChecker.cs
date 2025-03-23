@@ -6,6 +6,8 @@ namespace Shin_Megami_Tensei.Teams;
 
 public class TeamChecker(TeamParser team)
 {
+    private const int MaxTeamSize = 8;
+    private const int MaxSkills = 8;
     private TeamParser Team = team;
 
     public bool IsValid()
@@ -23,7 +25,7 @@ public class TeamChecker(TeamParser team)
 
     private bool HasSamurais() => Team.Samurais.Count > 0;
     private bool HasOneSamurai() => Team.Samurais.Count == 1;
-    private bool LessThanMaxSize() => Team.Monsters.Count + 1 <= Constants.MaxTeamSize;
+    private bool LessThanMaxSize() => Team.Monsters.Count + 1 <= MaxTeamSize;
 
     private bool AllUnitsAreUnique()
     {
@@ -35,7 +37,7 @@ public class TeamChecker(TeamParser team)
     {
         if (Team.Samurais.Count == 0) return false;
         Samurai samurai = Team.Samurais.First();
-        return samurai.Skills.Length <= Constants.MaxSkillSize;
+        return samurai.Skills.Length <= MaxSkills;
     }
 
     private bool AllSkillsAreUnique()

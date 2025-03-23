@@ -16,7 +16,7 @@ public class Invoke: IAction
     {
     }
 
-    public void End()
+    public void Reset()
     {
     }
 }

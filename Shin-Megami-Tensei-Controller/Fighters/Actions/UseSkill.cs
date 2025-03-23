@@ -22,5 +22,5 @@ public class UseSkill: IAction
         //implementar para prox entrega
     }
 
-    public void End() => _isDone = false;
+    public void Reset() => _isDone = false;
 }

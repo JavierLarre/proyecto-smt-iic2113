@@ -13,9 +13,11 @@ public class TableRow
     private int _fightersAmount;
     private const string RowPositions = "ABCDEFGHI"; //alphabet
 
-    public int FullTurns => _fighters
-        .Where(fighter => fighter is not null)
-        .Count(fighter => fighter.IsAlive());
+    public int FullTurns => ValidTargets().Count();
+
+    public IEnumerable<Fighter> ValidTargets() =>
+        _fighters.Where(fighter => fighter is not null)
+        .Where(fighter => fighter.IsAlive());
 
     public static TableRow FromTeam(Team team) => 
         new (team);
@@ -34,16 +36,16 @@ public class TableRow
         }
     }
 
-    //TODO: cambiar a metodo
     public string PrintFighters()
     {
         var rowStrings = _fighters
             .Select(FighterPosition);
         return string.Join('\n', rowStrings);
     }
-
     private string FighterPosition(Fighter? fighter, int i) =>
-         fighter is null ? $"{RowPosition(i)}-" : $"{RowPosition(i)}-{fighter.PrintNameAndStats()}";
+         fighter is null ?
+             $"{RowPosition(i)}-" :
+             $"{RowPosition(i)}-{fighter.PrintNameAndStats()}";
 
     public IEnumerable<Fighter> TurnOrder()
     {
@@ -51,11 +53,6 @@ public class TableRow
             .Where(fighter => fighter is not null)
             .Where(fighter => fighter.IsAlive()) 
             .OrderBy(fighter => fighter.Stats.Spd * -1);
-    }
-
-    public Fighter?[] Units()
-    {
-        return _fighters;
     }
 
     private static char RowPosition(int position) =>

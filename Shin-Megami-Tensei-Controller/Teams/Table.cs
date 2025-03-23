@@ -6,7 +6,7 @@ namespace Shin_Megami_Tensei.Teams;
 public class Table(Team[] teams)
 {
     public Team[] Teams = teams;
-    private int _turnsPlayed = 0; //TODO: mover a row
+    private int _turnsPlayed = 0; 
     public int PlayerTurn => GetPlayerFromTeam(CurrentTeam);
     public Team CurrentTeam = teams[0];
     public Team EnemyTeam => Teams[(PlayerTurn + 1) % Teams.Length];
@@ -31,27 +31,20 @@ public class Table(Team[] teams)
             .Select((_, i) => fightOrder[(i + _turnsPlayed) % fightOrder.Length]);
     }
     public int GetPlayerFromTeam(Team team) => Array.IndexOf(Teams, team);
-    public Team GetTeamFromPlayer(int player) => Teams[player - 1];
     public int TurnsLeft => CurrentTeam.FullTurns - _turnsPlayed;
     public void EndTurn() => _turnsPlayed++;
     public Fighter NextFighterInOrder() => GetFightOrder().First();
     public bool IsRoundDone() => !(TurnsLeft > 0);
-
-    public Team GetTeamFromFighter(Fighter fighter)
-    {
-        return Teams.First(team => team.HasFighter(fighter));
-    }
-    public bool HasTeamLost()
-    {
-        return Teams.Any(team => team.HasLost());
-    }
-
-    public Team GetWinner() //TODO: solo retorna al que no está perdiendo
-    {
-        return Teams.First(team => !team.HasLost());
-    }
+    public Team GetTeamFromFighter(Fighter fighter) =>
+         Teams.First(team => team.HasFighter(fighter));
+    
+    public bool HasTeamLost() => Teams.Any(team => team.HasLost());
+    public Team GetWinner() => Teams.First(team => !team.HasLost());
+    
     private string PrintPlayerBanner(Team team) =>
-        $"Equipo de {team.Samurai.Name} (J{GetPlayerFromTeam(team)+1})\n{team.PrintFighters()}";
+        $"Equipo de {team.Samurai.Name} " +
+        $"(J{GetPlayerFromTeam(team)+1})\n" +
+        $"{team.PrintFighters()}";
     
     
 }

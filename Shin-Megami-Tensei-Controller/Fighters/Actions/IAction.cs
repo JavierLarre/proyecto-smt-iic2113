@@ -8,5 +8,5 @@ public interface IAction
     public string ToString();
     public bool IsDone();
     public void Act(Table table, Fighter fighter, BattleFrontend frontend);
-    public void End();
+    public void Reset();
 }

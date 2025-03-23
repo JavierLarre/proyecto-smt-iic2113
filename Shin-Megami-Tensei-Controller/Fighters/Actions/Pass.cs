@@ -16,7 +16,7 @@ public class Pass: IAction
     {
     }
 
-    public void End()
+    public void Reset()
     {
     }
 }
