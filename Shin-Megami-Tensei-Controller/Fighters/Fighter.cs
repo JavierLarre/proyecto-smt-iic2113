@@ -16,10 +16,6 @@ public abstract class Fighter
     public IEnumerable<Skill> AvailableSkills() => Skills.Where(IsUsable);
     public bool IsUsable(Skill skill) => skill.Cost <= Stats.MpLeft;
     public bool IsAlive() => Stats.HpLeft > 0;
-
-    public void RecieveDamage(int damage)
-    {
+    public void RecieveDamage(int damage) =>
         Stats.HpLeft = int.Max(0, Stats.HpLeft - damage);
-    }
-    
 }
