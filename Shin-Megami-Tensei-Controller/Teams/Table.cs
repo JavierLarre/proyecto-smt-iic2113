@@ -5,11 +5,13 @@ namespace Shin_Megami_Tensei.Teams;
 
 public class Table(Team[] teams)
 {
-    public Team[] Teams = teams;
+    private Team[] Teams = teams;
     private int _turnsPlayed = 0; 
     public int PlayerTurn => GetPlayerFromTeam(CurrentTeam);
     public Team CurrentTeam = teams[0];
     public Team EnemyTeam => Teams[(PlayerTurn + 1) % Teams.Length];
+    
+    
     
     public void EndRound()
     {

@@ -2,38 +2,37 @@
 
 public class TeamsFile
 {
-    private string[] Lines;
-    private TeamParser[] Parsers;
+    private readonly string[] _lines;
+    private readonly IEnumerable<TeamParser> _parsers;
 
     public TeamsFile(string filePath)
     {
-        Lines = File.ReadAllLines(filePath);
-        Parsers = GetParsers();
+        _lines = File.ReadAllLines(filePath);
+        _parsers = GetParsers();
     }
 
     public bool IsFileValid()
     {
-        TeamChecker[] checkers = Parsers
-            .Select(parser => new TeamChecker(parser))
-            .ToArray();
+        var checkers = _parsers
+            .Select(TeamChecker.FromParser);
         return checkers.All(checker => checker.IsValid());
     }
 
     public Team[] GetTeams()
     {
-        return Parsers
+        return _parsers
             .Select(Team.FromParser)
             .ToArray();
     }
 
-    private TeamParser[] GetParsers()
+    private IEnumerable<TeamParser> GetParsers()
     {
-        int teamOneLength = Array.IndexOf(Lines, "Player 2 Team");
-        string[] teamOneLines = Lines[1..teamOneLength];
-        string[] teamTwoLines = Lines[(teamOneLength + 1) .. Lines.Length];
+        int teamOneLength = Array.IndexOf(_lines, "Player 2 Team");
+        string[] teamOneLines = _lines[1..teamOneLength];
+        string[] teamTwoLines = _lines[(teamOneLength + 1) .. _lines.Length];
         return [
-            new TeamParser(teamOneLines),
-            new TeamParser(teamTwoLines)
+            TeamParser.FromTextLines(teamOneLines),
+            TeamParser.FromTextLines(teamTwoLines)
         ];
     }
 }

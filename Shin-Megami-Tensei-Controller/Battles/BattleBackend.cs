@@ -10,9 +10,9 @@ public class BattleBackend
     private Table _table; //Also works as the game model
     private BattleFrontend _frontend;
 
-    public BattleBackend(Team[] teams, View view)
+    public BattleBackend(Table table, View view)
     {
-        _table = new Table(teams);
+        _table = table;
         _frontend = new BattleFrontend(_table, view);
     }
 

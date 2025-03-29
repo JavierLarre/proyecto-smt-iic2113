@@ -6,8 +6,8 @@ namespace Shin_Megami_Tensei;
 
 public class Game
 {
-    private View _view;
-    private TeamsFolder _folder;
+    private readonly View _view;
+    private readonly TeamsFolder _folder;
     public Game(View view, string teamsFolder)
     {
         _view = view;
@@ -21,19 +21,20 @@ public class Game
             StartFight(file.GetTeams());
         else
             _view.WriteLine("Archivo de equipos inválido");
-        
     }
 
     private void StartFight(Team[] teams)
     {
-        BattleBackend backend = new BattleBackend(teams, _view);
+        Table table = new Table(teams);
+        BattleBackend backend = new BattleBackend(table, _view);
         backend.Play();
     }
 
     private TeamsFile ChooseTeamFromInput()
     {
         int teamNumber = ChooseTeamFile();
-        return _folder.ReadTeamFile(teamNumber);
+        TeamsFile file = _folder.ReadTeamFile(teamNumber);
+        return file;
     }
 
     private int ChooseTeamFile()

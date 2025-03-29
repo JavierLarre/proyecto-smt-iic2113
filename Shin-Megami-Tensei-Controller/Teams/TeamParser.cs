@@ -6,22 +6,22 @@ namespace Shin_Megami_Tensei.Teams;
 
 public class TeamParser
 {
-    public List<Samurai> Samurais = [];
-    public List<Monster> Monsters = [];
-    private string[] Lines;
+    public readonly List<Samurai> Samurais = [];
+    public readonly List<Monster> Monsters = [];
+    private readonly IEnumerable<string> _lines;
 
-    public TeamParser(string[] lines)
+    public static TeamParser FromTextLines(IEnumerable<string> lines)
+        => new (lines);
+    private TeamParser(IEnumerable<string> lines)
     {
-        Lines = lines;
+        _lines = lines;
         DeserializeTeam();
     }
     
     private void DeserializeTeam()
     {
-        foreach (string line in Lines)
-        {
+        foreach (string line in _lines)
             AddEntity(line);
-        }
     }
 
     private void AddEntity(string line)

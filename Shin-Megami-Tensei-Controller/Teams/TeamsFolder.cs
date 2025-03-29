@@ -2,38 +2,42 @@
 
 public class TeamsFolder
 {
-    private string FolderPath;
-    private string[] FileNames;
+    private readonly string _folderPath;
+    private readonly string[] _fileNames;
 
     public TeamsFolder(string folderPath)
     {
-        FolderPath = folderPath;
+        _folderPath = folderPath;
         CheckFolderPath();
-        FileNames = GetFileNames();
+        _fileNames = GetFileNames().ToArray();
     }
 
     public string PrintFileNames()
     {
-        var fileNames = FileNames.
+        var namesWithIndex = _fileNames.
             Select((name, index) => $"{index}: {name}");
-        return string.Join("\n", fileNames);
+        string allNamesWithNewlines = string.Join("\n", namesWithIndex);
+        return allNamesWithNewlines;
     }
 
     public TeamsFile ReadTeamFile(int fileNumber)
     {
-        string fileName = FileNames[fileNumber];
-        TeamsFile file = new TeamsFile(Path.Join(FolderPath, fileName));
+        string fileName = _fileNames[fileNumber];
+        string filePath = Path.Join(_folderPath, fileName);
+        TeamsFile file = new TeamsFile(filePath);
         return file;
     }
     
-    private string[] GetFileNames()
+    private IEnumerable<string> GetFileNames()
     {
-        return Directory.GetFiles(FolderPath).Select(Path.GetFileName).ToArray();
+        var fileNames = Directory.GetFiles(_folderPath)
+            .Select(Path.GetFileName);
+        return fileNames.Where(name => !string.IsNullOrEmpty(name))!;
     }
 
     private void CheckFolderPath()
     {
-        if (!Directory.Exists(FolderPath))
+        if (!Directory.Exists(_folderPath))
             throw new FileNotFoundException();
     }
     
