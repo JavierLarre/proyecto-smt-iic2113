@@ -1,11 +1,11 @@
 ﻿namespace Shin_Megami_Tensei.Teams;
 
-public class TeamsFolder
+public class TeamsFolderController
 {
     private readonly string _folderPath;
     private readonly string[] _fileNames;
 
-    public TeamsFolder(string folderPath)
+    public TeamsFolderController(string folderPath)
     {
         _folderPath = folderPath;
         CheckFolderPath();

@@ -7,11 +7,11 @@ namespace Shin_Megami_Tensei;
 public class Game
 {
     private readonly View _view;
-    private readonly TeamsFolder _folder;
+    private readonly TeamsFolderController _folder;
     public Game(View view, string teamsFolder)
     {
         _view = view;
-        _folder = new TeamsFolder(teamsFolder);
+        _folder = new TeamsFolderController(teamsFolder);
     }
     
     public void Play()
