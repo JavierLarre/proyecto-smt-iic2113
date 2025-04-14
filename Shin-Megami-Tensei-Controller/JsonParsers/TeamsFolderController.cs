@@ -1,44 +1,37 @@
-﻿namespace Shin_Megami_Tensei.Teams;
+﻿using Shin_Megami_Tensei_Model;
+using Shin_Megami_Tensei_View;
+using Shin_Megami_Tensei_View.Views.ConsoleView.GameInitializer;
+
+namespace Shin_Megami_Tensei.Teams;
 
 public class TeamsFolderController
 {
-    private readonly string _folderPath;
-    private readonly string[] _fileNames;
+    private readonly TeamsFolder _folder;
+    private readonly TeamsFolderView _view;
 
-    public TeamsFolderController(string folderPath)
+    public TeamsFolderController(string folderPath, View view)
     {
-        _folderPath = folderPath;
-        CheckFolderPath();
-        _fileNames = GetFileNames().ToArray();
-    }
-
-    public string PrintFileNames()
-    {
-        var namesWithIndex = _fileNames.
-            Select((name, index) => $"{index}: {name}");
-        string allNamesWithNewlines = string.Join("\n", namesWithIndex);
-        return allNamesWithNewlines;
+        _folder = new TeamsFolder(folderPath);
+        _view = new TeamsFolderView(_folder, view);
     }
 
-    public TeamsFile ReadTeamFile(int fileNumber)
+    public TeamsFile GetTeamFile()
     {
-        string fileName = _fileNames[fileNumber];
-        string filePath = Path.Join(_folderPath, fileName);
-        TeamsFile file = new TeamsFile(filePath);
-        return file;
-    }
-    
-    private IEnumerable<string> GetFileNames()
-    {
-        var fileNames = Directory.GetFiles(_folderPath)
-            .Select(Path.GetFileName);
-        return fileNames.Where(name => !string.IsNullOrEmpty(name))!;
+        string nameTeamFile = _view.GetFileNameFromUser();
+        string pathTeamFile = CombinePathWithName(nameTeamFile);
+        return new TeamsFile(pathTeamFile);
     }
 
-    private void CheckFolderPath()
+    public ICollection<Team> GetTeams()
     {
-        if (!Directory.Exists(_folderPath))
-            throw new FileNotFoundException();
+        TeamsFile file = GetTeamFile();
+        if (!file.IsFileValid())
+            throw new ArgumentException("Archivo de equipos inválido");
+        return file.GetTeams();
     }
-    
+
+    private string CombinePathWithName(string fileName)
+    {
+        return Path.Combine(_folder.Path, fileName);
+    }
 }

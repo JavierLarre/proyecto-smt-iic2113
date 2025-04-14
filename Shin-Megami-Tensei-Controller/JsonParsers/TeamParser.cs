@@ -1,17 +1,22 @@
 ﻿using System.Text.RegularExpressions;
-using Shin_Megami_Tensei.Fighters.Monsters;
-using Shin_Megami_Tensei.Fighters.Samurais;
+using Shin_Megami_Tensei_Model;
 
 namespace Shin_Megami_Tensei.Teams;
 
 public class TeamParser
 {
-    public readonly List<Samurai> Samurais = [];
-    public readonly List<Monster> Monsters = [];
+    private readonly List<IFighter> _fighters = [];
     private readonly IEnumerable<string> _lines;
+    private readonly SamuraiFactory _samuraiFactory = new ();
+    private readonly DemonFactory _demonFactory = new DemonFactory();
 
     public static TeamParser FromTextLines(IEnumerable<string> lines)
         => new (lines);
+
+    public IEnumerable<IFighter> GetFighters()
+    {
+        return _fighters;
+    }
     private TeamParser(IEnumerable<string> lines)
     {
         _lines = lines;
@@ -36,16 +41,15 @@ public class TeamParser
 
     private void AddMonster(string name)
     {
-        Monsters.Add(MonsterFactory.FromName(name));
+        _fighters.Add(_demonFactory.FromName(name));
     }
 
     private void AddSamurai(string line)
     {
         string name = GetSamuraiName(line);
         string[] skills = GetSamuraiSkills(line);
-        Samurai samurai = SamuraiFactory.FromName(name);
-        samurai.SetSkills(skills);
-        Samurais.Add(samurai);
+        IFighter samurai = _samuraiFactory.FromNameAndSkills(name, skills);
+        _fighters.Add(samurai);
     }
 
     private static string GetSamuraiName(string line)

@@ -1,22 +1,28 @@
-﻿using Shin_Megami_Tensei.Battles;
+﻿using Shin_Megami_Tensei_Model;
+using Shin_Megami_Tensei.Battles;
 using Shin_Megami_Tensei.Teams;
 
 namespace Shin_Megami_Tensei.Fighters.Actions;
 
-public class Shoot(Fighter attacker): PhysAttack
+public class Shoot: PhysAttack
 {
-    private readonly Fighter _attacker = attacker;
+    private readonly IFighter _attacker;
     private const int _modifier = 80;
+
+    public Shoot(IFighter fighter)
+    {
+        _attacker = fighter;
+    }
 
     public override string ActionName() => "Disparar";
     protected override int Modifier() => _modifier;
     protected override int FighterStat() => _attacker.Stats.Skl;
-    protected override void PrintAttack(BattleFrontend frontend, Fighter reciever)
+    protected override void PrintAttack(BattleView view, IFighter reciever)
     {
-        frontend.WriteLines([
+        view.WriteLines([
             $"{_attacker.Name} dispara a {reciever.Name}",
             $"{reciever.Name} recibe {CalculateDamage()} de daño",
-            $"{reciever.Name} termina con {reciever.Stats.PrintHp()}"
+            $"{reciever.Name} termina con HP:{reciever.Stats.HpLeft}/{reciever.Stats.MaxHp}"
         ]);
     }
 }

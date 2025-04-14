@@ -2,9 +2,19 @@
 
 public class Samurai: AbstractFighter
 {
-    public Samurai(string name, string[] fightOptions,
-        Skill[] skills, Stats stats, Affinities affinities)
-        : base(name, fightOptions, skills, stats, affinities)
+    public override string[] FightOptions =>
+    [
+        "Atacar",
+        "Disparar",
+        "Usar Habilidad",
+        "Invocar",
+        "Pasar Turno",
+        "Rendirse"
+    ];
+
+    public Samurai(string name, Skill[] skills, Stats stats, Affinities affinities)
+        : base(name, skills, stats, affinities)
     {
+        
     }
 }

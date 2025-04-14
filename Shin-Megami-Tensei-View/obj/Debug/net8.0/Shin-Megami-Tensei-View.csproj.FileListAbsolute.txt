@@ -32,3 +32,10 @@ C:\Users\javol\Desktop\Diseño Detallado de Software\Proyecto-Megaten-IIC2113\Sh
 C:\Users\javol\Desktop\Diseño Detallado de Software\Proyecto-Megaten-IIC2113\Shin-Megami-Tensei-View\obj\Debug\net8.0\refint\Shin-Megami-Tensei-View.dll
 C:\Users\javol\Desktop\Diseño Detallado de Software\Proyecto-Megaten-IIC2113\Shin-Megami-Tensei-View\obj\Debug\net8.0\Shin-Megami-Tensei-View.pdb
 C:\Users\javol\Desktop\Diseño Detallado de Software\Proyecto-Megaten-IIC2113\Shin-Megami-Tensei-View\obj\Debug\net8.0\ref\Shin-Megami-Tensei-View.dll
+C:\Users\javol\Desktop\Diseño Detallado de Software\Proyecto-Megaten-IIC2113\Shin-Megami-Tensei-View\bin\Debug\net8.0\Shin-Megami-Tensei-Model.deps.json
+C:\Users\javol\Desktop\Diseño Detallado de Software\Proyecto-Megaten-IIC2113\Shin-Megami-Tensei-View\bin\Debug\net8.0\Shin-Megami-Tensei-Model.runtimeconfig.json
+C:\Users\javol\Desktop\Diseño Detallado de Software\Proyecto-Megaten-IIC2113\Shin-Megami-Tensei-View\bin\Debug\net8.0\Shin-Megami-Tensei-Model.exe
+C:\Users\javol\Desktop\Diseño Detallado de Software\Proyecto-Megaten-IIC2113\Shin-Megami-Tensei-View\bin\Debug\net8.0\Shin-Megami-Tensei-Model.dll
+C:\Users\javol\Desktop\Diseño Detallado de Software\Proyecto-Megaten-IIC2113\Shin-Megami-Tensei-View\bin\Debug\net8.0\Shin-Megami-Tensei-Model.pdb
+C:\Users\javol\Desktop\Diseño Detallado de Software\Proyecto-Megaten-IIC2113\Shin-Megami-Tensei-View\obj\Debug\net8.0\Shin-Megami-Tensei-View.csproj.AssemblyReference.cache
+C:\Users\javol\Desktop\Diseño Detallado de Software\Proyecto-Megaten-IIC2113\Shin-Megami-Tensei-View\obj\Debug\net8.0\Shin-Meg.6D01BA87.Up2Date

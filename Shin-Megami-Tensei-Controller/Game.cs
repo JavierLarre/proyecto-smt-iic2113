@@ -1,52 +1,39 @@
-﻿using Shin_Megami_Tensei_View;
+﻿using Shin_Megami_Tensei_Model;
+using Shin_Megami_Tensei_View;
 using Shin_Megami_Tensei.Battles;
 using Shin_Megami_Tensei.Teams;
 
 namespace Shin_Megami_Tensei;
 
-public class Game
+public class Game: IController
 {
     private readonly View _view;
     private readonly TeamsFolderController _folder;
     public Game(View view, string teamsFolder)
     {
         _view = view;
-        _folder = new TeamsFolderController(teamsFolder);
+        _folder = new TeamsFolderController(teamsFolder, view);
     }
     
     public void Play()
     {
-        TeamsFile file = ChooseTeamFromInput();
-        if (file.IsFileValid())
-            StartFight(file.GetTeams());
-        else
-            _view.WriteLine("Archivo de equipos inválido");
+        ICollection<Team> teams;
+        try
+        {
+            teams = _folder.GetTeams();
+        }
+        catch (ArgumentException e)
+        {
+            _view.WriteLine(e.Message);
+            return;
+        }
+        StartFight(teams);
     }
 
-    private void StartFight(Team[] teams)
+    private void StartFight(ICollection<Team> teams)
     {
         Table table = new Table(teams);
-        BattleBackend backend = new BattleBackend(table, _view);
-        backend.Play();
-    }
-
-    private TeamsFile ChooseTeamFromInput()
-    {
-        int teamNumber = ChooseTeamFile();
-        TeamsFile file = _folder.ReadTeamFile(teamNumber);
-        return file;
-    }
-
-    private int ChooseTeamFile()
-    {
-        string? input = null;
-        while (input == null)
-        {
-            _view.WriteLine("Elige un archivo para cargar los equipos");
-            _view.WriteLine(_folder.PrintFileNames());
-            input = _view.ReadLine();
-        }
-
-        return int.Parse(input);
+        BattleController controller = new BattleController(table, _view);
+        controller.Play();
     }
 }

@@ -1,5 +1,4 @@
-﻿using Shin_Megami_Tensei.Fighters.Samurais;
-using Shin_Megami_Tensei.Fighters.Skills;
+﻿using Shin_Megami_Tensei_Model;
 
 
 namespace Shin_Megami_Tensei.Teams;
@@ -8,11 +7,11 @@ public class TeamChecker
 {
     private const int MaxTeamSize = 8;
     private const int MaxSkills = 8;
-    private readonly TeamParser _parser;
+    private readonly ICollection<IFighter> _fighters;
 
     public static TeamChecker FromParser(TeamParser parser)
         => new TeamChecker(parser);
-    private TeamChecker(TeamParser parser) => _parser = parser;
+    private TeamChecker(TeamParser parser) => _fighters = parser.GetFighters().ToList();
 
     public bool IsValid()
     {
@@ -27,28 +26,27 @@ public class TeamChecker
         return conditions.All(c => c);
     }
 
-    private bool HasSamurais() => _parser.Samurais.Count > 0;
-    private bool HasOneSamurai() => _parser.Samurais.Count == 1;
-    private bool LessThanMaxSize() => _parser.Monsters.Count + 1 <= MaxTeamSize;
-
+    private bool HasSamurais() => _fighters.Any(fighter => fighter is Samurai);
+    private bool HasOneSamurai() => _fighters.Count(fighter => fighter is Samurai) == 1;
+    private bool LessThanMaxSize() => _fighters.Count <= MaxTeamSize;
     private bool AllUnitsAreUnique()
     {
-        var monsterNames = _parser.Monsters.Select(monster => monster.Name);
-        return monsterNames.Distinct().Count() == _parser.Monsters.Count;
+        var fightersNames = _fighters.Select(fighter => fighter.Name);
+        return fightersNames.Distinct().Count() == _fighters.Count;
     }
 
     private bool SamuraiHasLessThanMaxSkills()
     {
-        if (_parser.Samurais.Count == 0) return false;
-        Samurai samurai = _parser.Samurais.First();
-        return samurai.Skills.Length <= MaxSkills;
+        if (!HasSamurais()) return false;
+        IFighter samurai = _fighters.First(fighter => fighter is Samurai);
+        return samurai.GetSkills().Count <= MaxSkills;
     }
 
     private bool AllSkillsAreUnique()
     {
-        if (_parser.Samurais.Count == 0) return false;
-        Skill[] skills = _parser.Samurais.First().Skills;
-        var skillNames = skills.Select(skill => skill.Name).ToArray();
-        return skillNames.Distinct().Count() == skills.Length;
+        if (!HasSamurais()) return false;
+        var skills = _fighters.First(fighter => fighter is Samurai).GetSkills();
+        var skillNames = skills.Select(skill => skill.Name);
+        return skillNames.Distinct().Count() == skills.Count;
     }
 }

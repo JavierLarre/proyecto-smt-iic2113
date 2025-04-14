@@ -1,4 +1,6 @@
-﻿namespace Shin_Megami_Tensei.Teams;
+﻿using Shin_Megami_Tensei_Model;
+
+namespace Shin_Megami_Tensei.Teams;
 
 public class TeamsFile
 {
@@ -18,11 +20,30 @@ public class TeamsFile
         return checkers.All(checker => checker.IsValid());
     }
 
-    public Team[] GetTeams()
+    public ICollection<Team> GetTeams()
     {
         return _parsers
-            .Select(Team.FromParser)
+            .Select(BuildTeam)
             .ToArray();
+    }
+
+    private Team BuildTeam(TeamParser parser)
+    {
+        List<IFighter> frontRow = [];
+        List<IFighter> reserve = [];
+        foreach (var fighter in parser.GetFighters())
+        {
+            if (frontRow.Count < Constants.MaxSizeFrontRow)
+            {
+                frontRow.Add(fighter);
+            }
+            else
+            {
+                reserve.Add(fighter);
+            }
+        }
+
+        return new Team(frontRow, reserve);
     }
 
     private IEnumerable<TeamParser> GetParsers()
