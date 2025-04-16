@@ -4,29 +4,30 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 public class OptionMenu: IOptionMenu
 {
-    private readonly string _name;
     private string _header = "";
     private ICollection<IOptionMenu> _options = [];
     private string _separator = "";
     private readonly BattleView _view;
 
-    public OptionMenu(string name, BattleView view)
+    public OptionMenu(BattleView view)
     {
-        _name = name;
         _view = view;
     }
 
-    public void SetOptions(IEnumerable<IOptionMenu> options,
-        string header, string separator)
+    public void SetMenuView(string header, string separator)
     {
-        _options = options.ToArray();
         _header = header;
         _separator = separator;
     }
 
+    public void SetOptions(IEnumerable<IOptionMenu> options)
+    {
+        _options = options.ToArray();
+    }
+
     public override string ToString()
     {
-        return _name;
+        return _header;
     }
 
     public IOptionMenu GetOption()
@@ -56,10 +57,19 @@ public class OptionMenu: IOptionMenu
         }
     }
 
+    public int GetOptionIndex(IOptionMenu option)
+    {
+        return _options.ToList().IndexOf(option);
+    }
+
     private string GetFormattedOptions()
     {
-        var formattedOptions = _options
-            .Select((option, i) => $"{i+1}{_separator}{option.ToString()}");
+        var formattedOptions = _options.Select(GetFormattedOption);
         return string.Join('\n', formattedOptions);
+    }
+
+    private string GetFormattedOption(IOptionMenu option, int optionIndex)
+    {
+        return $"{optionIndex + 1}{_separator}{option.ToString()}";
     }
 }

@@ -17,8 +17,7 @@ public class TableController
     
     public void EndRound()
     {
-        _table.SwapPlayers();
-        _table.CurrentPlayer.Team.ResetTurns();
+        _table.EndRound();
     }
 
     public void EndTurn()
@@ -29,13 +28,10 @@ public class TableController
 
     public bool HasAnyTeamLost()
     {
-        var frontRow = _table.GetCurrentFighters();
-        return frontRow.All(fighter => fighter.Stats.HpLeft == 0)
-            || !_table.GetEnemyTeamTargets().Any();
-        // TODO: investigar porqué funciona
+        return _table.HasAnyTeamLost();
     }
 
-    public bool DoesCurrentPlayerHasTurnsLeft()
+    public bool DoesCurrentPlayerHasNoTurnsLeft()
     {
         return _table.GetFullTurnsLeftFromCurrentPlayer() == 0
             && _table.GetBlinkingTurnsLeftFromCurrentPlayer() == 0;
@@ -43,16 +39,8 @@ public class TableController
 
     public void GetActionFromFighter(BattleView view)
     {
-        IFighter currentFighter = _table.GetCurrentFighter();
-        IOptionMenu actionMenu = OptionFactory.BuildMenu(
-            $"Seleccione una acción para {currentFighter.Name}",
-            "",
-            ": ",
-            currentFighter.FightOptions,
-            view,
-            false
-        );
-        string choosenAction = actionMenu.GetOption().ToString();
+        IFighter currentFighter = _table.GetFighterInTurn();
+        string choosenAction = view.GetActionFromUser();
         IAction selection = ActionFactory.GetAction(currentFighter, choosenAction);
         selection.Act(_table, view);
     }

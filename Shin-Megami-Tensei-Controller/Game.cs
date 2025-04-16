@@ -17,7 +17,7 @@ public class Game: IController
     
     public void Play()
     {
-        ICollection<Team> teams;
+        IEnumerable<Team> teams;
         try
         {
             teams = _folder.GetTeams();
@@ -30,7 +30,7 @@ public class Game: IController
         StartFight(teams);
     }
 
-    private void StartFight(ICollection<Team> teams)
+    private void StartFight(IEnumerable<Team> teams)
     {
         Table table = new Table(teams);
         BattleController controller = new BattleController(table, _view);

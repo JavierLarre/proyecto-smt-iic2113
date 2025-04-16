@@ -12,19 +12,20 @@ public class TeamsFile
         _lines = File.ReadAllLines(filePath);
         _parsers = GetParsers();
     }
+    
+    public IEnumerable<Team> GetTeams()
+    {
+        if (!IsFileValid())
+            throw new ArgumentException("Archivo de equipos inválido");
+        return _parsers.Select(BuildTeam);
+        ;
+    }
 
-    public bool IsFileValid()
+    private bool IsFileValid()
     {
         var checkers = _parsers
             .Select(TeamChecker.FromParser);
         return checkers.All(checker => checker.IsValid());
-    }
-
-    public ICollection<Team> GetTeams()
-    {
-        return _parsers
-            .Select(BuildTeam)
-            .ToArray();
     }
 
     private Team BuildTeam(TeamParser parser)

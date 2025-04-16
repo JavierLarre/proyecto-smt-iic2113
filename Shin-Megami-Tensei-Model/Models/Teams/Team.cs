@@ -46,7 +46,7 @@ public class Team
         return _frontRow.Concat(_reserve).ToList();
     }
 
-    public void EndTurn()
+    public void ConsumeTurn()
     {
         _fullturnsLeft--;
     }

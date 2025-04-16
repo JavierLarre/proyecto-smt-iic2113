@@ -4,14 +4,20 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 
 public class SkillsView
 {
-    private ICollection<Skill> _skills;
+    public ICollection<Skill> Skills;
 
-    public SkillsView(ICollection<Skill> skills) => _skills = skills;
+    public SkillsView(ICollection<Skill> skills) => Skills = skills;
 
-    public IEnumerable<string> ViewSkills()
+    public IEnumerable<string> GetSkillsInfo()
     {
-        return _skills.Select(ViewSkill);
+        return Skills.Select(GetSkillInfo);
     }
 
-    private string ViewSkill(Skill skill) => $"{skill.Name} MP:{skill.Cost}";
+    public IEnumerable<string> GetSkillsNames()
+    {
+        return Skills.Select(skill => skill.Name);
+    }
+
+    public static string GetSkillInfo(Skill skill) => $"{skill.Name} MP:{skill.Cost}";
+
 }

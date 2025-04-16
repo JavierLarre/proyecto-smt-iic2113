@@ -7,10 +7,10 @@ public class DemonView: AbstractFighterView
     public DemonView(IFighter fighter) : base(fighter)
     {
     }
-    public override string GetFighterInfo()
+    public override string GetInfo()
     {
         return Fighter.IsAlive() ? 
-                base.GetFighterInfo() :
+                base.GetInfo() :
                 ""
                 ;
     }

@@ -9,4 +9,6 @@ public struct Skill
     public string Target;
     public string Hits;
     public string Effect;
+
+    public override string ToString() => $"{Name} MP:{Cost}";
 }

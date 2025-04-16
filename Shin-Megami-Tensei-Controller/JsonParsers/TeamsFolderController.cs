@@ -15,18 +15,16 @@ public class TeamsFolderController
         _view = new TeamsFolderView(_folder, view);
     }
 
-    public TeamsFile GetTeamFile()
+    private TeamsFile GetTeamFile()
     {
         string nameTeamFile = _view.GetFileNameFromUser();
         string pathTeamFile = CombinePathWithName(nameTeamFile);
         return new TeamsFile(pathTeamFile);
     }
 
-    public ICollection<Team> GetTeams()
+    public IEnumerable<Team> GetTeams()
     {
         TeamsFile file = GetTeamFile();
-        if (!file.IsFileValid())
-            throw new ArgumentException("Archivo de equipos inválido");
         return file.GetTeams();
     }
 

@@ -9,26 +9,24 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 public class UseSkill: IAction
 {
     private bool _isDone = false;
-    public string ActionName() => "Usar Habilidad";
+    public string GetActionName() => "Usar Habilidad";
     public bool IsDone() => _isDone;
 
     public void Act(Table table, BattleView view)
     {
-        IFighter attacker = table.GetCurrentFighter();
-        SkillsView skills = new SkillsView(attacker.GetAvailableSkills().ToList());
-        IOptionMenu targetMenu = OptionFactory.BuildMenu(
-            $"Seleccione una habilidad para que {attacker.Name} use",
-            "",
-            "-",
-            skills.ViewSkills(),
-            view,
-            true
-        );
-        string target = targetMenu.GetOption().ToString();
-        if (target == "Cancelar")
+        string choice;
+        try
+        {
+            choice = view.GetSkillFromUser();
+        }
+        catch (OptionException e)
+        {
+            throw new ActionException();
+        }
+
+        if (choice == "Cancelar")
             throw new ActionException();
         _isDone = true;
-        
     }
 
     public void Reset() => _isDone = false;

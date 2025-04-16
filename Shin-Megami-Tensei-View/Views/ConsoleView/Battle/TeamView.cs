@@ -14,7 +14,7 @@ public class TeamView
         _leader = FighterViewFactory.FromFighter(_team.GetLeader());
     }
 
-    public string GetLeaderName() => _leader.GetFighterName();
+    public string GetLeaderName() => _leader.GetName();
 
     public string GetFightersInfo()
     {
@@ -40,7 +40,7 @@ public class TeamView
 
     private string GetFighterPosition(IFighterView? fighter, int position)
     {
-        string fighterInfo = fighter is null ? "" : fighter.GetFighterInfo();
+        string fighterInfo = fighter is null ? "" : fighter.GetInfo();
         return $"{Positions[position]}-{fighterInfo}";
     }
 }

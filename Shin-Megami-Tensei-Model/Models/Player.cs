@@ -10,8 +10,4 @@ public class Player
         PlayerNumber = playerNumber;
         Team = team;
     }
-
-    public int GetFullTurnsLeft() => Team.GetFullTurnsLeft();
-    public int GetBlinkingTurnsLeft() => Team.GetBlinkingTurnsLeft();
-    public IEnumerable<IFighter> GetFightOrder() => Team.GetFightOrder();
 }

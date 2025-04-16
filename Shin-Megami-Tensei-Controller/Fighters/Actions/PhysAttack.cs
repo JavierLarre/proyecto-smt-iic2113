@@ -11,7 +11,7 @@ public abstract class PhysAttack: IAction
     private bool _isDone = false;
     private const double PhysicalDamageMultiplier = 0.0114;
 
-    public abstract string ActionName();
+    public abstract string GetActionName();
     public bool IsDone() => _isDone;
     protected abstract int Modifier();
     protected abstract int FighterStat();
@@ -32,20 +32,16 @@ public abstract class PhysAttack: IAction
 
     private IFighter GetTargetFromUser(Table table, BattleView view)
     {
-        IFighter attacker = table.GetCurrentFighter();
-        TableView tableView = new TableView(table);
-        IOptionMenu targetMenu = OptionFactory.BuildMenu(
-            $"Seleccione un objetivo para {attacker.Name}",
-            "",
-            "-",
-            tableView.GetEnemyTeamTargets(),
-            view,
-            true
-        );
-        var targets = table.GetEnemyTeamTargets().Zip(tableView.GetEnemyTeamTargets()).ToDictionary(tuple => tuple.Second, tuple => tuple.First);
-        string target = targetMenu.GetOption().ToString();
-        if (target == "Cancelar")
+        string targetName;
+        try
+        {
+            targetName = view.GetTargetFromUser();
+        }
+        catch (OptionException e)
+        {
             throw new ActionException();
-        return targets[target];
+        }
+        var targets = table.GetEnemyTeamAliveTargets();
+        return targets.First(target => target.Name == targetName);
     }
 }

@@ -27,7 +27,7 @@ public class TableView
     {
         PlayerView current = GetCurrentPlayer();
         PlayerView enemy = GetEnemyPlayer();
-        if (current.GetPlayerNumber() == 1)
+        if (current.GetPlayerNumber() == 2)
             (current, enemy) = (enemy, current);
         return $"{current.GetBanner()}\n{enemy.GetBanner()}";
     }
@@ -40,22 +40,28 @@ public class TableView
         return string.Join('\n', stringfiedFighters);
     }
 
-    public IEnumerable<string> GetEnemyTeamTargets()
+    public IEnumerable<IFighterView> GetEnemyTeamTargets()
     {
-        var targets = _table.GetEnemyTeamTargets()
+        var targets = _table.GetEnemyTeamAliveTargets()
             .Select(FighterViewFactory.FromFighter);
-        return targets.Select(target => target.GetFighterInfo());
+        return targets;
     }
 
     public string GetWinner()
     {
         PlayerView enemy = GetEnemyPlayer();
-        return $"Ganador: {enemy.GetPlayerName()} (J{enemy.GetPlayerNumber()+1})";
+        return $"Ganador: {enemy.GetPlayerName()} (J{enemy.GetPlayerNumber()})";
+    }
+
+    public IFighterView GetFighterInTurn()
+    {
+        IFighter fighterInTurn = _table.GetFighterInTurn();
+        return FighterViewFactory.FromFighter(fighterInTurn);
     }
 
     private PlayerView GetCurrentPlayer() =>
-        new PlayerView(_table.CurrentPlayer);
+        new PlayerView(_table.GetCurrentPlayer());
 
     private PlayerView GetEnemyPlayer() =>
-        new PlayerView(_table.EnemyPlayer);
+        new PlayerView(_table.GetEnemyPlayer());
 }

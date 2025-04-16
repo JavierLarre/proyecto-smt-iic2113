@@ -11,7 +11,7 @@ public class Attack: PhysAttack
 
     public Attack(IFighter attacker) => _attacker = attacker;
 
-    public override string ActionName() => "Atacar";
+    public override string GetActionName() => "Atacar";
     protected override int Modifier() => _modifier;
     protected override int FighterStat() => _attacker.Stats.Str;
     protected override void PrintAttack(BattleView view, IFighter reciever)

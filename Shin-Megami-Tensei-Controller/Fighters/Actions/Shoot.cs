@@ -14,7 +14,7 @@ public class Shoot: PhysAttack
         _attacker = fighter;
     }
 
-    public override string ActionName() => "Disparar";
+    public override string GetActionName() => "Disparar";
     protected override int Modifier() => _modifier;
     protected override int FighterStat() => _attacker.Stats.Skl;
     protected override void PrintAttack(BattleView view, IFighter reciever)

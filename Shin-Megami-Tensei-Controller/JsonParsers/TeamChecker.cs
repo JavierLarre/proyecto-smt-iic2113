@@ -7,7 +7,7 @@ public class TeamChecker
 {
     private const int MaxTeamSize = 8;
     private const int MaxSkills = 8;
-    private readonly ICollection<IFighter> _fighters;
+    private readonly List<IFighter> _fighters;
 
     public static TeamChecker FromParser(TeamParser parser)
         => new TeamChecker(parser);

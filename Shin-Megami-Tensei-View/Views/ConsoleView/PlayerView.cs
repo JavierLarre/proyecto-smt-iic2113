@@ -14,12 +14,12 @@ public class PlayerView
         _team = new TeamView(player.Team);
     }
 
-    public int GetPlayerNumber() => _player.PlayerNumber;
+    public int GetPlayerNumber() => _player.PlayerNumber + 1;
     public string GetPlayerName() => _team.GetLeaderName();
 
     public string GetBanner()
     {
-        return $"Equipo de {GetPlayerName()} (J{GetPlayerNumber()+1})"
+        return $"Equipo de {GetPlayerName()} (J{GetPlayerNumber()})"
                + '\n' + _team.GetFightersInfo();
     }
 

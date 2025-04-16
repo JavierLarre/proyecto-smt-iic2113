@@ -1,6 +1,8 @@
 ﻿using Shin_Megami_Tensei_Model;
 using Shin_Megami_Tensei_View;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
+using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
+using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 namespace Shin_Megami_Tensei.Battles;
 
@@ -41,7 +43,7 @@ public class BattleView
 
     public void StartRound() =>
         WriteLine($"Ronda de {_table.GetCurrentPlayerName()} " +
-                  $"(J{_table.GetCurrentPlayerNumber()+1})");
+                  $"(J{_table.GetCurrentPlayerNumber()})");
 
     public void StartTurn()
     {
@@ -57,4 +59,37 @@ public class BattleView
         ]);
 
     public string ReadLine() => _view.ReadLine();
+    
+    //TODO: separar cada menú en su propia clase
+
+    public string GetActionFromUser()
+    {
+        IFighterView currentFighter = _table.GetFighterInTurn();
+        IOptionMenu actionMenu = OptionFactory.BuildActionMenu(currentFighter, this);
+        IOptionMenu choosenAction = actionMenu.GetOption();
+        return choosenAction.ToString();
+    }
+
+    public string GetTargetFromUser()
+    {
+        IFighterView currentFighter = _table.GetFighterInTurn();
+        List<IFighterView> targets = _table.GetEnemyTeamTargets().ToList();
+        IOptionMenu targetMenu = OptionFactory.BuildTargetMenu(currentFighter, this, targets);
+        IOptionMenu choosenTarget = targetMenu.GetOption();
+        int optionIndex = targetMenu.GetOptionIndex(choosenTarget);
+        if (choosenTarget.ToString() == "Cancelar")
+            throw new OptionException("Cancelado");
+        return targets[optionIndex].GetName();
+    }
+
+    public string GetSkillFromUser()
+    {
+        IFighterView currentFighter = _table.GetFighterInTurn();
+        IOptionMenu skillMenu = OptionFactory.BuildSkillMenu(currentFighter.GetFighter(), this);
+        IOptionMenu choosenSkill = skillMenu.GetOption();
+        if (choosenSkill.ToString() == "Cancelar")
+            throw new OptionException("Cancelado");
+        return currentFighter.GetSkills().Skills
+            .First(skill => SkillsView.GetSkillInfo(skill) == choosenSkill.ToString()).Name;
+    }
 }

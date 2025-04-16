@@ -5,7 +5,7 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public class Pass: IAction 
 {
-    public string ActionName() => "Pasar Turno";
+    public string GetActionName() => "Pasar Turno";
     public bool IsDone() => true;
     public void Act(Table table, BattleView view)
     {

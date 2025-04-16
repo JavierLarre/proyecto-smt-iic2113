@@ -8,8 +8,8 @@ namespace Shin_Megami_Tensei.Battles;
 
 public class BattleController
 {
-    private TableController _table; //Also works as the game model
-    private BattleView _view;
+    private readonly TableController _table; //Also works as the game model
+    private readonly BattleView _view;
 
     public BattleController(Table table, View view)
     {
@@ -21,7 +21,7 @@ public class BattleController
     {
         try
         {
-            while (!HasAnyTeamLost())
+            while (HasNoPlayerLost())
                 PlayRound();
         }
         catch (GameException e)
@@ -29,7 +29,7 @@ public class BattleController
             _view.WriteLine(e.Message);
         }
         
-        EndGame();
+        _view.PrintWinner();
     }
 
     private void PlayRound()
@@ -40,13 +40,6 @@ public class BattleController
         _table.EndRound();
     }
 
-    private bool IsRoundDone() => HasAnyTeamLost() || _table.DoesCurrentPlayerHasTurnsLeft();
-    private bool HasAnyTeamLost() => _table.HasAnyTeamLost();
-    private void EndGame()
-    {
-        _view.PrintWinner();
-    }
-
     private void PlayTurn()
     {
         _view.StartTurn();
@@ -54,7 +47,7 @@ public class BattleController
         _view.EndTurn();
         _table.EndTurn();
     }
-    
+
     private void PlayAction()
     {
         bool done = false;
@@ -71,4 +64,9 @@ public class BattleController
         }
 
     }
+
+    private bool IsRoundDone() =>  _table.HasAnyTeamLost() || _table.DoesCurrentPlayerHasNoTurnsLeft();
+
+    private bool HasNoPlayerLost() => !_table.HasAnyTeamLost();
+
 }
