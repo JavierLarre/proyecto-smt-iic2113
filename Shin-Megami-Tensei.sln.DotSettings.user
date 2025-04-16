@@ -5,6 +5,7 @@
     &lt;TestId&gt;xUnit::1EC1F8F9-45A6-47E4-89F8-7FAA1E4E6242::net8.0::Shin_Megami_Tensei.Tests.Tests.TestE1_BasicCombat&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::1EC1F8F9-45A6-47E4-89F8-7FAA1E4E6242::net8.0::Shin_Megami_Tensei.Tests.Tests.TestE1_InvalidTeams&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::1EC1F8F9-45A6-47E4-89F8-7FAA1E4E6242::net8.0::Shin_Megami_Tensei.Tests.Tests.TestE1_Random&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::1EC1F8F9-45A6-47E4-89F8-7FAA1E4E6242::net8.0::Shin_Megami_Tensei.Tests.Tests.TestE2_HealAndSabbatma.TestE2_HealAndSabbatma(teamsFolder: "data\\E2-HealAndSabbatma", testFile: "data\\E2-HealAndSabbatma-Tests\\001.txt")&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

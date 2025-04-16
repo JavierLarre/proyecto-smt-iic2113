@@ -9,11 +9,11 @@ namespace Shin_Megami_Tensei.Battles;
 public class BattleView
 {
     private readonly View _view;
-    private readonly TableView _table;
+    private readonly TableView _tableView;
 
     public BattleView(Table table, View view)
     {
-        _table = new TableView(table);
+        _tableView = new TableView(table);
         _view = view;
     }
 
@@ -30,41 +30,37 @@ public class BattleView
         _view.WriteLine(line);
     }
 
-    private void PrintIndent()
-    {
-        string indent = new('-', 40);
-        _view.WriteLine(indent);
-    }
-
     public void PrintWinner()
     {
-        WriteLine(_table.GetWinner());
+        WriteLine(_tableView.GetWinner());
     }
 
     public void StartRound() =>
-        WriteLine($"Ronda de {_table.GetCurrentPlayerName()} " +
-                  $"(J{_table.GetCurrentPlayerNumber()})");
+        WriteLine($"Ronda de {_tableView.GetCurrentPlayerName()} " +
+                  $"(J{_tableView.GetCurrentPlayerNumber()})");
 
     public void StartTurn()
     {
-        WriteLine(_table.GetCurrentInfo());
-        WriteLine(_table.GetCurrentPlayerTurns());
-        WriteLine("Orden:\n" + _table.GetCurrentPlayerFightOrder());
+        WriteLine(_tableView.GetCurrentInfo());
+        WriteLine(_tableView.GetCurrentPlayerTurns());
+        WriteLine("Orden:\n" + _tableView.GetCurrentPlayerFightOrder());
     }
 
-    public void EndTurn() =>
-        WriteLines([
-            "Se han consumido 1 Full Turn(s) y 0 Blinking Turn(s)",
-            "Se han obtenido 0 Blinking Turn(s)"
-        ]);
+    public void PrintConsumedAndObtainedTurns()
+    {
+        string consumed = $"Se han consumido 1 Full Turn(s)"
+                          + $" y 0 Blinking Turn(s)";
+        string gained = $"Se han obtenido 0 Blinking Turn(s)";
+        WriteLine(consumed + '\n' + gained);
+    }
 
-    public string ReadLine() => _view.ReadLine();
+    public string GetInputFromUser() => _view.ReadLine();
     
     //TODO: separar cada menú en su propia clase
 
     public string GetActionFromUser()
     {
-        IFighterView currentFighter = _table.GetFighterInTurn();
+        IFighterView currentFighter = _tableView.GetFighterInTurn();
         IOptionMenu actionMenu = OptionFactory.BuildActionMenu(currentFighter, this);
         IOptionMenu choosenAction = actionMenu.GetOption();
         return choosenAction.ToString();
@@ -72,8 +68,8 @@ public class BattleView
 
     public string GetTargetFromUser()
     {
-        IFighterView currentFighter = _table.GetFighterInTurn();
-        List<IFighterView> targets = _table.GetEnemyTeamTargets().ToList();
+        IFighterView currentFighter = _tableView.GetFighterInTurn();
+        List<IFighterView> targets = _tableView.GetEnemyTeamTargets().ToList();
         IOptionMenu targetMenu = OptionFactory.BuildTargetMenu(currentFighter, this, targets);
         IOptionMenu choosenTarget = targetMenu.GetOption();
         int optionIndex = targetMenu.GetOptionIndex(choosenTarget);
@@ -84,12 +80,18 @@ public class BattleView
 
     public string GetSkillFromUser()
     {
-        IFighterView currentFighter = _table.GetFighterInTurn();
+        IFighterView currentFighter = _tableView.GetFighterInTurn();
         IOptionMenu skillMenu = OptionFactory.BuildSkillMenu(currentFighter.GetFighter(), this);
         IOptionMenu choosenSkill = skillMenu.GetOption();
         if (choosenSkill.ToString() == "Cancelar")
             throw new OptionException("Cancelado");
         return currentFighter.GetSkills().Skills
             .First(skill => SkillsView.GetSkillInfo(skill) == choosenSkill.ToString()).Name;
+    }
+
+    private void PrintIndent()
+    {
+        string indent = new('-', 40);
+        _view.WriteLine(indent);
     }
 }

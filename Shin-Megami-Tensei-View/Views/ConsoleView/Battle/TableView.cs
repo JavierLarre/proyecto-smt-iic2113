@@ -14,7 +14,6 @@ public class TableView
 
     public int GetCurrentPlayerNumber() => GetCurrentPlayer().GetPlayerNumber();
     public string GetCurrentPlayerName() => GetCurrentPlayer().GetPlayerName();
-
     public string GetCurrentPlayerTurns()
     {
         int fullTurns = _table.GetFullTurnsLeftFromCurrentPlayer();
@@ -36,7 +35,8 @@ public class TableView
     {
         var orderedFighters = _table.GetCurrentPlayerFightOrder();
         var stringfiedFighters = orderedFighters
-            .Select((fighter, i) => $"{i + 1}-{fighter.Name}");
+            .Select(FighterViewFactory.FromFighter)
+            .Select((fighter, i) => $"{i + 1}-{fighter.GetName()}");
         return string.Join('\n', stringfiedFighters);
     }
 
@@ -49,8 +49,8 @@ public class TableView
 
     public string GetWinner()
     {
-        PlayerView enemy = GetEnemyPlayer();
-        return $"Ganador: {enemy.GetPlayerName()} (J{enemy.GetPlayerNumber()})";
+        PlayerView winner = GetEnemyPlayer();
+        return $"Ganador: {winner.GetPlayerName()} (J{winner.GetPlayerNumber()})";
     }
 
     public IFighterView GetFighterInTurn()

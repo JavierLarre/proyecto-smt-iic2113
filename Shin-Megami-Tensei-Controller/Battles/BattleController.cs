@@ -44,7 +44,7 @@ public class BattleController
     {
         _view.StartTurn();
         PlayAction();
-        _view.EndTurn();
+        _view.PrintConsumedAndObtainedTurns();
         _table.EndTurn();
     }
 
@@ -58,7 +58,7 @@ public class BattleController
                 _table.GetActionFromFighter(_view);
                 done = true;
             }
-            catch (ActionException e)
+            catch (FighterCommandException e)
             {
             }
         }

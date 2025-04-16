@@ -45,7 +45,7 @@ public class OptionMenu: IOptionMenu
 
     private IOptionMenu GetOptionFromUser()
     {
-        string userInput = _view.ReadLine();
+        string userInput = _view.GetInputFromUser();
         int choice = int.Parse(userInput);
         try
         {

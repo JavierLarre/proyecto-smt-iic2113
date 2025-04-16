@@ -1,5 +1,6 @@
 ﻿
 using Shin_Megami_Tensei_Model;
+using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 using Shin_Megami_Tensei.Battles;
 using Shin_Megami_Tensei.Fighters.Actions;
@@ -39,10 +40,10 @@ public class TableController
 
     public void GetActionFromFighter(BattleView view)
     {
-        IFighter currentFighter = _table.GetFighterInTurn();
         string choosenAction = view.GetActionFromUser();
-        IAction selection = ActionFactory.GetAction(currentFighter, choosenAction);
-        selection.Act(_table, view);
+        CommandFactory factory = new CommandFactory(_table, view);
+        IFighterCommand selection = factory.GetAction(choosenAction);
+        selection.Execute();
     }
     
 }
