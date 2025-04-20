@@ -1,5 +1,6 @@
 ﻿using Shin_Megami_Tensei_Model;
 using Shin_Megami_Tensei_View;
+using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 using Shin_Megami_Tensei.Fighters;
 using Shin_Megami_Tensei.Fighters.Actions;
 using Shin_Megami_Tensei.Teams;
@@ -8,14 +9,8 @@ namespace Shin_Megami_Tensei.Battles;
 
 public class BattleController
 {
-    private readonly TableController _table; //Also works as the game model
-    private readonly BattleView _view;
-
-    public BattleController(Table table, View view)
-    {
-        _table = new TableController(table);
-        _view = new BattleView(table, view);
-    }
+    private readonly TableController _table = new();
+    private readonly BattleView _view = BattleViewSingleton.GetBattleView();
 
     public void Play()
     {

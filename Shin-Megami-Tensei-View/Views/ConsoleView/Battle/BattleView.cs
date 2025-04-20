@@ -9,13 +9,9 @@ namespace Shin_Megami_Tensei.Battles;
 public class BattleView
 {
     private readonly View _view;
-    private readonly TableView _tableView;
+    private readonly TableView _tableView = new();
 
-    public BattleView(Table table, View view)
-    {
-        _tableView = new TableView(table);
-        _view = view;
-    }
+    public BattleView(View view) => _view = view;
 
     public void WriteLines(IEnumerable<string> lines)
     {

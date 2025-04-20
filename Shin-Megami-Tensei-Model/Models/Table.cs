@@ -5,7 +5,9 @@ public class Table
     private Player _currentPlayer;
     private Player _enemyPlayer;
 
-    public Table(IEnumerable<Team> teams)
+    public static Table FromTeams(IEnumerable<Team> teams) => new(teams);
+    
+    private Table(IEnumerable<Team> teams)
     {
         List<Player> players = teams
             .Select((team, i) => new Player(i, team))
@@ -25,6 +27,16 @@ public class Table
     public int GetBlinkingTurnsLeftFromCurrentPlayer()
     {
         return _currentPlayer.Team.GetBlinkingTurnsLeft();
+    }
+
+    public void IncreaseCurrentPlayerUsedSkillsCount()
+    {
+        _currentPlayer.IncreaseUsedSkills();
+    }
+
+    public int GetCurrentPlayerUsedSkillsCount()
+    {
+        return _currentPlayer.GetUsedSkillsCount();
     }
 
     public IFighter GetFighterInTurn()

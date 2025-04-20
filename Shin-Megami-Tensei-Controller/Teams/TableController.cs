@@ -8,12 +8,7 @@ namespace Shin_Megami_Tensei.Teams;
 
 public class TableController
 {
-    private readonly Table _table;
-
-    public TableController(Table table)
-    {
-        _table = table;
-    }
+    private readonly Table _table = TableSingleton.GetInstance();
     
     public void EndRound()
     {

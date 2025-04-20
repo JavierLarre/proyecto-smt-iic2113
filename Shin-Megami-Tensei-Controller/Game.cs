@@ -1,5 +1,6 @@
 ﻿using Shin_Megami_Tensei_Model;
 using Shin_Megami_Tensei_View;
+using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 using Shin_Megami_Tensei.Battles;
 using Shin_Megami_Tensei.Teams;
 
@@ -32,8 +33,9 @@ public class Game: IController
 
     private void StartFight(IEnumerable<Team> teams)
     {
-        Table table = new Table(teams);
-        BattleController controller = new BattleController(table, _view);
+        TableSingleton.SetTable(teams);
+        BattleViewSingleton.SetBattleView(_view);
+        BattleController controller = new BattleController();
         controller.Play();
     }
 }

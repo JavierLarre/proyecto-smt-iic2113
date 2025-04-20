@@ -5,12 +5,7 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 
 public class TableView
 {
-    private Table _table;
-
-    public TableView(Table table)
-    {
-        _table = table;
-    }
+    private readonly Table _table = TableSingleton.GetInstance();
 
     public int GetCurrentPlayerNumber() => GetCurrentPlayer().GetPlayerNumber();
     public string GetCurrentPlayerName() => GetCurrentPlayer().GetPlayerName();
