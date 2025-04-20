@@ -13,9 +13,4 @@
       <ProjectReference Include="..\Shin-Megami-Tensei-View\Shin-Megami-Tensei-View.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Fighters\Demons\" />
-      <Folder Include="Fighters\Samurais\" />
-    </ItemGroup>
-
 </Project>

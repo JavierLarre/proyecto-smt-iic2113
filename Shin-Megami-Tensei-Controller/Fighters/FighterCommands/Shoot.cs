@@ -7,19 +7,19 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 public class Shoot: PhysAttack
 {
 
-    public Shoot(Table table, BattleView view)
-    : base(table, view)
+    public Shoot(IFighter fighter)
+    : base(fighter)
     {
     }
 
     protected override int Modifier() => 80;
     protected override int FighterStat() => Attacker.Stats.Skl;
-    protected override void PrintAttack()
+    protected override void PrintAttack(IFighter reciever, BattleView view)
     {
-        View.WriteLines([
-            $"{Attacker.Name} dispara a {Reciever.Name}",
-            $"{Reciever.Name} recibe {CalculateDamage()} de daño",
-            $"{Reciever.Name} termina con HP:{Reciever.Stats.HpLeft}/{Reciever.Stats.MaxHp}"
+        view.WriteLines([
+            $"{Attacker.Name} dispara a {reciever.Name}",
+            $"{reciever.Name} recibe {CalculateDamage()} de daño",
+            $"{reciever.Name} termina con HP:{reciever.Stats.HpLeft}/{reciever.Stats.MaxHp}"
         ]);
     }
 }

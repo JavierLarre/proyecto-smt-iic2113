@@ -1,8 +1,7 @@
 ﻿
 using Shin_Megami_Tensei_Model;
-using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
-using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 using Shin_Megami_Tensei.Battles;
+using Shin_Megami_Tensei.Fighters;
 using Shin_Megami_Tensei.Fighters.Actions;
 
 namespace Shin_Megami_Tensei.Teams;
@@ -38,12 +37,18 @@ public class TableController
             && _table.GetBlinkingTurnsLeftFromCurrentPlayer() == 0;
     }
 
-    public void GetActionFromFighter(BattleView view)
+    public void PlayAction(string action, BattleView view)
     {
-        string choosenAction = view.GetActionFromUser();
-        CommandFactory factory = new CommandFactory(_table, view);
-        IFighterCommand selection = factory.GetAction(choosenAction);
-        selection.Execute();
+        var currentController = GetCurrentFighterController();
+        IFighterCommand command = currentController.GetCommand(action);
+        command.Execute(_table, view);
+    }
+
+    private IFighterController GetCurrentFighterController()
+    {
+        IFighter current = _table.GetFighterInTurn();
+        var controllerFactory = new FighterControllerFactory(current);
+        return controllerFactory.GetController();
     }
     
 }

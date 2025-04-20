@@ -6,46 +6,41 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public abstract class PhysAttack: IFighterCommand
 {
-    protected Table Table;
-    protected BattleView View;
     protected IFighter Attacker;
-    protected IFighter Reciever;
 
-    protected PhysAttack(Table table, BattleView view)
+    protected PhysAttack(IFighter attacker)
     {
-        Table = table;
-        View = view;
-        Attacker = Table.GetFighterInTurn();
+        Attacker = attacker;
+    }
+
+    public void Execute(Table table, BattleView view)
+    {
+        IFighter reciever = GetTargetFromUser(table, view);
+        int damage = CalculateDamage();
+        reciever.RecieveDamage(damage);
+        PrintAttack(reciever, view);
     }
     
     private const double PhysicalDamageMultiplier = 0.0114;
 
     protected abstract int Modifier();
     protected abstract int FighterStat();
-    protected abstract void PrintAttack();
+    protected abstract void PrintAttack(IFighter reciever, BattleView view);
     protected int CalculateDamage() =>
         (int)Math.Floor(FighterStat() * Modifier() * PhysicalDamageMultiplier);
 
-    public void Execute()
+    private IFighter GetTargetFromUser(Table table, BattleView view)
     {
-        Reciever = GetTargetFromUser();
-        int damage = CalculateDamage();
-        Reciever.RecieveDamage(damage);
-        PrintAttack();
-    }
-
-    private IFighter GetTargetFromUser()
-    {
-        string targetName;
+        var targets = table.GetEnemyTeamAliveTargets().ToList();
         try
         {
-            targetName = View.GetTargetFromUser();
+            IOptionMenu targetMenu = new TargetMenu(Attacker, targets);
+            string targetName = view.GetChoiceFromOptionMenu(targetMenu);
+            return targets.First(target => target.Name == targetName);
         }
         catch (OptionException e)
         {
             throw new FighterCommandException();
         }
-        var targets = Table.GetEnemyTeamAliveTargets();
-        return targets.First(target => target.Name == targetName);
     }
 }

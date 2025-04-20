@@ -6,28 +6,24 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public class UseSkill: IFighterCommand
 {
-    private Table _table;
-    private BattleView _view;
+    private IFighter _fighter;
 
-    public UseSkill(Table table, BattleView view)
+    public UseSkill(IFighter fighter)
     {
-        _table = table;
-        _view = view;
+        _fighter = fighter;
     }
 
-    public void Execute()
+    public void Execute(Table table, BattleView view)
     {
-        string choice;
         try
         {
-            choice = _view.GetSkillFromUser();
+            IOptionMenu skillMenu = new SkillMenu(_fighter);
+            string skillName = view.GetChoiceFromOptionMenu(skillMenu);
+
         }
         catch (OptionException e)
         {
             throw new FighterCommandException();
         }
-
-        if (choice == "Cancelar")
-            throw new FighterCommandException();
     }
 }

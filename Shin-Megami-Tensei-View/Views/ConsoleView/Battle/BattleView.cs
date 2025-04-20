@@ -54,39 +54,26 @@ public class BattleView
         WriteLine(consumed + '\n' + gained);
     }
 
-    public string GetInputFromUser() => _view.ReadLine();
+    public int GetInputFromUser() => int.Parse(_view.ReadLine());
     
     //TODO: separar cada menú en su propia clase
 
     public string GetActionFromUser()
     {
         IFighterView currentFighter = _tableView.GetFighterInTurn();
-        IOptionMenu actionMenu = OptionFactory.BuildActionMenu(currentFighter, this);
-        IOptionMenu choosenAction = actionMenu.GetOption();
-        return choosenAction.ToString();
+        IOptionMenu actionMenu = currentFighter.GetActionsMenu();
+        return GetChoiceFromOptionMenu(actionMenu);
     }
 
-    public string GetTargetFromUser()
-    {
-        IFighterView currentFighter = _tableView.GetFighterInTurn();
-        List<IFighterView> targets = _tableView.GetEnemyTeamTargets().ToList();
-        IOptionMenu targetMenu = OptionFactory.BuildTargetMenu(currentFighter, this, targets);
-        IOptionMenu choosenTarget = targetMenu.GetOption();
-        int optionIndex = targetMenu.GetOptionIndex(choosenTarget);
-        if (choosenTarget.ToString() == "Cancelar")
-            throw new OptionException("Cancelado");
-        return targets[optionIndex].GetName();
-    }
 
-    public string GetSkillFromUser()
+    public string GetChoiceFromOptionMenu(IOptionMenu menu)
     {
-        IFighterView currentFighter = _tableView.GetFighterInTurn();
-        IOptionMenu skillMenu = OptionFactory.BuildSkillMenu(currentFighter.GetFighter(), this);
-        IOptionMenu choosenSkill = skillMenu.GetOption();
-        if (choosenSkill.ToString() == "Cancelar")
-            throw new OptionException("Cancelado");
-        return currentFighter.GetSkills().Skills
-            .First(skill => SkillsView.GetSkillInfo(skill) == choosenSkill.ToString()).Name;
+        var numberedOptions = menu.GetOptions()
+            .Select((option, i) => $"{i+1}{menu.GetSeparator()}{option}");
+        string formattedOptions = string.Join('\n', numberedOptions);
+        WriteLine(menu.GetHeader() + '\n' + formattedOptions);
+        int userChoice = GetInputFromUser();
+        return menu.GetOptionFromChoice(userChoice);
     }
 
     private void PrintIndent()

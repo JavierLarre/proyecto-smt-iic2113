@@ -1,4 +1,5 @@
 ﻿using Shin_Megami_Tensei_Model;
+using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 namespace Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 
@@ -16,9 +17,9 @@ public abstract class AbstractFighterView: IFighterView
         return $"HP:{stats.HpLeft}/{stats.MaxHp} MP:{stats.MpLeft}/{stats.MaxMp}";
     }
 
-    public IEnumerable<string> GetOptions()
+    public IOptionMenu GetActionsMenu()
     {
-        return Fighter.FightOptions;
+        return new ActionMenu(Fighter);
     }
 
     public virtual string GetInfo()

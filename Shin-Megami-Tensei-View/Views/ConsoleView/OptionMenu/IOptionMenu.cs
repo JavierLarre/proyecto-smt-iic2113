@@ -2,10 +2,8 @@
 
 public interface IOptionMenu
 {
-    // muejejejjejejejeje composite pattern
-    public void SetOptions(IEnumerable<IOptionMenu> options);
-    public void SetMenuView(string header, string separator);
-    public IOptionMenu GetOption();
-    public int GetOptionIndex(IOptionMenu option);
-    public string ToString();
+    public IEnumerable<string> GetOptions();
+    public string GetOptionFromChoice(int choiceIndex);
+    public string GetSeparator();
+    public string GetHeader();
 }
