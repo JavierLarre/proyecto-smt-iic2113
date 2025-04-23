@@ -1,4 +1,5 @@
 ﻿using Shin_Megami_Tensei_Model;
+using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 using Shin_Megami_Tensei.Battles;
 
@@ -6,37 +7,39 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public abstract class PhysAttack: IFighterCommand
 {
-    protected IFighter Attacker;
+    private const double PhysicalDamageMultiplier = 0.0114;
+    
+    protected Table Table = Table.GetInstance();
+    protected BattleView View = BattleViewSingleton.GetBattleView();
 
-    protected PhysAttack(IFighter attacker)
+    public void Execute()
     {
-        Attacker = attacker;
-    }
-
-    public void Execute(Table table, BattleView view)
-    {
-        IFighter reciever = GetTargetFromUser(table, view);
+        IFighter reciever = GetTargetFromUser();
         int damage = CalculateDamage();
         reciever.RecieveDamage(damage);
-        PrintAttack(reciever, view);
+        PrintAttack(reciever);
     }
-    
-    private const double PhysicalDamageMultiplier = 0.0114;
 
     protected abstract int Modifier();
     protected abstract int FighterStat();
-    protected abstract void PrintAttack(IFighter reciever, BattleView view);
-    protected int CalculateDamage() =>
-        (int)Math.Floor(FighterStat() * Modifier() * PhysicalDamageMultiplier);
+    protected abstract void PrintAttack(IFighter reciever);
 
-    private IFighter GetTargetFromUser(Table table, BattleView view)
+    protected IFighter GetAttacker() => Table.GetCurrentFighter();
+
+    protected int CalculateDamage()
     {
-        var targets = table.GetEnemyTeamAliveTargets().ToList();
+        double damage = FighterStat() * Modifier() * PhysicalDamageMultiplier;
+        return (int)Math.Floor(damage);
+    }
+
+    private IFighter GetTargetFromUser()
+    {
+        var targets = Table.GetEnemyTeamAliveTargets().ToList();
         try
         {
-            IOptionMenu targetMenu = new TargetMenu(Attacker, targets);
-            string targetName = view.GetChoiceFromOptionMenu(targetMenu);
-            return targets.First(target => target.Name == targetName);
+            IOptionMenu targetMenu = new TargetMenu(GetAttacker(), targets);
+            string targetName = View.GetChoiceFromOptionMenu(targetMenu);
+            return targets.First(target => target.GetName() == targetName);
         }
         catch (OptionException e)
         {

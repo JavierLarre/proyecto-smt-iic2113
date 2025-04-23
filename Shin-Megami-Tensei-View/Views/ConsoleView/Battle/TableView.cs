@@ -5,7 +5,7 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 
 public class TableView
 {
-    private readonly Table _table = TableSingleton.GetInstance();
+    private readonly Table _table = Table.GetInstance();
 
     public int GetCurrentPlayerNumber() => GetCurrentPlayer().GetPlayerNumber();
     public string GetCurrentPlayerName() => GetCurrentPlayer().GetPlayerName();
@@ -50,7 +50,7 @@ public class TableView
 
     public IFighterView GetFighterInTurn()
     {
-        IFighter fighterInTurn = _table.GetFighterInTurn();
+        IFighter fighterInTurn = _table.GetCurrentFighter();
         return FighterViewFactory.FromFighter(fighterInTurn);
     }
 

@@ -13,6 +13,11 @@ public class Stats
     public int Spd { get; }
     public int Lck { get; }
 
+    public Stats()
+    {
+        
+    }
+
     public Stats(int maxHp, int maxMp, int str, int skl, int mag, int spd, int lck)
     {
         MaxHp = maxHp;
@@ -26,8 +31,18 @@ public class Stats
         Lck = lck;
     }
 
-    public void RecieveDamage(int damage)
+    public void HealDamage(int amount)
     {
-        HpLeft = int.Max(0, HpLeft - damage);
+        HpLeft = int.Min(MaxHp, HpLeft + amount);
+    }
+    public void RecieveDamage(double damage)
+    {
+        int newHp = (int)(HpLeft - damage);
+        HpLeft = int.Max(0, newHp);
+    }
+
+    public void DecreaseMp(int cost)
+    {
+        MpLeft = int.Max(0, MpLeft - cost);
     }
 }

@@ -2,5 +2,5 @@
 
 public interface ISkillHits
 {
-    
+    public int CalculateHits();
 }

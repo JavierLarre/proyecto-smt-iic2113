@@ -50,7 +50,7 @@ public class BattleView
         WriteLine(consumed + '\n' + gained);
     }
 
-    public int GetInputFromUser() => int.Parse(_view.ReadLine());
+    private int GetInputFromUser() => int.Parse(_view.ReadLine());
     
     //TODO: separar cada menú en su propia clase
 

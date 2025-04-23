@@ -5,7 +5,6 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 public class TargetMenu: AbstractOptionsMenu
 {
-    private string _header;
     
     public TargetMenu(IFighter attacker, IEnumerable<IFighter> targets)
     {
@@ -15,9 +14,7 @@ public class TargetMenu: AbstractOptionsMenu
             AddOption(targetView.GetName(), targetView.GetInfo());
         }
         AddOption("Cancelar", "Cancelar");
-        _header = $"Seleccione un objetivo para {attacker.Name}";
+        SetHeader($"Seleccione un objetivo para {attacker.GetName()}");
     }
-
-    public override string GetHeader() => _header;
     public override string GetSeparator() => "-";
 }

@@ -51,7 +51,7 @@ public class BattleController
             try
             {
                 string action = _view.GetActionFromUser();
-                _table.PlayAction(action, _view);
+                _table.PlayAction(action);
                 done = true;
             }
             catch (FighterCommandException e)

@@ -1,22 +1,20 @@
 ﻿using Shin_Megami_Tensei_Model;
+using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 using Shin_Megami_Tensei.Battles;
 
 namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public class Attack: PhysAttack
 {
-    public Attack(IFighter fighter)
-    : base(fighter)
-    {
-    }
     protected override int Modifier() => 54;
-    protected override int FighterStat() => Attacker.Stats.Str;
-    protected override void PrintAttack(IFighter reciever, BattleView view)
+    protected override int FighterStat() => GetAttacker().GetStats().Str;
+    protected override void PrintAttack(IFighter reciever)
     {
+        BattleView view = BattleViewSingleton.GetBattleView();
         view.WriteLines([
-            $"{Attacker.Name} ataca a {reciever.Name}",
-            $"{reciever.Name} recibe {CalculateDamage()} de daño",
-            $"{reciever.Name} termina con HP:{reciever.Stats.HpLeft}/{reciever.Stats.MaxHp}"
+            $"{GetAttacker().GetName()} ataca a {reciever.GetName()}",
+            $"{reciever.GetName()} recibe {CalculateDamage()} de daño",
+            $"{reciever.GetName()} termina con HP:{reciever.GetStats().HpLeft}/{reciever.GetStats().MaxHp}"
         ]);
     }
 }

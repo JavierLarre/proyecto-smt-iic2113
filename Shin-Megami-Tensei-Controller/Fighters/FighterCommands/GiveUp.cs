@@ -6,15 +6,12 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public class GiveUp: IFighterCommand
 {
-    private IFighter _fighter;
-    public GiveUp(IFighter fighter)
-    {
-        _fighter = fighter;
-    }
+    private Table _table = Table.GetInstance();
 
-    public void Execute(Table table, BattleView view)
+    public void Execute()
     {
-        PlayerView loser = new PlayerView(table.GetCurrentPlayer());
-        throw new GameException($"{loser.GetPlayerName()} (J{loser.GetPlayerNumber()}) se rinde");
+        Player loser = _table.GetCurrentPlayer();
+        PlayerView loserView = new PlayerView(loser);
+        throw new GameException($"{loserView.GetPlayerName()} (J{loserView.GetPlayerNumber()}) se rinde");
     }
 }

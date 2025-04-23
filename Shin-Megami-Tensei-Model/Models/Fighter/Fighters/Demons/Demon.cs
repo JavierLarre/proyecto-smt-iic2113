@@ -2,7 +2,7 @@
 
 public class Demon: AbstractFighter
 {
-    public override string[] FightOptions
+    public override IEnumerable<string> GetFightOptions()
         => [
             "Atacar",
             "Usar Habilidad",

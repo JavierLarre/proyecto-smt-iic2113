@@ -33,7 +33,8 @@ public class Game: IController
 
     private void StartFight(IEnumerable<Team> teams)
     {
-        TableSingleton.SetTable(teams);
+        Table table = Table.GetInstance();
+        table.SetPlayersFromTeams(teams);
         BattleViewSingleton.SetBattleView(_view);
         BattleController controller = new BattleController();
         controller.Play();

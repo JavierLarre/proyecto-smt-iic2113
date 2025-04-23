@@ -8,7 +8,7 @@ namespace Shin_Megami_Tensei.Teams;
 
 public class TableController
 {
-    private readonly Table _table = TableSingleton.GetInstance();
+    private readonly Table _table = Table.GetInstance();
     
     public void EndRound()
     {
@@ -32,16 +32,16 @@ public class TableController
             && _table.GetBlinkingTurnsLeftFromCurrentPlayer() == 0;
     }
 
-    public void PlayAction(string action, BattleView view)
+    public void PlayAction(string action)
     {
         var currentController = GetCurrentFighterController();
         IFighterCommand command = currentController.GetCommand(action);
-        command.Execute(_table, view);
+        command.Execute();
     }
 
     private IFighterController GetCurrentFighterController()
     {
-        IFighter current = _table.GetFighterInTurn();
+        IFighter current = _table.GetCurrentFighter();
         var controllerFactory = new FighterControllerFactory(current);
         return controllerFactory.GetController();
     }

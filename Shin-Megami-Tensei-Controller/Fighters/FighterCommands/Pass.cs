@@ -5,7 +5,7 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public class Pass: IFighterCommand 
 {
-    public void Execute(Table table, BattleView view)
+    public void Execute()
     {
     }
 }

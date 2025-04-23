@@ -11,10 +11,10 @@ public class PlayerView
     public PlayerView(Player player)
     {
         _player = player;
-        _team = new TeamView(player.Team);
+        _team = new TeamView(player.GetTeam());
     }
 
-    public int GetPlayerNumber() => _player.PlayerNumber + 1;
+    public int GetPlayerNumber() => _player.GetPlayerNumber() + 1;
     public string GetPlayerName() => _team.GetLeaderName();
 
     public string GetBanner()

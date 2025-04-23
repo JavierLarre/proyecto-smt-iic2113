@@ -2,7 +2,7 @@
 
 public class Samurai: AbstractFighter
 {
-    public override string[] FightOptions =>
+    public override IEnumerable<string> GetFightOptions() =>
     [
         "Atacar",
         "Disparar",

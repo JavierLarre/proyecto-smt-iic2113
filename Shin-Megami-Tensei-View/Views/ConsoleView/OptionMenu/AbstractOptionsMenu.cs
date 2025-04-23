@@ -4,6 +4,7 @@ public abstract class AbstractOptionsMenu: IOptionMenu
 {
     private readonly List<string> _optionsNames = [];
     private readonly List<string> _optionsDisplays = [];
+    private string _header = "";
 
     public IEnumerable<string> GetOptions()
     {
@@ -18,7 +19,8 @@ public abstract class AbstractOptionsMenu: IOptionMenu
     }
 
     public abstract string GetSeparator();
-    public abstract string GetHeader();
+    public string GetHeader() => _header;
+    protected void SetHeader(string header) => _header = header;
 
     protected void AddOption(string name, string display)
     {

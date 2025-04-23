@@ -2,12 +2,20 @@
 
 public class Table
 {
-    private Player _currentPlayer;
-    private Player _enemyPlayer;
+    private Player _currentPlayer = null!;
+    private Player _enemyPlayer = null!;
 
-    public static Table FromTeams(IEnumerable<Team> teams) => new(teams);
-    
-    private Table(IEnumerable<Team> teams)
+    private Table()
+    {
+    }
+
+    private static readonly Table Singleton = new Table();
+    public static Table GetInstance() => Singleton;
+    // Dos críticas de singleton
+    // ahora el proyecto depende de este modelo
+    // Y agrega una responsabilidad a Table (ergo, rompe SRP)
+
+    public void SetPlayersFromTeams(IEnumerable<Team> teams)
     {
         List<Player> players = teams
             .Select((team, i) => new Player(i, team))
@@ -21,12 +29,12 @@ public class Table
 
     public int GetFullTurnsLeftFromCurrentPlayer()
     {
-        return _currentPlayer.Team.GetFullTurnsLeft();
+        return _currentPlayer.GetTeam().GetFullTurnsLeft();
     }
 
     public int GetBlinkingTurnsLeftFromCurrentPlayer()
     {
-        return _currentPlayer.Team.GetBlinkingTurnsLeft();
+        return _currentPlayer.GetTeam().GetBlinkingTurnsLeft();
     }
 
     public void IncreaseCurrentPlayerUsedSkillsCount()
@@ -39,37 +47,37 @@ public class Table
         return _currentPlayer.GetUsedSkillsCount();
     }
 
-    public IFighter GetFighterInTurn()
+    public IFighter GetCurrentFighter()
     {
         return GetCurrentPlayerFightOrder().First();
     }
 
     public IEnumerable<IFighter> GetCurrentPlayerFightOrder()
     {
-        return _currentPlayer.Team.GetFightOrder();
+        return _currentPlayer.GetTeam().GetFightOrder();
     }
 
     public IEnumerable<IFighter> GetEnemyTeamAliveTargets()
     {
-        return _enemyPlayer.Team.GetAliveFront();
+        return _enemyPlayer.GetTeam().GetAliveFront();
     }
 
     public bool HasAnyTeamLost()
     {
-        var currentAliveUnits = _currentPlayer.Team.GetAliveFront();
-        var enemyAliveUnits = _enemyPlayer.Team.GetAliveFront();
+        var currentAliveUnits = _currentPlayer.GetTeam().GetAliveFront();
+        var enemyAliveUnits = _enemyPlayer.GetTeam().GetAliveFront();
         return !(currentAliveUnits.Any() && enemyAliveUnits.Any());
     }
 
     public void EndTurn()
     {
-        _currentPlayer.Team.ConsumeTurn();
+        _currentPlayer.GetTeam().ConsumeTurn();
     }
 
     public void EndRound()
     {
         SwapPlayers();
-        _currentPlayer.Team.ResetTurns();
+        _currentPlayer.GetTeam().ResetTurns();
     }
 
     private void SwapPlayers()

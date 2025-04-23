@@ -2,5 +2,5 @@
 
 public class SingleHitSkill: ISkillHits
 {
-    
+    public int CalculateHits() => 1;
 }

@@ -7,7 +7,7 @@ public class TeamView
 {
     private Team _team;
     private IFighterView _leader;
-    private const string Positions = "ABCDEFGHI";
+    private const string Positions = "ABCD";
     public TeamView(Team team)
     {
         _team = team;
@@ -18,19 +18,8 @@ public class TeamView
 
     public string GetFightersInfo()
     {
-        var fighterViews = GetFrontRow().ToArray();
-        string[] fightersInfo = new string[Constants.MaxSizeFrontRow];
-        for (int i = 0; i < Constants.MaxSizeFrontRow; i++)
-        {
-            if (i < fighterViews.Length)
-            {
-                fightersInfo[i] = GetFighterPosition(fighterViews[i], i);
-            }
-            else
-            {
-                fightersInfo[i] = GetFighterPosition(null, i);
-            }
-        }
+        var fighterViews = GetFrontRow();
+        var fightersInfo = fighterViews.Select(GetFighterPosition);
         return string.Join('\n', fightersInfo);
     }
 
@@ -38,9 +27,9 @@ public class TeamView
     private IEnumerable<IFighterView> GetFrontRow() =>
         _team.GetFrontRow().Select(FighterViewFactory.FromFighter);
 
-    private string GetFighterPosition(IFighterView? fighter, int position)
+    private string GetFighterPosition(IFighterView fighter, int position)
     {
-        string fighterInfo = fighter is null ? "" : fighter.GetInfo();
+        string fighterInfo = fighter.GetInfo();
         return $"{Positions[position]}-{fighterInfo}";
     }
 }

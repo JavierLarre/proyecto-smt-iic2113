@@ -11,7 +11,7 @@ public static class SkillControllerBuilder
     public static SkillController FromSkill(Skill skill)
     {
         ISkillType type = SkillTypesFactory.GetSkillType(skill.Type);
-        ISkillTargets targets = SkillTargetsFactory.GetSkillTargets(skill.Target);
+        ISkillTargets targets = SkillTargetsFactory.GetSkillTargets(skill.Target, skill.Name);
         ISkillHits hits = SkillHitFactory.GetSkillHits(skill.Hits);
         SkillController controller = new SkillController(skill, type, hits, targets);
         return controller;

@@ -9,11 +9,11 @@ public abstract class AbstractFighterView: IFighterView
     protected AbstractFighterView(IFighter fighter) => Fighter = fighter;
     public IFighter GetFighter() => Fighter;
 
-    public string GetName() => Fighter.Name;
+    public string GetName() => Fighter.GetName();
 
     public string GetStats()
     {
-        Stats stats = Fighter.Stats;
+        Stats stats = Fighter.GetStats();
         return $"HP:{stats.HpLeft}/{stats.MaxHp} MP:{stats.MpLeft}/{stats.MaxMp}";
     }
 
@@ -27,8 +27,4 @@ public abstract class AbstractFighterView: IFighterView
         return $"{GetName()} {GetStats()}";
     }
 
-    public SkillsView GetSkills()
-    {
-        return new SkillsView(Fighter.GetSkills());
-    }
 }

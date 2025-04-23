@@ -31,7 +31,7 @@ public class TeamChecker
     private bool LessThanMaxSize() => _fighters.Count <= MaxTeamSize;
     private bool AllUnitsAreUnique()
     {
-        var fightersNames = _fighters.Select(fighter => fighter.Name);
+        var fightersNames = _fighters.Select(fighter => fighter.GetName());
         return fightersNames.Distinct().Count() == _fighters.Count;
     }
 
