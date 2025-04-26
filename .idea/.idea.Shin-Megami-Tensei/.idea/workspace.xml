@@ -9,37 +9,144 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2bf468a-8d45-4359-ad58-a882c4d46f13" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/AbstractSkillType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/AbstractInvoke.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/AttackCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/DemonInvoke.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/SamuraiInvoke.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/ISkillController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/Invitation.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/Sabbatma.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTargets/AliveAlliesTarget.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTargets/ReserveTargets.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTargets/ReviveSkillTarget.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/ReviveSkillType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/SupportiveSkillType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/AbstractModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/IModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/IModelObserver.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/TeamServices/FrontRowService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/TeamServices/ITeamService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Actions/HealView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Actions/OffensiveActionView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Actions/OffensiveActions/DarkView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Actions/OffensiveActions/ElecView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Actions/OffensiveActions/FireView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Actions/OffensiveActions/ForceView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Actions/OffensiveActions/IceView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Actions/OffensiveActions/LightView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Actions/OffensiveActions/PhysicalAttackView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Actions/OffensiveActions/ShootView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Actions/SummonView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/OptionMenu/AbstractFighterTargetMenu.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/OptionMenu/Menus/ReviveMenu.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/IView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Shin-Megami-Tensei/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shin-Megami-Tensei/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Battles/BattleController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Battles/BattleController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Battles/BattleController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/BattleController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/AffinityFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/AffinityFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/DrainAffinity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/DrainAffinity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/IAffinityController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/IAffinityController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/NeutralAffinity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/NeutralAffinity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/NullAffinity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/NullAffinity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/RepelAffinity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/RepelAffinity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/ResistAffinity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/ResistAffinity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/WeakAffinity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Affinities/WeakAffinity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Demons/DemonController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Demons/DemonController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/Attack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/Attack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/GiveUp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/GiveUp.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/IFighterCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/IFighterCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/Invoke.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/Invoke.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/Attack.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/Invoke.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/Pass.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/Pass.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/PhysAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/PhysAttack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/Shoot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/Shoot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/Shoot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/ShootAttack.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/UseSkill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/FighterCommands/UseSkill.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/IFighterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/IFighterController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Samurais/SamuraiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Samurais/SamuraiController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillHits/ISkillHits.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillHits/ISkillHits.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillControllerBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillControllerBuilder.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillHits/MultiHitSkill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillHits/MultiHitSkill.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillHits/SingleHitSkill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillHits/SingleHitSkill.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillHits/SkillHitFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillHits/SkillHitFactory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTargets/AllySkillTarget.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTargets/AllySkillTarget.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTargets/ISkillTargets.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTargets/ISkillTargets.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTargets/SingleSkillTarget.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTargets/SingleSkillTarget.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/ElecSkillType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/ElecSkillType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/FireSkillType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/FireSkillType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/ForceSkillType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/ForceSkillType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/GunSkillType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/GunSkillType.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/HealSkillType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/HealSkillType.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/ISkillType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/ISkillType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/IceSkillType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/IceSkillType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/OffensiveMagicSkill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/OffensiveMagicSkill.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/OffensiveSkillType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/OffensiveSkillType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/PhysSkillType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/PhysSkillType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/SkillTypesFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/SkillTypesFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/SpecialSkillType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Fighters/Skills/SkillTypes/SpecialSkillType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Game.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/IController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/IController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Teams/TableController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Teams/TableController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighters/AbstractFighter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighters/AbstractFighter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighters/IFighter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighters/IFighter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighters/Stats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighters/Stats.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/bin/Debug/net8.0/Shin-Megami-Tensei-Controller.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/bin/Debug/net8.0/Shin-Megami-Tensei-Controller.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/bin/Debug/net8.0/Shin-Megami-Tensei-Controller.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/bin/Debug/net8.0/Shin-Megami-Tensei-Controller.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/bin/Debug/net8.0/Shin-Megami-Tensei-Controller.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/bin/Debug/net8.0/Shin-Megami-Tensei-Controller.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/bin/Debug/net8.0/Shin-Megami-Tensei-View.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/bin/Debug/net8.0/Shin-Megami-Tensei-View.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/bin/Debug/net8.0/Shin-Megami-Tensei-View.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/bin/Debug/net8.0/Shin-Megami-Tensei-View.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/Shin-Megami-Tensei-Controller.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/ref/Shin-Megami-Tensei-Controller.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/ref/Shin-Megami-Tensei-Controller.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/refint/Shin-Megami-Tensei-Controller.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Controller/obj/Debug/net8.0/refint/Shin-Megami-Tensei-Controller.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/IModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/TurnManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighter/AbstractFighter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighter/AbstractFighter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighter/Fighters/Demons/DemonFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighter/Fighters/Demons/DemonFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighter/Fighters/EmptyFighter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighter/Fighters/EmptyFighter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighter/IFighter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighter/IFighter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighter/Stats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighter/Stats.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/GameModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Table.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Table.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/TableSingleton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/TableSingleton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Battle/BattleView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Battle/BattleView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Battle/TableView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Battle/TableView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Team.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Team.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/obj/Debug/net8.0/Shin-Megami-Tensei-Model.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/obj/Debug/net8.0/Shin-Megami-Tensei-Model.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/obj/Debug/net8.0/Shin-Megami-Tensei-Model.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-Model/obj/Debug/net8.0/Shin-Megami-Tensei-Model.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Battle/BattleView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/BattleView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Battle/BattleViewSingleton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/BattleViewSingleton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Battle/TableView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/TableView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Battle/TeamView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/TeamView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/AbstractFighterView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/AbstractFighterView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Actions/IActionView.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Fighters/DemonView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Fighters/DemonView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Fighters/EmptyFighterView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/Fighters/EmptyFighterView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/IFighterView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/Fighter/IFighterView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/OptionMenu/AbstractOptionsMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/OptionMenu/AbstractOptionsMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/OptionMenu/Menus/SkillMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/OptionMenu/Menus/SkillMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/OptionMenu/Menus/SummonFighterMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/OptionMenu/Menus/SummonFighterMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/OptionMenu/Menus/SummonPositionMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/OptionMenu/Menus/SummonPositionMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/OptionMenu/Menus/TargetMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/Views/ConsoleView/OptionMenu/Menus/TargetMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/bin/Debug/net8.0/Shin-Megami-Tensei-View.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/bin/Debug/net8.0/Shin-Megami-Tensei-View.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/bin/Debug/net8.0/Shin-Megami-Tensei-View.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/bin/Debug/net8.0/Shin-Megami-Tensei-View.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/Shin-Megami-Tensei-View.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/Shin-Megami-Tensei-View.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/Shin-Megami-Tensei-View.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/Shin-Megami-Tensei-View.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/Shin-Megami-Tensei-View.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/Shin-Megami-Tensei-View.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/Shin-Megami-Tensei-View.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/Shin-Megami-Tensei-View.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/Shin-Megami-Tensei-View.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/Shin-Megami-Tensei-View.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/Shin-Megami-Tensei-View.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/Shin-Megami-Tensei-View.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/ref/Shin-Megami-Tensei-View.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/ref/Shin-Megami-Tensei-View.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/refint/Shin-Megami-Tensei-View.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei-View/obj/Debug/net8.0/refint/Shin-Megami-Tensei-View.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei-Controller.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei-Controller.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei-Controller.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei-Controller.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei-Controller.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei-Controller.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei-View.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei-View.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei-View.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei-View.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei.Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei.Tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei.Tests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/bin/Debug/net8.0/Shin-Megami-Tensei.Tests.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/Shin-Megami-Tensei.Tests.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/ref/Shin-Megami-Tensei.Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/ref/Shin-Megami-Tensei.Tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/refint/Shin-Megami-Tensei.Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.Tests/obj/Debug/net8.0/refint/Shin-Megami-Tensei.Tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shin-Megami-Tensei.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Shin-Megami-Tensei.sln.DotSettings.user" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,12 +172,17 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5e14a4e27990972fa4ae94975603bd298aaf328ee083c03b10569ee4724d57/TestInvoker.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/95d4cd8ea6ea8f44fbdc0a169635d1c3b635eb0c4c6ef1be04861a7f4f8/DirectoryNotFoundException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shin-Megami-Tensei-Controller/Game.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighters/DataClassesForJson/DemonDataFromJson.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighters/DataClassesForJson/FighterDataForJson.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Shin-Megami-Tensei-Model/Models/Fighters/DataClassesForJson/SamuraiDataFromJson.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -185,6 +297,12 @@
       <workItem from="1744818758062" duration="5532000" />
       <workItem from="1745009868035" duration="4150000" />
       <workItem from="1745167331923" duration="24553000" />
+      <workItem from="1745426098393" duration="27218000" />
+      <workItem from="1745496254487" duration="17993000" />
+      <workItem from="1745525766331" duration="6000" />
+      <workItem from="1745525962567" duration="25970000" />
+      <workItem from="1745597877843" duration="9836000" />
+      <workItem from="1745621769478" duration="14423000" />
     </task>
     <task id="LOCAL-00001" summary="ya volvió la luz">
       <option name="closed" value="true" />

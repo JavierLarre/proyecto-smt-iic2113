@@ -10,4 +10,5 @@ public interface IFighterView
     public string GetStats();
     public string GetInfo();
     public IOptionMenu GetActionsMenu();
+    public string GetHpEndedWith();
 }

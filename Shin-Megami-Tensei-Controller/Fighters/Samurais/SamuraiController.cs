@@ -13,10 +13,10 @@ public class SamuraiController: AbstractFighterController
     {
         return commandName switch
         {
-            "Atacar" => new Attack(),
-            "Disparar" => new Shoot(),
+            "Atacar" => new PhysAttack(),
+            "Disparar" => new ShootAttack(),
             "Usar Habilidad" => new UseSkill(),
-            "Invocar" => new Invoke(),
+            "Invocar" => new SamuraiInvoke(),
             "Pasar Turno" => new Pass(),
             "Rendirse" => new GiveUp(),
             _ => throw new ArgumentException("Action Not Found")

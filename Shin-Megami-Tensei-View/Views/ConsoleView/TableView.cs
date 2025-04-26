@@ -6,24 +6,30 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 public class TableView
 {
     private readonly Table _table = Table.GetInstance();
+    private readonly PlayerView _firstPlayer;
+    private readonly PlayerView _secondPlayer;
+
+    public TableView()
+    {
+        Player firstPlayer = _table.GetCurrentPlayer();
+        Player secondPlayer = _table.GetEnemyPlayer();
+        _firstPlayer = new PlayerView(firstPlayer);
+        _secondPlayer = new PlayerView(secondPlayer);
+    }
 
     public int GetCurrentPlayerNumber() => GetCurrentPlayer().GetPlayerNumber();
     public string GetCurrentPlayerName() => GetCurrentPlayer().GetPlayerName();
     public string GetCurrentPlayerTurns()
     {
-        int fullTurns = _table.GetFullTurnsLeftFromCurrentPlayer();
-        int blinkingTurns = _table.GetBlinkingTurnsLeftFromCurrentPlayer();
+        int fullTurns = _table.GetFullTurnsLeft();
+        int blinkingTurns = _table.GetBlinkingTurnsLeft();
         return $"Full Turns: {fullTurns}"
                + '\n' + $"Blinking Turns: {blinkingTurns}";
     }
 
     public string GetCurrentInfo()
     {
-        PlayerView current = GetCurrentPlayer();
-        PlayerView enemy = GetEnemyPlayer();
-        if (current.GetPlayerNumber() == 2)
-            (current, enemy) = (enemy, current);
-        return $"{current.GetBanner()}\n{enemy.GetBanner()}";
+        return $"{_firstPlayer.GetBanner()}\n{_secondPlayer.GetBanner()}";
     }
 
     public string GetCurrentPlayerFightOrder()
@@ -35,17 +41,11 @@ public class TableView
         return string.Join('\n', stringfiedFighters);
     }
 
-    public IEnumerable<IFighterView> GetEnemyTeamTargets()
-    {
-        var targets = _table.GetEnemyTeamAliveTargets()
-            .Select(FighterViewFactory.FromFighter);
-        return targets;
-    }
-
     public string GetWinner()
     {
-        PlayerView winner = GetEnemyPlayer();
-        return $"Ganador: {winner.GetPlayerName()} (J{winner.GetPlayerNumber()})";
+        Player winner = _table.GetWinner();
+        PlayerView winnerView = new PlayerView(winner);
+        return $"Ganador: {winnerView.GetPlayerName()} (J{winnerView.GetPlayerNumber()})";
     }
 
     public IFighterView GetFighterInTurn()

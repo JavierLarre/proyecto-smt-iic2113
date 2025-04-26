@@ -1,4 +1,6 @@
-﻿namespace Shin_Megami_Tensei_Model;
+﻿using Shin_Megami_Tensei_Model.TeamServices;
+
+namespace Shin_Megami_Tensei_Model;
 
 public class Player
 {
@@ -16,4 +18,8 @@ public class Player
     public Team GetTeam() => _team;
     public void IncreaseUsedSkills() => _usedSkillsCount++;
     public int GetUsedSkillsCount() => _usedSkillsCount;
+    public void SetTeamToService(ITeamService service)
+    {
+        service.SetTeam(_team);
+    }
 }

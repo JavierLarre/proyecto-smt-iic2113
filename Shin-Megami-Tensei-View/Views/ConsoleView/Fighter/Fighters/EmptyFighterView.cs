@@ -15,4 +15,8 @@ public class EmptyFighterView: IFighterView
     public string GetInfo() => "";
 
     public IOptionMenu GetActionsMenu() => new ActionMenu(new EmptyFighter());
+    public string GetHpEndedWith()
+    {
+        return "";
+    }
 }

@@ -12,7 +12,7 @@ public class SkillMenu: AbstractOptionsMenu
         {
             AddOption(skill.Name, skill.ToString());
         }
-        AddOption("Cancelar", "Cancelar");
+        AddCancelOption();
         SetHeader($"Seleccione una habilidad para que {fighter.GetName()} use");
     }
     public override string GetSeparator() => "-";

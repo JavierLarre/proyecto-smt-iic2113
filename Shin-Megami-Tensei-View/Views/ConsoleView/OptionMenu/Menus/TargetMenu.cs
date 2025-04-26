@@ -3,18 +3,20 @@ using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 
 namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
-public class TargetMenu: AbstractOptionsMenu
+public class TargetMenu: AbstractFighterTargetMenu
 {
     
     public TargetMenu(IFighter attacker, IEnumerable<IFighter> targets)
     {
-        foreach (IFighter target in targets)
+        SetTargets(targets.ToList());
+        foreach (IFighter target in GetTargets())
         {
             IFighterView targetView = FighterViewFactory.FromFighter(target);
             AddOption(targetView.GetName(), targetView.GetInfo());
         }
-        AddOption("Cancelar", "Cancelar");
+        AddCancelOption();
         SetHeader($"Seleccione un objetivo para {attacker.GetName()}");
     }
+
     public override string GetSeparator() => "-";
 }

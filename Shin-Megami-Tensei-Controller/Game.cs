@@ -6,7 +6,7 @@ using Shin_Megami_Tensei.Teams;
 
 namespace Shin_Megami_Tensei;
 
-public class Game: IController
+public class Game
 {
     private readonly View _view;
     private readonly TeamsFolderController _folder;

@@ -44,10 +44,8 @@ public class BattleView
 
     public void PrintConsumedAndObtainedTurns()
     {
-        string consumed = $"Se han consumido 1 Full Turn(s)"
-                          + $" y 0 Blinking Turn(s)";
-        string gained = $"Se han obtenido 0 Blinking Turn(s)";
-        WriteLine(consumed + '\n' + gained);
+        TurnManager turnManager = Table.GetInstance().GetTurnManager();
+        WriteLine(turnManager.ToString());
     }
 
     private int GetInputFromUser() => int.Parse(_view.ReadLine());

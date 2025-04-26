@@ -1,9 +1,16 @@
-﻿namespace Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
+﻿using Shin_Megami_Tensei_Model;
+
+namespace Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
 
 public class IceSkillType: OffensiveMagicSkill
 {
-    protected override string GetAffinityFromTarget()
+    protected override string GetMadeAction()
     {
-        return Target.GetAffinities().Ice;
+        return "lanza hielo a";
+    }
+
+    protected override string GetAffinityString(IFighter target)
+    {
+        return target.GetAffinities().Ice;
     }
 }

@@ -16,9 +16,18 @@ public abstract class AbstractFighter: IFighter
         _affinities = affinities;
     }
 
-    public void HealDamage(int amount) => _stats.HealDamage(amount);
+    public void HealDamage(double amount) => _stats.HealDamage(amount);
 
-    public void RecieveDamage(double damage) => _stats.RecieveDamage(damage);
+    public void RecieveDamage(double damage)
+    {
+        _stats.RecieveDamage(damage);
+        if (!IsAlive() && this is not Samurai)
+        {
+            Table table = Table.GetInstance();
+            Team team = table.GetEnemyPlayer().GetTeam();
+            team.MoveToReserve(this);
+        }
+    }
     
 
     public void DecreaseMp(int cost) => _stats.DecreaseMp(cost);

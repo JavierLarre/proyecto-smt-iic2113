@@ -4,23 +4,27 @@ namespace Shin_Megami_Tensei.Fighters.Skills.SkillHits;
 
 public static class SkillHitFactory
 {
-    private static Regex _singleHitPattern = new(@"(?<hits>\d+)");
-    private static Regex _multiHitPattern = new(@"(?<lowerBound>\d+)-(?<upperBound>\d+)");
+    private static Regex _singleHitPattern = new(@"^(?<hits>\d+)$");
+    private static Regex _multiHitPattern = new(@"^(?<lowerBound>\d+)-(?<upperBound>\d+)$");
     public static ISkillHits GetSkillHits(string hit)
     {
         Match singleHitMatch = _singleHitPattern.Match(hit);
+        Match multiHitMatch = _multiHitPattern.Match(hit);
         if (singleHitMatch.Success)
             return new SingleHitSkill();
-        Match multiHitMatch = _multiHitPattern.Match(hit);
         if (multiHitMatch.Success)
-        {
-            int lowerBound = int.Parse(multiHitMatch.Groups["lowerBound"].Value);
-            int upperBound = int.Parse(multiHitMatch.Groups["upperBound"].Value);
-            return new MultiHitSkill(lowerBound, upperBound);
-        }
+            return ParseMatch(multiHitMatch);
+        
         throw new ArgumentException(hit);
     }
 
-    private static bool IsSingleHit(string hit) => hit == "1";
+    private static MultiHitSkill ParseMatch(Match multiHitMatch)
+    {
+        string lowerBoundString = multiHitMatch.Groups["lowerBound"].Value;
+        string upperBoundString = multiHitMatch.Groups["upperBound"].Value;
+        int lowerBound = int.Parse(lowerBoundString);
+        int upperBound = int.Parse(upperBoundString);
+        return new MultiHitSkill(lowerBound, upperBound);
+    }
     
 }

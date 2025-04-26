@@ -31,13 +31,15 @@ public class Stats
         Lck = lck;
     }
 
-    public void HealDamage(int amount)
+    public void HealDamage(double amount)
     {
-        HpLeft = int.Min(MaxHp, HpLeft + amount);
+        int truncatedHeal = Convert.ToInt32(Math.Floor(amount));
+        HpLeft = int.Min(MaxHp, HpLeft + truncatedHeal);
     }
     public void RecieveDamage(double damage)
     {
-        int newHp = (int)(HpLeft - damage);
+        int truncatedDamage = Convert.ToInt32(Math.Floor(damage));
+        int newHp = HpLeft - truncatedDamage;
         HpLeft = int.Max(0, newHp);
     }
 

@@ -6,7 +6,7 @@ public class EmptyFighter: IFighter
     public Stats GetStats() => new Stats();
     public IEnumerable<string> GetFightOptions() => [];
     public Affinities GetAffinities() => new Affinities();
-    public void HealDamage(int amount)
+    public void HealDamage(double amount)
     {
     }
 

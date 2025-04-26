@@ -22,9 +22,14 @@ public abstract class AbstractFighterView: IFighterView
         return new ActionMenu(Fighter);
     }
 
-    public virtual string GetInfo()
+    public string GetInfo()
     {
         return $"{GetName()} {GetStats()}";
     }
 
+    public string GetHpEndedWith()
+    {
+        Stats stats = Fighter.GetStats();
+        return $"{GetName()} termina con HP:{stats.HpLeft}/{stats.MaxHp}";
+    }
 }

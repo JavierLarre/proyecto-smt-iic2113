@@ -2,16 +2,16 @@
 
 namespace Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
 
-public class HealSkillType: ISkillType
+public class HealSkillType: SupportiveSkillType
 {
-    public void ApplyEffect(IFighter target, int power)
+    public override string ToString(IFighter target, int power)
     {
-        int healAmount = CalculateHealAmount(target, power);
-        target.HealDamage(healAmount);
+        double healAmount = CalculateHealAmount(target, power);
+        int truncatedHealAmount = Convert.ToInt32(Math.Floor(healAmount));
+        IFighter healer = Table.GetInstance().GetCurrentFighter();
+        string heals = $"{healer.GetName()} cura a {target.GetName()}";
+        string recieves = $"{target.GetName()} recibe {truncatedHealAmount} de HP";
+        return heals + '\n' + recieves;
     }
 
-    private static int CalculateHealAmount(IFighter target, int power)
-    {
-        return (int) Math.Floor(target.GetStats().MaxHp * power * 0.01);
-    }
 }

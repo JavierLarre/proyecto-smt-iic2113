@@ -11,6 +11,11 @@ public abstract class AbstractOptionsMenu: IOptionMenu
         return _optionsDisplays;
     }
 
+    protected void AddCancelOption()
+    {
+        AddOption("Cancelar", "Cancelar");
+    }
+
     public string GetOptionFromChoice(int choiceIndex)
     {
         if (_optionsNames[choiceIndex - 1] == "Cancelar")

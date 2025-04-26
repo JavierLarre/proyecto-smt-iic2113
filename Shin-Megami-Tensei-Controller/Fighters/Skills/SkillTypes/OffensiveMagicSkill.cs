@@ -4,5 +4,8 @@ namespace Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
 
 public abstract class OffensiveMagicSkill: OffensiveSkillType
 {
-    protected override int GetSkillStatFromAttacker() => GetAttacker().GetStats().Mag;
+    protected override int GetSkillStatFromAttacker()
+    {
+        return GetAttacker().GetStats().Mag;
+    }
 }

@@ -10,7 +10,7 @@ public interface IFighter
     public IEnumerable<Skill> GetAvailableSkills();
     public Skill GetSkillFromName(string skillName);
 
-    public void HealDamage(int amount);
+    public void HealDamage(double amount);
     public void RecieveDamage(double damage);
     public void DecreaseMp(int cost);
     public bool IsAlive();

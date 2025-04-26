@@ -14,7 +14,7 @@ public class UseSkill: IFighterCommand
     {
         string skillName = GetSkillNameFromUser();
         Skill choice = _fighter.GetSkillFromName(skillName);
-        SkillController controller = SkillControllerBuilder.FromSkill(choice);
+        ISkillController controller = SkillControllerBuilder.FromSkill(choice);
         controller.UseSkill();
     }
 

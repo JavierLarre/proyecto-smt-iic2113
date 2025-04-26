@@ -1,9 +1,13 @@
-﻿namespace Shin_Megami_Tensei_Model;
+﻿using Shin_Megami_Tensei_Model.TeamServices;
+
+namespace Shin_Megami_Tensei_Model;
 
 public class Table
 {
     private Player _currentPlayer = null!;
     private Player _enemyPlayer = null!;
+    private TurnManager _turnManager = new TurnManager();
+    private LinkedList<IFighter> _fightOrder = [];
 
     private Table()
     {
@@ -22,19 +26,27 @@ public class Table
             .ToList();
         _currentPlayer = players[0];
         _enemyPlayer = players[1];
+        _fightOrder = new LinkedList<IFighter>(_currentPlayer.GetTeam().GetFightOrder());;
+        _turnManager.Reset(_fightOrder.Count);
+    }
+
+    public void SetCurrentTeamToService(ITeamService service)
+    {
+        _currentPlayer.SetTeamToService(service);
     }
 
     public Player GetCurrentPlayer() => _currentPlayer;
     public Player GetEnemyPlayer() => _enemyPlayer;
+    public TurnManager GetTurnManager() => _turnManager;
 
-    public int GetFullTurnsLeftFromCurrentPlayer()
+    public int GetFullTurnsLeft()
     {
-        return _currentPlayer.GetTeam().GetFullTurnsLeft();
+        return _turnManager.GetFullTurns();
     }
 
-    public int GetBlinkingTurnsLeftFromCurrentPlayer()
+    public int GetBlinkingTurnsLeft()
     {
-        return _currentPlayer.GetTeam().GetBlinkingTurnsLeft();
+        return _turnManager.GetBlinkingTurns();
     }
 
     public void IncreaseCurrentPlayerUsedSkillsCount()
@@ -49,12 +61,12 @@ public class Table
 
     public IFighter GetCurrentFighter()
     {
-        return GetCurrentPlayerFightOrder().First();
+        return _fightOrder.First();
     }
 
     public IEnumerable<IFighter> GetCurrentPlayerFightOrder()
     {
-        return _currentPlayer.GetTeam().GetFightOrder();
+        return _fightOrder;
     }
 
     public IEnumerable<IFighter> GetEnemyTeamAliveTargets()
@@ -66,18 +78,51 @@ public class Table
     {
         var currentAliveUnits = _currentPlayer.GetTeam().GetAliveFront();
         var enemyAliveUnits = _enemyPlayer.GetTeam().GetAliveFront();
-        return !(currentAliveUnits.Any() && enemyAliveUnits.Any());
+        bool currentHasAliveUnits = currentAliveUnits.Any();
+        bool enemyHasAliveUnits = enemyAliveUnits.Any();
+        return !currentHasAliveUnits || !enemyHasAliveUnits;
+    }
+
+    public void Summon(IFighter fighter, int atPosition)
+    {
+        IFighter previousFighter = _currentPlayer.GetTeam().GetFrontRow().ToArray()[atPosition];
+        _currentPlayer.GetTeam().Summon(fighter, atPosition);
+        UpdateFightOrder(previousFighter, fighter);
     }
 
     public void EndTurn()
     {
-        _currentPlayer.GetTeam().ConsumeTurn();
+        IFighter playedFighter = _fightOrder.First();
+        _fightOrder.RemoveFirst();
+        _fightOrder.AddLast(playedFighter);
+        _turnManager.SaveTurns();
     }
 
     public void EndRound()
     {
         SwapPlayers();
-        _currentPlayer.GetTeam().ResetTurns();
+        var fightOrder = _currentPlayer.GetTeam().GetFightOrder();
+        _fightOrder = new LinkedList<IFighter>(fightOrder);
+        _turnManager.Reset(_fightOrder.Count);
+    }
+
+    public Player GetWinner()
+    {
+        var enemyFighters = GetEnemyTeamAliveTargets();
+        bool enemyHasUnits = enemyFighters.Any();
+        return enemyHasUnits ? _enemyPlayer : _currentPlayer;
+    }
+
+    private void UpdateFightOrder(IFighter previousFighter, IFighter newFighter)
+    {
+        var node = _fightOrder.Find(previousFighter);
+        if (node is null)
+        {
+            _fightOrder.AddLast(newFighter);
+            return;
+        }
+        _fightOrder.AddAfter(node, newFighter);
+        _fightOrder.Remove(previousFighter);
     }
 
     private void SwapPlayers()

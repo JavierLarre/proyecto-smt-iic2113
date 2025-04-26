@@ -16,6 +16,8 @@ public class MultiHitSkill: ISkillHits
     {
         int amountSkillsUsed = GetAmountSkillsUsed();
         int offset = GetOffset(amountSkillsUsed);
+        Console.WriteLine(amountSkillsUsed);
+        Console.WriteLine(offset);
         return _lowerBound + offset;
     }
 

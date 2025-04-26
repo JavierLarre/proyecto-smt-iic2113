@@ -9,8 +9,13 @@ public class GunSkillType: OffensiveSkillType
         return GetAttacker().GetStats().Skl;
     }
 
-    protected override string GetAffinityFromTarget()
+    protected override string GetMadeAction()
     {
-        return Target.GetAffinities().Gun;
+        return "dispara a";
+    }
+
+    protected override string GetAffinityString(IFighter target)
+    {
+        return target.GetAffinities().Gun;
     }
 }

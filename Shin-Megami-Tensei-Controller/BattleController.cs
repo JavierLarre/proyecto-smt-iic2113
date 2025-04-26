@@ -1,6 +1,7 @@
 ﻿using Shin_Megami_Tensei_Model;
 using Shin_Megami_Tensei_View;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
+using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 using Shin_Megami_Tensei.Fighters;
 using Shin_Megami_Tensei.Fighters.Actions;
 using Shin_Megami_Tensei.Teams;
@@ -17,7 +18,9 @@ public class BattleController
         try
         {
             while (HasNoPlayerLost())
+            {
                 PlayRound();
+            }
         }
         catch (GameException e)
         {
@@ -32,7 +35,8 @@ public class BattleController
         _view.StartRound();
         while (!IsRoundDone())
             PlayTurn();
-        _table.EndRound();
+        if (HasNoPlayerLost())
+            _table.EndRound();
     }
 
     private void PlayTurn()
@@ -55,6 +59,9 @@ public class BattleController
                 done = true;
             }
             catch (FighterCommandException e)
+            {
+            }
+            catch (OptionException e)
             {
             }
         }

@@ -4,36 +4,40 @@ namespace Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
 
 public abstract class OffensiveSkillType: ISkillType
 {
-    protected IFighter Target = null!;
-    protected int SkillPower = 0;
+    private int _skillPower;
     
     public void ApplyEffect(IFighter target, int power)
     {
-        Target = target;
-        SkillPower = power;
-        double damage = CalculateTotalDamage();
-        target.RecieveDamage(damage);
-    }
-
-    private double CalculateTotalDamage()
-    {
+        _skillPower = power;
         double baseDamage = CalculateSkillDamage();
-        IAffinityController affinity = GetAffinity();
-        return affinity.CalculateDamage(baseDamage);
+        IAffinityController affinity = GetTargetAffinity(target);
+        affinity.RecieveAttack(target, baseDamage);
+        
     }
 
     private double CalculateSkillDamage()
     {
         int stat = GetSkillStatFromAttacker();
-        return Math.Sqrt(stat * SkillPower);
+        return Math.Sqrt(stat * _skillPower);
     }
 
-    private IAffinityController GetAffinity()
+    public IAffinityController GetTargetAffinity(IFighter target)
     {
-        string affinity = GetAffinityFromTarget();
+        string affinity = GetAffinityString(target);
         AffinityFactory factory = new AffinityFactory(affinity);
         return factory.GetAffinity();
     }
+
+    public string ToString(IFighter target, int power)
+    {
+        string actionMade = GetMadeAction();
+        IAffinityController affinity = GetTargetAffinity(target);
+        IFighter attacker = Table.GetInstance().GetCurrentFighter();
+        string header = $"{attacker.GetName()} {actionMade} {target.GetName()}";
+        return header + '\n' + affinity.GetEffectString(target, CalculateSkillDamage());
+    }
+
+    protected abstract string GetMadeAction();
 
     protected IFighter GetAttacker()
     {
@@ -41,6 +45,6 @@ public abstract class OffensiveSkillType: ISkillType
         return table.GetCurrentFighter();
     }
 
-    protected abstract string GetAffinityFromTarget();
+    protected abstract string GetAffinityString(IFighter target);
     protected abstract int GetSkillStatFromAttacker();
 }

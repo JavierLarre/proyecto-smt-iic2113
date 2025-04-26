@@ -11,6 +11,15 @@ public class AffinityFactory
 
     public IAffinityController GetAffinity()
     {
-        return null;
+        return _affinity switch
+        {
+            "Dr" => new DrainAffinity(),
+            "-" => new NeutralAffinity(),
+            "Nu" => new NullAffinity(),
+            "Rp" => new RepelAffinity(),
+            "Rs" => new ResistAffinity(),
+            "Wk" => new WeakAffinity(),
+            _ => throw new ArgumentException($"Affinity Not Found:{_affinity}")
+        };
     }
 }

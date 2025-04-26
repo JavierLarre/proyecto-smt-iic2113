@@ -1,14 +1,20 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ADirectoryNotFoundException_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2024_002E3_003Fresharper_002Dhost_003FSourcesCache_003F95d4cd8ea6ea8f44fbdc0a169635d1c3b635eb0c4c6ef1be04861a7f4f8_003FDirectoryNotFoundException_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATestInvoker_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2024_002E3_003Fresharper_002Dhost_003FSourcesCache_003F5e14a4e27990972fa4ae94975603bd298aaf328ee083c03b10569ee4724d57_003FTestInvoker_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4264a793_002D8c5b_002D4fde_002D97fe_002D67b06f9ff258/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestE1_BasicCombat" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=61af17a9_002Dfae5_002D43f3_002D8500_002Dcfbdf04f5ab7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestE1_BasicCombat" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::1EC1F8F9-45A6-47E4-89F8-7FAA1E4E6242::net8.0::Shin_Megami_Tensei.Tests.Tests.TestE1_BasicCombat&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::1EC1F8F9-45A6-47E4-89F8-7FAA1E4E6242::net8.0::Shin_Megami_Tensei.Tests.Tests.TestE1_InvalidTeams&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::1EC1F8F9-45A6-47E4-89F8-7FAA1E4E6242::net8.0::Shin_Megami_Tensei.Tests.Tests.TestE1_Random&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::1EC1F8F9-45A6-47E4-89F8-7FAA1E4E6242::net8.0::Shin_Megami_Tensei.Tests.Tests.TestE2_HealAndSabbatma.TestE2_HealAndSabbatma(teamsFolder: "data\\E2-HealAndSabbatma", testFile: "data\\E2-HealAndSabbatma-Tests\\001.txt")&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::1EC1F8F9-45A6-47E4-89F8-7FAA1E4E6242::net8.0::Shin_Megami_Tensei.Tests.Tests.TestE2_AffinityAndBasicSkills&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::1EC1F8F9-45A6-47E4-89F8-7FAA1E4E6242::net8.0::Shin_Megami_Tensei.Tests.Tests.TestE2_HealAndSabbatma&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::1EC1F8F9-45A6-47E4-89F8-7FAA1E4E6242::net8.0::Shin_Megami_Tensei.Tests.Tests.TestE2_PassTurnSummon&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::1EC1F8F9-45A6-47E4-89F8-7FAA1E4E6242::net8.0::Shin_Megami_Tensei.Tests.Tests.TestE2_Random&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
+	
+	
 	
 	
 	

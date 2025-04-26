@@ -14,9 +14,9 @@ public class DemonController: AbstractFighterController
     {
         return commandName switch
         {
-            "Atacar" => new Attack(),
+            "Atacar" => new PhysAttack(),
             "Usar Habilidad" => new UseSkill(),
-            "Invocar" => new Invoke(),
+            "Invocar" => new DemonInvoke(),
             "Pasar Turno" => new Pass(),
             _ => throw new ArgumentException("Action Not Found")
         };

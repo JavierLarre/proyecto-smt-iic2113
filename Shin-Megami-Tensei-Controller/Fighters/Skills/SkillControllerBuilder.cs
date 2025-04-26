@@ -8,9 +8,13 @@ namespace Shin_Megami_Tensei.Fighters.Skills;
 public static class SkillControllerBuilder
 {
     
-    public static SkillController FromSkill(Skill skill)
+    public static ISkillController FromSkill(Skill skill)
     {
-        ISkillType type = SkillTypesFactory.GetSkillType(skill.Type);
+        if (skill.Name == "Invitation")
+            return new Invitation(skill);
+        if (skill.Name == "Sabbatma")
+            return new Sabbatma(skill);
+        ISkillType type = SkillTypesFactory.GetSkillType(skill.Type, skill.Name);
         ISkillTargets targets = SkillTargetsFactory.GetSkillTargets(skill.Target, skill.Name);
         ISkillHits hits = SkillHitFactory.GetSkillHits(skill.Hits);
         SkillController controller = new SkillController(skill, type, hits, targets);

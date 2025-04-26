@@ -7,15 +7,21 @@ namespace Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 
 public class SingleSkillTarget: ISkillTargets
 {
+    private IFighter? _target = null;
+    
     public ICollection<IFighter> GetTargets()
     {
+        if (_target is null)
+            InitializeTarget();
+        return [_target!];
+    }
+
+    private void InitializeTarget()
+    {
         Table table = Table.GetInstance();
-        BattleView view = BattleViewSingleton.GetBattleView();
         IFighter attacker = table.GetCurrentFighter();
         var targets = table.GetEnemyTeamAliveTargets().ToList();
-        IOptionMenu targetMenu = new TargetMenu(attacker, targets);
-        string targetName = view.GetChoiceFromOptionMenu(targetMenu);
-        IFighter reciever = targets.First(target => target.GetName() == targetName);
-        return [reciever];
+        TargetMenu targetMenu = new TargetMenu(attacker, targets);
+        _target = targetMenu.GetTarget();
     }
 }

@@ -2,7 +2,7 @@
 
 public static class SkillTypesFactory
 {
-    public static ISkillType GetSkillType(string type)
+    public static ISkillType GetSkillType(string type, string skillName)
     {
         return type switch
         {
@@ -12,9 +12,16 @@ public static class SkillTypesFactory
             "Ice" => new IceSkillType(),
             "Elec" => new ElecSkillType(),
             "Force" => new ForceSkillType(),
-            "Heal" => new HealSkillType(),
+            "Heal" => DoesSkillRevive(skillName) ?
+                new ReviveSkillType() :
+                new HealSkillType(),
             "Special" => new SpecialSkillType(),
             _ => throw new NotImplementedException("Type Not Implemented" + type)
         };
+    }
+    
+    private static bool DoesSkillRevive(string skillName)
+    {
+        return skillName.Contains("ecarm");
     }
 }

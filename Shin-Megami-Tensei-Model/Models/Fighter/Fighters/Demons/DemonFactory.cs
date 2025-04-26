@@ -21,11 +21,21 @@ public class DemonFactory: AbstractFighterFactory
         //     Console.WriteLine("Hee Hoo");
         // }
         DemonDataFromJson demonData = FindDataByName(name);
+        return BuildDemon(demonData);
+    }
+
+    public IEnumerable<IFighter> GetDemonLibrary()
+    {
+        return GetData().Select(BuildDemon);
+    }
+
+    private Demon BuildDemon(DemonDataFromJson data)
+    {
         return new Demon(
-            name: demonData.name,
-            skills: GetSkillsFromNames(demonData.skills),
-            stats: BuildStats(demonData.stats),
-            affinities: BuildAffinities(demonData.affinity)
+            name: data.name,
+            skills: GetSkillsFromNames(data.skills),
+            stats: BuildStats(data.stats),
+            affinities: BuildAffinities(data.affinity)
         );
     }
 }
