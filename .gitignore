@@ -30,11 +30,19 @@ _UpgradeReport_Files/
 [Pp]ackages/
 
 !Shin-Megami-Tensei-Controller/bin/
-!Shin-Megami-Controller/bin/Debug/
+!Shin-Megami-Tensei-Controller/bin/Debug/
+!Shin-Megami-Tensei-Controller/bin/Debug/net8.0/
 !Shin-Megami-Tensei-Controller/bin/Debug/net8.0/data
 
 !Shin-Megami.Tests/bin/
 !Shin-Megami.Tests/bin/Debug/
+!Shin-Megami.Tests/bin/Debug/net8.0/
+!Shin-Megami.Tests/bin/Debug/net8.0/data
+
+Shin-Megami-Tensei-Controller/bin/Debug/net8.0/*
+!Shin-Megami-Tensei-Controller/bin/Debug/net8.0/data
+
+Shin-Megami.Tests/bin/Debug/net8.0/*
 !Shin-Megami.Tests/bin/Debug/net8.0/data
 
 Thumbs.db
