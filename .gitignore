@@ -28,8 +28,8 @@
 [Oo]bj/
 _UpgradeReport_Files/
 [Pp]ackages/
-!Shin-Megami-Tensei-Controller/bin/Debug/net8.0/data
-!Shin-Megami-Tensei.Tests/bin/Debug/net8.0/data
+!Shin-Megami-Tensei-Controller/bin/Debug/net8.0/data/
+!Shin-Megami-Tensei.Tests/bin/Debug/net8.0/data/
 
 Thumbs.db
 Desktop.ini
