@@ -34,10 +34,10 @@ _UpgradeReport_Files/
 !Shin-Megami-Tensei-Controller/bin/Debug/net8.0/
 !Shin-Megami-Tensei-Controller/bin/Debug/net8.0/data
 
-!Shin-Megami.Tests/bin/
-!Shin-Megami.Tests/bin/Debug/
-!Shin-Megami.Tests/bin/Debug/net8.0/
-!Shin-Megami.Tests/bin/Debug/net8.0/data
+!Shin-Megami-Tensei.Tests/bin/
+!Shin-Megami-Tensei.Tests/bin/Debug/
+!Shin-Megami-Tensei.Tests/bin/Debug/net8.0/
+!Shin-Megami-Tensei.Tests/bin/Debug/net8.0/data
 
 Shin-Megami-Tensei-Controller/bin/Debug/net8.0/*
 !Shin-Megami-Tensei-Controller/bin/Debug/net8.0/data
