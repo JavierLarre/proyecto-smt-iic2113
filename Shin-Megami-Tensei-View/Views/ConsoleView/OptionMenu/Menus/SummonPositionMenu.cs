@@ -1,5 +1,4 @@
 ﻿using Shin_Megami_Tensei_Model;
-using Shin_Megami_Tensei_Model.TeamServices;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 using Shin_Megami_Tensei.Battles;
@@ -33,13 +32,11 @@ public class SummonPositionMenu: AbstractOptionsMenu
         }
     }
     
-    private FrontRowService _frontRow = new FrontRowService();
     
     public SummonPositionMenu()
     {
         Table table = Table.GetInstance();
-        table.SetCurrentTeamToService(_frontRow);
-        var fighters = _frontRow.GetFrontRow();
+        var fighters = table.GetCurrentPlayer().GetTeam().GetFrontRow();
         SetPositions(fighters);
         SetHeader("Seleccione una posición para invocar");
     }

@@ -1,5 +1,5 @@
 ﻿namespace Shin_Megami_Tensei_Model;
 
-public class GameModel
+public class GameModel: AbstractModel
 {
 }

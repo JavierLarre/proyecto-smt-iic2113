@@ -1,6 +1,4 @@
-﻿using Shin_Megami_Tensei_Model.TeamServices;
-
-namespace Shin_Megami_Tensei_Model;
+﻿namespace Shin_Megami_Tensei_Model;
 
 public class Table
 {
@@ -28,11 +26,6 @@ public class Table
         _enemyPlayer = players[1];
         _fightOrder = new LinkedList<IFighter>(_currentPlayer.GetTeam().GetFightOrder());;
         _turnManager.Reset(_fightOrder.Count);
-    }
-
-    public void SetCurrentTeamToService(ITeamService service)
-    {
-        _currentPlayer.SetTeamToService(service);
     }
 
     public Player GetCurrentPlayer() => _currentPlayer;
