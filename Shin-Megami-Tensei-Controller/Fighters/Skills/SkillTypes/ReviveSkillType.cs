@@ -9,8 +9,8 @@ public class ReviveSkillType: SupportiveSkillType
         double healAmount = CalculateHealAmount(target, power);
         int truncatedHealAmount = Convert.ToInt32(Math.Floor(healAmount));
         IFighter healer = Table.GetInstance().GetCurrentFighter();
-        string heals = $"{healer.GetName()} revive a {target.GetName()}";
-        string recieves = $"{target.GetName()} recibe {truncatedHealAmount} de HP";
+        string heals = $"{healer.GetUnitData().Name} revive a {target.GetUnitData().Name}";
+        string recieves = $"{target.GetUnitData().Name} recibe {truncatedHealAmount} de HP";
         return heals + '\n' + recieves;
     }
 }

@@ -14,7 +14,7 @@ public class SummonView: IView
     public void Display()
     {
         BattleView view = BattleViewSingleton.GetBattleView();
-        string summonLine = $"{_summoned.GetName()} ha sido invocado";
+        string summonLine = $"{_summoned.GetUnitData().Name} ha sido invocado";
         view.WriteLine(summonLine);
     }
 }

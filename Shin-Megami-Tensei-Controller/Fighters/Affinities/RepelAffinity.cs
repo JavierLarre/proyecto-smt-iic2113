@@ -8,7 +8,7 @@ public class RepelAffinity: IAffinityController
     public void RecieveAttack(IFighter target, double damage)
     {
         IFighter attacker = Table.GetInstance().GetCurrentFighter();
-        attacker.RecieveDamage(damage);
+        attacker.SetHp(attacker.GetCurrentHp() - Constants.Truncate(damage));
     }
 
     public void ConsumeTurns()
@@ -23,7 +23,7 @@ public class RepelAffinity: IAffinityController
         IFighter attacker = Table.GetInstance().GetCurrentFighter();
         IFighterView view = FighterViewFactory.FromFighter(attacker);
         int recievedDamage = Convert.ToInt32(Math.Floor(damage));
-        string targetName = target.GetName();
+        string targetName = target.GetUnitData().Name;
         string repelled = $"{targetName} devuelve {recievedDamage} daño a {view.GetName()}";
         return repelled;
     }

@@ -7,7 +7,9 @@ public class DrainAffinity: IAffinityController
 {
     public void RecieveAttack(IFighter target, double damage)
     {
-        target.HealDamage(damage);
+        int targetHp = target.GetCurrentHp();
+        int healedHp = targetHp + Constants.Truncate(damage);
+        target.SetHp(healedHp);
     }
 
     public void ConsumeTurns()

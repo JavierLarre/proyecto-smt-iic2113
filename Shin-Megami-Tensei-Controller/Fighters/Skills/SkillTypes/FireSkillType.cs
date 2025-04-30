@@ -11,6 +11,6 @@ public class FireSkillType: OffensiveMagicSkill
 
     protected override string GetAffinityString(IFighter target)
     {
-        return target.GetAffinities().Fire;
+        return target.GetUnitData().Affinities.Fire;
     }
 }

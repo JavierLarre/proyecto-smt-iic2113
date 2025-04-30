@@ -9,12 +9,12 @@ public abstract class AbstractFighterView: IFighterView
     protected AbstractFighterView(IFighter fighter) => Fighter = fighter;
     public IFighter GetFighter() => Fighter;
 
-    public string GetName() => Fighter.GetName();
+    public string GetName() => Fighter.GetUnitData().Name;
 
     public string GetStats()
     {
-        Stats stats = Fighter.GetStats();
-        return $"HP:{stats.HpLeft}/{stats.MaxHp} MP:{stats.MpLeft}/{stats.MaxMp}";
+        Stats stats = Fighter.GetUnitData().Stats;
+        return $"HP:{Fighter.GetCurrentHp()}/{stats.Hp} MP:{Fighter.GetCurrentMp()}/{stats.Mp}";
     }
 
     public IOptionMenu GetActionsMenu()
@@ -29,7 +29,7 @@ public abstract class AbstractFighterView: IFighterView
 
     public string GetHpEndedWith()
     {
-        Stats stats = Fighter.GetStats();
-        return $"{GetName()} termina con HP:{stats.HpLeft}/{stats.MaxHp}";
+        Stats stats = Fighter.GetUnitData().Stats;
+        return $"{GetName()} termina con HP:{Fighter.GetCurrentHp()}/{stats.Hp}";
     }
 }

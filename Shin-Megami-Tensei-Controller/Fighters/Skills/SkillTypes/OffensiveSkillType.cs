@@ -33,7 +33,7 @@ public abstract class OffensiveSkillType: ISkillType
         string actionMade = GetMadeAction();
         IAffinityController affinity = GetTargetAffinity(target);
         IFighter attacker = Table.GetInstance().GetCurrentFighter();
-        string header = $"{attacker.GetName()} {actionMade} {target.GetName()}";
+        string header = $"{attacker.GetUnitData().Name} {actionMade} {target.GetUnitData().Name}";
         return header + '\n' + affinity.GetEffectString(target, CalculateSkillDamage());
     }
 

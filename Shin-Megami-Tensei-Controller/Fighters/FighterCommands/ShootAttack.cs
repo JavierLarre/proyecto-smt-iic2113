@@ -9,15 +9,15 @@ public class ShootAttack: AttackCommand
 {
 
     protected override int Modifier() => 80;
-    protected override int FighterStat() => GetAttacker().GetStats().Skl;
+    protected override int FighterStat() => GetAttacker().GetUnitData().Stats.Skl;
     protected override string GetAttackString(IFighter reciever)
     {
         return 
-            $"{GetAttacker().GetName()} dispara a {reciever.GetName()}";
+            $"{GetAttacker().GetUnitData().Name} dispara a {reciever.GetUnitData().Name}";
     }
 
     protected override string GetAffinityString(IFighter target)
     {
-        return target.GetAffinities().Gun;
+        return target.GetUnitData().Affinities.Gun;
     }
 }

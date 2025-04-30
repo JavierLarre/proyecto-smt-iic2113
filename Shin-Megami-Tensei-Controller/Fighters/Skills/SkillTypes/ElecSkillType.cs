@@ -11,6 +11,6 @@ public class ElecSkillType: OffensiveMagicSkill
 
     protected override string GetAffinityString(IFighter target)
     {
-        return target.GetAffinities().Elec;
+        return target.GetUnitData().Affinities.Elec;
     }
 }

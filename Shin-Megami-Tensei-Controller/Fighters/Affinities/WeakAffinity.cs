@@ -7,7 +7,7 @@ public class WeakAffinity: IAffinityController
 {
     public void RecieveAttack(IFighter target, double damage)
     {
-        target.RecieveDamage(damage * 1.5);
+        target.SetHp(target.GetCurrentHp() - Constants.Truncate(damage * 1.5));
     }
 
     public void ConsumeTurns()
@@ -21,7 +21,7 @@ public class WeakAffinity: IAffinityController
     {
         IFighter attacker = Table.GetInstance().GetCurrentFighter();
         IFighterView view = FighterViewFactory.FromFighter(target);
-        string weaker = $"{view.GetName()} es débil contra el ataque de {attacker.GetName()}";
+        string weaker = $"{view.GetName()} es débil contra el ataque de {attacker.GetUnitData().Name}";
         string recieves = $"{view.GetName()} recibe {Convert.ToInt32(Math.Floor(damage * 1.5))} de daño";
         return weaker + '\n' + recieves;
     }

@@ -1,26 +1,24 @@
-﻿namespace Shin_Megami_Tensei_Model;
+﻿using Shin_Megami_Tensei_Model.Models.Fighter.Fighters;
 
-public abstract class AbstractFighter: IFighter
+namespace Shin_Megami_Tensei_Model;
+
+public abstract class AbstractFighter: AbstractModel, IFighter
 {
-    private string _name;
-    private Stats _stats;
-    private Affinities _affinities;
-    private readonly ICollection<Skill> _skills;
+    private UnitData _unitData;
+    private StatComponent _hp;
+    private StatComponent _mp;
 
-    protected AbstractFighter(string name, ICollection<Skill> skills,
-        Stats stats, Affinities affinities)
+    protected AbstractFighter(UnitData unitData)
     {
-        _name = name;
-        _skills = skills;
-        _stats = stats;
-        _affinities = affinities;
+        _unitData = unitData;
+        _hp = new StatComponent(_unitData.Stats.Hp);
+        _mp = new StatComponent(_unitData.Stats.Mp);
     }
+    public int GetCurrentHp() => _hp.Get();
 
-    public void HealDamage(double amount) => _stats.HealDamage(amount);
-
-    public void RecieveDamage(double damage)
+    public void SetHp(int value)
     {
-        _stats.RecieveDamage(damage);
+        _hp.Set(value);
         if (!IsAlive() && this is not Samurai)
         {
             Table table = Table.GetInstance();
@@ -28,31 +26,13 @@ public abstract class AbstractFighter: IFighter
             team.MoveToReserve(this);
         }
     }
+
+    public int GetCurrentMp() => _mp.Get();
+
+    public void SetMp(int value) => _mp.Set(value);
+
+    public bool IsAlive() => _hp.Get() > 0;
+
+    public UnitData GetUnitData() => _unitData;
     
-
-    public void DecreaseMp(int cost) => _stats.DecreaseMp(cost);
-
-
-
-    public IEnumerable<Skill> GetAvailableSkills()
-    {
-        return _skills
-            .Where(skill => skill.Cost <= _stats.MpLeft);
-    }
-    public Affinities GetAffinities() => _affinities;
-
-    public ICollection<Skill> GetSkills() => _skills;
-
-    public Skill GetSkillFromName(string skillName)
-    {
-        return _skills.First(skill => skill.Name == skillName);
-    }
-
-    public bool IsAlive() => _stats.HpLeft > 0;
-
-    public string GetName() => _name;
-
-    public Stats GetStats() => _stats;
-
-    public  abstract IEnumerable<string> GetFightOptions();
 }

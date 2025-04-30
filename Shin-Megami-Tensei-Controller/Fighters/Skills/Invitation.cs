@@ -20,7 +20,7 @@ public class Invitation: ISkillController
         IFighter target = new ReserveTargets().GetTargets().First();
         int atPosition = new SummonPositionMenu().GetPosition();
         ISkillType type = new ReviveSkillType();
-        string effectMade = $"{target.GetName()} ha sido invocado";
+        string effectMade = $"{target.GetUnitData().Name} ha sido invocado";
         bool targetWasDead = !target.IsAlive();
         type.ApplyEffect(target, _skill.Power);
         if (targetWasDead)
@@ -31,7 +31,8 @@ public class Invitation: ISkillController
 
         _view.WriteLine(effectMade);
         _table.GetTurnManager().ConsumeTurn();
-        _table.GetCurrentFighter().DecreaseMp(_skill.Cost);
+        IFighter currentFighter = _table.GetCurrentFighter();
+        currentFighter.SetMp(currentFighter.GetCurrentMp() - _skill.Cost);
         _table.Summon(target, atPosition);
         _table.IncreaseCurrentPlayerUsedSkillsCount();
     }

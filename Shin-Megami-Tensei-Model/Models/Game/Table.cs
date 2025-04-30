@@ -1,7 +1,8 @@
 ﻿namespace Shin_Megami_Tensei_Model;
 
-public class Table
+public class Table: AbstractModel
 {
+    // Tambien puedes interpretarlo como la clase game
     private Player _currentPlayer = null!;
     private Player _enemyPlayer = null!;
     private TurnManager _turnManager = new TurnManager();
@@ -24,7 +25,7 @@ public class Table
             .ToList();
         _currentPlayer = players[0];
         _enemyPlayer = players[1];
-        _fightOrder = new LinkedList<IFighter>(_currentPlayer.GetTeam().GetFightOrder());;
+        _fightOrder = new LinkedList<IFighter>(_currentPlayer.GetTeam().GetFightOrder());
         _turnManager.Reset(_fightOrder.Count);
     }
 

@@ -31,7 +31,7 @@ public class TeamChecker
     private bool LessThanMaxSize() => _fighters.Count <= MaxTeamSize;
     private bool AllUnitsAreUnique()
     {
-        var fightersNames = _fighters.Select(fighter => fighter.GetName());
+        var fightersNames = _fighters.Select(fighter => fighter.GetUnitData().Name);
         return fightersNames.Distinct().Count() == _fighters.Count;
     }
 
@@ -39,13 +39,13 @@ public class TeamChecker
     {
         if (!HasSamurais()) return false;
         IFighter samurai = _fighters.First(fighter => fighter is Samurai);
-        return samurai.GetSkills().Count <= MaxSkills;
+        return samurai.GetUnitData().Skills.Count <= MaxSkills;
     }
 
     private bool AllSkillsAreUnique()
     {
         if (!HasSamurais()) return false;
-        var skills = _fighters.First(fighter => fighter is Samurai).GetSkills();
+        var skills = _fighters.First(fighter => fighter is Samurai).GetUnitData().Skills;
         var skillNames = skills.Select(skill => skill.Name);
         return skillNames.Distinct().Count() == skills.Count;
     }

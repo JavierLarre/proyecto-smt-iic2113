@@ -16,12 +16,15 @@ public class SamuraiFactory: AbstractFighterFactory
     public IFighter FromNameAndSkills(string name, string[] skills)
     {
         SamuraiDataFromJson samuraiData = FindDataByName(name);
-        return new Samurai(
-            name: samuraiData.name,
-            skills: GetSkillsFromNames(skills),
-            stats: BuildStats(samuraiData.stats),
-            affinities: BuildAffinities(samuraiData.affinity)
-        );
+        UnitData unitData = new UnitData()
+        {
+            Affinities = BuildAffinitiesFrom(samuraiData.affinity),
+            Stats = BuildStatsFrom(samuraiData.stats),
+            Name = samuraiData.name,
+            Skills = GetSkillsFromNames(skills),
+            FightOptions = Samurai.FightOptions
+        };
+        return new Samurai(unitData);
     }
     
 }

@@ -31,11 +31,14 @@ public class DemonFactory: AbstractFighterFactory
 
     private Demon BuildDemon(DemonDataFromJson data)
     {
-        return new Demon(
-            name: data.name,
-            skills: GetSkillsFromNames(data.skills),
-            stats: BuildStats(data.stats),
-            affinities: BuildAffinities(data.affinity)
-        );
+        UnitData unitData = new UnitData()
+        {
+            Affinities = BuildAffinitiesFrom(data.affinity),
+            Stats = BuildStatsFrom(data.stats),
+            Name = data.name,
+            Skills = GetSkillsFromNames(data.skills),
+            FightOptions = Demon.FightOptions
+        };
+        return new Demon(unitData);
     }
 }

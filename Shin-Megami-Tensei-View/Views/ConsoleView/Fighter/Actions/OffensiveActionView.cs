@@ -33,7 +33,7 @@ public abstract class OffensiveActionView: IView
 
     protected virtual string GetRecieverString()
     {
-        return $"{_target.GetName()} recibe de daño";
+        return $"{_target.GetUnitData().Name} recibe de daño";
     }
 
     public void Display()
@@ -41,7 +41,7 @@ public abstract class OffensiveActionView: IView
         BattleView view = BattleViewSingleton.GetBattleView();
         List<string> lines =
         [
-            $"{_attacker.GetName()} {_actionMade} {_target.GetName()}"
+            $"{_attacker.GetUnitData().Name} {_actionMade} {_target.GetUnitData().Name}"
         ];
         if (_extraLine != "")
             lines.Add(_extraLine);

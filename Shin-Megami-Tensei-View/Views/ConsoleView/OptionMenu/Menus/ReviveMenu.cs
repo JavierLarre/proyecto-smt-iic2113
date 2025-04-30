@@ -13,7 +13,7 @@ public class ReviveMenu: AbstractFighterTargetMenu
         SetTargets(targets.ToList());
         AddTargets();
         AddCancelOption();
-        SetHeader($"Seleccione un objetivo para {attacker.GetName()}");
+        SetHeader($"Seleccione un objetivo para {attacker.GetUnitData().Name}");
     }
 
     private void AddTargets()
@@ -25,7 +25,7 @@ public class ReviveMenu: AbstractFighterTargetMenu
     private void AddTargetOption(IFighter target)
     {
         IFighterView targetView = FighterViewFactory.FromFighter(target);
-        string targetInfo = $"{target.GetName()} {targetView.GetStats()}";
+        string targetInfo = $"{target.GetUnitData().Name} {targetView.GetStats()}";
         AddOption(targetView.GetName(), targetInfo);
     }
     

@@ -13,7 +13,8 @@ public class UseSkill: IFighterCommand
     public void Execute()
     {
         string skillName = GetSkillNameFromUser();
-        Skill choice = _fighter.GetSkillFromName(skillName);
+        Skill choice = _fighter.GetUnitData().Skills
+            .First(skill => skill.Name == skillName);
         ISkillController controller = SkillControllerBuilder.FromSkill(choice);
         controller.UseSkill();
     }

@@ -11,6 +11,6 @@ public class ForceSkillType: OffensiveMagicSkill
 
     protected override string GetAffinityString(IFighter target)
     {
-        return target.GetAffinities().Force;
+        return target.GetUnitData().Affinities.Force;
     }
 }

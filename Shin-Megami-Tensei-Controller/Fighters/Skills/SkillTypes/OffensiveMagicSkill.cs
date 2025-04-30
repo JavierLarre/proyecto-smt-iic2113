@@ -6,6 +6,6 @@ public abstract class OffensiveMagicSkill: OffensiveSkillType
 {
     protected override int GetSkillStatFromAttacker()
     {
-        return GetAttacker().GetStats().Mag;
+        return GetAttacker().GetUnitData().Stats.Mag;
     }
 }

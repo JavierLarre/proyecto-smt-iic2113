@@ -4,7 +4,7 @@ public abstract class AbstractFighterFactory
 {
     private readonly SkillFactory _skillFactory = new SkillFactory();
 
-    protected Skill[] GetSkillsFromNames(IEnumerable<string> skillNames)
+    protected ICollection<Skill> GetSkillsFromNames(IEnumerable<string> skillNames)
     {
         return skillNames
             .Where(skill => skill != "")
@@ -12,7 +12,7 @@ public abstract class AbstractFighterFactory
             .ToArray();
     }
 
-    protected static Stats BuildStats(StatsDataFromJson data)
+    protected static Stats BuildStatsFrom(StatsDataFromJson data)
     {
         return new Stats(
             data.HP,
@@ -25,7 +25,7 @@ public abstract class AbstractFighterFactory
             );
     }
 
-    protected static Affinities BuildAffinities(AffinityDataFromJson data)
+    protected static Affinities BuildAffinitiesFrom(AffinityDataFromJson data)
     {
         return new Affinities
         {

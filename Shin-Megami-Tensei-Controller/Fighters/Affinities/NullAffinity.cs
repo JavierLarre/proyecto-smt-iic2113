@@ -24,7 +24,7 @@ public class NullAffinity: IAffinityController
         IFighterView view = FighterViewFactory.FromFighter(target);
         IFighter attacker = Table.GetInstance().GetCurrentFighter();
         string blockerName = view.GetName();
-        string attackerName = attacker.GetName();
+        string attackerName = attacker.GetUnitData().Name;
         string blocked = $"{blockerName} bloquea el ataque de {attackerName}";
         return blocked;
     }

@@ -1,10 +1,14 @@
 ﻿namespace Shin_Megami_Tensei_Model;
 
-public class Player
+public class Player: AbstractModel
 {
     private readonly int _playerNumber;
-    private readonly Team _team;
-    private int _usedSkillsCount = 0;
+    private readonly Team _team = new Team([], []);
+    private int _usedSkillsCount;
+
+    public static Player GetEmptyPlayer() => new Player();
+
+    private Player() { }
 
     public Player(int playerNumber, Team team)
     {

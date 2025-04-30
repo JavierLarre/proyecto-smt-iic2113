@@ -6,7 +6,7 @@ public class GunSkillType: OffensiveSkillType
 {
     protected override int GetSkillStatFromAttacker()
     {
-        return GetAttacker().GetStats().Skl;
+        return GetAttacker().GetUnitData().Stats.Skl;
     }
 
     protected override string GetMadeAction()
@@ -16,6 +16,6 @@ public class GunSkillType: OffensiveSkillType
 
     protected override string GetAffinityString(IFighter target)
     {
-        return target.GetAffinities().Gun;
+        return target.GetUnitData().Affinities.Gun;
     }
 }

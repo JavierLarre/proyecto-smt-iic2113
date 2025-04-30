@@ -85,7 +85,7 @@ public class SkillController: ISkillController
     {
         int cost = _skill.Cost;
         IFighter user = Table.GetInstance().GetCurrentFighter();
-        user.DecreaseMp(cost);
+        user.SetMp(user.GetCurrentMp() - cost);
     }
 
     private static void IncreaseCurrentPlayerUsedSkills()

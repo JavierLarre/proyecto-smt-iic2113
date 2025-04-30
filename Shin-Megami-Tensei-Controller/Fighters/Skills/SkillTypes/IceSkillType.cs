@@ -11,6 +11,6 @@ public class IceSkillType: OffensiveMagicSkill
 
     protected override string GetAffinityString(IFighter target)
     {
-        return target.GetAffinities().Ice;
+        return target.GetUnitData().Affinities.Ice;
     }
 }

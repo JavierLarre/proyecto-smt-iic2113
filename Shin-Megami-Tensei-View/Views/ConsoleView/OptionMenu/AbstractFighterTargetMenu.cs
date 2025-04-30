@@ -16,7 +16,7 @@ public abstract class AbstractFighterTargetMenu: AbstractOptionsMenu
         BattleView view = BattleViewSingleton.GetBattleView();
         string targetName = view.GetChoiceFromOptionMenu(this);
         IFighter choosenTarget = _targets.
-            First(target => target.GetName() == targetName);
+            First(target => target.GetUnitData().Name == targetName);
         return choosenTarget;
     }
 }

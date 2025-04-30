@@ -7,12 +7,12 @@ public class ActionMenu: AbstractOptionsMenu
     
     public ActionMenu(IFighter fighter)
     {
-        foreach (string action in fighter.GetFightOptions())
+        foreach (string action in fighter.GetUnitData().FightOptions)
         {
             AddOption(action, action);
         }
 
-        SetHeader($"Seleccione una acción para {fighter.GetName()}");
+        SetHeader($"Seleccione una acción para {fighter.GetUnitData().Name}");
     }
 
     public override string GetSeparator() => ": ";

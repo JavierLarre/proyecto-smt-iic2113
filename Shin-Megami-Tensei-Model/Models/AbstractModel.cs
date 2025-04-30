@@ -14,7 +14,7 @@ public abstract class AbstractModel: IModel
         _observers.Remove(observer);
     }
 
-    public void UpdateObservers()
+    protected void UpdateObservers()
     {
         foreach (IModelObserver observer in _observers)
         {

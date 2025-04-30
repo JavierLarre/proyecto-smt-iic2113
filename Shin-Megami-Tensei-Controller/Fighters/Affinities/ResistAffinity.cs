@@ -7,7 +7,7 @@ public class ResistAffinity: IAffinityController
 {
     public void RecieveAttack(IFighter target, double damage)
     {
-        target.RecieveDamage(damage * 0.5);
+        target.SetHp(target.GetCurrentHp() - Constants.Truncate(damage * 0.5));
     }
 
     public void ConsumeTurns()
@@ -20,7 +20,7 @@ public class ResistAffinity: IAffinityController
     public string GetEffectString(IFighter target, double damage)
     {
         IFighter attacker = Table.GetInstance().GetCurrentFighter();
-        string attackerName = attacker.GetName();
+        string attackerName = attacker.GetUnitData().Name;
         IFighterView view = FighterViewFactory.FromFighter(target);
         int recievedDamage = Convert.ToInt32(Math.Floor(damage * 0.5));
         string resists = $"{view.GetName()} es resistente el ataque de {attackerName}";

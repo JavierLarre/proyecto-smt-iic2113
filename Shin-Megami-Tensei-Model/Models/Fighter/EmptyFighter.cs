@@ -1,0 +1,19 @@
+﻿namespace Shin_Megami_Tensei_Model.Fighters;
+
+public class EmptyFighter: AbstractModel, IFighter
+{
+    public UnitData GetUnitData() => new();
+    
+    public void HealDamage(double amount) { }
+
+    public void RecieveDamage(double damage) { }
+
+    public void DecreaseMp(int cost) { }
+
+    public int GetCurrentHp() => 0;
+    public void SetHp(int value) { }
+
+    public int GetCurrentMp() => 0;
+    public void SetMp(int value) { }
+    public bool IsAlive() => false;
+}

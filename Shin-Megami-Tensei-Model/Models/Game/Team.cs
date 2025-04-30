@@ -2,7 +2,7 @@
 
 namespace Shin_Megami_Tensei_Model;
 
-public class Team
+public class Team: AbstractModel
 {
     private readonly IFighter[] _frontRow = new IFighter[Constants.MaxSizeFrontRow];
     private IList<IFighter> _reserve;
@@ -28,13 +28,20 @@ public class Team
     public IEnumerable<IFighter> GetFightOrder()
     {
         var order = GetAliveFront()
-            .OrderBy(fighter => fighter.GetStats().Spd * -1);
+            .OrderBy(fighter => fighter.GetUnitData().Stats.Spd * -1);
         return order;
     }
     
     public IFighter GetLeader() => _frontRow[0];
     public IEnumerable<IFighter> GetFrontRow() => _frontRow;
-    public IEnumerable<IFighter> GetAliveFront() => _frontRow.Where(fighter => fighter.IsAlive());
+    public IEnumerable<IFighter> GetAliveFront()
+    {
+        return _frontRow.Where(fighter => fighter.IsAlive());
+    }
+    public IEnumerable<IFighter> GetDeadFront()
+    {
+        return _frontRow.Where(fighter => !fighter.IsAlive());
+    }
     public ICollection<IFighter> GetReserve() => _reserve;
 
     public IEnumerable<IFighter> GetAllFighters()
@@ -68,15 +75,15 @@ public class Team
             .ToList();
         var demonLibray = new DemonFactory().GetDemonLibrary();
         var deadFightersNames = deadFighters
-            .Select(fighter => fighter.GetName()).ToHashSet();
+            .Select(fighter => fighter.GetUnitData().Name).ToHashSet();
         var filteredLibrary = demonLibray
-            .Where(demon => deadFightersNames.Contains(demon.GetName()))
-            .Select(demon => demon.GetName());
+            .Where(demon => deadFightersNames.Contains(demon.GetUnitData().Name))
+            .Select(demon => demon.GetUnitData().Name);
         List<IFighter> sortedDeadFighters = [];
         foreach (string demonName in filteredLibrary)
         {
             var deadDemon = deadFighters
-                .First(demon => demon.GetName() == demonName);
+                .First(demon => demon.GetUnitData().Name == demonName);
             sortedDeadFighters.Add(deadDemon);
         }
 
@@ -92,14 +99,14 @@ public class Team
     private void SortReserve()
     {
         var demonLibrary = new DemonFactory().GetDemonLibrary();
-        var reserveNames = _reserve.Select(fighter => fighter.GetName()).ToHashSet();
+        var reserveNames = _reserve.Select(fighter => fighter.GetUnitData().Name).ToHashSet();
         var filteredLibrary = demonLibrary.
-            Where(demon => reserveNames.Contains(demon.GetName()));
+            Where(demon => reserveNames.Contains(demon.GetUnitData().Name));
         List<IFighter> newReserve = [];
         foreach (IFighter demon in filteredLibrary)
         {
             var reserveDemon = _reserve
-                .First(reserveDemon => reserveDemon.GetName() == demon.GetName());
+                .First(reserveDemon => reserveDemon.GetUnitData().Name == demon.GetUnitData().Name);
             newReserve.Add(reserveDemon);
         }
 

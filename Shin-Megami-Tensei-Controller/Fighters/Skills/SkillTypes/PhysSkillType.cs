@@ -11,11 +11,11 @@ public class PhysSkillType: OffensiveSkillType
 
     protected override string GetAffinityString(IFighter target)
     {
-        return target.GetAffinities().Phys;
+        return target.GetUnitData().Affinities.Phys;
     }
 
     protected override int GetSkillStatFromAttacker()
     {
-        return GetAttacker().GetStats().Str;
+        return GetAttacker().GetUnitData().Stats.Str;
     }
 }

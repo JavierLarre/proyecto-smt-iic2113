@@ -67,7 +67,7 @@ public abstract class AttackCommand: IFighterCommand
         {
             IOptionMenu targetMenu = new TargetMenu(GetAttacker(), targets);
             string targetName = View.GetChoiceFromOptionMenu(targetMenu);
-            return targets.First(target => target.GetName() == targetName);
+            return targets.First(target => target.GetUnitData().Name == targetName);
         }
         catch (OptionException e)
         {

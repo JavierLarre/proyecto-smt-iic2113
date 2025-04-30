@@ -24,8 +24,8 @@ public class Sabbatma: ISkillController
         _table.Summon(target, atPosition);
         _table.GetTurnManager().ConsumeTurn();
         IFighter currentFighter = _table.GetCurrentFighter();
-        currentFighter.DecreaseMp(_skill.Cost);
+        currentFighter.SetMp(currentFighter.GetCurrentMp() - _skill.Cost);
         _table.IncreaseCurrentPlayerUsedSkillsCount();
-        _view.WriteLine($"{target.GetName()} ha sido invocado");
+        _view.WriteLine($"{target.GetUnitData().Name} ha sido invocado");
     }
 }

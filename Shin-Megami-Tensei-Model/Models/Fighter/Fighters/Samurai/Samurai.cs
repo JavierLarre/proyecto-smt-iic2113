@@ -2,8 +2,9 @@
 
 public class Samurai: AbstractFighter
 {
-    public override IEnumerable<string> GetFightOptions() =>
-    [
+    public Samurai(UnitData unitData) : base(unitData) { }
+    
+    public static readonly ICollection<string> FightOptions = [
         "Atacar",
         "Disparar",
         "Usar Habilidad",
@@ -11,10 +12,4 @@ public class Samurai: AbstractFighter
         "Pasar Turno",
         "Rendirse"
     ];
-
-    public Samurai(string name, Skill[] skills, Stats stats, Affinities affinities)
-        : base(name, skills, stats, affinities)
-    {
-        
-    }
 }
