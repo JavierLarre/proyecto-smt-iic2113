@@ -8,5 +8,6 @@ public interface IFighter: IModel
     public void SetHp(int value);
     public int GetCurrentMp();
     public void SetMp(int value);
+    public void AddToReserve(Team team);
     public bool IsAlive();
 }

@@ -19,17 +19,14 @@ public abstract class AbstractFighter: AbstractModel, IFighter
     public void SetHp(int value)
     {
         _hp.Set(value);
-        if (!IsAlive() && this is not Samurai)
-        {
-            Table table = Table.GetInstance();
-            Team team = table.GetEnemyPlayer().GetTeam();
-            team.MoveToReserve(this);
-        }
+        UpdateObservers();
     }
 
     public int GetCurrentMp() => _mp.Get();
 
     public void SetMp(int value) => _mp.Set(value);
+
+    public abstract void AddToReserve(Team team);
 
     public bool IsAlive() => _hp.Get() > 0;
 

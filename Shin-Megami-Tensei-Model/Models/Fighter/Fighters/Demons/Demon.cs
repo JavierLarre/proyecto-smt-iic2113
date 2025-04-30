@@ -10,4 +10,9 @@ public class Demon: AbstractFighter
         "Invocar",
         "Pasar Turno"
     ];
+
+    public override void AddToReserve(Team team)
+    {
+        team.MoveToReserve(this);
+    }
 }

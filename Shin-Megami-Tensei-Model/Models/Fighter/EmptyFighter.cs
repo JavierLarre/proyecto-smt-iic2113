@@ -15,5 +15,8 @@ public class EmptyFighter: AbstractModel, IFighter
 
     public int GetCurrentMp() => 0;
     public void SetMp(int value) { }
+    
+    public void AddToReserve(Team team) { }
+
     public bool IsAlive() => false;
 }

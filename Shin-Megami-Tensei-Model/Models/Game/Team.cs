@@ -37,24 +37,23 @@ public class Team: AbstractModel, IModelObserver
     {
         return _frontRow.Where(fighter => fighter.IsAlive());
     }
-    public IEnumerable<IFighter> GetDeadFront()
-    {
-        return _frontRow.Where(fighter => !fighter.IsAlive());
-    }
-    public ICollection<IFighter> GetReserve() => _reserve;
-
-    public IEnumerable<IFighter> GetAllFighters()
-    {
-        return _frontRow.Concat(_reserve);
-    }
-
+    public IEnumerable<IFighter> GetReserve() => _reserve;
     public void Summon(IFighter inFighter, int atPosition)
     {
         IFighter outFighter = _frontRow[atPosition];
-        _reserve.Add(outFighter);
+        outFighter.AddToReserve(this);
         _frontRow[atPosition] = inFighter;
         _reserve.Remove(inFighter);
         SortReserve();
+    }
+    
+    public void Update()
+    {
+        foreach (IFighter fighter in _frontRow)
+        {
+            if (!fighter.IsAlive())
+                fighter.AddToReserve(this);
+        }
     }
 
     public void MoveToReserve(IFighter fighter)
@@ -77,24 +76,8 @@ public class Team: AbstractModel, IModelObserver
 
     private void SortReserve()
     {
-        var demonLibrary = new DemonFactory().GetDemonLibrary();
-        var reserveNames = _reserve.Select(fighter => fighter.GetUnitData().Name).ToHashSet();
-        var filteredLibrary = demonLibrary.
-            Where(demon => reserveNames.Contains(demon.GetUnitData().Name));
-        List<IFighter> newReserve = [];
-        foreach (IFighter demon in filteredLibrary)
-        {
-            var reserveDemon = _reserve
-                .First(reserveDemon => reserveDemon.GetUnitData().Name == demon.GetUnitData().Name);
-            newReserve.Add(reserveDemon);
-        }
-
-        _reserve = newReserve;
-    }
-
-
-    public void Update()
-    {
-        throw new NotImplementedException();
+        var sortedReserve = _reserve
+            .OrderBy(fighter => fighter.GetUnitData().FilePriority);
+        _reserve = sortedReserve.ToList();
     }
 }

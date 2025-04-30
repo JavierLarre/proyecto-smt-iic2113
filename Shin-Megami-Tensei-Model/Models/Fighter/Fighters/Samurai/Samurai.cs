@@ -12,4 +12,6 @@ public class Samurai: AbstractFighter
         "Pasar Turno",
         "Rendirse"
     ];
+
+    public override void AddToReserve(Team team) { }
 }
