@@ -18,9 +18,7 @@ public class Team: AbstractModel, IModelObserver
     {
         var allFighters = _frontRow.Concat(_reserve);
         foreach (IFighter fighter in allFighters)
-        {
             fighter.AddObserver(this);
-        }
     }
 
 
@@ -40,20 +38,18 @@ public class Team: AbstractModel, IModelObserver
     public IEnumerable<IFighter> GetReserve() => _reserve;
     public void Summon(IFighter inFighter, int atPosition)
     {
-        IFighter outFighter = _frontRow[atPosition];
-        outFighter.AddToReserve(this);
-        _frontRow[atPosition] = inFighter;
         _reserve.Remove(inFighter);
+        IFighter outFighter = _frontRow[atPosition];
+        _frontRow[atPosition] = inFighter;
+        outFighter.AddToReserve(this);
         SortReserve();
     }
     
     public void Update()
     {
         foreach (IFighter fighter in _frontRow)
-        {
             if (!fighter.IsAlive())
                 fighter.AddToReserve(this);
-        }
     }
 
     public void MoveToReserve(IFighter fighter)
