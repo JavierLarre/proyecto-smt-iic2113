@@ -11,6 +11,16 @@ public class Team: AbstractModel, IModelObserver
     {
         _frontRow = frontRow.ToArray();
         _reserve = reserve.ToList();
+        SubscribeToFighters();
+    }
+
+    private void SubscribeToFighters()
+    {
+        var allFighters = _frontRow.Concat(_reserve);
+        foreach (IFighter fighter in allFighters)
+        {
+            fighter.AddObserver(this);
+        }
     }
 
 
@@ -59,30 +69,10 @@ public class Team: AbstractModel, IModelObserver
 
     public IEnumerable<IFighter> GetDeadFighters()
     {
-        var deadFighters = GetAllFighters()
+        return _frontRow.Concat(_reserve)
             .Where(fighter => !fighter.IsAlive())
-            .ToList();
-        var demonLibray = new DemonFactory().GetDemonLibrary();
-        var deadFightersNames = deadFighters
-            .Select(fighter => fighter.GetUnitData().Name).ToHashSet();
-        var filteredLibrary = demonLibray
-            .Where(demon => deadFightersNames.Contains(demon.GetUnitData().Name))
-            .Select(demon => demon.GetUnitData().Name);
-        List<IFighter> sortedDeadFighters = [];
-        foreach (string demonName in filteredLibrary)
-        {
-            var deadDemon = deadFighters
-                .First(demon => demon.GetUnitData().Name == demonName);
-            sortedDeadFighters.Add(deadDemon);
-        }
-
-        foreach (IFighter deadFighter in deadFighters)
-        {
-            if (deadFighter is Samurai)
-                sortedDeadFighters.Insert(0, deadFighter);
-        }
-
-        return sortedDeadFighters;
+            .Where(fighter => fighter is not EmptyFighter)
+            .OrderBy(fighter => fighter.GetUnitData().FilePriority);
     }
 
     private void SortReserve()
