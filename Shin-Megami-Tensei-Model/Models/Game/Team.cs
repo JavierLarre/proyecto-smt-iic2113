@@ -2,25 +2,14 @@
 
 namespace Shin_Megami_Tensei_Model;
 
-public class Team: AbstractModel
+public class Team: AbstractModel, IModelObserver
 {
-    private readonly IFighter[] _frontRow = new IFighter[Constants.MaxSizeFrontRow];
+    private readonly IFighter[] _frontRow;
     private IList<IFighter> _reserve;
     
     public Team(ICollection<IFighter> frontRow, ICollection<IFighter> reserve)
     {
-        int i = 0;
-        foreach (IFighter fighter in frontRow)
-        {
-            _frontRow[i] = fighter;
-            i++;
-        }
-
-        while (i < Constants.MaxSizeFrontRow)
-        {
-            _frontRow[i] = new EmptyFighter();
-            i++;
-        }
+        _frontRow = frontRow.ToArray();
         _reserve = reserve.ToList();
     }
 
@@ -112,6 +101,10 @@ public class Team: AbstractModel
 
         _reserve = newReserve;
     }
-    
 
+
+    public void Update()
+    {
+        throw new NotImplementedException();
+    }
 }

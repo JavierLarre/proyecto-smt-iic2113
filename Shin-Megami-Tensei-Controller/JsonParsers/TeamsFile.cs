@@ -17,8 +17,7 @@ public class TeamsFile
     {
         if (!IsFileValid())
             throw new ArgumentException("Archivo de equipos inválido");
-        return _parsers.Select(BuildTeam);
-        ;
+        return _parsers.Select(parser => parser.GetTeam());
     }
 
     private bool IsFileValid()
@@ -26,25 +25,6 @@ public class TeamsFile
         var checkers = _parsers
             .Select(TeamChecker.FromParser);
         return checkers.All(checker => checker.IsValid());
-    }
-
-    private Team BuildTeam(TeamParser parser)
-    {
-        List<IFighter> frontRow = [];
-        List<IFighter> reserve = [];
-        foreach (var fighter in parser.GetFighters())
-        {
-            if (frontRow.Count < Constants.MaxSizeFrontRow)
-            {
-                frontRow.Add(fighter);
-            }
-            else
-            {
-                reserve.Add(fighter);
-            }
-        }
-
-        return new Team(frontRow, reserve);
     }
 
     private IEnumerable<TeamParser> GetParsers()

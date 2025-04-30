@@ -10,6 +10,11 @@ public class DemonFactory: AbstractFighterFactory
     {
         return JsonDeserializer.Deserialize<DemonDataFromJson>(JsonFile);
     }
+
+    private int GetDataIndex(DemonDataFromJson data)
+    {
+        return GetData().ToList().IndexOf(data);
+    }
     
     private DemonDataFromJson FindDataByName(string name) =>
         _data.First(demon => demon.name == name);
@@ -37,7 +42,8 @@ public class DemonFactory: AbstractFighterFactory
             Stats = BuildStatsFrom(data.stats),
             Name = data.name,
             Skills = GetSkillsFromNames(data.skills),
-            FightOptions = Demon.FightOptions
+            FightOptions = Demon.FightOptions,
+            FilePriority = GetDataIndex(data)
         };
         return new Demon(unitData);
     }

@@ -22,7 +22,8 @@ public class SamuraiFactory: AbstractFighterFactory
             Stats = BuildStatsFrom(samuraiData.stats),
             Name = samuraiData.name,
             Skills = GetSkillsFromNames(skills),
-            FightOptions = Samurai.FightOptions
+            FightOptions = Samurai.FightOptions,
+            FilePriority = -1
         };
         return new Samurai(unitData);
     }

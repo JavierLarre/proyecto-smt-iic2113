@@ -7,4 +7,5 @@ public struct UnitData
     public Affinities Affinities;
     public ICollection<string> FightOptions;
     public ICollection<Skill> Skills;
+    public int FilePriority;
 }

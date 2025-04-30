@@ -17,6 +17,12 @@ public class TeamParser
     {
         return _fighters;
     }
+
+    public Team GetTeam()
+    {
+        TeamBuilder teamBuilder = new TeamBuilder();
+        return teamBuilder.FromFighters(_fighters);
+    }
     private TeamParser(IEnumerable<string> lines)
     {
         _lines = lines;
