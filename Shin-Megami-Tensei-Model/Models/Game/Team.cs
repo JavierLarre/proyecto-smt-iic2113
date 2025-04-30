@@ -66,14 +66,6 @@ public class Team: AbstractModel, IModelObserver
         _frontRow[fighterIndex] = new EmptyFighter();
     }
 
-    public IEnumerable<IFighter> GetDeadFighters()
-    {
-        return _frontRow.Concat(_reserve)
-            .Where(fighter => !fighter.IsAlive())
-            .Where(fighter => fighter is not EmptyFighter)
-            .OrderBy(fighter => fighter.GetUnitData().FilePriority);
-    }
-
     private void SortReserve()
     {
         var sortedReserve = _reserve

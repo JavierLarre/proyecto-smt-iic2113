@@ -18,7 +18,10 @@ public class ReviveSkillTarget: ISkillTargets
     {
         Table table = Table.GetInstance();
         Team team = table.GetCurrentPlayer().GetTeam();
-        var deadUnits = team.GetDeadFighters();
+        var deadUnits = team.GetReserve().
+            Where(fighter => !fighter.IsAlive()).ToList();
+        if (!team.GetLeader().IsAlive())
+            deadUnits.Insert(0, team.GetLeader());
         ReviveMenu menu = new ReviveMenu(deadUnits);
         _target = menu.GetTarget();
     }
