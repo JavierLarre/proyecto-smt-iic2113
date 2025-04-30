@@ -3,7 +3,7 @@ namespace Shin_Megami_Tensei_Model;
 
 public static class JsonDeserializer
 {
-    public static ICollection<T> Deserialize<T>(string fileName)
+    public static IList<T> Deserialize<T>(string fileName)
     {
         string jsonFolder = "data";
         string path = Path.Combine(jsonFolder, fileName);

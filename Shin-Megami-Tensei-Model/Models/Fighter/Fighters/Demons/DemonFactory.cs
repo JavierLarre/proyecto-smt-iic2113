@@ -4,20 +4,20 @@ public class DemonFactory: AbstractFighterFactory
 {
     private const string JsonFile = "monsters.json";
 
-    private readonly ICollection<DemonDataFromJson> _data = GetData();
+    private static readonly IList<DemonDataFromJson> Data = GetData();
 
-    private static ICollection<DemonDataFromJson> GetData()
+    private static IList<DemonDataFromJson> GetData()
     {
         return JsonDeserializer.Deserialize<DemonDataFromJson>(JsonFile);
     }
 
     private int GetDataIndex(DemonDataFromJson data)
     {
-        return GetData().ToList().IndexOf(data);
+        return Data.IndexOf(data);
     }
     
     private DemonDataFromJson FindDataByName(string name) =>
-        _data.First(demon => demon.name == name);
+        Data.First(demon => demon.name == name);
 
     public IFighter FromName(string name)
     {
@@ -31,7 +31,7 @@ public class DemonFactory: AbstractFighterFactory
 
     public IEnumerable<IFighter> GetDemonLibrary()
     {
-        return GetData().Select(BuildDemon);
+        return Data.Select(BuildDemon);
     }
 
     private Demon BuildDemon(DemonDataFromJson data)
