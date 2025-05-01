@@ -36,8 +36,9 @@ public class RoundController
 
     private bool IsPlayerOutOfTurns()
     {
-        int fullTurns = _turnManager.GetFullTurns();
-        int blinkingTurns = _turnManager.GetBlinkingTurns();
+        Turns turns = _turnManager.GetTurns();
+        int fullTurns = turns.FullTurns;
+        int blinkingTurns = turns.BlinkingTurns;
         return fullTurns == 0 && blinkingTurns == 0;
     }
 

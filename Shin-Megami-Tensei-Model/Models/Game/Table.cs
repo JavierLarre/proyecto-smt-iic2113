@@ -35,12 +35,12 @@ public class Table: AbstractModel
 
     public int GetFullTurnsLeft()
     {
-        return _turnManager.GetFullTurns();
+        return _turnManager.GetTurns().FullTurns;
     }
 
     public int GetBlinkingTurnsLeft()
     {
-        return _turnManager.GetBlinkingTurns();
+        return _turnManager.GetTurns().BlinkingTurns;
     }
 
     public void IncreaseCurrentPlayerUsedSkillsCount()

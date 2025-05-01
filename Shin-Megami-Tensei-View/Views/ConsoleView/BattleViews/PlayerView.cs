@@ -1,9 +1,10 @@
 ﻿using Shin_Megami_Tensei_Model;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
+using Shin_Megami_Tensei.Battles;
 
 namespace Shin_Megami_Tensei_View.Views.ConsoleView;
 
-public class PlayerView
+public class PlayerView: IView
 {
     private readonly Player _player;
     private readonly TeamView _team;
@@ -26,6 +27,13 @@ public class PlayerView
     {
         return $"Equipo de {GetPlayerName()} (J{GetPlayerNumber()})"
                + '\n' + _team.GetFightersInfo();
+    }
+
+    public void Display()
+    {
+        BattleView view = BattleViewSingleton.GetBattleView();
+        view.DisplayCard($"Equipo de {GetPlayerNameAndNumber()}");
+        view.WriteLine(_team.GetFightersInfo());
     }
 
 }

@@ -10,7 +10,7 @@ namespace Shin_Megami_Tensei.Battles;
 public class BattleView
 {
     private readonly View _view;
-    private readonly TableView _tableView = new();
+    private readonly TableInfoView _tableInfoView = new();
 
     public BattleView(View view) => _view = view;
 
@@ -29,13 +29,6 @@ public class BattleView
 
     public void WriteLine(string line) => _view.WriteLine(line);
 
-    public void StartTurn()
-    {
-        DisplayCard(_tableView.GetCurrentInfo());
-        new TurnsView().DisplayTurnsLeft();
-        new FightOrderView().Display();
-    }
-
     public void PrintConsumedAndObtainedTurns()
     {
         TurnManager turnManager = Table.GetInstance().GetTurnManager();
@@ -48,7 +41,7 @@ public class BattleView
 
     public string GetActionFromUser()
     {
-        IFighterView currentFighter = _tableView.GetFighterInTurn();
+        IFighterView currentFighter = _tableInfoView.GetFighterInTurn();
         IOptionMenu actionMenu = currentFighter.GetActionsMenu();
         return GetChoiceFromOptionMenu(actionMenu);
     }
