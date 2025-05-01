@@ -31,46 +31,6 @@ public class BattleController
         new EndGameController().EndGame();
     }
 
-    private void PlayRound()
-    {
-        _view.StartRound();
-        while (!IsRoundDone())
-            PlayTurn();
-        if (HasNoPlayerLost())
-            _table.EndRound();
-    }
-
-    private void PlayTurn()
-    {
-        _view.StartTurn();
-        PlayAction();
-        _view.PrintConsumedAndObtainedTurns();
-        _table.EndTurn();
-    }
-
-    private void PlayAction()
-    {
-        bool done = false;
-        while (!done)
-        {
-            try
-            {
-                string action = _view.GetActionFromUser();
-                _table.PlayAction(action);
-                done = true;
-            }
-            catch (FighterCommandException e)
-            {
-            }
-            catch (OptionException e)
-            {
-            }
-        }
-
-    }
-
-    private bool IsRoundDone() =>  _table.HasAnyTeamLost() || _table.DoesCurrentPlayerHasNoTurnsLeft();
-
     private bool HasNoPlayerLost() => !_table.HasAnyTeamLost();
 
 }
