@@ -40,8 +40,8 @@ public class Team: AbstractModel, IModelObserver
     {
         _reserve.Remove(inFighter);
         IFighter outFighter = _frontRow[atPosition];
-        _frontRow[atPosition] = inFighter;
         outFighter.AddToReserve(this);
+        _frontRow[atPosition] = inFighter;
         SortReserve();
     }
     
