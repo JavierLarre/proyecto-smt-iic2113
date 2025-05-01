@@ -27,7 +27,7 @@ public class BattleController
             _view.WriteLine(e.Message);
         }
         
-        _view.PrintWinner();
+        new EndGameController().EndGame();
     }
 
     private void PlayRound()

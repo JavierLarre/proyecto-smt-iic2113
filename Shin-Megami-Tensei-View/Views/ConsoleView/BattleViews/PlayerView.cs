@@ -17,6 +17,11 @@ public class PlayerView
     public int GetPlayerNumber() => _player.GetPlayerNumber() + 1;
     public string GetPlayerName() => _team.GetLeaderName();
 
+    public string GetPlayerNameAndNumber()
+    {
+        return $"{GetPlayerName()} (J{GetPlayerNumber()})";
+    }
+
     public string GetBanner()
     {
         return $"Equipo de {GetPlayerName()} (J{GetPlayerNumber()})"
