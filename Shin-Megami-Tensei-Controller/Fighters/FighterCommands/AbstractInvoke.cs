@@ -1,7 +1,6 @@
 ﻿using Shin_Megami_Tensei_Model;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
-using Shin_Megami_Tensei.Battles;
 
 namespace Shin_Megami_Tensei.Fighters.Actions;
 
