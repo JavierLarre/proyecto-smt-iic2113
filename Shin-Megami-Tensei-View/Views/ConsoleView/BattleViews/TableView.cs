@@ -16,9 +16,6 @@ public class TableView
         _firstPlayer = new PlayerView(firstPlayer);
         _secondPlayer = new PlayerView(secondPlayer);
     }
-
-    public int GetCurrentPlayerNumber() => GetCurrentPlayer().GetPlayerNumber();
-    public string GetCurrentPlayerName() => GetCurrentPlayer().GetPlayerName();
     public string GetCurrentPlayerTurns()
     {
         int fullTurns = _table.GetFullTurnsLeft();
@@ -30,15 +27,6 @@ public class TableView
     public string GetCurrentInfo()
     {
         return $"{_firstPlayer.GetBanner()}\n{_secondPlayer.GetBanner()}";
-    }
-
-    public string GetCurrentPlayerFightOrder()
-    {
-        var orderedFighters = _table.GetCurrentPlayerFightOrder();
-        var stringfiedFighters = orderedFighters
-            .Select(FighterViewFactory.FromFighter)
-            .Select((fighter, i) => $"{i + 1}-{fighter.GetName()}");
-        return string.Join('\n', stringfiedFighters);
     }
 
     public IFighterView GetFighterInTurn()

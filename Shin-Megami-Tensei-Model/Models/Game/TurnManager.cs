@@ -10,15 +10,6 @@ public class TurnManager: AbstractModel
     private int _consumedFull;
     private int _consumedBlinking;
 
-    public TurnManager()
-    {
-    }
-
-    public TurnManager(int initialTurns)
-    {
-        _fullTurns = initialTurns;
-    }
-
     public void Reset(int initialFullTurns)
     {
         if (initialFullTurns == 0)
@@ -84,8 +75,7 @@ public class TurnManager: AbstractModel
     }
 
     private void GainTurn() => _gainedBlinking++;
-
-
+    
     public void SaveTurns()
     {
         _fullTurns = int.Max(0, _fullTurns - _consumedFull);

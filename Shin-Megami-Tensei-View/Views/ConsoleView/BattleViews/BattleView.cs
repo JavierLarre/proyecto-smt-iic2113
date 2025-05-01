@@ -1,6 +1,7 @@
 ﻿using Shin_Megami_Tensei_Model;
 using Shin_Megami_Tensei_View;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
+using Shin_Megami_Tensei_View.Views.ConsoleView.BattleViews;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
@@ -28,15 +29,11 @@ public class BattleView
 
     public void WriteLine(string line) => _view.WriteLine(line);
 
-    public void StartRound() =>
-        DisplayCard($"Ronda de {_tableView.GetCurrentPlayerName()} " +
-                  $"(J{_tableView.GetCurrentPlayerNumber()})");
-
     public void StartTurn()
     {
         DisplayCard(_tableView.GetCurrentInfo());
-        DisplayCard(_tableView.GetCurrentPlayerTurns());
-        DisplayCard("Orden:\n" + _tableView.GetCurrentPlayerFightOrder());
+        new TurnsView().DisplayTurnsLeft();
+        new FightOrderView().Display();
     }
 
     public void PrintConsumedAndObtainedTurns()
