@@ -8,30 +8,11 @@ public abstract class AbstractOptionsMenu: IOptionMenu
     private readonly List<string> _optionsNames = [];
     private readonly List<string> _optionsDisplays = [];
     private string _header = "";
-
-    public IEnumerable<string> GetOptions()
-    {
-        return _optionsDisplays;
-    }
-
-    protected void AddCancelOption()
-    {
-        AddOption("Cancelar", "Cancelar");
-    }
-
-    public string GetOptionFromChoice(int choiceIndex)
-    {
-        if (_optionsNames[choiceIndex - 1] == "Cancelar")
-            throw new OptionException("Opción Cancelada");
-        return _optionsNames[choiceIndex - 1];
-    }
-
-    public abstract string GetSeparator();
-    public string GetHeader() => _header;
+    
     public string GetChoice()
     {
         ConsoleBattleView view = BattleViewSingleton.GetBattleView();
-        view.DisplayCard(GetHeader());
+        view.DisplayCard(_header);
         for (int i = 0; i < _optionsDisplays.Count; i++)
         {
             string option = _optionsDisplays[i];
@@ -41,6 +22,15 @@ public abstract class AbstractOptionsMenu: IOptionMenu
         int userInput = view.GetInputFromUser();
         return GetOptionFromChoice(userInput);
     }
+    
+    private string GetOptionFromChoice(int choiceIndex)
+    {
+        if (_optionsNames[choiceIndex - 1] == "Cancelar")
+            throw new OptionException("Opción Cancelada");
+        return _optionsNames[choiceIndex - 1];
+    }
+
+    protected abstract string GetSeparator();
 
     protected void SetHeader(string header) => _header = header;
 
@@ -48,5 +38,10 @@ public abstract class AbstractOptionsMenu: IOptionMenu
     {
         _optionsNames.Add(name);
         _optionsDisplays.Add(display);
+    }
+
+    protected void AddCancelOption()
+    {
+        AddOption("Cancelar", "Cancelar");
     }
 }

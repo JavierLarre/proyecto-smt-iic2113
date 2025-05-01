@@ -1,12 +1,10 @@
 ﻿using Shin_Megami_Tensei_View;
-using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 
 namespace Shin_Megami_Tensei.Battles;
 
 public class ConsoleBattleView
 {
     private readonly View _view;
-    private readonly TableInfoView _tableInfoView = new();
 
     public ConsoleBattleView(View view) => _view = view;
 

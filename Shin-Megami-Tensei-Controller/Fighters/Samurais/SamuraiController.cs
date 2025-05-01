@@ -5,9 +5,7 @@ namespace Shin_Megami_Tensei.Fighters.Samurais;
 
 public class SamuraiController: AbstractFighterController
 {
-    public SamuraiController(IFighter fighter): base(fighter)
-    {
-    }
+    public SamuraiController(IFighter fighter): base(fighter) { }
 
     public override IFighterCommand GetCommand(string commandName)
     {

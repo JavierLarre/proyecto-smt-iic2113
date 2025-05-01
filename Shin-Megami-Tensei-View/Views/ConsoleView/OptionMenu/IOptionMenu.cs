@@ -2,9 +2,5 @@
 
 public interface IOptionMenu
 {
-    public IEnumerable<string> GetOptions();
-    public string GetOptionFromChoice(int choiceIndex);
-    public string GetSeparator();
-    public string GetHeader();
     public string GetChoice();
 }

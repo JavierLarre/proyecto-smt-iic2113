@@ -21,5 +21,5 @@ public class SummonFighterMenu: AbstractFighterTargetMenu
     }
 
     
-    public override string GetSeparator() => "-";
+    protected override string GetSeparator() => "-";
 }

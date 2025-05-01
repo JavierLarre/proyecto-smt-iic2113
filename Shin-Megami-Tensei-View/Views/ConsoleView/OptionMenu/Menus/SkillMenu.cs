@@ -16,5 +16,5 @@ public class SkillMenu: AbstractOptionsMenu
         AddCancelOption();
         SetHeader($"Seleccione una habilidad para que {fighter.GetUnitData().Name} use");
     }
-    public override string GetSeparator() => "-";
+    protected override string GetSeparator() => "-";
 }

@@ -61,5 +61,5 @@ public class SummonPositionMenu: AbstractOptionsMenu
     }
 
     
-    public override string GetSeparator() => "-";
+    protected override string GetSeparator() => "-";
 }

@@ -15,5 +15,5 @@ public class ActionMenu: AbstractOptionsMenu
         SetHeader($"Seleccione una acción para {fighter.GetUnitData().Name}");
     }
 
-    public override string GetSeparator() => ": ";
+    protected override string GetSeparator() => ": ";
 }

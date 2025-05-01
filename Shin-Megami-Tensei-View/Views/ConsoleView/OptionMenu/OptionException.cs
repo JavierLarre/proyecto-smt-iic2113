@@ -2,8 +2,5 @@
 
 public class OptionException: ApplicationException
 {
-    public OptionException(string message) : base(message)
-    {
-        
-    }
+    public OptionException(string message) : base(message) { }
 }

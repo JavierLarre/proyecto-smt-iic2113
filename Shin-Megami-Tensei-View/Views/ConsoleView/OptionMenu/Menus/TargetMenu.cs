@@ -18,5 +18,5 @@ public class TargetMenu: AbstractFighterTargetMenu
         SetHeader($"Seleccione un objetivo para {attacker.GetUnitData().Name}");
     }
 
-    public override string GetSeparator() => "-";
+    protected override string GetSeparator() => "-";
 }

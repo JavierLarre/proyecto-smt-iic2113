@@ -29,5 +29,5 @@ public class ReviveMenu: AbstractFighterTargetMenu
         AddOption(targetView.GetName(), targetInfo);
     }
     
-    public override string GetSeparator() => "-";
+    protected override string GetSeparator() => "-";
 }
