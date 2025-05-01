@@ -15,7 +15,7 @@ public class StartRoundView: IView
 
     public void Display()
     {
-        BattleView view = BattleViewSingleton.GetBattleView();
+        ConsoleBattleView view = BattleViewSingleton.GetBattleView();
         PlayerView currentPlayerView = new PlayerView(_currentPlayer);
         view.DisplayCard($"Ronda de {currentPlayerView.GetPlayerNameAndNumber()}");
     }

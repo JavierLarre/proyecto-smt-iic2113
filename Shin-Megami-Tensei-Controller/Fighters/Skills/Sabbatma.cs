@@ -8,7 +8,7 @@ namespace Shin_Megami_Tensei.Fighters.Skills;
 
 public class Sabbatma: ISkillController
 {
-    private BattleView _view = BattleViewSingleton.GetBattleView();
+    private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
     private Skill _skill;
     private Table _table = Table.GetInstance();
 

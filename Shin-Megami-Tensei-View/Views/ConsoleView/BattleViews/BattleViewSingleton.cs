@@ -4,14 +4,14 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 
 public static class BattleViewSingleton
 {
-    private static BattleView? _battleViewinstance;
+    private static ConsoleBattleView? _battleViewinstance;
 
     public static void SetBattleView(View view)
     {
-        _battleViewinstance = new BattleView(view);
+        _battleViewinstance = new ConsoleBattleView(view);
     }
 
-    public static BattleView GetBattleView()
+    public static ConsoleBattleView GetBattleView()
     {
         if (_battleViewinstance is null)
             throw new ArgumentNullException();

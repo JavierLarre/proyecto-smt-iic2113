@@ -27,7 +27,7 @@ public class TableInfoView: IView
 
     public void Display()
     {
-        BattleView view = BattleViewSingleton.GetBattleView();
+        ConsoleBattleView view = BattleViewSingleton.GetBattleView();
         view.DisplayCard(_firstPlayer.GetBanner());
         view.WriteLine(_secondPlayer.GetBanner());
     }

@@ -31,7 +31,7 @@ public class PlayerView: IView
 
     public void Display()
     {
-        BattleView view = BattleViewSingleton.GetBattleView();
+        ConsoleBattleView view = BattleViewSingleton.GetBattleView();
         view.DisplayCard($"Equipo de {GetPlayerNameAndNumber()}");
         view.WriteLine(_team.GetFightersInfo());
     }

@@ -11,7 +11,7 @@ namespace Shin_Megami_Tensei.Battles;
 public class BattleController
 {
     private readonly Table _table = Table.GetInstance();
-    private readonly BattleView _view = BattleViewSingleton.GetBattleView();
+    private readonly ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
 
     public void Play()
     {

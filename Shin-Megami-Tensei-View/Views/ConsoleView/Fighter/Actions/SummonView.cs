@@ -13,7 +13,7 @@ public class SummonView: IView
     
     public void Display()
     {
-        BattleView view = BattleViewSingleton.GetBattleView();
+        ConsoleBattleView view = BattleViewSingleton.GetBattleView();
         string summonLine = $"{_summoned.GetUnitData().Name} ha sido invocado";
         view.DisplayCard(summonLine);
     }

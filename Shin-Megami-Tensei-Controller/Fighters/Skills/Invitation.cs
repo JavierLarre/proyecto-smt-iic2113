@@ -10,7 +10,7 @@ namespace Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
 public class Invitation: ISkillController
 {
     private Skill _skill;
-    private BattleView _view = BattleViewSingleton.GetBattleView();
+    private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
     private Table _table = Table.GetInstance();
 
     public Invitation(Skill skill) => _skill = skill;

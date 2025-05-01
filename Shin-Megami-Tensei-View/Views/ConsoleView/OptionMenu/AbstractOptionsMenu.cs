@@ -30,7 +30,7 @@ public abstract class AbstractOptionsMenu: IOptionMenu
     public string GetHeader() => _header;
     public string GetChoice()
     {
-        BattleView view = BattleViewSingleton.GetBattleView();
+        ConsoleBattleView view = BattleViewSingleton.GetBattleView();
         view.DisplayCard(GetHeader());
         for (int i = 0; i < _optionsDisplays.Count; i++)
         {

@@ -8,7 +8,7 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.BattleViews;
 public class FightOrderView: IView
 {
     private Table _table = Table.GetInstance();
-    private BattleView _view = BattleViewSingleton.GetBattleView();
+    private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
     private IEnumerable<IFighter> _fightOrder;
 
     public FightOrderView()

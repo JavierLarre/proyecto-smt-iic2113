@@ -55,7 +55,7 @@ public class SummonPositionMenu: AbstractOptionsMenu
 
     public int GetPosition()
     {
-        BattleView view = BattleViewSingleton.GetBattleView();
+        ConsoleBattleView view = BattleViewSingleton.GetBattleView();
         string choice = GetChoice();
         return int.Parse(choice);
     }

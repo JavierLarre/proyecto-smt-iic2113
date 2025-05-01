@@ -11,7 +11,7 @@ public abstract class AttackCommand: IFighterCommand
     private const double PhysicalDamageMultiplier = 0.0114;
     
     protected Table Table = Table.GetInstance();
-    protected BattleView View = BattleViewSingleton.GetBattleView();
+    protected ConsoleBattleView View = BattleViewSingleton.GetBattleView();
 
     public void Execute()
     {

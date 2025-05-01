@@ -38,7 +38,7 @@ public abstract class OffensiveActionView: IView
 
     public void Display()
     {
-        BattleView view = BattleViewSingleton.GetBattleView();
+        ConsoleBattleView view = BattleViewSingleton.GetBattleView();
         List<string> lines =
         [
             $"{_attacker.GetUnitData().Name} {_actionMade} {_target.GetUnitData().Name}"
