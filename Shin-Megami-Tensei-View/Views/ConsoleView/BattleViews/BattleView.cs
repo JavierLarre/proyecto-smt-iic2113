@@ -1,9 +1,5 @@
-﻿using Shin_Megami_Tensei_Model;
-using Shin_Megami_Tensei_View;
+﻿using Shin_Megami_Tensei_View;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
-using Shin_Megami_Tensei_View.Views.ConsoleView.BattleViews;
-using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
-using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 namespace Shin_Megami_Tensei.Battles;
 
@@ -30,23 +26,6 @@ public class BattleView
     public void WriteLine(string line) => _view.WriteLine(line);
 
     public int GetInputFromUser() => int.Parse(_view.ReadLine());
-
-    public string GetActionFromUser()
-    {
-        IFighterView currentFighter = _tableInfoView.GetFighterInTurn();
-        IOptionMenu actionMenu = currentFighter.GetActionsMenu();
-        return actionMenu.GetChoice();
-    }
-
-    public string GetChoiceFromOptionMenu(IOptionMenu menu)
-    {
-        var numberedOptions = menu.GetOptions()
-            .Select((option, i) => $"{i+1}{menu.GetSeparator()}{option}");
-        string formattedOptions = string.Join('\n', numberedOptions);
-        DisplayCard(menu.GetHeader() + '\n' + formattedOptions);
-        int userChoice = GetInputFromUser();
-        return menu.GetOptionFromChoice(userChoice);
-    }
 
     private void DisplayIndent()
     {

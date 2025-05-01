@@ -5,10 +5,7 @@ namespace Shin_Megami_Tensei.Fighters.Demons;
 
 public class DemonController: AbstractFighterController
 {
-    public DemonController(IFighter fighter) : base(fighter)
-    {
-        
-    }
+    public DemonController(IFighter fighter) : base(fighter) { }
 
     public override IFighterCommand GetCommand(string commandName)
     {

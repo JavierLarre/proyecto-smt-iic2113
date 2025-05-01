@@ -13,8 +13,7 @@ public abstract class AbstractFighterTargetMenu: AbstractOptionsMenu
     
     public IFighter GetTarget()
     {
-        BattleView view = BattleViewSingleton.GetBattleView();
-        string targetName = view.GetChoiceFromOptionMenu(this);
+        string targetName = GetChoice();
         IFighter choosenTarget = _targets.
             First(target => target.GetUnitData().Name == targetName);
         return choosenTarget;

@@ -21,11 +21,10 @@ public class UseSkill: IFighterCommand
 
     private string GetSkillNameFromUser()
     {
-        BattleView view = BattleViewSingleton.GetBattleView();
         try
         {
             IOptionMenu skillMenu = new SkillMenu(_fighter);
-            string skillName = view.GetChoiceFromOptionMenu(skillMenu);
+            string skillName = skillMenu.GetChoice();
             return skillName;
 
         }
