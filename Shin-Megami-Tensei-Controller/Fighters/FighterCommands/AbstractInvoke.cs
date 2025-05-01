@@ -1,23 +1,46 @@
 ﻿using Shin_Megami_Tensei_Model;
-using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
+using Shin_Megami_Tensei_View.Views.ConsoleView;
 using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public abstract class AbstractInvoke: IFighterCommand
 {
+    private Table _table = Table.GetInstance();
+    
     public void Execute()
     {
-        Table table = Table.GetInstance();
-        var reserve = table.GetCurrentPlayer().GetTeam().GetReserve()
-            .Where(fighter => fighter.IsAlive());
+        var target = GetTarget();
+        Summon(target);
+        Display(target);
+    }
+
+    private IFighter GetTarget()
+    {
+        var reserve = GetReserve();
         SummonFighterMenu summonMenu = new SummonFighterMenu(reserve);
         IFighter target = summonMenu.GetTarget();
+        return target;
+    }
+
+    private IEnumerable<IFighter> GetReserve()
+    {
+        var reserve = _table.GetCurrentPlayer().GetTeam().GetReserve()
+            .Where(fighter => fighter.IsAlive());
+        return reserve;
+    }
+
+    private void Summon(IFighter target)
+    {
         int atPosition = GetSummonPosition();
-        table.Summon(target, atPosition);
-        table.GetTurnManager().ConsumeAndGainTurn();
-        BattleViewSingleton.GetBattleView()
-            .DisplayCard($"{target.GetUnitData().Name} ha sido invocado");
+        _table.Summon(target, atPosition);
+        _table.GetTurnManager().ConsumeAndGainTurn();
+    }
+
+    private void Display(IFighter summoned)
+    {
+        SummonView summonView = new SummonView(summoned);
+        summonView.Display();
     }
 
     protected abstract int GetSummonPosition();

@@ -26,7 +26,6 @@ public class UseSkill: IFighterCommand
             IOptionMenu skillMenu = new SkillMenu(_fighter);
             string skillName = skillMenu.GetChoice();
             return skillName;
-
         }
         catch (OptionException e)
         {
