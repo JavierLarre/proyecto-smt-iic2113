@@ -15,11 +15,12 @@ public class BattleController
 
     public void Play()
     {
+        RoundController roundController = new RoundController();
         try
         {
             while (HasNoPlayerLost())
             {
-                PlayRound();
+                roundController.PlayRound();
             }
         }
         catch (GameException e)

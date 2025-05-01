@@ -2,5 +2,5 @@
 
 public interface IViewInput: IView, IViewController
 {
-    
+    public void SetInput(IViewController viewController);
 }
