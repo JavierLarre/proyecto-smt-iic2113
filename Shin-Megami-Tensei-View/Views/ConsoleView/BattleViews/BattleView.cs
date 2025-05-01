@@ -13,39 +13,36 @@ public class BattleView
 
     public BattleView(View view) => _view = view;
 
-    public void WriteLines(IEnumerable<string> lines)
+    public void DisplayCard(IEnumerable<string> lines)
     {
-        PrintIndent();
+        DisplayIndent();
         foreach (var line in lines)
             _view.WriteLine(line);
     }
 
-    public void WriteLine(string line)
+    public void DisplayCard(string line)
     {
-        PrintIndent();
+        DisplayIndent();
         _view.WriteLine(line);
     }
 
-    public void PrintWinner()
-    {
-        WriteLine(_tableView.GetWinner());
-    }
+    public void WriteLine(string line) => _view.WriteLine(line);
 
     public void StartRound() =>
-        WriteLine($"Ronda de {_tableView.GetCurrentPlayerName()} " +
+        DisplayCard($"Ronda de {_tableView.GetCurrentPlayerName()} " +
                   $"(J{_tableView.GetCurrentPlayerNumber()})");
 
     public void StartTurn()
     {
-        WriteLine(_tableView.GetCurrentInfo());
-        WriteLine(_tableView.GetCurrentPlayerTurns());
-        WriteLine("Orden:\n" + _tableView.GetCurrentPlayerFightOrder());
+        DisplayCard(_tableView.GetCurrentInfo());
+        DisplayCard(_tableView.GetCurrentPlayerTurns());
+        DisplayCard("Orden:\n" + _tableView.GetCurrentPlayerFightOrder());
     }
 
     public void PrintConsumedAndObtainedTurns()
     {
         TurnManager turnManager = Table.GetInstance().GetTurnManager();
-        WriteLine(turnManager.ToString());
+        DisplayCard(turnManager.ToString());
     }
 
     private int GetInputFromUser() => int.Parse(_view.ReadLine());
@@ -65,12 +62,12 @@ public class BattleView
         var numberedOptions = menu.GetOptions()
             .Select((option, i) => $"{i+1}{menu.GetSeparator()}{option}");
         string formattedOptions = string.Join('\n', numberedOptions);
-        WriteLine(menu.GetHeader() + '\n' + formattedOptions);
+        DisplayCard(menu.GetHeader() + '\n' + formattedOptions);
         int userChoice = GetInputFromUser();
         return menu.GetOptionFromChoice(userChoice);
     }
 
-    private void PrintIndent()
+    private void DisplayIndent()
     {
         string indent = new('-', 40);
         _view.WriteLine(indent);

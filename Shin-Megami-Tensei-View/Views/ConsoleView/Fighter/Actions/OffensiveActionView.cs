@@ -52,6 +52,6 @@ public abstract class OffensiveActionView: IView
             lines = lines.Concat(lines).ToList();
         }
 
-        view.WriteLines(lines);
+        view.DisplayCard(lines);
     }
 }

@@ -94,6 +94,8 @@ public class Table: AbstractModel
 
     public void EndRound()
     {
+        if (HasAnyTeamLost())
+            return;
         SwapPlayers();
         var fightOrder = _currentPlayer.GetTeam().GetFightOrder();
         _fightOrder = new LinkedList<IFighter>(fightOrder);

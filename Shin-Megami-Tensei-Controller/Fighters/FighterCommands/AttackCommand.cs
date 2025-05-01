@@ -20,7 +20,7 @@ public abstract class AttackCommand: IFighterCommand
         double damage = CalculateDamage();
         affinity.RecieveAttack(reciever, damage);
         affinity.ConsumeTurns();
-        View.WriteLine(GetEffectString(reciever));
+        View.DisplayCard(GetEffectString(reciever));
     }
 
     private string GetEffectString(IFighter target)

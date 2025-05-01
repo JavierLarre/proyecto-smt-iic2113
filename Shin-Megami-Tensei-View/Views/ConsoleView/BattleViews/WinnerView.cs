@@ -13,7 +13,7 @@ public class WinnerView: IView
     public void Display()
     {
         BattleView view = BattleViewSingleton.GetBattleView();
-        view.WriteLine(GetFormattedWinner());
+        view.DisplayCard(GetFormattedWinner());
     }
 
     private string GetFormattedWinner()

@@ -65,7 +65,7 @@ public class SkillController: ISkillController
                 effectsMade.Add(FighterViewFactory.FromFighter(attacker).GetHpEndedWith());
             }
 
-            _view.WriteLines(effectsMade);
+            _view.DisplayCard(effectsMade);
             // TODO E3: implementar una vista para cada tipo
             // Así evito esto
         }

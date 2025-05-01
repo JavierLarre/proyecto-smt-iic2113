@@ -41,13 +41,6 @@ public class TableView
         return string.Join('\n', stringfiedFighters);
     }
 
-    public string GetWinner()
-    {
-        Player winner = _table.GetWinner();
-        PlayerView winnerView = new PlayerView(winner);
-        return $"Ganador: {winnerView.GetPlayerName()} (J{winnerView.GetPlayerNumber()})";
-    }
-
     public IFighterView GetFighterInTurn()
     {
         IFighter fighterInTurn = _table.GetCurrentFighter();

@@ -29,7 +29,7 @@ public class Invitation: ISkillController
             effectMade += '\n' + FighterViewFactory.FromFighter(target).GetHpEndedWith();
         }
 
-        _view.WriteLine(effectMade);
+        _view.DisplayCard(effectMade);
         _table.GetTurnManager().ConsumeTurn();
         IFighter currentFighter = _table.GetCurrentFighter();
         currentFighter.SetMp(currentFighter.GetCurrentMp() - _skill.Cost);

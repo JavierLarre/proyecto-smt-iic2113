@@ -17,7 +17,7 @@ public abstract class AbstractInvoke: IFighterCommand
         table.Summon(target, atPosition);
         table.GetTurnManager().ConsumeAndGainTurn();
         BattleViewSingleton.GetBattleView()
-            .WriteLine($"{target.GetUnitData().Name} ha sido invocado");
+            .DisplayCard($"{target.GetUnitData().Name} ha sido invocado");
     }
 
     protected abstract int GetSummonPosition();

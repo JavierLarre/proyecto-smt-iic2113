@@ -24,7 +24,7 @@ public class BattleController
         }
         catch (GameException e)
         {
-            _view.WriteLine(e.Message);
+            _view.DisplayCard(e.Message);
         }
         
         new EndGameController().EndGame();
