@@ -1,4 +1,7 @@
-﻿namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
+﻿using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
+using Shin_Megami_Tensei.Battles;
+
+namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 public abstract class AbstractOptionsMenu: IOptionMenu
 {
@@ -25,6 +28,20 @@ public abstract class AbstractOptionsMenu: IOptionMenu
 
     public abstract string GetSeparator();
     public string GetHeader() => _header;
+    public string GetChoice()
+    {
+        BattleView view = BattleViewSingleton.GetBattleView();
+        view.DisplayCard(GetHeader());
+        for (int i = 0; i < _optionsDisplays.Count; i++)
+        {
+            string option = _optionsDisplays[i];
+            string formattedOption = $"{i + 1}{GetSeparator()}{option}";
+            view.WriteLine(formattedOption);
+        }
+        int userInput = view.GetInputFromUser();
+        return GetOptionFromChoice(userInput);
+    }
+
     protected void SetHeader(string header) => _header = header;
 
     protected void AddOption(string name, string display)

@@ -29,15 +29,14 @@ public class BattleView
 
     public void WriteLine(string line) => _view.WriteLine(line);
 
-    private int GetInputFromUser() => int.Parse(_view.ReadLine());
+    public int GetInputFromUser() => int.Parse(_view.ReadLine());
 
     public string GetActionFromUser()
     {
         IFighterView currentFighter = _tableInfoView.GetFighterInTurn();
         IOptionMenu actionMenu = currentFighter.GetActionsMenu();
-        return GetChoiceFromOptionMenu(actionMenu);
+        return actionMenu.GetChoice();
     }
-
 
     public string GetChoiceFromOptionMenu(IOptionMenu menu)
     {

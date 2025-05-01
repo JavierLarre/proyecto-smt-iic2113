@@ -1,12 +1,14 @@
 ﻿using Shin_Megami_Tensei_Model;
+using Shin_Megami_Tensei_View.Views;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
+using Shin_Megami_Tensei_View.Views.ConsoleView.BattleViews;
 using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 using Shin_Megami_Tensei.Fighters;
 using Shin_Megami_Tensei.Fighters.Actions;
 
 namespace Shin_Megami_Tensei.Battles;
 
-public class ActionController
+public class ActionController: IViewController
 {
     private Table _table = Table.GetInstance();
     
@@ -26,10 +28,9 @@ public class ActionController
 
     private void ExecuteCommandFromUser()
     {
-        BattleView view = BattleViewSingleton.GetBattleView();
-        string action = view.GetActionFromUser();
-        IFighterCommand command = GetCommandFromAction(action);
-        command.Execute();
+        IFighter currentFighter = _table.GetCurrentFighter();
+        ActionView actionView = new ActionView(currentFighter, this);
+        actionView.Display();
     }
 
     private IFighterCommand GetCommandFromAction(string action)
@@ -38,5 +39,11 @@ public class ActionController
         IFighterController controller = FighterControllerFactory
             .GetController(currentFighter);
         return controller.GetCommand(action);
+    }
+
+    public void OnInput(string input)
+    {
+        IFighterCommand fighterCommand = GetCommandFromAction(input);
+        fighterCommand.Execute();
     }
 }
