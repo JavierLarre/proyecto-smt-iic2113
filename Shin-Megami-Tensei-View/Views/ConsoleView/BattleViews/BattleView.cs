@@ -29,15 +29,7 @@ public class BattleView
 
     public void WriteLine(string line) => _view.WriteLine(line);
 
-    public void PrintConsumedAndObtainedTurns()
-    {
-        TurnManager turnManager = Table.GetInstance().GetTurnManager();
-        DisplayCard(turnManager.ToString());
-    }
-
     private int GetInputFromUser() => int.Parse(_view.ReadLine());
-    
-    //TODO: separar cada menú en su propia clase
 
     public string GetActionFromUser()
     {

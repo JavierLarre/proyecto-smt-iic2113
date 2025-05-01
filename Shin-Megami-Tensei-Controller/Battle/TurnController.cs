@@ -18,10 +18,9 @@ public class TurnController
 
     public void PlayTurn()
     {
-        BattleView view = BattleViewSingleton.GetBattleView();
         _turnsView.Display();
         _actionController.PlayAction();
-        view.PrintConsumedAndObtainedTurns();
+        _turnsView.DisplayTurnsConsumedAndGained();
         _table.EndTurn();
     }
 }

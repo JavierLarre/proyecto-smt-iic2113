@@ -35,8 +35,8 @@ public class ActionController
     private IFighterCommand GetCommandFromAction(string action)
     {
         IFighter currentFighter = _table.GetCurrentFighter();
-        var controllerFactory = new FighterControllerFactory(currentFighter);
-        IFighterController controller = controllerFactory.GetController();
+        IFighterController controller = FighterControllerFactory
+            .GetController(currentFighter);
         return controller.GetCommand(action);
     }
 }

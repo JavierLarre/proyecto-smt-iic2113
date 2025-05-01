@@ -83,12 +83,4 @@ public class TurnManager: AbstractModel
         _turns.ConsumedFull = 0;
         _turns.ConsumedBlinking = 0;
     }
-
-    public override string ToString()
-    {
-        string consumedFull = $"Se han consumido {_turns.ConsumedFull} Full Turn(s)";
-        string consumedBlinking = $" y {_turns.ConsumedBlinking} Blinking Turn(s)";
-        string gainedTurns = $"Se han obtenido {_turns.GainedBlinking} Blinking Turn(s)";
-        return consumedFull + consumedBlinking + '\n' + gainedTurns;
-    }
 }

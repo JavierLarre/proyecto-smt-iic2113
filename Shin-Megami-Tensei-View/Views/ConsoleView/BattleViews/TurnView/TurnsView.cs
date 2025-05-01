@@ -30,9 +30,27 @@ public class TurnsView: IView
         _view.WriteLine($"Blinking Turns: {blinkingTurns}");
     }
 
-    public void DisplayTurnsGained()
+    public void DisplayTurnsConsumedAndGained()
     {
-        int consumedFullTurns = _turnManager.GetTurns().ConsumedFull;
-        _view.DisplayCard($"Se han consumido {consumedFullTurns}");
+        DisplayConsumedTurns();
+        DisplayGainedTurns();
+    }
+
+    private void DisplayConsumedTurns()
+    {
+        Turns turns = _turnManager.GetTurns();
+        int consumedFullTurns = turns.ConsumedFull;
+        int consumedBlinking = turns.ConsumedBlinking;
+        string consumedTurns = $"Se han consumido {consumedFullTurns} Full Turn(s)";
+        consumedTurns += $" y {consumedBlinking} Blinking Turn(s)";
+        _view.DisplayCard(consumedTurns);
+    }
+
+    private void DisplayGainedTurns()
+    {
+        Turns turns = _turnManager.GetTurns();
+        int gainedBlinking = turns.GainedBlinking;
+        string gainedTurns = $"Se han obtenido {gainedBlinking} Blinking Turn(s)";
+        _view.WriteLine(gainedTurns);
     }
 }

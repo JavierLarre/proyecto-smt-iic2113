@@ -4,21 +4,14 @@ using Shin_Megami_Tensei.Fighters.Samurais;
 
 namespace Shin_Megami_Tensei.Fighters;
 
-public class FighterControllerFactory
+public static class FighterControllerFactory
 {
-    private readonly IFighter _fighter;
-
-    public FighterControllerFactory(IFighter fighter)
+    public static IFighterController GetController(IFighter fighter)
     {
-        _fighter = fighter;
-    }
-
-    public IFighterController GetController()
-    {
-        return _fighter switch
+        return fighter switch
         {
-            Demon => new DemonController(_fighter),
-            Samurai => new SamuraiController(_fighter),
+            Demon => new DemonController(fighter),
+            Samurai => new SamuraiController(fighter),
             _ => throw new ArgumentException("Fighter Type not found")
         };
     }
