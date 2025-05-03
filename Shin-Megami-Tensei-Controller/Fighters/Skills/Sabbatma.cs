@@ -2,6 +2,7 @@
 using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 using Shin_Megami_Tensei.Battles;
+using Shin_Megami_Tensei.Fighters.Actions;
 using Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 
 namespace Shin_Megami_Tensei.Fighters.Skills;
@@ -20,7 +21,7 @@ public class Sabbatma: ISkillController
             .Where(fighter => fighter.IsAlive());
         SummonFighterMenu summonMenu = new SummonFighterMenu(reserve);
         IFighter target = summonMenu.GetTarget();
-        int atPosition = new SummonPositionMenu().GetPosition();
+        int atPosition = new SummonPositionsMenu(new SummonablePositionsController().GetPositions()).GetPosition();
         _table.Summon(target, atPosition);
         _table.GetTurnManager().ConsumeTurn();
         IFighter currentFighter = _table.GetCurrentFighter();

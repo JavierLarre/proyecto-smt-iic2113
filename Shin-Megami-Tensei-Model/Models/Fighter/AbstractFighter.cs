@@ -27,6 +27,7 @@ public abstract class AbstractFighter: AbstractModel, IFighter
     public void SetMp(int value) => _mp.Set(value);
 
     public abstract void AddToReserve(Team team);
+    public abstract bool CanBeSwapped();
 
     public bool IsAlive() => _hp.Get() > 0;
 

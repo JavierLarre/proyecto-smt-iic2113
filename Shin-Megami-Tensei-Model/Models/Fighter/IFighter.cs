@@ -10,4 +10,5 @@ public interface IFighter: IModel
     public void SetMp(int value);
     public void AddToReserve(Team team);
     public bool IsAlive();
+    public bool CanBeSwapped();
 }

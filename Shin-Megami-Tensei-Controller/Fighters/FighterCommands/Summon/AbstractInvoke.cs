@@ -12,18 +12,19 @@ public abstract class AbstractInvoke: IFighterCommand
     {
         var target = GetTarget();
         Summon(target);
+        ConsumeTurns();
         Display(target);
     }
 
     private IFighter GetTarget()
     {
-        var reserve = GetReserve();
+        var reserve = GetAliveReserve();
         SummonFighterMenu summonMenu = new SummonFighterMenu(reserve);
         IFighter target = summonMenu.GetTarget();
         return target;
     }
 
-    private IEnumerable<IFighter> GetReserve()
+    private IEnumerable<IFighter> GetAliveReserve()
     {
         var reserve = _table.GetCurrentPlayer().GetTeam().GetReserve()
             .Where(fighter => fighter.IsAlive());
@@ -34,7 +35,12 @@ public abstract class AbstractInvoke: IFighterCommand
     {
         int atPosition = GetSummonPosition();
         _table.Summon(target, atPosition);
-        _table.GetTurnManager().ConsumeAndGainTurn();
+    }
+
+    private void ConsumeTurns()
+    {
+        TurnManager turnManager = _table.GetTurnManager();
+        turnManager.ConsumeAndGainTurn();
     }
 
     private void Display(IFighter summoned)

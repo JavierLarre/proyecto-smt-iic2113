@@ -15,4 +15,6 @@ public class Demon: AbstractFighter
     {
         team.MoveToReserve(this);
     }
+
+    public override bool CanBeSwapped() => true;
 }

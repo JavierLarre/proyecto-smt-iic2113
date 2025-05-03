@@ -19,4 +19,5 @@ public class EmptyFighter: AbstractModel, IFighter
     public void AddToReserve(Team team) { }
 
     public bool IsAlive() => false;
+    public bool CanBeSwapped() => true;
 }

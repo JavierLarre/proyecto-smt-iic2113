@@ -16,7 +16,7 @@ public static class SkillTypesFactory
                 new ReviveSkillType() :
                 new HealSkillType(),
             "Special" => new SpecialSkillType(),
-            _ => throw new NotImplementedException("Type Not Implemented" + type)
+            _ => throw new ArgumentException("Type Not Found: " + type)
         };
     }
     

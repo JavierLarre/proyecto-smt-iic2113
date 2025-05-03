@@ -14,4 +14,5 @@ public class Samurai: AbstractFighter
     ];
 
     public override void AddToReserve(Team team) { }
+    public override bool CanBeSwapped() => false;
 }
