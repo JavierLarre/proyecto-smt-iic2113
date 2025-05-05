@@ -7,8 +7,7 @@ public class SamuraiInvoke: AbstractInvoke
 {
     protected override int GetSummonPosition()
     {
-        var targets = new SummonablePositionsController().GetPositions();
-        SummonPositionsMenu positionsMenu = new SummonPositionsMenu(targets);
-        return positionsMenu.GetPosition();
+        var summonablePositionsController = new SummonablePositionsController();
+        return summonablePositionsController.GetPosition();
     }
 }

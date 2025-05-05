@@ -8,8 +8,9 @@ public abstract class AbstractOptionsMenu: IOptionMenu
     private readonly List<string> _optionsNames = [];
     private readonly List<string> _optionsDisplays = [];
     private string _header = "";
-    
-    public string GetChoice()
+    private IViewController _inputController = new EmptyViewController();
+
+    public void Display()
     {
         ConsoleBattleView view = BattleViewSingleton.GetBattleView();
         view.DisplayCard(_header);
@@ -19,12 +20,20 @@ public abstract class AbstractOptionsMenu: IOptionMenu
             string formattedOption = $"{i + 1}{GetSeparator()}{option}";
             view.WriteLine(formattedOption);
         }
-        int userInput = view.GetInputFromUser();
-        return GetOptionFromChoice(userInput);
     }
     
-    private string GetOptionFromChoice(int choiceIndex)
+    public string GetChoice()
     {
+        Display();
+        string userInput = GetOptionFromChoice();
+        OnInput(userInput);
+        return userInput;
+    }
+    
+    private string GetOptionFromChoice()
+    {
+        ConsoleBattleView view = BattleViewSingleton.GetBattleView();
+        int choiceIndex = view.GetInputFromUser();
         if (_optionsNames[choiceIndex - 1] == "Cancelar")
             throw new OptionException("Opción Cancelada");
         return _optionsNames[choiceIndex - 1];
@@ -43,5 +52,15 @@ public abstract class AbstractOptionsMenu: IOptionMenu
     protected void AddCancelOption()
     {
         AddOption("Cancelar", "Cancelar");
+    }
+
+    public void OnInput(string input)
+    {
+        _inputController.OnInput(input);
+    }
+
+    public void SetInput(IViewController viewController)
+    {
+        _inputController = viewController;
     }
 }

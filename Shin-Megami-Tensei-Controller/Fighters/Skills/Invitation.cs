@@ -19,8 +19,7 @@ public class Invitation: ISkillController
     public void UseSkill()
     {
         IFighter target = new ReserveTargets().GetTargets().First();
-        int atPosition = new SummonPositionsMenu(new SummonablePositionsController()
-            .GetPositions()).GetPosition();
+        int atPosition = new SummonablePositionsController().GetPosition();
         ISkillType type = new ReviveSkillType();
         string effectMade = $"{target.GetUnitData().Name} ha sido invocado";
         bool targetWasDead = !target.IsAlive();

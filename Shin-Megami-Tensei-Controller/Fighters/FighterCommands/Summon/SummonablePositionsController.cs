@@ -1,10 +1,19 @@
 ﻿using Shin_Megami_Tensei_Model;
+using Shin_Megami_Tensei_View.Views;
+using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 namespace Shin_Megami_Tensei.Fighters.Actions;
 
-public class SummonablePositionsController
+public class SummonablePositionsController: IViewController
 {
     private Table _table = Table.GetInstance();
+    private ICollection<IFighter> _positions;
+    private int _position = -1;
+
+    public SummonablePositionsController()
+    {
+        _positions = GetPositions().ToArray();
+    }
     
     public IEnumerable<IFighter> GetPositions()
     {
@@ -20,6 +29,19 @@ public class SummonablePositionsController
         // Aún así pienso que pude haber hecho los modelos como estructuras de datos,
         // pero sería responsabilidad de los controladores que los datos estuvieran correctos
     }
-    
-    
+
+    public int GetPosition()
+    {
+        var positions = GetPositions();
+        SummonPositionsMenu summonPositionsMenu = new SummonPositionsMenu(positions);
+        summonPositionsMenu.SetInput(this);
+        summonPositionsMenu.GetChoice();
+        return _position;
+    }
+
+
+    public void OnInput(string input)
+    {
+        _position =  int.Parse(input);
+    }
 }
