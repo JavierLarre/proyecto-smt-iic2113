@@ -18,7 +18,7 @@ public class Invitation: ISkillController
     
     public void UseSkill()
     {
-        IFighter target = new ReserveTargets().GetTargets().First();
+        IFighter target = new ReserveTarget().GetTargets().First();
         int atPosition = new SummonablePositionsController().GetPosition();
         ISkillType type = new ReviveSkillType();
         string effectMade = $"{target.GetUnitData().Name} ha sido invocado";

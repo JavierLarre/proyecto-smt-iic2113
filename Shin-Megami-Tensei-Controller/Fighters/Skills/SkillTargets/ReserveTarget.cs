@@ -4,12 +4,12 @@ using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 namespace Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 
-public class ReserveTargets: ISkillTargets, IViewController
+public class ReserveTarget: ISkillTargets, IViewController
 {
     private IFighter? _target;
-    private ICollection<IFighter> _reserve;
+    private readonly ICollection<IFighter> _reserve;
 
-    public ReserveTargets()
+    public ReserveTarget()
     {
         Table table = Table.GetInstance();
         Team team = table.GetCurrentPlayer().GetTeam();
@@ -26,11 +26,18 @@ public class ReserveTargets: ISkillTargets, IViewController
     private void InitializeTarget()
     {
         SummonFighterMenu menu = new SummonFighterMenu(_reserve);
-        _target = menu.GetTarget();
+        menu.SetInput(this);
+        menu.GetChoice();
     }
 
     public void OnInput(string input)
     {
-        throw new NotImplementedException();
+        _target = _reserve.First(IsFighterChoosenTarget);
+        return;
+
+        bool IsFighterChoosenTarget(IFighter fighter)
+        {
+            return fighter.GetUnitData().Name == input;
+        }
     }
 }
