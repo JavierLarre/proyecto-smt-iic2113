@@ -5,7 +5,7 @@ namespace Shin_Megami_Tensei.Fighters;
 
 public class WeakAffinity: IAffinityController
 {
-    public void RecieveAttack(IFighter target, double damage)
+    public void RecieveAttack(IFighterModel target, double damage)
     {
         target.SetHp(target.GetCurrentHp() - Constants.Truncate(damage * 1.5));
     }
@@ -17,9 +17,9 @@ public class WeakAffinity: IAffinityController
         turnManager.ConsumeFullAndGain();
     }
 
-    public string GetEffectString(IFighter target, double damage)
+    public string GetEffectString(IFighterModel target, double damage)
     {
-        IFighter attacker = Table.GetInstance().GetCurrentFighter();
+        IFighterModel attacker = Table.GetInstance().GetCurrentFighter();
         IFighterView view = FighterViewFactory.FromFighter(target);
         string weaker = $"{view.GetName()} es débil contra el ataque de {attacker.GetUnitData().Name}";
         string recieves = $"{view.GetName()} recibe {Convert.ToInt32(Math.Floor(damage * 1.5))} de daño";

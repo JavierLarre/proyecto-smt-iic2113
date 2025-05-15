@@ -1,7 +1,7 @@
 ﻿
 namespace Shin_Megami_Tensei_Model;
 
-public interface IFighter: IModel
+public interface IFighterModel: IModel
 {
     public UnitData GetUnitData();
     public int GetCurrentHp();

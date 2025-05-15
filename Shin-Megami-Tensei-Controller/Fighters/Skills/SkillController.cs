@@ -45,7 +45,7 @@ public class SkillController: ISkillController
     private void ApplyEffectsOnTargets()
     {
         var targets = _targets.GetTargets();
-        foreach (IFighter target in targets)
+        foreach (IFighterModel target in targets)
             SingularApplyEffect(target);
         
     }
@@ -54,7 +54,7 @@ public class SkillController: ISkillController
     {
         IFighterView targetView;
         IList<string> effectsMade = [];
-        foreach (IFighter target in _targets.GetTargets())
+        foreach (IFighterModel target in _targets.GetTargets())
         {
             for (int i = 0; i < _hits.CalculateHits(); i++)
                 effectsMade.Add(_type.ToString(target, _skill.Power));
@@ -68,7 +68,7 @@ public class SkillController: ISkillController
             
             if (_type.GetTargetAffinity(target) is RepelAffinity)
             {
-                IFighter attacker = Table.GetInstance().GetCurrentFighter();
+                IFighterModel attacker = Table.GetInstance().GetCurrentFighter();
                 effectsMade.RemoveAt(effectsMade.Count-1);
                 effectsMade.Add(FighterViewFactory.FromFighter(attacker).GetHpEndedWith());
             }
@@ -79,7 +79,7 @@ public class SkillController: ISkillController
         }
     }
 
-    private void SingularApplyEffect(IFighter target)
+    private void SingularApplyEffect(IFighterModel target)
     {
         int hits = _hits.CalculateHits();
         for (int i = 0; i < hits; i++)
@@ -92,7 +92,7 @@ public class SkillController: ISkillController
     private void DecreaseCurrentFighterMp()
     {
         int cost = _skill.Cost;
-        IFighter user = Table.GetInstance().GetCurrentFighter();
+        IFighterModel user = Table.GetInstance().GetCurrentFighter();
         user.SetMp(user.GetCurrentMp() - cost);
     }
 
@@ -111,7 +111,7 @@ public class SkillController: ISkillController
     private IAffinityController GetPrioritizedAffinity()
     {
         IAffinityController prioritizedAffinity = new NeutralAffinity();
-        foreach (IFighter target in _targets.GetTargets())
+        foreach (IFighterModel target in _targets.GetTargets())
         {
             prioritizedAffinity = _type.GetTargetAffinity(target);
             //TODO: implementar prioridad de affinides para ataques multihit

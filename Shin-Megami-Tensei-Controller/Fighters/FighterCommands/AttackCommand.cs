@@ -15,7 +15,7 @@ public abstract class AttackCommand: IFighterCommand
 
     public void Execute()
     {
-        IFighter reciever = GetTargetFromUser();
+        IFighterModel reciever = GetTargetFromUser();
         var affinity = GetAffinityController(reciever);
         double damage = CalculateDamage();
         affinity.RecieveAttack(reciever, damage);
@@ -23,7 +23,7 @@ public abstract class AttackCommand: IFighterCommand
         View.DisplayCard(GetEffectString(reciever));
     }
 
-    private string GetEffectString(IFighter target)
+    private string GetEffectString(IFighterModel target)
     {
         string attack = GetAttackString(target);
         IAffinityController affinity = GetAffinityController(target);
@@ -31,9 +31,9 @@ public abstract class AttackCommand: IFighterCommand
         return attack + '\n' + effectsResult + '\n' + GetRecieverEndedWith(target);
     }
 
-    private string GetRecieverEndedWith(IFighter target)
+    private string GetRecieverEndedWith(IFighterModel target)
     {
-        IFighter reciever;
+        IFighterModel reciever;
         reciever = GetAffinityController(target) is RepelAffinity ? 
             GetAttacker() : 
             target;
@@ -42,17 +42,17 @@ public abstract class AttackCommand: IFighterCommand
 
     protected abstract int Modifier();
     protected abstract int FighterStat();
-    protected abstract string GetAttackString(IFighter reciever);
-    protected abstract string GetAffinityString(IFighter target);
+    protected abstract string GetAttackString(IFighterModel reciever);
+    protected abstract string GetAffinityString(IFighterModel target);
 
-    private IAffinityController GetAffinityController(IFighter target)
+    private IAffinityController GetAffinityController(IFighterModel target)
     {
         string affinity = GetAffinityString(target);
         AffinityFactory factory = new AffinityFactory(affinity);
         return factory.GetAffinity();
     }
 
-    protected IFighter GetAttacker() => Table.GetCurrentFighter();
+    protected IFighterModel GetAttacker() => Table.GetCurrentFighter();
 
     protected double CalculateDamage()
     {
@@ -60,7 +60,7 @@ public abstract class AttackCommand: IFighterCommand
         return damage;
     }
 
-    private IFighter GetTargetFromUser()
+    private IFighterModel GetTargetFromUser()
     {
         var targets = Table.GetEnemyTeamAliveTargets().ToList();
         try

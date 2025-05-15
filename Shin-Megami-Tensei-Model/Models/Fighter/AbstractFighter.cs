@@ -2,7 +2,7 @@
 
 namespace Shin_Megami_Tensei_Model;
 
-public abstract class AbstractFighter: AbstractModel, IFighter
+public abstract class AbstractFighter: AbstractModel, IFighterModel
 {
     private UnitData _unitData;
     private StatComponent _hp;

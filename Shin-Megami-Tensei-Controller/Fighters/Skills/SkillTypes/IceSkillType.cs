@@ -9,7 +9,7 @@ public class IceSkillType: OffensiveMagicSkill
         return "lanza hielo a";
     }
 
-    protected override string GetAffinityString(IFighter target)
+    protected override string GetAffinityString(IFighterModel target)
     {
         return target.GetUnitData().Affinities.Ice;
     }

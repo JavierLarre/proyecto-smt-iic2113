@@ -9,7 +9,7 @@ public class PhysSkillType: OffensiveSkillType
         return "ataca a";
     }
 
-    protected override string GetAffinityString(IFighter target)
+    protected override string GetAffinityString(IFighterModel target)
     {
         return target.GetUnitData().Affinities.Phys;
     }

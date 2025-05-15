@@ -4,15 +4,15 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 public abstract class AbstractFighterTargetMenu: AbstractOptionsMenu
 {
-    private ICollection<IFighter> _targets = [];
+    private ICollection<IFighterModel> _targets = [];
 
-    protected void SetTargets(ICollection<IFighter> targets) => _targets = targets;
-    protected ICollection<IFighter> GetTargets() => _targets;
+    protected void SetTargets(ICollection<IFighterModel> targets) => _targets = targets;
+    protected ICollection<IFighterModel> GetTargets() => _targets;
     
-    public IFighter GetTarget()
+    public IFighterModel GetTarget()
     {
         string targetName = GetChoice();
-        IFighter choosenTarget = _targets.
+        IFighterModel choosenTarget = _targets.
             First(target => target.GetUnitData().Name == targetName);
         return choosenTarget;
     }

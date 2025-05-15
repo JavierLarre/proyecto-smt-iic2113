@@ -8,7 +8,7 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public class UseSkill: IFighterCommand
 {
-    private IFighter _fighter = Table.GetInstance().GetCurrentFighter();
+    private IFighterModel _fighter = Table.GetInstance().GetCurrentFighter();
 
     public void Execute()
     {

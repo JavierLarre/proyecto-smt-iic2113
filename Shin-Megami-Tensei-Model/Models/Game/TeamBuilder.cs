@@ -4,13 +4,13 @@ namespace Shin_Megami_Tensei_Model;
 
 public class TeamBuilder
 {
-    private readonly IFighter[] _frontRow = GetEmptyArray();
-    private readonly IList<IFighter> _reserve = [];
+    private readonly IFighterModel[] _frontRow = GetEmptyArray();
+    private readonly IList<IFighterModel> _reserve = [];
     private int _frontRowLength;
     
-    public Team FromFighters(ICollection<IFighter> fighters)
+    public Team FromFighters(ICollection<IFighterModel> fighters)
     {
-        foreach (IFighter fighter in fighters)
+        foreach (IFighterModel fighter in fighters)
         {
             if (_frontRowLength < _frontRow.Length)
             {
@@ -24,10 +24,10 @@ public class TeamBuilder
         return new Team(_frontRow, _reserve);
     }
 
-    private static IFighter[] GetEmptyArray()
+    private static IFighterModel[] GetEmptyArray()
     {
         const int frontRowSize = Constants.MaxSizeFrontRow;
         var emptyFighters = Enumerable.Repeat(new EmptyFighter(), frontRowSize);
-        return emptyFighters.ToArray<IFighter>();
+        return emptyFighters.ToArray<IFighterModel>();
     }
 }

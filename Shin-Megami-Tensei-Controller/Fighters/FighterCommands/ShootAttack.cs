@@ -10,13 +10,13 @@ public class ShootAttack: AttackCommand
 
     protected override int Modifier() => 80;
     protected override int FighterStat() => GetAttacker().GetUnitData().Stats.Skl;
-    protected override string GetAttackString(IFighter reciever)
+    protected override string GetAttackString(IFighterModel reciever)
     {
         return 
             $"{GetAttacker().GetUnitData().Name} dispara a {reciever.GetUnitData().Name}";
     }
 
-    protected override string GetAffinityString(IFighter target)
+    protected override string GetAffinityString(IFighterModel target)
     {
         return target.GetUnitData().Affinities.Gun;
     }

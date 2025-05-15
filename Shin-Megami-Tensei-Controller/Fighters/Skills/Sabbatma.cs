@@ -20,11 +20,11 @@ public class Sabbatma: ISkillController
         var reserve = _table.GetCurrentPlayer().GetTeam().GetReserve()
             .Where(fighter => fighter.IsAlive());
         SummonFighterMenu summonMenu = new SummonFighterMenu(reserve);
-        IFighter target = summonMenu.GetTarget();
+        IFighterModel target = summonMenu.GetTarget();
         int atPosition = new SummonPositionsMenu(new SummonablePositionsController().GetPositions()).GetPosition();
         _table.Summon(target, atPosition);
         _table.GetTurnManager().ConsumeTurn();
-        IFighter currentFighter = _table.GetCurrentFighter();
+        IFighterModel currentFighter = _table.GetCurrentFighter();
         currentFighter.SetMp(currentFighter.GetCurrentMp() - _skill.Cost);
         _table.IncreaseCurrentPlayerUsedSkillsCount();
         _view.DisplayCard($"{target.GetUnitData().Name} ha sido invocado");

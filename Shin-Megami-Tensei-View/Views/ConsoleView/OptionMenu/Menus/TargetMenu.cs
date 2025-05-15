@@ -6,10 +6,10 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 public class TargetMenu: AbstractFighterTargetMenu
 {
     
-    public TargetMenu(IFighter attacker, IEnumerable<IFighter> targets)
+    public TargetMenu(IFighterModel attacker, IEnumerable<IFighterModel> targets)
     {
         SetTargets(targets.ToList());
-        foreach (IFighter target in GetTargets())
+        foreach (IFighterModel target in GetTargets())
         {
             IFighterView targetView = FighterViewFactory.FromFighter(target);
             AddOption(targetView.GetName(), targetView.GetInfo());

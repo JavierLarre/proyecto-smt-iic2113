@@ -7,7 +7,7 @@ public class TeamChecker
 {
     private const int MaxTeamSize = 8;
     private const int MaxSkills = 8;
-    private readonly List<IFighter> _fighters;
+    private readonly List<IFighterModel> _fighters;
 
     public static TeamChecker FromParser(TeamParser parser)
         => new TeamChecker(parser);
@@ -38,7 +38,7 @@ public class TeamChecker
     private bool SamuraiHasLessThanMaxSkills()
     {
         if (!HasSamurais()) return false;
-        IFighter samurai = _fighters.First(fighter => fighter is Samurai);
+        IFighterModel samurai = _fighters.First(fighter => fighter is Samurai);
         return samurai.GetUnitData().Skills.Count <= MaxSkills;
     }
 

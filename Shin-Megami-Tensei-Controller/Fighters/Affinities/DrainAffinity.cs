@@ -5,7 +5,7 @@ namespace Shin_Megami_Tensei.Fighters;
 
 public class DrainAffinity: IAffinityController
 {
-    public void RecieveAttack(IFighter target, double damage)
+    public void RecieveAttack(IFighterModel target, double damage)
     {
         int targetHp = target.GetCurrentHp();
         int healedHp = targetHp + Constants.Truncate(damage);
@@ -19,7 +19,7 @@ public class DrainAffinity: IAffinityController
         turnManager.ConsumeAll();
     }
 
-    public string GetEffectString(IFighter target, double damage)
+    public string GetEffectString(IFighterModel target, double damage)
     {
         IFighterView view = FighterViewFactory.FromFighter(target);
         int absorbed = Convert.ToInt32(Math.Floor(damage));

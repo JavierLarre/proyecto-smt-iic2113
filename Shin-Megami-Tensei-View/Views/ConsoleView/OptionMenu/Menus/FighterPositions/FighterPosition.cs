@@ -6,11 +6,11 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 public struct FighterPosition
 {
     public int Position;
-    public IFighter Fighter;
+    public IFighterModel Fighter;
 
     public override string ToString()
     {
-        IFighter fighter = Fighter;
+        IFighterModel fighter = Fighter;
         IFighterView fighterView = FighterViewFactory.FromFighter(fighter);
         string positionInfo = fighterView.GetInfo();
         if (positionInfo == "")

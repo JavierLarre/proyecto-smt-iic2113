@@ -5,9 +5,9 @@ namespace Shin_Megami_Tensei.Fighters;
 
 public class RepelAffinity: IAffinityController
 {
-    public void RecieveAttack(IFighter target, double damage)
+    public void RecieveAttack(IFighterModel target, double damage)
     {
-        IFighter attacker = Table.GetInstance().GetCurrentFighter();
+        IFighterModel attacker = Table.GetInstance().GetCurrentFighter();
         attacker.SetHp(attacker.GetCurrentHp() - Constants.Truncate(damage));
     }
 
@@ -18,9 +18,9 @@ public class RepelAffinity: IAffinityController
         turnManager.ConsumeAll();
     }
 
-    public string GetEffectString(IFighter target, double damage)
+    public string GetEffectString(IFighterModel target, double damage)
     {
-        IFighter attacker = Table.GetInstance().GetCurrentFighter();
+        IFighterModel attacker = Table.GetInstance().GetCurrentFighter();
         IFighterView view = FighterViewFactory.FromFighter(attacker);
         int recievedDamage = Convert.ToInt32(Math.Floor(damage));
         string targetName = target.GetUnitData().Name;

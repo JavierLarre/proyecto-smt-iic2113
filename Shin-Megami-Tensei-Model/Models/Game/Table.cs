@@ -6,7 +6,7 @@ public class Table: AbstractModel
     private Player _currentPlayer = null!;
     private Player _enemyPlayer = null!;
     private TurnsModel _turnManager = new TurnsModel();
-    private LinkedList<IFighter> _fightOrder = [];
+    private LinkedList<IFighterModel> _fightOrder = [];
 
     private Table()
     {
@@ -25,7 +25,7 @@ public class Table: AbstractModel
             .ToList();
         _currentPlayer = players[0];
         _enemyPlayer = players[1];
-        _fightOrder = new LinkedList<IFighter>(_currentPlayer.GetTeam().GetFightOrder());
+        _fightOrder = new LinkedList<IFighterModel>(_currentPlayer.GetTeam().GetFightOrder());
         _turnManager.Reset(_fightOrder.Count);
     }
 
@@ -53,17 +53,17 @@ public class Table: AbstractModel
         return _currentPlayer.GetUsedSkillsCount();
     }
 
-    public IFighter GetCurrentFighter()
+    public IFighterModel GetCurrentFighter()
     {
         return _fightOrder.First();
     }
 
-    public IEnumerable<IFighter> GetCurrentPlayerFightOrder()
+    public IEnumerable<IFighterModel> GetCurrentPlayerFightOrder()
     {
         return _fightOrder;
     }
 
-    public IEnumerable<IFighter> GetEnemyTeamAliveTargets()
+    public IEnumerable<IFighterModel> GetEnemyTeamAliveTargets()
     {
         return _enemyPlayer.GetTeam().GetAliveFront();
     }
@@ -77,16 +77,16 @@ public class Table: AbstractModel
         return !currentHasAliveUnits || !enemyHasAliveUnits;
     }
 
-    public void Summon(IFighter fighter, int atPosition)
+    public void Summon(IFighterModel fighter, int atPosition)
     {
-        IFighter previousFighter = _currentPlayer.GetTeam().GetFrontRow().ToArray()[atPosition];
+        IFighterModel previousFighter = _currentPlayer.GetTeam().GetFrontRow().ToArray()[atPosition];
         _currentPlayer.GetTeam().Summon(fighter, atPosition);
         UpdateFightOrder(previousFighter, fighter);
     }
 
     public void EndTurn()
     {
-        IFighter playedFighter = _fightOrder.First();
+        IFighterModel playedFighter = _fightOrder.First();
         _fightOrder.RemoveFirst();
         _fightOrder.AddLast(playedFighter);
         _turnManager.SaveTurns();
@@ -98,7 +98,7 @@ public class Table: AbstractModel
             return;
         SwapPlayers();
         var fightOrder = _currentPlayer.GetTeam().GetFightOrder();
-        _fightOrder = new LinkedList<IFighter>(fightOrder);
+        _fightOrder = new LinkedList<IFighterModel>(fightOrder);
         _turnManager.Reset(_fightOrder.Count);
     }
 
@@ -109,7 +109,7 @@ public class Table: AbstractModel
         return enemyHasUnits ? _enemyPlayer : _currentPlayer;
     }
 
-    private void UpdateFightOrder(IFighter previousFighter, IFighter newFighter)
+    private void UpdateFightOrder(IFighterModel previousFighter, IFighterModel newFighter)
     {
         var node = _fightOrder.Find(previousFighter);
         if (node is null)

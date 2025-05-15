@@ -5,9 +5,9 @@ namespace Shin_Megami_Tensei.Fighters;
 
 public abstract class AbstractFighterController: IFighterController
 {
-    protected IFighter Fighter;
+    protected IFighterModel Fighter;
 
-    protected AbstractFighterController(IFighter fighter)
+    protected AbstractFighterController(IFighterModel fighter)
     {
         Fighter = fighter;
     }

@@ -1,6 +1,6 @@
 ﻿namespace Shin_Megami_Tensei_Model.Fighters;
 
-public class EmptyFighter: AbstractModel, IFighter
+public class EmptyFighter: AbstractModel, IFighterModel
 {
     public UnitData GetUnitData() => new();
     

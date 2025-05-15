@@ -6,8 +6,8 @@ namespace Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 
 public class ReserveTarget: ISkillTargets, IViewController
 {
-    private IFighter? _target;
-    private readonly ICollection<IFighter> _reserve;
+    private IFighterModel? _target;
+    private readonly ICollection<IFighterModel> _reserve;
 
     public ReserveTarget()
     {
@@ -16,7 +16,7 @@ public class ReserveTarget: ISkillTargets, IViewController
         _reserve = team.GetReserve().ToList();
     }
     
-    public ICollection<IFighter> GetTargets()
+    public ICollection<IFighterModel> GetTargets()
     {
         if (_target is null)
             InitializeTarget();
@@ -35,7 +35,7 @@ public class ReserveTarget: ISkillTargets, IViewController
         _target = _reserve.First(IsFighterChoosenTarget);
         return;
 
-        bool IsFighterChoosenTarget(IFighter fighter)
+        bool IsFighterChoosenTarget(IFighterModel fighter)
         {
             return fighter.GetUnitData().Name == input;
         }

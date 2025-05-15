@@ -6,10 +6,10 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.BattleViews;
 
 public class ActionView: IViewInput
 {
-    private IFighter _currentFighter;
+    private IFighterModel _currentFighter;
     private IViewController _controller;
 
-    public ActionView(IFighter currentFighter, IViewController controller)
+    public ActionView(IFighterModel currentFighter, IViewController controller)
     {
         _currentFighter = currentFighter;
         _controller = controller;

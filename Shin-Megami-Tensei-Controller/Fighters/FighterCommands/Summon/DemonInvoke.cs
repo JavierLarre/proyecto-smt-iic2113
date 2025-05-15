@@ -7,7 +7,7 @@ public class DemonInvoke: AbstractInvoke
     protected override int GetSummonPosition()
     {
         Table table = Table.GetInstance();
-        IFighter currentDemon = table.GetCurrentFighter();
+        IFighterModel currentDemon = table.GetCurrentFighter();
         int atPosition = table.GetCurrentPlayer().GetTeam()
             .GetFrontRow().ToList().IndexOf(currentDemon);
         return atPosition;

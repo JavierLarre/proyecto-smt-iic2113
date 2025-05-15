@@ -7,9 +7,9 @@ public class ReviveMenu: AbstractFighterTargetMenu
 {
     private Table _table = Table.GetInstance();
 
-    public ReviveMenu(IEnumerable<IFighter> targets)
+    public ReviveMenu(IEnumerable<IFighterModel> targets)
     {
-        IFighter attacker = _table.GetCurrentFighter();
+        IFighterModel attacker = _table.GetCurrentFighter();
         SetTargets(targets.ToList());
         AddTargets();
         AddCancelOption();
@@ -18,11 +18,11 @@ public class ReviveMenu: AbstractFighterTargetMenu
 
     private void AddTargets()
     {
-        foreach (IFighter target in GetTargets())
+        foreach (IFighterModel target in GetTargets())
             AddTargetOption(target);
     }
 
-    private void AddTargetOption(IFighter target)
+    private void AddTargetOption(IFighterModel target)
     {
         IFighterView targetView = FighterViewFactory.FromFighter(target);
         string targetInfo = $"{target.GetUnitData().Name} {targetView.GetStats()}";

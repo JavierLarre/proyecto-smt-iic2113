@@ -5,7 +5,7 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 
 public static class FighterViewFactory
 {
-    public static IFighterView FromFighter(IFighter fighter)
+    public static IFighterView FromFighter(IFighterModel fighter)
     {
         return fighter switch
         {

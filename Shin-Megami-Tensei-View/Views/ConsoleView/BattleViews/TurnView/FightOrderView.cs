@@ -9,7 +9,7 @@ public class FightOrderView: IView
 {
     private Table _table = Table.GetInstance();
     private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
-    private IEnumerable<IFighter> _fightOrder;
+    private IEnumerable<IFighterModel> _fightOrder;
 
     public FightOrderView()
     {
@@ -24,11 +24,11 @@ public class FightOrderView: IView
 
     private void DisplayFighters()
     {
-        IFighter[] fighters = _fightOrder
+        IFighterModel[] fighters = _fightOrder
             .ToArray();
         for (int i = 0; i < fighters.Length; i++)
         {
-            IFighter fighter = fighters[i];
+            IFighterModel fighter = fighters[i];
             _view.WriteLine($"{i+1}-{fighter.GetUnitData().Name}");
         }
     }

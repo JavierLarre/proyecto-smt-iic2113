@@ -5,9 +5,9 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 
 public abstract class AbstractFighterView: IFighterView
 {
-    protected readonly IFighter Fighter;
-    protected AbstractFighterView(IFighter fighter) => Fighter = fighter;
-    public IFighter GetFighter() => Fighter;
+    protected readonly IFighterModel Fighter;
+    protected AbstractFighterView(IFighterModel fighter) => Fighter = fighter;
+    public IFighterModel GetFighter() => Fighter;
 
     public string GetName() => Fighter.GetUnitData().Name;
 

@@ -8,7 +8,7 @@ public class SpecialSkillType: ISkillType
 {
     Table _table = Table.GetInstance();
     
-    public void ApplyEffect(IFighter target, int power)
+    public void ApplyEffect(IFighterModel target, int power)
     {
         throw new ArgumentException("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         // TODO: oportunidad de refactorizar aquí
@@ -16,7 +16,7 @@ public class SpecialSkillType: ISkillType
         Summon(target);
     }
 
-    private void Summon(IFighter target)
+    private void Summon(IFighterModel target)
     {
         int atPosition = GetSummonPosition();
         _table.Summon(target, atPosition);
@@ -29,13 +29,13 @@ public class SpecialSkillType: ISkillType
         return positionsMenu.GetPosition();
     }
 
-    public IAffinityController GetTargetAffinity(IFighter target)
+    public IAffinityController GetTargetAffinity(IFighterModel target)
     {
         return new WeakAffinity();
         // Invocar da 
     }
 
-    public string ToString(IFighter target, int power)
+    public string ToString(IFighterModel target, int power)
     {
         return $"{target} a sido invocado";
     }

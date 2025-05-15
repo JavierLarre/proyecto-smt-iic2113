@@ -14,7 +14,7 @@ public class GunSkillType: OffensiveSkillType
         return "dispara a";
     }
 
-    protected override string GetAffinityString(IFighter target)
+    protected override string GetAffinityString(IFighterModel target)
     {
         return target.GetUnitData().Affinities.Gun;
     }

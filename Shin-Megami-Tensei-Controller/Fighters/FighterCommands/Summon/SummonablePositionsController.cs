@@ -7,7 +7,7 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 public class SummonablePositionsController: IViewController
 {
     private Table _table = Table.GetInstance();
-    private ICollection<IFighter> _positions;
+    private ICollection<IFighterModel> _positions;
     private int _position = -1;
 
     public SummonablePositionsController()
@@ -15,12 +15,12 @@ public class SummonablePositionsController: IViewController
         _positions = GetPositions().ToArray();
     }
     
-    public IEnumerable<IFighter> GetPositions()
+    public IEnumerable<IFighterModel> GetPositions()
     {
         Player currentPlayer = _table.GetCurrentPlayer();
         Team currentTeam = currentPlayer.GetTeam();
-        IEnumerable<IFighter> frontRow = currentTeam.GetFrontRow();
-        IEnumerable<IFighter> swapablePositions = frontRow.Where(fighter => fighter.CanBeSwapped());
+        IEnumerable<IFighterModel> frontRow = currentTeam.GetFrontRow();
+        IEnumerable<IFighterModel> swapablePositions = frontRow.Where(fighter => fighter.CanBeSwapped());
         return swapablePositions;
         // Rompo la ley de demeter,
         // pero prefiero hacer las consultas en los controladores

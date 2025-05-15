@@ -5,9 +5,9 @@ namespace Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 
 public class ReviveSkillTarget: ISkillTargets
 {
-    private IFighter? _target;
+    private IFighterModel? _target;
     
-    public ICollection<IFighter> GetTargets()
+    public ICollection<IFighterModel> GetTargets()
     {
         if (_target is null)
             InitializeTarget();

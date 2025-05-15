@@ -7,9 +7,9 @@ namespace Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 
 public class SingleSkillTarget: ISkillTargets
 {
-    private IFighter? _target = null;
+    private IFighterModel? _target = null;
     
-    public ICollection<IFighter> GetTargets()
+    public ICollection<IFighterModel> GetTargets()
     {
         if (_target is null)
             InitializeTarget();
@@ -19,7 +19,7 @@ public class SingleSkillTarget: ISkillTargets
     private void InitializeTarget()
     {
         Table table = Table.GetInstance();
-        IFighter attacker = table.GetCurrentFighter();
+        IFighterModel attacker = table.GetCurrentFighter();
         var targets = table.GetEnemyTeamAliveTargets().ToList();
         TargetMenu targetMenu = new TargetMenu(attacker, targets);
         _target = targetMenu.GetTarget();

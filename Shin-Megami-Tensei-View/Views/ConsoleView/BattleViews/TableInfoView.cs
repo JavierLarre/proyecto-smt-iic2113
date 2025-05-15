@@ -34,7 +34,7 @@ public class TableInfoView: IView
 
     public IFighterView GetFighterInTurn()
     {
-        IFighter fighterInTurn = _table.GetCurrentFighter();
+        IFighterModel fighterInTurn = _table.GetCurrentFighter();
         return FighterViewFactory.FromFighter(fighterInTurn);
     }
 }

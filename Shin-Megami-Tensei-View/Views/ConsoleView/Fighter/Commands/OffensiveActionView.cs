@@ -7,21 +7,21 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView;
 
 public abstract class OffensiveActionView: IView
 {
-    private IFighter _attacker = Table.GetInstance().GetCurrentFighter();
-    private IFighter _target;
+    private IFighterModel _attacker = Table.GetInstance().GetCurrentFighter();
+    private IFighterModel _target;
     private string _actionMade = "";
     private string _extraLine = "";
     private string _result = "";
     private int _hits;
 
-    protected OffensiveActionView(IFighter target, int hits, int recievedDamage)
+    protected OffensiveActionView(IFighterModel target, int hits, int recievedDamage)
     {
         _target = target;
         _hits = hits;
     }
 
-    protected IFighter GetAttacker() => _attacker;
-    protected IFighter GetTarget() => _target;
+    protected IFighterModel GetAttacker() => _attacker;
+    protected IFighterModel GetTarget() => _target;
     protected void SetActionMade(string line) => _actionMade = line;
     protected void SetResult(string line) => _result = line;
     public void SetExtraLine(string line) => _extraLine = line;

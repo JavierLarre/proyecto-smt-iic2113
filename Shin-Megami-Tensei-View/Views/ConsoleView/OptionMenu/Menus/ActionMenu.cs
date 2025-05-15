@@ -5,7 +5,7 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 public class ActionMenu: AbstractOptionsMenu
 {
     
-    public ActionMenu(IFighter fighter)
+    public ActionMenu(IFighterModel fighter)
     {
         foreach (string action in fighter.GetUnitData().FightOptions)
         {

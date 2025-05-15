@@ -14,7 +14,7 @@ public class AllySkillTarget: ISkillTargets
             new AliveAlliesTarget();
     }
     
-    public ICollection<IFighter> GetTargets()
+    public ICollection<IFighterModel> GetTargets()
     {
         return _allyTargets.GetTargets();
     }

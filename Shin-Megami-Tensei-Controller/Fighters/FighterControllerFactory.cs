@@ -6,7 +6,7 @@ namespace Shin_Megami_Tensei.Fighters;
 
 public static class FighterControllerFactory
 {
-    public static IFighterController GetController(IFighter fighter)
+    public static IFighterController GetController(IFighterModel fighter)
     {
         return fighter switch
         {

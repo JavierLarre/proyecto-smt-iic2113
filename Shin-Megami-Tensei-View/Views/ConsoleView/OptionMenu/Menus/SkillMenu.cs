@@ -5,7 +5,7 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 public class SkillMenu: AbstractOptionsMenu
 {
     
-    public SkillMenu(IFighter fighter)
+    public SkillMenu(IFighterModel fighter)
     {
         var mpLeft = fighter.GetCurrentMp();
         var skills = fighter.GetUnitData().Skills.Where(skill => skill.Cost <= mpLeft);

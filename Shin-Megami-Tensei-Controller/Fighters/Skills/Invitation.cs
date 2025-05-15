@@ -18,7 +18,7 @@ public class Invitation: ISkillController
     
     public void UseSkill()
     {
-        IFighter target = new ReserveTarget().GetTargets().First();
+        IFighterModel target = new ReserveTarget().GetTargets().First();
         int atPosition = new SummonablePositionsController().GetPosition();
         ISkillType type = new ReviveSkillType();
         string effectMade = $"{target.GetUnitData().Name} ha sido invocado";
@@ -32,7 +32,7 @@ public class Invitation: ISkillController
 
         _view.DisplayCard(effectMade);
         _table.GetTurnManager().ConsumeTurn();
-        IFighter currentFighter = _table.GetCurrentFighter();
+        IFighterModel currentFighter = _table.GetCurrentFighter();
         currentFighter.SetMp(currentFighter.GetCurrentMp() - _skill.Cost);
         _table.Summon(target, atPosition);
         _table.IncreaseCurrentPlayerUsedSkillsCount();

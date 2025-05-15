@@ -5,8 +5,8 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 public class SummonPositionsMenu: AbstractOptionsMenu
 {
-    private IEnumerable<IFighter> _targets;
-    public SummonPositionsMenu(IEnumerable<IFighter> targets)
+    private IEnumerable<IFighterModel> _targets;
+    public SummonPositionsMenu(IEnumerable<IFighterModel> targets)
     {
         _targets = targets;
         SetPositions();
@@ -23,7 +23,7 @@ public class SummonPositionsMenu: AbstractOptionsMenu
         AddCancelOption();
     }
 
-    private static string FormatPosition(IFighter target, int position)
+    private static string FormatPosition(IFighterModel target, int position)
     {
         IFighterView fighterView = FighterViewFactory.FromFighter(target);
         string positionInfo = fighterView.GetInfo();

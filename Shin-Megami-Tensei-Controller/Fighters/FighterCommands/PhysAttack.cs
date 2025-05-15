@@ -6,12 +6,12 @@ public class PhysAttack: AttackCommand
 {
     protected override int Modifier() => 54;
     protected override int FighterStat() => GetAttacker().GetUnitData().Stats.Str;
-    protected override string GetAttackString(IFighter reciever)
+    protected override string GetAttackString(IFighterModel reciever)
     {
         return $"{GetAttacker().GetUnitData().Name} ataca a {reciever.GetUnitData().Name}";
     }
 
-    protected override string GetAffinityString(IFighter target)
+    protected override string GetAffinityString(IFighterModel target)
     {
         return target.GetUnitData().Affinities.Phys;
     }

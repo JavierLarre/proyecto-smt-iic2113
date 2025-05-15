@@ -27,14 +27,14 @@ public class ActionController: IViewController
 
     private void ExecuteCommandFromUser()
     {
-        IFighter currentFighter = _table.GetCurrentFighter();
+        IFighterModel currentFighter = _table.GetCurrentFighter();
         ActionView actionView = new ActionView(currentFighter, this);
         actionView.Display();
     }
 
     private IFighterCommand GetCommandFromAction(string action)
     {
-        IFighter currentFighter = _table.GetCurrentFighter();
+        IFighterModel currentFighter = _table.GetCurrentFighter();
         IFighterController controller = FighterControllerFactory
             .GetController(currentFighter);
         return controller.GetCommand(action);

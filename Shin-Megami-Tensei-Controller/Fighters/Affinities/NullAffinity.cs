@@ -6,7 +6,7 @@ namespace Shin_Megami_Tensei.Fighters;
 
 public class NullAffinity: IAffinityController
 {
-    public void RecieveAttack(IFighter target, double damage)
+    public void RecieveAttack(IFighterModel target, double damage)
     {
         
     }
@@ -19,10 +19,10 @@ public class NullAffinity: IAffinityController
         turnManager.ConsumeTurn();
     }
 
-    public string GetEffectString(IFighter target, double damage)
+    public string GetEffectString(IFighterModel target, double damage)
     {
         IFighterView view = FighterViewFactory.FromFighter(target);
-        IFighter attacker = Table.GetInstance().GetCurrentFighter();
+        IFighterModel attacker = Table.GetInstance().GetCurrentFighter();
         string blockerName = view.GetName();
         string attackerName = attacker.GetUnitData().Name;
         string blocked = $"{blockerName} bloquea el ataque de {attackerName}";

@@ -7,9 +7,9 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView;
 
 public class SummonView: IView
 {
-    private IFighter _summoned;
+    private IFighterModel _summoned;
 
-    public SummonView(IFighter summoned) => _summoned = summoned;
+    public SummonView(IFighterModel summoned) => _summoned = summoned;
     
     public void Display()
     {

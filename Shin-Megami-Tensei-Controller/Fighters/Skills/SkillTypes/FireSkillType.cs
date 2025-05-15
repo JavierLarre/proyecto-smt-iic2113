@@ -9,7 +9,7 @@ public class FireSkillType: OffensiveMagicSkill
         return "lanza fuego a";
     }
 
-    protected override string GetAffinityString(IFighter target)
+    protected override string GetAffinityString(IFighterModel target)
     {
         return target.GetUnitData().Affinities.Fire;
     }
