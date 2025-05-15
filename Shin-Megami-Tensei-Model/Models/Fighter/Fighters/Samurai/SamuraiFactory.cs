@@ -13,7 +13,7 @@ public class SamuraiFactory: AbstractFighterFactory
     private SamuraiDataFromJson FindDataByName(string name) =>
         _data.First(samurai => samurai.name == name);
 
-    public IFighter FromNameAndSkills(string name, string[] skills)
+    public IFighterModel BuildFromNameAndSkills(string name, string[] skills)
     {
         SamuraiDataFromJson samuraiData = FindDataByName(name);
         UnitData unitData = new UnitData()

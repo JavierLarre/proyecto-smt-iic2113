@@ -19,7 +19,7 @@ public class DemonFactory: AbstractFighterFactory
     private DemonDataFromJson FindDataByName(string name) =>
         Data.First(demon => demon.name == name);
 
-    public IFighter FromName(string name)
+    public IFighterModel BuildFromName(string name)
     {
         // if (name == "Jack Frost")
         // {
@@ -29,7 +29,7 @@ public class DemonFactory: AbstractFighterFactory
         return BuildDemon(demonData);
     }
 
-    public IEnumerable<IFighter> GetDemonLibrary()
+    public IEnumerable<IFighterModel> GetDemonLibrary()
     {
         return Data.Select(BuildDemon);
     }

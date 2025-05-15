@@ -5,7 +5,7 @@ namespace Shin_Megami_Tensei.Teams;
 
 public class TeamParser
 {
-    private readonly List<IFighter> _fighters = [];
+    private readonly List<IFighterModel> _fighters = [];
     private readonly IEnumerable<string> _lines;
     private readonly SamuraiFactory _samuraiFactory = new ();
     private readonly DemonFactory _demonFactory = new DemonFactory();
@@ -13,7 +13,7 @@ public class TeamParser
     public static TeamParser FromTextLines(IEnumerable<string> lines)
         => new (lines);
 
-    public IEnumerable<IFighter> GetFighters()
+    public IEnumerable<IFighterModel> GetFighters()
     {
         return _fighters;
     }
@@ -47,14 +47,14 @@ public class TeamParser
 
     private void AddMonster(string name)
     {
-        _fighters.Add(_demonFactory.FromName(name));
+        _fighters.Add(_demonFactory.BuildFromName(name));
     }
 
     private void AddSamurai(string line)
     {
         string name = GetSamuraiName(line);
         string[] skills = GetSamuraiSkills(line);
-        IFighter samurai = _samuraiFactory.FromNameAndSkills(name, skills);
+        IFighterModel samurai = _samuraiFactory.BuildFromNameAndSkills(name, skills);
         _fighters.Add(samurai);
     }
 
