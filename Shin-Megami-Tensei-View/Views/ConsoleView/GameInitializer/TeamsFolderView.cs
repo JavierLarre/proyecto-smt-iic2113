@@ -39,6 +39,7 @@ public class TeamsFolderView
     private IEnumerable<string> GetFileNames()
     {
         return _folder.FileNames
+            .OrderBy(fileName => int.Parse(Path.GetFileNameWithoutExtension(fileName)))
             .Select((name, i) => $"{i}: {name}");
     }
 }
