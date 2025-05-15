@@ -25,6 +25,14 @@ public class SkillController: ISkillController
         _targets = targets;
     }
 
+    public SkillController(Skill skill)
+    {
+        _skill = skill;
+        _hits = SkillHitFactory.GetSkillHits(_skill);
+        _type = SkillTypesFactory.GetSkillType(_skill);
+        _targets = SkillTargetsFactory.GetSkillTargets(_skill);
+    }
+
     public void UseSkill()
     {
         ApplyEffectsOnTargets();

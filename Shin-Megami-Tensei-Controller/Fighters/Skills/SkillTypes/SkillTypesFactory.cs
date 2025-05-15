@@ -1,10 +1,12 @@
-﻿namespace Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
+﻿using Shin_Megami_Tensei_Model;
+
+namespace Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
 
 public static class SkillTypesFactory
 {
-    public static ISkillType GetSkillType(string type, string skillName)
+    public static ISkillType GetSkillType(Skill skill)
     {
-        return type switch
+        return skill.Type switch
         {
             "Phys" => new PhysSkillType(),
             "Gun" => new GunSkillType(),
@@ -12,16 +14,16 @@ public static class SkillTypesFactory
             "Ice" => new IceSkillType(),
             "Elec" => new ElecSkillType(),
             "Force" => new ForceSkillType(),
-            "Heal" => DoesSkillRevive(skillName) ?
+            "Heal" => DoesSkillRevive(skill) ?
                 new ReviveSkillType() :
                 new HealSkillType(),
             "Special" => new SpecialSkillType(),
-            _ => throw new ArgumentException("Type Not Found: " + type)
+            _ => throw new ArgumentException("Type Not Found", skill.Type)
         };
     }
     
-    private static bool DoesSkillRevive(string skillName)
+    private static bool DoesSkillRevive(Skill skill)
     {
-        return skillName.Contains("ecarm");
+        return skill.Name.Contains("ecarm");
     }
 }

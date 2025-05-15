@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Shin_Megami_Tensei_Model;
 
 namespace Shin_Megami_Tensei.Fighters.Skills.SkillHits;
 
@@ -6,8 +7,9 @@ public static class SkillHitFactory
 {
     private static Regex _singleHitPattern = new(@"^(?<hits>\d+)$");
     private static Regex _multiHitPattern = new(@"^(?<lowerBound>\d+)-(?<upperBound>\d+)$");
-    public static ISkillHits GetSkillHits(string hit)
+    public static ISkillHits GetSkillHits(Skill skill)
     {
+        string hit = skill.Hits;
         Match singleHitMatch = _singleHitPattern.Match(hit);
         Match multiHitMatch = _multiHitPattern.Match(hit);
         if (singleHitMatch.Success)
