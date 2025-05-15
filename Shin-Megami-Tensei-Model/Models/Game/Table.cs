@@ -5,7 +5,7 @@ public class Table: AbstractModel
     // Tambien puedes interpretarlo como la clase game
     private Player _currentPlayer = null!;
     private Player _enemyPlayer = null!;
-    private TurnManager _turnManager = new TurnManager();
+    private TurnsModel _turnManager = new TurnsModel();
     private LinkedList<IFighter> _fightOrder = [];
 
     private Table()
@@ -31,7 +31,7 @@ public class Table: AbstractModel
 
     public Player GetCurrentPlayer() => _currentPlayer;
     public Player GetEnemyPlayer() => _enemyPlayer;
-    public TurnManager GetTurnManager() => _turnManager;
+    public TurnsModel GetTurnManager() => _turnManager;
 
     public int GetFullTurnsLeft()
     {

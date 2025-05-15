@@ -7,7 +7,7 @@ public class Pass: IFighterCommand
 {
     public void Execute()
     {
-        TurnManager turnManager = Table.GetInstance().GetTurnManager();
+        TurnsModel turnManager = Table.GetInstance().GetTurnManager();
         turnManager.ConsumeAndGainTurn();
     }
 }

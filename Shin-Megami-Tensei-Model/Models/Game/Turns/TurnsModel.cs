@@ -2,19 +2,19 @@
 
 namespace Shin_Megami_Tensei_Model;
 
-public class TurnManager: AbstractModel
+public class TurnsModel: AbstractModel
 {
-    private Turns _turns;
+    private TurnsData _turns;
 
     public void Reset(int initialFullTurns)
     {
-        _turns = new Turns();
+        _turns = new TurnsData();
         if (initialFullTurns == 0)
             throw new ArgumentException("Initial Full Turns can't be zero");
         _turns.FullTurns = initialFullTurns;
     }
 
-    public Turns GetTurns() => _turns;
+    public TurnsData GetTurns() => _turns;
     
 
     public void ConsumeTurn()

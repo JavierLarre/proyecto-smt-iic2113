@@ -1,6 +1,6 @@
 ﻿namespace Shin_Megami_Tensei_Model;
 
-public struct Turns
+public struct TurnsData
 {
     public int FullTurns;
     public int BlinkingTurns;

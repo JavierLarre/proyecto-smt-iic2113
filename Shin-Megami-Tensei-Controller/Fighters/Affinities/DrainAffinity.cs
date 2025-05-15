@@ -15,7 +15,7 @@ public class DrainAffinity: IAffinityController
     public void ConsumeTurns()
     {
         Table table = Table.GetInstance();
-        TurnManager turnManager = table.GetTurnManager();
+        TurnsModel turnManager = table.GetTurnManager();
         turnManager.ConsumeAll();
     }
 

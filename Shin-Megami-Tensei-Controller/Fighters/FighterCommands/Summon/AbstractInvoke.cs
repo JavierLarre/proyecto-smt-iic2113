@@ -39,7 +39,7 @@ public abstract class AbstractInvoke: IFighterCommand
 
     private void ConsumeTurns()
     {
-        TurnManager turnManager = _table.GetTurnManager();
+        TurnsModel turnManager = _table.GetTurnManager();
         turnManager.ConsumeAndGainTurn();
     }
 

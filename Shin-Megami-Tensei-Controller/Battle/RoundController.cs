@@ -7,7 +7,7 @@ public class RoundController
 {
     private Table _table = Table.GetInstance();
     private TurnController _turnController = new();
-    private TurnManager _turnManager;
+    private TurnsModel _turnManager;
 
     public RoundController()
     {
@@ -36,7 +36,7 @@ public class RoundController
 
     private bool IsPlayerOutOfTurns()
     {
-        Turns turns = _turnManager.GetTurns();
+        TurnsData turns = _turnManager.GetTurns();
         int fullTurns = turns.FullTurns;
         int blinkingTurns = turns.BlinkingTurns;
         return fullTurns == 0 && blinkingTurns == 0;

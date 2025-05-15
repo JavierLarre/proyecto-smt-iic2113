@@ -14,7 +14,7 @@ public class NeutralAffinity: IAffinityController
     public void ConsumeTurns()
     {
         Table table = Table.GetInstance();
-        TurnManager turnManager = table.GetTurnManager();
+        TurnsModel turnManager = table.GetTurnManager();
         turnManager.ConsumeTurn();
     }
 

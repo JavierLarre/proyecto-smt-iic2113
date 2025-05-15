@@ -12,7 +12,7 @@ public class TurnController
 
     public TurnController()
     {
-        TurnManager turnManager = _table.GetTurnManager();
+        TurnsModel turnManager = _table.GetTurnManager();
         _turnsView = new TurnsView(turnManager);
     }
 

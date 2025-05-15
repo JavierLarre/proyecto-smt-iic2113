@@ -6,10 +6,10 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.BattleViews;
 
 public class TurnsView: IView
 {
-    private TurnManager _turnManager;
+    private TurnsModel _turnManager;
     private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
 
-    public TurnsView(TurnManager turnManager)
+    public TurnsView(TurnsModel turnManager)
     {
         _turnManager = turnManager;
     }
@@ -23,7 +23,7 @@ public class TurnsView: IView
 
     private void DisplayTurnsLeft()
     {
-        Turns turns = _turnManager.GetTurns();
+        TurnsData turns = _turnManager.GetTurns();
         int fullTurns = turns.FullTurns;
         int blinkingTurns = turns.BlinkingTurns;
         _view.DisplayCard($"Full Turns: {fullTurns}");
@@ -38,7 +38,7 @@ public class TurnsView: IView
 
     private void DisplayConsumedTurns()
     {
-        Turns turns = _turnManager.GetTurns();
+        TurnsData turns = _turnManager.GetTurns();
         int consumedFullTurns = turns.ConsumedFull;
         int consumedBlinking = turns.ConsumedBlinking;
         string consumedTurns = $"Se han consumido {consumedFullTurns} Full Turn(s)";
@@ -48,7 +48,7 @@ public class TurnsView: IView
 
     private void DisplayGainedTurns()
     {
-        Turns turns = _turnManager.GetTurns();
+        TurnsData turns = _turnManager.GetTurns();
         int gainedBlinking = turns.GainedBlinking;
         string gainedTurns = $"Se han obtenido {gainedBlinking} Blinking Turn(s)";
         _view.WriteLine(gainedTurns);

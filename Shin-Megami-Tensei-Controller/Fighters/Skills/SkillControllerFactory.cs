@@ -1,6 +1,4 @@
 ﻿using Shin_Megami_Tensei_Model;
-using Shin_Megami_Tensei.Fighters.Skills.SkillHits;
-using Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 using Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
 
 namespace Shin_Megami_Tensei.Fighters.Skills;
