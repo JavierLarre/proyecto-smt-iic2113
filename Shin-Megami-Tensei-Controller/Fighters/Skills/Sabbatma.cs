@@ -17,8 +17,8 @@ public class Sabbatma: ISkillController
     
     public void UseSkill()
     {
-        var reserve = _table.GetCurrentPlayer().GetTeam().GetReserve()
-            .Where(fighter => fighter.IsAlive());
+        //todo: esto deberia ocupar invoke
+        var reserve = GetReserve();
         SummonFighterMenu summonMenu = new SummonFighterMenu(reserve);
         IFighterModel target = summonMenu.GetTarget();
         int atPosition = new SummonPositionsMenu(new SummonablePositionsController().GetPositions()).GetPosition();
@@ -28,5 +28,12 @@ public class Sabbatma: ISkillController
         currentFighter.SetMp(currentFighter.GetCurrentMp() - _skill.Cost);
         _table.IncreaseCurrentPlayerUsedSkillsCount();
         _view.DisplayCard($"{target.GetUnitData().Name} ha sido invocado");
+    }
+
+    //todo: esto deberia ser compartido por abstract invoke
+    private IEnumerable<IFighterModel> GetReserve()
+    {
+        return _table.GetCurrentPlayer().GetTeam().GetReserve()
+            .Where(fighter => fighter.IsAlive());
     }
 }

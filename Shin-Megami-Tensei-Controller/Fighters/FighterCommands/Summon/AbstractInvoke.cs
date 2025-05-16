@@ -26,9 +26,9 @@ public abstract class AbstractInvoke: IFighterCommand
 
     private IEnumerable<IFighterModel> GetAliveReserve()
     {
-        var reserve = _table.GetCurrentPlayer().GetTeam().GetReserve()
-            .Where(fighter => fighter.IsAlive());
-        return reserve;
+        Team currentTeam = _table.GetCurrentPlayer().GetTeam();
+        var reserve = currentTeam.GetReserve();
+        return reserve.Where(fighter => fighter.IsAlive());
     }
 
     private void Summon(IFighterModel target)

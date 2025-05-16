@@ -24,6 +24,7 @@ public class DrainAffinity: IAffinityController
         IFighterView view = FighterViewFactory.FromFighter(target);
         int absorbed = Convert.ToInt32(Math.Floor(damage));
         string absorbs = $"{view.GetName()} absorbe {absorbed} daño";
+        // todo: oye y si mejor uso LA FOKIN VISTA
         return absorbs;
     }
 }

@@ -28,6 +28,7 @@ public abstract class OffensiveSkillType: ISkillType
         return factory.GetAffinity();
     }
 
+    //todo: VIEWEWEWEWEW
     public string ToString(IFighterModel target, int power)
     {
         string actionMade = GetMadeAction();
@@ -37,7 +38,7 @@ public abstract class OffensiveSkillType: ISkillType
         return header + '\n' + affinity.GetEffectString(target, CalculateSkillDamage());
     }
 
-    protected abstract string GetMadeAction();
+    protected abstract string GetMadeAction();// todo: gawk gawk gawk
 
     protected IFighterModel GetAttacker()
     {

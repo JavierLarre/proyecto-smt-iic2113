@@ -6,10 +6,9 @@ public abstract class AbstractFighterFactory
 
     protected ICollection<Skill> GetSkillsFromNames(IEnumerable<string> skillNames)
     {
-        return skillNames
-            .Where(skill => skill != "")
-            .Select(_skillFactory.FromName)
-            .ToArray();
+        var filteredSkillNames = skillNames.Where(skill => skill != "");
+        var builtSkills = filteredSkillNames.Select(_skillFactory.FromName);
+        return builtSkills.ToArray();
     }
 
     protected static Stats BuildStatsFrom(StatsDataFromJson data)

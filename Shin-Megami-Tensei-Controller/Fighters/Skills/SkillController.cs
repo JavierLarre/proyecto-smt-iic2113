@@ -16,15 +16,6 @@ public class SkillController: ISkillController
     private ISkillTargets _targets;
     private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
 
-    public SkillController(Skill skill, ISkillType type,
-        ISkillHits hits, ISkillTargets targets)
-    {
-        _skill = skill;
-        _type = type;
-        _hits = hits;
-        _targets = targets;
-    }
-
     public SkillController(Skill skill)
     {
         _skill = skill;

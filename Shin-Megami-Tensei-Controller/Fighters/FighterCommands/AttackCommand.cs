@@ -23,6 +23,7 @@ public abstract class AttackCommand: IFighterCommand
         View.DisplayCard(GetEffectString(reciever));
     }
 
+    //todo: VIST A
     private string GetEffectString(IFighterModel target)
     {
         string attack = GetAttackString(target);

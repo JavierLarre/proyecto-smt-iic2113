@@ -18,6 +18,7 @@ public class Table: AbstractModel
     // ahora el proyecto depende de este modelo
     // Y agrega una responsabilidad a Table (ergo, rompe SRP)
 
+    //todo: solo deberia recibir players
     public void SetPlayersFromTeams(IEnumerable<Team> teams)
     {
         List<Player> players = teams
@@ -32,16 +33,6 @@ public class Table: AbstractModel
     public Player GetCurrentPlayer() => _currentPlayer;
     public Player GetEnemyPlayer() => _enemyPlayer;
     public TurnsModel GetTurnManager() => _turnManager;
-
-    public int GetFullTurnsLeft()
-    {
-        return _turnManager.GetTurns().FullTurns;
-    }
-
-    public int GetBlinkingTurnsLeft()
-    {
-        return _turnManager.GetTurns().BlinkingTurns;
-    }
 
     public void IncreaseCurrentPlayerUsedSkillsCount()
     {
@@ -70,6 +61,7 @@ public class Table: AbstractModel
 
     public bool HasAnyTeamLost()
     {
+        //todo: mover a su propia clase
         var currentAliveUnits = _currentPlayer.GetTeam().GetAliveFront();
         var enemyAliveUnits = _enemyPlayer.GetTeam().GetAliveFront();
         bool currentHasAliveUnits = currentAliveUnits.Any();
@@ -79,6 +71,7 @@ public class Table: AbstractModel
 
     public void Summon(IFighterModel fighter, int atPosition)
     {
+        //todo: usar modelo para actualizar fight order
         IFighterModel previousFighter = _currentPlayer.GetTeam().GetFrontRow().ToArray()[atPosition];
         _currentPlayer.GetTeam().Summon(fighter, atPosition);
         UpdateFightOrder(previousFighter, fighter);
