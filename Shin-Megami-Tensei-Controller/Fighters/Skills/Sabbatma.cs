@@ -10,10 +10,10 @@ namespace Shin_Megami_Tensei.Fighters.Skills;
 public class Sabbatma: ISkillController
 {
     private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
-    private Skill _skill;
+    private SkillData _skillData;
     private Table _table = Table.GetInstance();
 
-    public Sabbatma(Skill skill) => _skill = skill;
+    public Sabbatma(SkillData skill) => _skillData = skill;
     
     public void UseSkill()
     {
@@ -25,7 +25,7 @@ public class Sabbatma: ISkillController
         _table.Summon(target, atPosition);
         _table.GetTurnManager().ConsumeTurn();
         IFighterModel currentFighter = _table.GetCurrentFighter();
-        currentFighter.SetMp(currentFighter.GetCurrentMp() - _skill.Cost);
+        currentFighter.SetMp(currentFighter.GetCurrentMp() - _skillData.Cost);
         _table.IncreaseCurrentPlayerUsedSkillsCount();
         _view.DisplayCard($"{target.GetUnitData().Name} ha sido invocado");
     }

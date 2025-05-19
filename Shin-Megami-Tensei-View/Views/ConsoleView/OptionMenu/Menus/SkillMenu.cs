@@ -9,7 +9,7 @@ public class SkillMenu: AbstractOptionsMenu
     {
         var mpLeft = fighter.GetCurrentMp();
         var skills = fighter.GetUnitData().Skills.Where(skill => skill.Cost <= mpLeft);
-        foreach (Skill skill in skills)
+        foreach (SkillData skill in skills)
         {
             AddOption(skill.Name, skill.ToString());
         }

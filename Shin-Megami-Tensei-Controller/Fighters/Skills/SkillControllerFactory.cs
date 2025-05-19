@@ -6,7 +6,7 @@ namespace Shin_Megami_Tensei.Fighters.Skills;
 public static class SkillControllerFactory
 {
     
-    public static ISkillController BuildFromData(Skill skill)
+    public static ISkillController BuildFromData(SkillData skill)
     {
         return skill.Name switch
         {
@@ -16,7 +16,7 @@ public static class SkillControllerFactory
         };
     }
 
-    private static SkillController GetCommonSkill(Skill skill)
+    private static SkillController GetCommonSkill(SkillData skill)
     {
         SkillController controller = new SkillController(skill);
         return controller;

@@ -10,11 +10,11 @@ namespace Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
 
 public class Invitation: ISkillController
 {
-    private Skill _skill;
+    private SkillData _skillData;
     private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
     private Table _table = Table.GetInstance();
 
-    public Invitation(Skill skill) => _skill = skill;
+    public Invitation(SkillData skill) => _skillData = skill;
     
     public void UseSkill()
     {
@@ -23,17 +23,17 @@ public class Invitation: ISkillController
         ISkillType type = new ReviveSkillType();
         string effectMade = $"{target.GetUnitData().Name} ha sido invocado";
         bool targetWasDead = !target.IsAlive();
-        type.ApplyEffect(target, _skill.Power);
+        type.ApplyEffect(target, _skillData.Power);
         if (targetWasDead)
         {
-            effectMade += '\n' + type.ToString(target, _skill.Power);
+            effectMade += '\n' + type.ToString(target, _skillData.Power);
             effectMade += '\n' + FighterViewFactory.FromFighter(target).GetHpEndedWith();
         }
 
         _view.DisplayCard(effectMade);
         _table.GetTurnManager().ConsumeTurn();
         IFighterModel currentFighter = _table.GetCurrentFighter();
-        currentFighter.SetMp(currentFighter.GetCurrentMp() - _skill.Cost);
+        currentFighter.SetMp(currentFighter.GetCurrentMp() - _skillData.Cost);
         _table.Summon(target, atPosition);
         _table.IncreaseCurrentPlayerUsedSkillsCount();
     }

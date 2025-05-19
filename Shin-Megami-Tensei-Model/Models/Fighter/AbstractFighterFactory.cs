@@ -4,7 +4,7 @@ public abstract class AbstractFighterFactory
 {
     private readonly SkillFactory _skillFactory = new SkillFactory();
 
-    protected ICollection<Skill> GetSkillsFromNames(IEnumerable<string> skillNames)
+    protected ICollection<SkillData> GetSkillsFromNames(IEnumerable<string> skillNames)
     {
         var filteredSkillNames = skillNames.Where(skill => skill != "");
         var builtSkills = filteredSkillNames.Select(_skillFactory.FromName);

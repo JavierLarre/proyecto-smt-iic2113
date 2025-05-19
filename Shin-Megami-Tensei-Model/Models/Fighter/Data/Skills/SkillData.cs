@@ -1,6 +1,6 @@
 ﻿namespace Shin_Megami_Tensei_Model;
 
-public struct Skill //TODO: change name to SkillData
+public struct SkillData
 {
     public string Name;
     public string Type;

@@ -10,18 +10,18 @@ namespace Shin_Megami_Tensei.Fighters.Skills;
 
 public class SkillController: ISkillController
 {
-    private Skill _skill;
+    private SkillData _skillData;
     private ISkillType _type;
     private ISkillHits _hits;
     private ISkillTargets _targets;
     private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
 
-    public SkillController(Skill skill)
+    public SkillController(SkillData skill)
     {
-        _skill = skill;
-        _hits = SkillHitFactory.GetSkillHits(_skill);
-        _type = SkillTypesFactory.GetSkillType(_skill);
-        _targets = SkillTargetsFactory.GetSkillTargets(_skill);
+        _skillData = skill;
+        _hits = SkillHitFactory.GetSkillHits(_skillData);
+        _type = SkillTypesFactory.GetSkillType(_skillData);
+        _targets = SkillTargetsFactory.GetSkillTargets(_skillData);
     }
 
     public void UseSkill()
@@ -48,7 +48,7 @@ public class SkillController: ISkillController
         foreach (IFighterModel target in _targets.GetTargets())
         {
             for (int i = 0; i < _hits.CalculateHits(); i++)
-                effectsMade.Add(_type.ToString(target, _skill.Power));
+                effectsMade.Add(_type.ToString(target, _skillData.Power));
 
             if (_type is not SpecialSkillType)
             {
@@ -75,14 +75,14 @@ public class SkillController: ISkillController
         int hits = _hits.CalculateHits();
         for (int i = 0; i < hits; i++)
         {
-            int skillPower = _skill.Power;
+            int skillPower = _skillData.Power;
             _type.ApplyEffect(target, skillPower);
         }
     }
 
     private void DecreaseCurrentFighterMp()
     {
-        int cost = _skill.Cost;
+        int cost = _skillData.Cost;
         IFighterModel user = Table.GetInstance().GetCurrentFighter();
         user.SetMp(user.GetCurrentMp() - cost);
     }

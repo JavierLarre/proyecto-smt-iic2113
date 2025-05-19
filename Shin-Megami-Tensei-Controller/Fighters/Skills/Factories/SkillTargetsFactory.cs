@@ -2,9 +2,9 @@
 
 namespace Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 
-public static class SkillTargetFactory
+public static class SkillTargetsFactory
 {
-    public static ISkillTargets GetSkillTargets(Skill skill)
+    public static ISkillTargets GetSkillTargets(SkillData skill)
     {
         return skill.Target switch
         {

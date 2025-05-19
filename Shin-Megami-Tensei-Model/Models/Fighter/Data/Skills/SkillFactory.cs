@@ -14,10 +14,10 @@ public class SkillFactory
     private SkillDataFromJson FindByName(string skillName) =>
         _dataList.First(skill => skill.name == skillName);
 
-    public Skill FromName(string name)
+    public SkillData FromName(string name)
     {
         var data = FindByName(name);
-        return new Skill
+        return new SkillData
         {
             Cost = data.cost,
             Effect = data.effect,

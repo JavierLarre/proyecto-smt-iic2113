@@ -4,7 +4,7 @@ namespace Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
 
 public static class SkillTypesFactory
 {
-    public static ISkillType GetSkillType(Skill skill)
+    public static ISkillType GetSkillType(SkillData skill)
     {
         return skill.Type switch
         {
@@ -22,7 +22,7 @@ public static class SkillTypesFactory
         };
     }
     
-    private static bool DoesSkillRevive(Skill skill)
+    private static bool DoesSkillRevive(SkillData skill)
     {
         return skill.Name.Contains("ecarm");
     }

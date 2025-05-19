@@ -7,7 +7,7 @@ public static class SkillHitFactory
 {
     private static Regex _singleHitPattern = new(@"^(?<hits>\d+)$");
     private static Regex _multiHitPattern = new(@"^(?<lowerBound>\d+)-(?<upperBound>\d+)$");
-    public static ISkillHits GetSkillHits(Skill skill)
+    public static ISkillHits GetSkillHits(SkillData skill)
     {
         string hit = skill.Hits;
         Match singleHitMatch = _singleHitPattern.Match(hit);
