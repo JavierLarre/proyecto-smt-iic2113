@@ -3,36 +3,29 @@
 public class Table: AbstractModel
 {
     // Tambien puedes interpretarlo como la clase game
-    private Player _currentPlayer = null!;
-    private Player _enemyPlayer = null!;
-    private TurnsModel _turnManager = new TurnsModel();
+    private static Table Singleton;
+    private Player _currentPlayer;
+    private Player _enemyPlayer;
+    private readonly TurnsModel _turnsModel = new();
     private LinkedList<IFighterModel> _fightOrder = [];
 
-    private Table()
+    public Table(Player player1, Player player2)
     {
+        _currentPlayer = player1;
+        _enemyPlayer = player2;
+        ResetFightOrder();
+        ResetTurns();
+        Singleton = this;
     }
 
-    private static readonly Table Singleton = new Table();
     public static Table GetInstance() => Singleton;
     // Dos críticas de singleton
     // ahora el proyecto depende de este modelo
     // Y agrega una responsabilidad a Table (ergo, rompe SRP)
 
-    //todo: solo deberia recibir players
-    public void SetPlayersFromTeams(IEnumerable<Team> teams)
-    {
-        List<Player> players = teams
-            .Select((team, i) => new Player(i, team))
-            .ToList();
-        _currentPlayer = players[0];
-        _enemyPlayer = players[1];
-        _fightOrder = new LinkedList<IFighterModel>(_currentPlayer.GetTeam().GetFightOrder());
-        _turnManager.Reset(_fightOrder.Count);
-    }
-
     public Player GetCurrentPlayer() => _currentPlayer;
     public Player GetEnemyPlayer() => _enemyPlayer;
-    public TurnsModel GetTurnManager() => _turnManager;
+    public TurnsModel GetTurnManager() => _turnsModel;
 
     public void IncreaseCurrentPlayerUsedSkillsCount()
     {
@@ -82,7 +75,7 @@ public class Table: AbstractModel
         IFighterModel playedFighter = _fightOrder.First();
         _fightOrder.RemoveFirst();
         _fightOrder.AddLast(playedFighter);
-        _turnManager.SaveTurns();
+        _turnsModel.SaveTurns();
     }
 
     public void EndRound()
@@ -90,9 +83,8 @@ public class Table: AbstractModel
         if (HasAnyTeamLost())
             return;
         SwapPlayers();
-        var fightOrder = _currentPlayer.GetTeam().GetFightOrder();
-        _fightOrder = new LinkedList<IFighterModel>(fightOrder);
-        _turnManager.Reset(_fightOrder.Count);
+        ResetFightOrder();
+        ResetTurns();
     }
 
     public Player GetWinner()
@@ -100,6 +92,18 @@ public class Table: AbstractModel
         var enemyFighters = GetEnemyTeamAliveTargets();
         bool enemyHasUnits = enemyFighters.Any();
         return enemyHasUnits ? _enemyPlayer : _currentPlayer;
+    }
+
+    private void ResetFightOrder()
+    {
+        var fightOrder = _currentPlayer.GetTeam().GetFightOrder(); 
+        _fightOrder = new LinkedList<IFighterModel>(fightOrder);
+        _turnsModel.Reset(_fightOrder.Count);
+    }
+
+    private void ResetTurns()
+    {
+        _turnsModel.Reset(_fightOrder.Count);
     }
 
     private void UpdateFightOrder(IFighterModel previousFighter, IFighterModel newFighter)

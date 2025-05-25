@@ -33,10 +33,20 @@ public class Game
 
     private void StartFight(IEnumerable<Team> teams)
     {
-        Table table = Table.GetInstance();
-        table.SetPlayersFromTeams(teams);
+        Table table = GetTableFromTeams(teams);
         BattleViewSingleton.SetBattleView(_view);
-        BattleController controller = new BattleController();
+        BattleController controller = new BattleController(table);
         controller.Play();
+    }
+
+    private Table GetTableFromTeams(IEnumerable<Team> teams)
+    {
+        List<Player> players = teams
+                    .Select((team, i) => new Player(i, team))
+                    .ToList();
+        Player player1 = players[0];
+        Player player2 = players[1];
+        Table table = new Table(player1, player2);
+        return table;
     }
 }
