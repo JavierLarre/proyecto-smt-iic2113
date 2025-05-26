@@ -27,6 +27,22 @@ public class Table: AbstractModel
     public Player GetEnemyPlayer() => _enemyPlayer;
     public TurnsModel GetTurnManager() => _turnsModel;
 
+    public GameState GetGameState()
+    {
+        return new GameState
+        {
+            CurrentPlayer = GetCurrentPlayer(),
+            CurrentTeam = GetCurrentPlayer().GetTeam(),
+            EnemyPlayer = GetEnemyPlayer(),
+            EnemyTeam = GetEnemyPlayer().GetTeam(),
+            CurrentFighter = _fightOrder.First(),
+            EnemyTeamAliveTargets = GetEnemyTeamAliveTargets().ToList(),
+            FightersInTurnOrder = _fightOrder,
+            TurnsModel = _turnsModel,
+            TurnsData = _turnsModel.GetTurnsData()
+        };
+    }
+
     public void IncreaseCurrentPlayerUsedSkillsCount()
     {
         _currentPlayer.IncreaseUsedSkills();
@@ -52,16 +68,6 @@ public class Table: AbstractModel
         return _enemyPlayer.GetTeam().GetAliveFront();
     }
 
-    public bool HasAnyTeamLost()
-    {
-        //todo: mover a su propia clase
-        var currentAliveUnits = _currentPlayer.GetTeam().GetAliveFront();
-        var enemyAliveUnits = _enemyPlayer.GetTeam().GetAliveFront();
-        bool currentHasAliveUnits = currentAliveUnits.Any();
-        bool enemyHasAliveUnits = enemyAliveUnits.Any();
-        return !currentHasAliveUnits || !enemyHasAliveUnits;
-    }
-
     public void Summon(IFighterModel fighter, int atPosition)
     {
         //todo: usar modelo para actualizar fight order
@@ -80,18 +86,9 @@ public class Table: AbstractModel
 
     public void EndRound()
     {
-        if (HasAnyTeamLost())
-            return;
         SwapPlayers();
         ResetFightOrder();
         ResetTurns();
-    }
-
-    public Player GetWinner()
-    {
-        var enemyFighters = GetEnemyTeamAliveTargets();
-        bool enemyHasUnits = enemyFighters.Any();
-        return enemyHasUnits ? _enemyPlayer : _currentPlayer;
     }
 
     private void ResetFightOrder()

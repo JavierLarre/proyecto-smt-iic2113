@@ -3,6 +3,6 @@
 public struct PlayerState
 {
     public int PlayerNumber;
-    public TeamState TeamState;
+    public Team Team;
     public int UsedSkills;
 }

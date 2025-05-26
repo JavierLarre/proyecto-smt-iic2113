@@ -23,7 +23,7 @@ public class TurnsView: IView
 
     private void DisplayTurnsLeft()
     {
-        TurnsData turns = _turnManager.GetTurns();
+        TurnsData turns = _turnManager.GetTurnsData();
         int fullTurns = turns.FullTurns;
         int blinkingTurns = turns.BlinkingTurns;
         _view.DisplayCard($"Full Turns: {fullTurns}");
@@ -38,7 +38,7 @@ public class TurnsView: IView
 
     private void DisplayConsumedTurns()
     {
-        TurnsData turns = _turnManager.GetTurns();
+        TurnsData turns = _turnManager.GetTurnsData();
         int consumedFullTurns = turns.ConsumedFull;
         int consumedBlinking = turns.ConsumedBlinking;
         string consumedTurns = $"Se han consumido {consumedFullTurns} Full Turn(s)";
@@ -48,7 +48,7 @@ public class TurnsView: IView
 
     private void DisplayGainedTurns()
     {
-        TurnsData turns = _turnManager.GetTurns();
+        TurnsData turns = _turnManager.GetTurnsData();
         int gainedBlinking = turns.GainedBlinking;
         string gainedTurns = $"Se han obtenido {gainedBlinking} Blinking Turn(s)";
         _view.WriteLine(gainedTurns);

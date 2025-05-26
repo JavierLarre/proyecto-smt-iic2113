@@ -6,13 +6,14 @@ namespace Shin_Megami_Tensei.Battles;
 
 public class TurnController
 {
-    private Table _table = Table.GetInstance();
+    private Table _table;
     private TurnsView _turnsView;
     private ActionController _actionController = new ();
 
-    public TurnController()
+    public TurnController(Table table)
     {
-        TurnsModel turnManager = _table.GetTurnManager();
+        _table = table;
+        TurnsModel turnManager = _table.GetGameState().TurnsModel;
         _turnsView = new TurnsView(turnManager);
     }
 

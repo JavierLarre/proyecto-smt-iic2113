@@ -5,13 +5,15 @@ namespace Shin_Megami_Tensei.Battles;
 
 public class RoundController
 {
-    private Table _table = Table.GetInstance();
-    private TurnController _turnController = new();
-    private TurnsModel _turnManager;
+    private Table _table;
+    private TurnController _turnController;
+    private WinConditionController _winCondition;
 
-    public RoundController()
+    public RoundController(Table table)
     {
-        _turnManager = _table.GetTurnManager();
+        _table = table;
+        _turnController = new TurnController(_table);
+        _winCondition = new WinConditionController(_table);
     }
     
     public void PlayRound()
@@ -19,7 +21,8 @@ public class RoundController
         DisplayRoundStart();
         while (!IsRoundDone())
             _turnController.PlayTurn();
-        _table.EndRound();
+        if (!_winCondition.HasAnyTeamWon())
+            _table.EndRound();
     }
 
     private void DisplayRoundStart()
@@ -31,12 +34,12 @@ public class RoundController
 
     private bool IsRoundDone()
     {
-        return _table.HasAnyTeamLost() || IsPlayerOutOfTurns();
+        return _winCondition.HasAnyTeamWon() || IsPlayerOutOfTurns();
     }
 
     private bool IsPlayerOutOfTurns()
     {
-        TurnsData turns = _turnManager.GetTurns();
+        TurnsData turns = _table.GetGameState().TurnsData;
         int fullTurns = turns.FullTurns;
         int blinkingTurns = turns.BlinkingTurns;
         return fullTurns == 0 && blinkingTurns == 0;

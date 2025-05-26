@@ -5,16 +5,15 @@ namespace Shin_Megami_Tensei.Battles;
 
 public class EndGameController
 {
+    private WinConditionController _winCondition;
+    public EndGameController(Table table)
+    {
+        _winCondition = new WinConditionController(table);
+    }
     public void EndGame()
     {
-        Player winner = GetWinner();
+        Player winner = _winCondition.GetWinner();
         WinnerView winnerView = new WinnerView(winner);
         winnerView.Display();
-    }
-
-    private Player GetWinner()
-    {
-        Table table = Table.GetInstance();
-        return table.GetWinner();
     }
 }

@@ -21,4 +21,14 @@ public class Player: AbstractModel
     public void IncreaseUsedSkills() => _usedSkillsCount++;
     public int GetUsedSkillsCount() => _usedSkillsCount;
 
+    public PlayerState GetPlayerState()
+    {
+        return new PlayerState
+        {
+            PlayerNumber = _playerNumber,
+            Team = _team,
+            UsedSkills = _usedSkillsCount
+        };
+    }
+
 }

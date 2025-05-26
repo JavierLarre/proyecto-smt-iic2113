@@ -11,19 +11,23 @@ namespace Shin_Megami_Tensei.Battles;
 public class BattleController
 {
     private readonly Table _table;
-    private readonly ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
+    private readonly ConsoleBattleView _view 
+        = BattleViewSingleton.GetBattleView();
+
+    private WinConditionController _winCondition;
 
     public BattleController(Table table)
     {
         _table = table;
+        _winCondition = new WinConditionController(_table);
     }
 
     public void Play()
     {
-        RoundController roundController = new RoundController();
+        RoundController roundController = new RoundController(_table);
         try
         {
-            while (HasNoPlayerLost())
+            while (HasNoPlayerWon())
             {
                 roundController.PlayRound();
             }
@@ -33,9 +37,9 @@ public class BattleController
             _view.DisplayCard(e.Message);
         }
         
-        new EndGameController().EndGame();
+        new EndGameController(_table).EndGame();
     }
 
-    private bool HasNoPlayerLost() => !_table.HasAnyTeamLost();
+    private bool HasNoPlayerWon() => !_winCondition.HasAnyTeamWon();
 
 }

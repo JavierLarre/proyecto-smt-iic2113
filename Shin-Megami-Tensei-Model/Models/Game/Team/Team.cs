@@ -68,4 +68,17 @@ public class Team: AbstractModel, IModelObserver
             .OrderBy(fighter => fighter.GetUnitData().FilePriority);
         _reserve = sortedReserve.ToList();
     }
+    
+    //todo: mover al principio
+    public TeamState GetTeamState()
+    {
+        return new TeamState
+        {
+            Leader = _frontRow[0],
+            FightersInOrder = GetFightOrder().ToList(),
+            FrontRow = _frontRow,
+            AliveFrontRow = GetAliveFront().ToList(),
+            Reserve = _reserve
+        };
+    }
 }
