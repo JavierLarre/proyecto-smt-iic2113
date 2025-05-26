@@ -7,7 +7,7 @@ public class ResistAffinity: IAffinityController
 {
     public void RecieveAttack(IFighterModel target, double damage)
     {
-        target.SetHp(target.GetCurrentHp() - Constants.Truncate(damage * 0.5));
+        target.SetHp(target.GetCurrentHp() - GameConstants.Truncate(damage * 0.5));
     }
 
     public void ConsumeTurns()

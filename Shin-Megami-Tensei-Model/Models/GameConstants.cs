@@ -1,6 +1,6 @@
 ﻿namespace Shin_Megami_Tensei_Model;
 
-public static class Constants
+public static class GameConstants
 {
     public const int MaxSizeFrontRow = 4;
 

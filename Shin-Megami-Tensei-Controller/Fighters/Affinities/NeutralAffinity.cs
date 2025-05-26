@@ -8,7 +8,7 @@ public class NeutralAffinity: IAffinityController
     public void RecieveAttack(IFighterModel target, double damage)
     {
         int targetHp = target.GetCurrentHp();
-        target.SetHp(targetHp - Constants.Truncate(damage));
+        target.SetHp(targetHp - GameConstants.Truncate(damage));
     }
 
     public void ConsumeTurns()

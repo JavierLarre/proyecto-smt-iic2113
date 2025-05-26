@@ -8,7 +8,7 @@ public class RepelAffinity: IAffinityController
     public void RecieveAttack(IFighterModel target, double damage)
     {
         IFighterModel attacker = Table.GetInstance().GetCurrentFighter();
-        attacker.SetHp(attacker.GetCurrentHp() - Constants.Truncate(damage));
+        attacker.SetHp(attacker.GetCurrentHp() - GameConstants.Truncate(damage));
     }
 
     public void ConsumeTurns()

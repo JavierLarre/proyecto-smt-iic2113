@@ -26,7 +26,7 @@ public class TeamBuilder
 
     private static IFighterModel[] GetEmptyArray()
     {
-        const int frontRowSize = Constants.MaxSizeFrontRow;
+        const int frontRowSize = GameConstants.MaxSizeFrontRow;
         var emptyFighters = Enumerable.Repeat(new EmptyFighter(), frontRowSize);
         return emptyFighters.ToArray<IFighterModel>();
     }

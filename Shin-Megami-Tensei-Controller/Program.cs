@@ -1,4 +1,5 @@
-﻿using Shin_Megami_Tensei_View;
+﻿using Shin_Megami_Tensei_GUI;
+using Shin_Megami_Tensei_View;
 using Shin_Megami_Tensei;
 
 /* 
@@ -21,15 +22,32 @@ using Shin_Megami_Tensei;
  *      var view = View.BuildConsoleView();
  */
 
-string testFolder = SelectTestFolder();
-string test = SelectTest(testFolder);
-string teamsFolder = testFolder.Replace("-Tests","");
-AnnounceTestCase(test);
 
-// var view = View.BuildConsoleView();
-var view = View.BuildManualTestingView(test);
-var game = new Game(view, teamsFolder);
-game.Play();
+bool useGui = ControllerConstants.UseGui;
+if (!useGui)
+{
+    string testFolder = SelectTestFolder();
+    string test = SelectTest(testFolder);
+    string teamsFolder = testFolder.Replace("-Tests","");
+    AnnounceTestCase(test);
+    // var view = View.BuildConsoleView();
+    var view = View.BuildManualTestingView(test);
+    var game = new Game(view, teamsFolder);
+    game.Play();
+}
+else
+{
+    var gui = new SMTGUI();
+    gui.Start(Main);
+}
+
+return;
+
+void Main()
+{
+    
+}
+
 
 string SelectTestFolder()
 {

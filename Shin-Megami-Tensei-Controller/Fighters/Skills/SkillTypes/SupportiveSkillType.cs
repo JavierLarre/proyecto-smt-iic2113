@@ -8,7 +8,7 @@ public abstract class SupportiveSkillType: ISkillType
     {
         double healAmount = CalculateHealAmount(target, power);
         int targetHp = target.GetCurrentHp();
-        target.SetHp(targetHp + Constants.Truncate(healAmount));
+        target.SetHp(targetHp + GameConstants.Truncate(healAmount));
     }
 
     protected static double CalculateHealAmount(IFighterModel target, int power)
