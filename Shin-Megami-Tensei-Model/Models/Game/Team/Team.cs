@@ -43,6 +43,7 @@ public class Team: AbstractModel, IModelObserver
         outFighter.AddToReserve(this);
         _frontRow[atPosition] = inFighter;
         SortReserve();
+        UpdateObservers();
     }
     
     public void Update()
