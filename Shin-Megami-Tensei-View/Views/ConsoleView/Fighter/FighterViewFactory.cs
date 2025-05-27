@@ -12,7 +12,7 @@ public static class FighterViewFactory
             Samurai => new SamuraiView(fighter),
             Demon => new DemonView(fighter),
             EmptyFighter => new EmptyFighterView(),
-            _ => throw new NotImplementedException("No view for this fighter")
+            _ => throw new ArgumentException("No view for this fighter")
         };
     }
 }

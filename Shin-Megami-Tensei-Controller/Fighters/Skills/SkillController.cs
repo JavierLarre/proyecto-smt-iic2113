@@ -43,20 +43,14 @@ public class SkillController: ISkillController
 
     private void PrintEffects()
     {
-        IFighterView targetView;
         IList<string> effectsMade = [];
         foreach (IFighterModel target in _targets.GetTargets())
         {
             for (int i = 0; i < _hits.CalculateHits(); i++)
                 effectsMade.Add(_type.ToString(target, _skillData.Power));
 
-            if (_type is not SpecialSkillType)
-            {
-                targetView = FighterViewFactory.FromFighter(target);
-                effectsMade.Add(targetView.GetHpEndedWith());
-            }
-
-            
+            var targetView = FighterViewFactory.FromFighter(target);
+            effectsMade.Add(targetView.GetHpEndedWith());
             if (_type.GetTargetAffinity(target) is RepelAffinity)
             {
                 IFighterModel attacker = Table.GetInstance().GetCurrentFighter();

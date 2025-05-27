@@ -42,7 +42,6 @@ public class Table: AbstractModel, IModelObserver
     {
         PlayerState currentPlayer = _currentPlayer.GetPlayerState();
         PlayerState enemyPlayer = _enemyPlayer.GetPlayerState();
-        // todo: agregar campos a esta edd
         return new GameState
         {
             CurrentPlayer = GetCurrentPlayer(),

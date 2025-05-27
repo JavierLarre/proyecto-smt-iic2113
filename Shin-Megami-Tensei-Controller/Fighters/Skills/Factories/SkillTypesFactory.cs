@@ -17,7 +17,6 @@ public static class SkillTypesFactory
             "Heal" => DoesSkillRevive(skill) ?
                 new ReviveSkillType() :
                 new HealSkillType(),
-            "Special" => new SpecialSkillType(),
             _ => throw new ArgumentException("Type Not Found", skill.Type)
         };
     }
