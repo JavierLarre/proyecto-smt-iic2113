@@ -38,7 +38,7 @@ public abstract class AttackCommand: IFighterCommand
         reciever = GetAffinityController(target) is RepelAffinity ? 
             GetAttacker() : 
             target;
-        return new FighterView(reciever).GetHpEndedWith();
+        return FighterViewFactory.FromFighter(reciever).GetHpEndedWith();
     }
 
     protected abstract int Modifier();

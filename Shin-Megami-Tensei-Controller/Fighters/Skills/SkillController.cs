@@ -51,13 +51,13 @@ public class SkillController: ISkillController
             for (int i = 0; i < _hits.CalculateHits(); i++)
                 effectsMade.Add(_type.ToString(target, _skillData.Power));
 
-            var targetView = new FighterView(target);
+            var targetView = FighterViewFactory.FromFighter(target);
             effectsMade.Add(targetView.GetHpEndedWith());
             if (_type.GetTargetAffinity(target) is RepelAffinity)
             {
                 IFighterModel attacker = Table.GetInstance().GetCurrentFighter();
                 effectsMade.RemoveAt(effectsMade.Count-1);
-                effectsMade.Add(new FighterView(attacker).GetHpEndedWith());
+                effectsMade.Add(FighterViewFactory.FromFighter(attacker).GetHpEndedWith());
             }
 
             _view.DisplayCard(effectsMade);

@@ -25,7 +25,7 @@ public class SummonPositionsMenu: AbstractOptionsMenu
 
     private static string FormatPosition(IFighterModel target, int position)
     {
-        FighterView fighterView = new FighterView(target);
+        IFighterView fighterView = FighterViewFactory.FromFighter(target);
         string positionInfo = fighterView.GetInfo();
         if (positionInfo == "")
             positionInfo = "Vacío";

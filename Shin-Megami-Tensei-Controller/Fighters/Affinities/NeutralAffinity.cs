@@ -21,7 +21,7 @@ public class NeutralAffinity: IAffinityController
     public string GetEffectString(IFighterModel target, double damage)
     {
         int recievedDamage = Convert.ToInt32(Math.Floor(damage));
-        FighterView view = new FighterView(target);
+        IFighterView view = FighterViewFactory.FromFighter(target);
         string recieved = $"{view.GetName()} recibe {recievedDamage} de daño";
         return recieved;
     }

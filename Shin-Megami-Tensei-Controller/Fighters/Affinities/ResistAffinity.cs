@@ -21,7 +21,7 @@ public class ResistAffinity: IAffinityController
     {
         IFighterModel attacker = Table.GetInstance().GetCurrentFighter();
         string attackerName = attacker.GetUnitData().Name;
-        FighterView view = new FighterView(target);
+        IFighterView view = FighterViewFactory.FromFighter(target);
         int recievedDamage = Convert.ToInt32(Math.Floor(damage * 0.5));
         string resists = $"{view.GetName()} es resistente el ataque de {attackerName}";
         string recieves = $"{view.GetName()} recibe {recievedDamage} de daño";

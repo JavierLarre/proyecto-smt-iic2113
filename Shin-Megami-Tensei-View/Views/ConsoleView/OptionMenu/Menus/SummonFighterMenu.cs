@@ -11,8 +11,8 @@ public class SummonFighterMenu: AbstractFighterTargetMenu
     public SummonFighterMenu(IEnumerable<IFighterModel> targets)
     {
         SetTargets(targets.ToList());
-        var views = GetTargets().Select(target => new FighterView(target));
-        foreach (FighterView target in views)
+        var views = GetTargets().Select(FighterViewFactory.FromFighter);
+        foreach (IFighterView target in views)
         {
             AddOption(target.GetName(), target.GetInfo());
         }

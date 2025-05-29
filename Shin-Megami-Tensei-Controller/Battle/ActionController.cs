@@ -28,8 +28,8 @@ public class ActionController: IViewController
     private void ExecuteCommandFromUser()
     {
         IFighterModel currentFighter = _table.GetCurrentFighter();
-        FighterActionsView fighterActionsView = new FighterActionsView(currentFighter, this);
-        fighterActionsView.Display();
+        ActionView actionView = new ActionView(currentFighter, this);
+        actionView.Display();
     }
 
     private IFighterCommand GetCommandFromAction(string action)

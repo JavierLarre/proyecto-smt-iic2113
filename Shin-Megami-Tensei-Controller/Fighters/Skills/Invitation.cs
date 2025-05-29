@@ -1,5 +1,4 @@
 ﻿using Shin_Megami_Tensei_Model;
-using Shin_Megami_Tensei_Model.Models.Fighter;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 using Shin_Megami_Tensei.Battles;
@@ -20,17 +19,15 @@ public class Invitation: ISkillController
     {
         _table = table;
         IFighterModel target = new ReserveTarget().GetTargets().First();
-        FighterState targetState = target.GetState();
-        var summonablePositions = new SummonablePositionsController(_table);
-        int atPosition = summonablePositions.GetPositionFromUser();
+        int atPosition = new SummonablePositionsController(_table).GetPositionFromUser();
         ISkillType type = new ReviveSkillType();
-        string effectMade = $"{targetState.Name} ha sido invocado";
-        bool targetWasDead = !targetState.IsAlive;
+        string effectMade = $"{target.GetUnitData().Name} ha sido invocado";
+        bool targetWasDead = !target.IsAlive();
         type.ApplyEffect(target, _skillData.Power);
         if (targetWasDead)
         {
             effectMade += '\n' + type.ToString(target, _skillData.Power);
-            effectMade += '\n' + new FighterView(target).GetHpEndedWith();
+            effectMade += '\n' + FighterViewFactory.FromFighter(target).GetHpEndedWith();
         }
 
         _view.DisplayCard(effectMade);

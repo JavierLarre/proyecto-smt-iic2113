@@ -24,7 +24,7 @@ public class ReviveMenu: AbstractFighterTargetMenu
 
     private void AddTargetOption(IFighterModel target)
     {
-        FighterView targetView = new FighterView(target);
+        IFighterView targetView = FighterViewFactory.FromFighter(target);
         string targetInfo = $"{target.GetUnitData().Name} {targetView.GetStats()}";
         AddOption(targetView.GetName(), targetInfo);
     }
