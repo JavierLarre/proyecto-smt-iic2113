@@ -10,20 +10,26 @@ namespace Shin_Megami_Tensei.Fighters.Skills;
 public class Sabbatma: ISkillController
 {
     private SkillData _skillData;
-    private Table _table = Table.GetInstance();
+    private Table _table = null!;
 
     public Sabbatma(SkillData skill) => _skillData = skill;
     
-    public void UseSkill()
+    public void UseSkill(Table table)
+    {
+        _table = table;
+        Summon();
+        _table.GetTurnManager().ConsumeTurn();
+        ConsumeMp();
+        _table.IncreaseCurrentPlayerUsedSkillsCount();
+    }
+
+    private void Summon()
     {
         var summonController = new SummonController(_table);
         var summonablePositions = new SummonablePositionsController(_table);
         summonController.AskUserForTarget();
         int atPosition = summonablePositions.GetPositionFromUser();
         summonController.SummonAt(atPosition);
-        _table.GetTurnManager().ConsumeTurn();
-        ConsumeMp();
-        _table.IncreaseCurrentPlayerUsedSkillsCount();
     }
 
     private void ConsumeMp()

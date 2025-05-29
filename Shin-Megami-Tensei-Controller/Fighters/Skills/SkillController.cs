@@ -15,6 +15,7 @@ public class SkillController: ISkillController
     private ISkillHits _hits;
     private ISkillTargets _targets;
     private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
+    private Table _table = null!;
 
     public SkillController(SkillData skill)
     {
@@ -24,8 +25,9 @@ public class SkillController: ISkillController
         _targets = SkillTargetsFactory.GetSkillTargets(_skillData);
     }
 
-    public void UseSkill()
+    public void UseSkill(Table table)
     {
+        _table = table;
         ApplyEffectsOnTargets();
         PrintEffects();
         ConsumeTurns();
@@ -81,10 +83,9 @@ public class SkillController: ISkillController
         user.SetMp(user.GetCurrentMp() - cost);
     }
 
-    private static void IncreaseCurrentPlayerUsedSkills()
+    private void IncreaseCurrentPlayerUsedSkills()
     {
-        Table table = Table.GetInstance();
-        table.IncreaseCurrentPlayerUsedSkillsCount();
+        _table.IncreaseCurrentPlayerUsedSkillsCount();
     }
 
     private void ConsumeTurns()

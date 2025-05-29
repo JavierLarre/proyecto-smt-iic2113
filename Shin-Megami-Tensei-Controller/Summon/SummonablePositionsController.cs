@@ -13,13 +13,6 @@ public class SummonablePositionsController: IViewController
     {
         _gameState = table.GetGameState();
     }
-    
-    public IEnumerable<IFighterModel> GetPositions()
-    {
-        var frontRow = _gameState.FrontRow;
-        var swapablePositions = frontRow.Where(fighter => fighter.CanBeSwapped());
-        return swapablePositions;
-    }
 
     public int GetPositionFromUser()
     {
@@ -28,6 +21,13 @@ public class SummonablePositionsController: IViewController
         summonPositionsMenu.SetInput(this);
         summonPositionsMenu.GetChoice();
         return _position;
+    }
+    
+    private IEnumerable<IFighterModel> GetPositions()
+    {
+        var frontRow = _gameState.FrontRow;
+        var swapablePositions = frontRow.Where(fighter => fighter.CanBeSwapped());
+        return swapablePositions;
     }
 
 
