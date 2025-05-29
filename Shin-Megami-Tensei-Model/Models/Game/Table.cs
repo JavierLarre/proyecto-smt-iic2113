@@ -49,10 +49,13 @@ public class Table: AbstractModel, IModelObserver
             EnemyPlayer = GetEnemyPlayer(),
             EnemyTeam = enemyPlayer.Team,
             CurrentFighter = _fightOrder.GetCurrentFighter(),
-            EnemyTeamAliveTargets = GetEnemyTeamAliveTargets().ToList(),
+            EnemyTeamAliveTargets = enemyPlayer.TeamState.AliveTargets,
             FightersInTurnOrder = _fightOrder.GetFightersInTurnOrder(),
+            Reserve = currentPlayer.TeamState.Reserve,
+            FrontRow = currentPlayer.TeamState.FrontRow,
             TurnsModel = _turnsModel,
-            TurnsData = _turnsModel.GetTurnsData()
+            TurnsData = _turnsModel.GetTurnsData(),
+            AliveReserve = currentPlayer.TeamState.AliveReserve
         };
     }
 

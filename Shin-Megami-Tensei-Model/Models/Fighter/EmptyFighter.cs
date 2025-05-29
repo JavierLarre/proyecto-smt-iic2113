@@ -1,4 +1,6 @@
-﻿namespace Shin_Megami_Tensei_Model.Fighters;
+﻿using Shin_Megami_Tensei_Model.Models.Fighter;
+
+namespace Shin_Megami_Tensei_Model.Fighters;
 
 public class EmptyFighter: AbstractModel, IFighterModel
 {
@@ -20,4 +22,5 @@ public class EmptyFighter: AbstractModel, IFighterModel
 
     public bool IsAlive() => false;
     public bool CanBeSwapped() => true;
+    public FighterState GetState() => new FighterState();
 }

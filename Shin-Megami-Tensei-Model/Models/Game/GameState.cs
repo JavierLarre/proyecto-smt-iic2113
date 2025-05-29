@@ -9,6 +9,9 @@ public struct GameState
     public TurnsModel TurnsModel;
     public TurnsData TurnsData;
     public IFighterModel CurrentFighter;
+    public ICollection<IFighterModel> FrontRow;
     public ICollection<IFighterModel> FightersInTurnOrder;
     public ICollection<IFighterModel> EnemyTeamAliveTargets;
+    public ICollection<IFighterModel> Reserve;
+    public ICollection<IFighterModel> AliveReserve;
 }

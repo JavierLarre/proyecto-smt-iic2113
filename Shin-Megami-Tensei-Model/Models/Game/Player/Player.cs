@@ -23,11 +23,13 @@ public class Player: AbstractModel
 
     public PlayerState GetPlayerState()
     {
+        TeamState teamState = _team.GetTeamState();
         return new PlayerState
         {
             PlayerNumber = _playerNumber,
             Team = _team,
-            UsedSkills = _usedSkillsCount
+            UsedSkills = _usedSkillsCount,
+            TeamState = teamState
         };
     }
 

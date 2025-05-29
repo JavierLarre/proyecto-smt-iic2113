@@ -1,4 +1,6 @@
 ﻿
+using Shin_Megami_Tensei_Model.Models.Fighter;
+
 namespace Shin_Megami_Tensei_Model;
 
 public interface IFighterModel: IModel
@@ -11,4 +13,5 @@ public interface IFighterModel: IModel
     public void AddToReserve(Team team);
     public bool IsAlive();
     public bool CanBeSwapped();
+    public FighterState GetState();
 }

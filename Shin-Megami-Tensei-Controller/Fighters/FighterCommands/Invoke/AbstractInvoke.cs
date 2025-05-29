@@ -10,10 +10,11 @@ public abstract class AbstractInvoke: IFighterCommand
     
     public void Execute()
     {
-        var target = GetTarget();
-        Summon(target);
+        var summonController = new SummonController(_table);
+        summonController.AskUserForTarget();
+        int atPosition = GetSummonPosition();
+        summonController.SummonAt(atPosition);
         ConsumeTurns();
-        Display(target);
     }
 
     private IFighterModel GetTarget()
@@ -41,12 +42,6 @@ public abstract class AbstractInvoke: IFighterCommand
     {
         TurnsModel turnManager = _table.GetTurnManager();
         turnManager.ConsumeAndGainTurn();
-    }
-
-    private void Display(IFighterModel summoned)
-    {
-        SummonView summonView = new SummonView(summoned);
-        summonView.Display();
     }
 
     protected abstract int GetSummonPosition();

@@ -21,7 +21,7 @@ public class Sabbatma: ISkillController
         var reserve = GetReserve();
         SummonFighterMenu summonMenu = new SummonFighterMenu(reserve);
         IFighterModel target = summonMenu.GetTarget();
-        int atPosition = new SummonPositionsMenu(new SummonablePositionsController().GetPositions()).GetPosition();
+        int atPosition = new SummonPositionsMenu(new SummonablePositionsController(_table).GetPositions()).GetPosition();
         _table.Summon(target, atPosition);
         _table.GetTurnManager().ConsumeTurn();
         IFighterModel currentFighter = _table.GetCurrentFighter();

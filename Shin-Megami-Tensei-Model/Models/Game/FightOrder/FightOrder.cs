@@ -1,4 +1,6 @@
-﻿namespace Shin_Megami_Tensei_Model;
+﻿using Shin_Megami_Tensei_Model.Fighters;
+
+namespace Shin_Megami_Tensei_Model;
 
 public class FightOrder: AbstractModel
 {
@@ -30,16 +32,12 @@ public class FightOrder: AbstractModel
     public void UpdateFightOrderFrom(Team team)
     {
         TeamState teamState = team.GetTeamState();
-        IFighterModel newFighter = FindNewFighter(teamState);
-        try
-        {
-            IFighterModel previousFighter = FindOldFighter(teamState);
+        IFighterModel newFighter = teamState.LastSummonedFighter;
+        IFighterModel previousFighter = teamState.LastReservedFighter;
+        if (_fightersInOrder.Contains(previousFighter))
             RemovePreviousFighter(previousFighter, newFighter);
-        }
-        catch (ArgumentException e)
-        {
+        else
             _fightersInOrder.AddLast(newFighter);
-        }
     }
 
     private void RemovePreviousFighter(IFighterModel previousFighter, IFighterModel newFighter)
@@ -47,31 +45,5 @@ public class FightOrder: AbstractModel
         var node = _fightersInOrder.Find(previousFighter)!;
         _fightersInOrder.AddAfter(node, newFighter);
         _fightersInOrder.Remove(node);
-    }
-
-    private IFighterModel FindNewFighter(TeamState newTeamState)
-    {
-        var newFightOrder = newTeamState.FightersInOrder;
-        foreach (IFighterModel fighter in newFightOrder)
-        {
-            if (_fightersInOrder.Contains(fighter))
-                continue;
-            return fighter;
-        }
-
-        throw new ArgumentException();
-    }
-
-    private IFighterModel FindOldFighter(TeamState newTeamState)
-    {
-        var newFightOrder = newTeamState.FightersInOrder;
-        foreach (IFighterModel fighter in _fightersInOrder)
-        {
-            if (newFightOrder.Contains(fighter))
-                continue;
-            return fighter;
-        }
-
-        throw new ArgumentException();
     }
 }

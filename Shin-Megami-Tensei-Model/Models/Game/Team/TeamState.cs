@@ -5,7 +5,9 @@ public struct TeamState
     public IFighterModel Leader;
     public ICollection<IFighterModel> FightersInOrder;
     public ICollection<IFighterModel> FrontRow;
-    public ICollection<IFighterModel> AliveFrontRow;
+    public ICollection<IFighterModel> AliveTargets;
     public ICollection<IFighterModel> Reserve;
-    
+    public ICollection<IFighterModel> AliveReserve;
+    public IFighterModel LastSummonedFighter;
+    public IFighterModel LastReservedFighter;
 }

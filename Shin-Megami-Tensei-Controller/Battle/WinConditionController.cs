@@ -46,7 +46,7 @@ public class WinConditionController
     private static bool HasAliveUnits(Team team)
     {
         TeamState state = team.GetTeamState();
-        var aliveFighters = state.AliveFrontRow;
+        var aliveFighters = state.AliveTargets;
         bool hasAliveUnits = aliveFighters.Count != 0;
         return hasAliveUnits;
     }

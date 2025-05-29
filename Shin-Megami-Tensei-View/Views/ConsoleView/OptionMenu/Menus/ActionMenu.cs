@@ -7,7 +7,7 @@ public class ActionMenu: AbstractOptionsMenu
     
     public ActionMenu(IFighterModel fighter)
     {
-        foreach (string action in fighter.GetUnitData().FightOptions)
+        foreach (string action in fighter.GetState().FightOptions)
         {
             AddOption(action, action);
         }
