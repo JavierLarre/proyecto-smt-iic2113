@@ -7,12 +7,10 @@ public static class FighterViewFactory
 {
     public static IFighterView FromFighter(IFighterModel fighter)
     {
-        return fighter switch
+        return fighter.GetState().Name switch
         {
-            Samurai => new SamuraiView(fighter),
-            Demon => new DemonView(fighter),
-            EmptyFighter => new EmptyFighterView(),
-            _ => throw new ArgumentException("No view for this fighter")
+            null => new EmptyFighterView(),
+            _ => new FighterView(fighter)
         };
     }
 }

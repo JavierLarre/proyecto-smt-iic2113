@@ -17,9 +17,7 @@ public class ActionView: IViewInput
 
     public void Display()
     {
-        IFighterView fighterView = FighterViewFactory
-            .FromFighter(_currentFighter);
-        IOptionMenu actionMenu = fighterView.GetActionsMenu();
+        ActionMenu actionMenu = new ActionMenu(_currentFighter);
         string choice = actionMenu.GetChoice();
         OnInput(choice);
     }
