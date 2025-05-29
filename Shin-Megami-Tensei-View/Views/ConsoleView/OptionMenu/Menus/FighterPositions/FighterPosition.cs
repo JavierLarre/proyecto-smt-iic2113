@@ -11,7 +11,7 @@ public struct FighterPosition
     public override string ToString()
     {
         IFighterModel fighter = Fighter;
-        IFighterView fighterView = FighterViewFactory.FromFighter(fighter);
+        FighterView fighterView = new FighterView(fighter);
         string positionInfo = fighterView.GetInfo();
         if (positionInfo == "")
             positionInfo = "Vacío";

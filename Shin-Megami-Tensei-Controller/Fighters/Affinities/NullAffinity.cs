@@ -21,7 +21,7 @@ public class NullAffinity: IAffinityController
 
     public string GetEffectString(IFighterModel target, double damage)
     {
-        IFighterView view = FighterViewFactory.FromFighter(target);
+        FighterView view = new FighterView(target);
         IFighterModel attacker = Table.GetInstance().GetCurrentFighter();
         string blockerName = view.GetName();
         string attackerName = attacker.GetUnitData().Name;

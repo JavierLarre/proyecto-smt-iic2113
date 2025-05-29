@@ -20,21 +20,10 @@ public class TableInfoView: IView
         _secondPlayer = new PlayerView(secondPlayer);
     }
 
-    public string GetCurrentInfo()
-    {
-        return $"{_firstPlayer.GetBanner()}\n{_secondPlayer.GetBanner()}";
-    }
-
     public void Display()
     {
         ConsoleBattleView view = BattleViewSingleton.GetBattleView();
         view.DisplayCard(_firstPlayer.GetBanner());
         view.WriteLine(_secondPlayer.GetBanner());
-    }
-
-    public IFighterView GetFighterInTurn()
-    {
-        IFighterModel fighterInTurn = _table.GetCurrentFighter();
-        return FighterViewFactory.FromFighter(fighterInTurn);
     }
 }

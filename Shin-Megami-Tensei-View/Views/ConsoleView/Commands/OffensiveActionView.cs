@@ -30,7 +30,7 @@ public abstract class OffensiveActionView: IView
 
     protected virtual string GetEndedHp()
     {
-        return FighterViewFactory.FromFighter(_target).GetHpEndedWith();
+        return new FighterView(_target).GetHpEndedWith();
     }
 
     protected virtual string GetRecieverString()

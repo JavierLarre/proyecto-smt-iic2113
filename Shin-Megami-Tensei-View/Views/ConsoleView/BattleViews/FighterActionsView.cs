@@ -4,12 +4,12 @@ using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 namespace Shin_Megami_Tensei_View.Views.ConsoleView.BattleViews;
 
-public class ActionView: IViewInput
+public class FighterActionsView: IViewInput
 {
     private IFighterModel _currentFighter;
     private IViewController _controller;
 
-    public ActionView(IFighterModel currentFighter, IViewController controller)
+    public FighterActionsView(IFighterModel currentFighter, IViewController controller)
     {
         _currentFighter = currentFighter;
         _controller = controller;
@@ -17,9 +17,7 @@ public class ActionView: IViewInput
 
     public void Display()
     {
-        IFighterView fighterView = FighterViewFactory
-            .FromFighter(_currentFighter);
-        IOptionMenu actionMenu = fighterView.GetActionsMenu();
+        ActionMenu actionMenu = new ActionMenu(_currentFighter);
         string choice = actionMenu.GetChoice();
         OnInput(choice);
     }

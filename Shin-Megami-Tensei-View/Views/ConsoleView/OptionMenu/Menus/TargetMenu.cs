@@ -11,7 +11,7 @@ public class TargetMenu: AbstractFighterTargetMenu
         SetTargets(targets.ToList());
         foreach (IFighterModel target in GetTargets())
         {
-            IFighterView targetView = FighterViewFactory.FromFighter(target);
+            FighterView targetView = new FighterView(target);
             AddOption(targetView.GetName(), targetView.GetInfo());
         }
         AddCancelOption();
