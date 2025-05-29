@@ -17,27 +17,6 @@ public abstract class AbstractInvoke: IFighterCommand
         ConsumeTurns();
     }
 
-    private IFighterModel GetTarget()
-    {
-        var reserve = GetAliveReserve();
-        SummonFighterMenu summonMenu = new SummonFighterMenu(reserve);
-        IFighterModel target = summonMenu.GetTarget();
-        return target;
-    }
-
-    private IEnumerable<IFighterModel> GetAliveReserve()
-    {
-        Team currentTeam = _table.GetCurrentPlayer().GetTeam();
-        var reserve = currentTeam.GetReserve();
-        return reserve.Where(fighter => fighter.IsAlive());
-    }
-
-    private void Summon(IFighterModel target)
-    {
-        int atPosition = GetSummonPosition();
-        _table.Summon(target, atPosition);
-    }
-
     private void ConsumeTurns()
     {
         TurnsModel turnManager = _table.GetTurnManager();

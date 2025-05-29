@@ -9,7 +9,6 @@ namespace Shin_Megami_Tensei.Fighters.Skills;
 
 public class Sabbatma: ISkillController
 {
-    private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
     private SkillData _skillData;
     private Table _table = Table.GetInstance();
 
@@ -17,23 +16,19 @@ public class Sabbatma: ISkillController
     
     public void UseSkill()
     {
-        //todo: esto deberia ocupar invoke
-        var reserve = GetReserve();
-        SummonFighterMenu summonMenu = new SummonFighterMenu(reserve);
-        IFighterModel target = summonMenu.GetTarget();
-        int atPosition = new SummonPositionsMenu(new SummonablePositionsController(_table).GetPositions()).GetPosition();
-        _table.Summon(target, atPosition);
+        var summonController = new SummonController(_table);
+        var summonablePositions = new SummonablePositionsController(_table);
+        summonController.AskUserForTarget();
+        int atPosition = summonablePositions.GetPositionFromUser();
+        summonController.SummonAt(atPosition);
         _table.GetTurnManager().ConsumeTurn();
-        IFighterModel currentFighter = _table.GetCurrentFighter();
-        currentFighter.SetMp(currentFighter.GetCurrentMp() - _skillData.Cost);
+        ConsumeMp();
         _table.IncreaseCurrentPlayerUsedSkillsCount();
-        _view.DisplayCard($"{target.GetUnitData().Name} ha sido invocado");
     }
 
-    //todo: esto deberia ser compartido por abstract invoke
-    private IEnumerable<IFighterModel> GetReserve()
+    private void ConsumeMp()
     {
-        return _table.GetCurrentPlayer().GetTeam().GetReserve()
-            .Where(fighter => fighter.IsAlive());
+        IFighterModel currentFighter = _table.GetCurrentFighter();
+        currentFighter.SetMp(currentFighter.GetCurrentMp() - _skillData.Cost);
     }
 }

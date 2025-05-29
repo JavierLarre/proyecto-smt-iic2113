@@ -8,7 +8,7 @@ public class Team: AbstractModel, IModelObserver
     private IList<IFighterModel> _reserve;
     private IFighterModel _lastSummoned = new EmptyFighter();
     private IFighterModel _lastReserved = new EmptyFighter();
-    private TeamState _state = new TeamState();
+    private TeamState _state = new TeamState(); //todo: agregarle valor a este atributo
     
     public Team(ICollection<IFighterModel> frontRow, ICollection<IFighterModel> reserve)
     {
