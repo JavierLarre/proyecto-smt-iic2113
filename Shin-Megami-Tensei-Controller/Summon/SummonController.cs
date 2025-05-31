@@ -30,11 +30,15 @@ public class SummonController: IViewController
         _summonMenu.GetChoice();
     }
 
+    public void SummonAt(IFighterModel summonTarget, int summonPosition)
+    {
+        _table.Summon(summonTarget, summonPosition);
+        var summonView = new SummonView(summonTarget);
+        summonView.Display();
+    }
     public void SummonAt(int summonPosition)
     {
-        _table.Summon(_choosenTarget, summonPosition);
-        var summonView = new SummonView(_choosenTarget);
-        summonView.Display();
+        SummonAt(_choosenTarget, summonPosition);
     }
 
     public void OnInput(string input)

@@ -25,7 +25,7 @@ public class ConsoleBattleView
 
     public int GetInputFromUser() => int.Parse(_view.ReadLine());
 
-    private void DisplayIndent()
+    public void DisplayIndent()
     {
         string indent = new('-', 40);
         _view.WriteLine(indent);

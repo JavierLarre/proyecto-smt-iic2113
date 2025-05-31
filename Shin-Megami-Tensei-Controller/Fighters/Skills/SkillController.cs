@@ -48,6 +48,13 @@ public class SkillController: ISkillController
         IList<string> effectsMade = [];
         foreach (IFighterModel target in _targets.GetTargets())
         {
+            if (_type is SupportiveSkillType)
+            {
+                _view.DisplayIndent();
+                SupportiveSkillType type = (SupportiveSkillType)_type;
+                type.Display(Table.GetInstance().GetCurrentFighter(), target);
+                return;
+            }
             for (int i = 0; i < _hits.CalculateHits(); i++)
                 effectsMade.Add(_type.ToString(target, _skillData.Power));
 
