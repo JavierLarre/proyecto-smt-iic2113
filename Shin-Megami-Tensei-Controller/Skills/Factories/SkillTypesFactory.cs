@@ -15,7 +15,7 @@ public static class SkillTypesFactory
             "Elec" => new ElecSkillType(skillData),
             "Force" => new ForceSkillType(skillData),
             "Heal" => new HealSkillType(skillData),
-            _ => throw new ArgumentException("Type Not Found", skillData.Type)
+            _ => throw new ArgumentException("Type Not Found", skillData.Name)
         };
     }
     

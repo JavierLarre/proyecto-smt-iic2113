@@ -38,8 +38,7 @@ public abstract class AbstractOptionsMenu: IViewInput
         return _optionsNames[choiceIndex - 1];
     }
 
-    protected void SetHeader(string header) => _header = header; //todo: abstraer header
-
+    protected void SetHeader(string header) => _header = header; 
     protected void AddOption(string name, string display)
     {
         _optionsNames.Add(name);
