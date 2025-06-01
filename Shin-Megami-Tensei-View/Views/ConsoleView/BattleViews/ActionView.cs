@@ -4,7 +4,7 @@ using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 namespace Shin_Megami_Tensei_View.Views.ConsoleView.BattleViews;
 
-public class ActionView: IViewInput
+public class ActionView: IViewInput, IViewController
 {
     private IFighterModel _currentFighter;
     private IViewController _controller;
@@ -18,8 +18,8 @@ public class ActionView: IViewInput
     public void Display()
     {
         ActionMenu actionMenu = new ActionMenu(_currentFighter);
-        string choice = actionMenu.GetChoice();
-        OnInput(choice);
+        actionMenu.SetInput(this);
+        actionMenu.Display();
     }
 
     public void OnInput(string input)

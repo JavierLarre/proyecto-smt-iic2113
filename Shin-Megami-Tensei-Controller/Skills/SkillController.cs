@@ -14,7 +14,6 @@ public class SkillController: ISkillController
     private ISkillType _type;
     private ISkillHits _hits;
     private ISkillTargets _targets;
-    private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
     private Table _table = null!;
 
     public SkillController(SkillData skill)
@@ -36,7 +35,7 @@ public class SkillController: ISkillController
 
     private void ApplyEffectsOnTargets()
     {
-        var targets = _targets.GetTargets();
+        var targets = _targets.GetTargets(_table);
         foreach (IFighterModel target in targets)
             SingularApplyEffect(target);
         
@@ -47,7 +46,7 @@ public class SkillController: ISkillController
         _type.SetTarget(target);
         ITypeView typeView = _type.GetActionView();
         typeView.StartDisplay();
-        int hits = _hits.GetHits();
+        int hits = _hits.GetHits(_table);
         for (int i = 0; i < hits; i++)
         {
             _type.ApplyEffect(_table);
@@ -60,14 +59,15 @@ public class SkillController: ISkillController
     private void ConsumeTurns()
     {
         var prioritizedAffinity = GetPrioritizedAffinity();
-        prioritizedAffinity.ConsumeTurns();
+        TurnsModel turnsModel = _table.GetGameState().TurnsModel;
+        prioritizedAffinity.ConsumeTurns(turnsModel);
     }
 
     private void DecreaseCurrentFighterMp()
     {
         int cost = _skillData.Cost;
-        IFighterModel user = Table.GetInstance().GetCurrentFighter();
-        user.SetMp(user.GetCurrentMp() - cost);
+        IFighterModel user = _table.GetGameState().CurrentFighter;
+        user.SetMp(user.GetState().CurrentMp - cost);
     }
 
     private void IncreaseCurrentPlayerUsedSkills()
@@ -78,10 +78,10 @@ public class SkillController: ISkillController
     private IAffinityController GetPrioritizedAffinity()
     {
         IAffinityController prioritizedAffinity = new NeutralAffinity();
-        foreach (IFighterModel target in _targets.GetTargets())
+        foreach (IFighterModel target in _targets.GetTargets(_table))
         {
             prioritizedAffinity = _type.GetAffinityFrom(target);
-            //TODO: implementar prioridad de affinides para ataques multihit
+            // int priority = prioritizedAffinity.GetPriority();
         }
 
         return prioritizedAffinity;

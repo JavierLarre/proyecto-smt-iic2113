@@ -6,35 +6,24 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 
 public class TableInfoView: IView
 {
-    private readonly Table _table = Table.GetInstance();
     private readonly PlayerView _firstPlayer;
     private readonly PlayerView _secondPlayer;
 
-    public TableInfoView()
+    public TableInfoView(GameState gameState)
     {
-        Player firstPlayer = _table.GetCurrentPlayer();
-        Player secondPlayer = _table.GetEnemyPlayer();
-        if (firstPlayer.GetPlayerNumber() != 0)
+        Player firstPlayer = gameState.CurrentPlayer;
+        Player secondPlayer = gameState.EnemyPlayer;
+        if (firstPlayer.GetPlayerState().PlayerNumber != 0)
             (firstPlayer, secondPlayer) = (secondPlayer, firstPlayer);
         _firstPlayer = new PlayerView(firstPlayer);
         _secondPlayer = new PlayerView(secondPlayer);
     }
 
-    public string GetCurrentInfo()
-    {
-        return $"{_firstPlayer.GetBanner()}\n{_secondPlayer.GetBanner()}";
-    }
-
     public void Display()
     {
         ConsoleBattleView view = BattleViewSingleton.GetBattleView();
-        view.DisplayCard(_firstPlayer.GetBanner());
-        view.WriteLine(_secondPlayer.GetBanner());
-    }
-
-    public IFighterView GetFighterInTurn()
-    {
-        IFighterModel fighterInTurn = _table.GetCurrentFighter();
-        return FighterViewFactory.FromFighter(fighterInTurn);
+        view.DisplayIndent();
+        _firstPlayer.Display();
+        _secondPlayer.Display();
     }
 }

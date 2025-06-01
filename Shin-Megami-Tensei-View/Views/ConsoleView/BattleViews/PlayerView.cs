@@ -6,34 +6,27 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView;
 
 public class PlayerView: IView
 {
-    private readonly Player _player;
     private readonly TeamView _team;
+    private int _playerNumber;
+    private string _leaderName;
 
     public PlayerView(Player player)
     {
-        _player = player;
-        _team = new TeamView(player.GetTeam());
-    }
-
-    public int GetPlayerNumber() => _player.GetPlayerNumber() + 1;
-    public string GetPlayerName() => _team.GetLeaderName();
-
-    public string GetPlayerNameAndNumber()
-    {
-        return $"{GetPlayerName()} (J{GetPlayerNumber()})";
-    }
-
-    public string GetBanner()
-    {
-        return $"Equipo de {GetPlayerName()} (J{GetPlayerNumber()})"
-               + '\n' + _team.GetFightersInfo();
+        PlayerState playerState = player.GetPlayerState();
+        _playerNumber = playerState.PlayerNumber + 1;
+        _team = new TeamView(playerState.Team);
+        _leaderName = _team.GetLeaderName();
     }
 
     public void Display()
     {
         ConsoleBattleView view = BattleViewSingleton.GetBattleView();
-        view.DisplayCard($"Equipo de {GetPlayerNameAndNumber()}");
+        view.WriteLine($"Equipo de {GetPlayerNameAndNumber()}");
         view.WriteLine(_team.GetFightersInfo());
     }
 
+    public string GetPlayerNameAndNumber()
+    {
+        return $"{_leaderName} (J{_playerNumber})";
+    }
 }

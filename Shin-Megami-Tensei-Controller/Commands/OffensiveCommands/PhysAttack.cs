@@ -4,9 +4,6 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public class PhysAttack: OffensiveAttack
 {
-    public PhysAttack(Table table) : base(table)
-    {
-    }
 
     protected override string GetAttackType() => "Phys";
 

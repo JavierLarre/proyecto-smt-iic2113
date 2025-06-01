@@ -20,7 +20,7 @@ public class WinConditionController
     public Player GetWinner()
     {
         GameState gameState = GetGameState();
-        bool enemyPlayerHasUnits = HasAliveUnits(gameState.EnemyTeam);
+        bool enemyPlayerHasUnits = HasAliveUnits(gameState.EnemyPlayerState);
         Player currentPlayer = gameState.CurrentPlayer;
         Player enemyPlayer = gameState.EnemyPlayer;
         if (enemyPlayerHasUnits)
@@ -31,10 +31,8 @@ public class WinConditionController
     private bool DoBothTeamsHaveAlivePlayers()
     {
         GameState gameState = GetGameState();
-        Team currentTeam = gameState.CurrentTeam;
-        Team enemyTeam = gameState.EnemyTeam;
-        bool currentTeamHasAliveUnits = HasAliveUnits(currentTeam);
-        bool enemyTeamHasAliveUnits = HasAliveUnits(enemyTeam);
+        bool currentTeamHasAliveUnits = HasAliveUnits(gameState.CurrentPlayerState);
+        bool enemyTeamHasAliveUnits = HasAliveUnits(gameState.EnemyPlayerState);
         return currentTeamHasAliveUnits && enemyTeamHasAliveUnits;
     }
 
@@ -43,10 +41,10 @@ public class WinConditionController
         return _table.GetGameState();
     }
 
-    private static bool HasAliveUnits(Team team)
+    private static bool HasAliveUnits(PlayerState playerState)
     {
-        TeamState state = team.GetTeamState();
-        var aliveFighters = state.AliveTargets;
+        TeamState teamState = playerState.TeamState;
+        var aliveFighters = teamState.AliveTargets;
         bool hasAliveUnits = aliveFighters.Count != 0;
         return hasAliveUnits;
     }

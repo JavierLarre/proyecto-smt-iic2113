@@ -5,15 +5,14 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 public class ReviveMenu: AbstractFighterTargetMenu
 {
-    private Table _table = Table.GetInstance();
 
-    public ReviveMenu(IEnumerable<IFighterModel> targets)
+    public ReviveMenu(GameState gameState, IEnumerable<IFighterModel> targets)
     {
-        IFighterModel attacker = _table.GetCurrentFighter();
+        IFighterModel attacker = gameState.CurrentFighter;
         SetTargets(targets.ToList());
         AddTargets();
         AddCancelOption();
-        SetHeader($"Seleccione un objetivo para {attacker.GetUnitData().Name}");
+        SetHeader($"Seleccione un objetivo para {attacker.GetState().Name}");
     }
 
     private void AddTargets()
@@ -25,7 +24,7 @@ public class ReviveMenu: AbstractFighterTargetMenu
     private void AddTargetOption(IFighterModel target)
     {
         IFighterView targetView = FighterViewFactory.FromFighter(target);
-        string targetInfo = $"{target.GetUnitData().Name} {targetView.GetStats()}";
+        string targetInfo = $"{target.GetState().Name} {targetView.GetStats()}";
         AddOption(targetView.GetName(), targetInfo);
     }
     

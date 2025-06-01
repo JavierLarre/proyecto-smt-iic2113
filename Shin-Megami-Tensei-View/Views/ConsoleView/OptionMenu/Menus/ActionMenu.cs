@@ -12,7 +12,7 @@ public class ActionMenu: AbstractOptionsMenu
             AddOption(action, action);
         }
 
-        SetHeader($"Seleccione una acción para {fighter.GetUnitData().Name}");
+        SetHeader($"Seleccione una acción para {fighter.GetState().Name}");
     }
 
     protected override string GetSeparator() => ": ";

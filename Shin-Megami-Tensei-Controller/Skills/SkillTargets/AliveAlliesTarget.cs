@@ -1,24 +1,21 @@
 ﻿using Shin_Megami_Tensei_Model;
+using Shin_Megami_Tensei_View.Views;
 using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
+using Shin_Megami_Tensei.TargetTypes;
 
 namespace Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 
 public class AliveAlliesTarget : ISkillTargets
 {
-    private IFighterModel? _target;
+    private SingleFighterMenuController? _controller;
 
-    public ICollection<IFighterModel> GetTargets()
+    public ICollection<IFighterModel> GetTargets(Table table)
     {
-        if (_target is null)
-            InitializeTarget();
-        return [_target!];
-    }
-
-    private void InitializeTarget()
-    {
-        Table table = Table.GetInstance();
-        var targets = table.GetCurrentPlayer().GetTeam().GetAliveFront();
-        TargetMenu menu = new TargetMenu(table.GetCurrentFighter(), targets);
-        _target = menu.GetTarget();
+        if (_controller is not null) 
+            return [_controller.GetTarget()];
+        
+        var builder = new SingleFighterMenuControllerBuilder(table);
+        _controller = builder.BuildFromAliveCurrentTeam();
+        return [_controller.GetTarget()];
     }
 }

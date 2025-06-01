@@ -8,12 +8,4 @@ public abstract class AbstractFighterTargetMenu: AbstractOptionsMenu
 
     protected void SetTargets(ICollection<IFighterModel> targets) => _targets = targets;
     protected ICollection<IFighterModel> GetTargets() => _targets;
-    
-    public IFighterModel GetTarget()
-    {
-        string targetName = GetChoice();
-        IFighterModel choosenTarget = _targets.
-            First(target => target.GetUnitData().Name == targetName);
-        return choosenTarget;
-    }
 }

@@ -15,25 +15,7 @@ public abstract class AbstractFighter: AbstractModel, IFighterModel
         _hp = new StatComponent(_unitData.Stats.Hp);
         _mp = new StatComponent(_unitData.Stats.Mp);
     }
-    public int GetCurrentHp() => _hp.Get();
-
-    public void SetHp(int value)
-    {
-        _hp.Set(value);
-        UpdateObservers();
-    }
-
-    public int GetCurrentMp() => _mp.Get();
-
-    public void SetMp(int value) => _mp.Set(value);
-
-    public abstract void AddToReserve(Team team);
-    public abstract bool CanBeSwapped();
-
-    public bool IsAlive() => _hp.Get() > 0;
-
-    public UnitData GetUnitData() => _unitData;
-
+    
     public FighterState GetState()
     {
         return new FighterState
@@ -41,15 +23,36 @@ public abstract class AbstractFighter: AbstractModel, IFighterModel
             Name = _unitData.Name,
             Stats = _unitData.Stats,
             Affinities = _unitData.Affinities,
-            CurrentHp = _hp.Get(),
-            MaxHp = _unitData.Stats.Hp,
-            CurrentMp = _mp.Get(),
-            MaxMp = _unitData.Stats.Mp,
             FightOptions = _unitData.FightOptions,
-            FilePriority = _unitData.FilePriority,
+            CurrentHp = _hp.Get(),
+            CurrentMp = _mp.Get(),
+            MaxHp = _unitData.Stats.Hp,
+            MaxMp = _unitData.Stats.Mp,
+            Skills = _unitData.Skills,
+            UsableSkills = GetUsableSkills(),
             IsAlive = IsAlive(),
-            Skills = _unitData.Skills
+            CanBeSwapped = CanBeSwapped(),
+            FilePriority = _unitData.FilePriority,
         };
     }
+
+    public void SetHp(int value)
+    {
+        _hp.Set(value);
+        UpdateObservers();
+    }
     
+    public void SetMp(int value) => _mp.Set(value);
+    
+    public abstract void AddToReserve(Team team);
+    protected abstract bool CanBeSwapped();
+    private bool IsAlive() => _hp.Get() > 0;
+
+    private ICollection<SkillData> GetUsableSkills()
+    {
+        return _unitData
+            .Skills
+            .Where(skill => skill.Cost <= _mp.Get())
+            .ToList();
+    }
 }

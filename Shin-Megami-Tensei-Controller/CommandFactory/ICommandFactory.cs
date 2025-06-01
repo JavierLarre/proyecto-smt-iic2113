@@ -2,7 +2,7 @@
 
 namespace Shin_Megami_Tensei.Fighters;
 
-public interface IFighterController
+public interface ICommandFactory
 {
     public IFighterCommand GetCommand(string commandName);
 }

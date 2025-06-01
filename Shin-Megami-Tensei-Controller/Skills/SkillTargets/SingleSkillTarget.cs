@@ -8,17 +8,17 @@ namespace Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 
 public class SingleSkillTarget: ISkillTargets
 {
-    private SingleEnemyTarget _targetController;
+    private SingleFighterMenuController? _targetController;
 
-    public SingleSkillTarget()
+    public ICollection<IFighterModel> GetTargets(Table table)
     {
-        Table table = Table.GetInstance();
-        _targetController = new SingleEnemyTarget(table);
-    }
-    
-    public ICollection<IFighterModel> GetTargets()
-    {
+        if (_targetController is null)
+        {
+            var controllerBuilder = new SingleFighterMenuControllerBuilder(table);
+            _targetController = controllerBuilder.BuildFromAliveEnemyTeam();
+        }
         IFighterModel target = _targetController.GetTarget();
         return [target];
     }
+
 }

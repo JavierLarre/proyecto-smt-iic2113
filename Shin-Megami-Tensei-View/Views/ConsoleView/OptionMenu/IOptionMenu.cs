@@ -2,5 +2,5 @@
 
 public interface IOptionMenu: IViewInput
 {
-    public string GetChoice();
+    public string GetChoice(); //todo: eliminar 
 }

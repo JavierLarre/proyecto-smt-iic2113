@@ -4,9 +4,6 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public class ShootAttack: OffensiveAttack
 {
-    public ShootAttack(Table table) : base(table)
-    {
-    }
 
     protected override string GetAttackType() => "Gun";
 

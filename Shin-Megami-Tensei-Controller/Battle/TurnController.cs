@@ -8,13 +8,13 @@ public class TurnController
 {
     private Table _table;
     private TurnsView _turnsView;
-    private ActionController _actionController = new ();
+    private ActionController _actionController;
 
     public TurnController(Table table)
     {
         _table = table;
-        TurnsModel turnManager = _table.GetGameState().TurnsModel;
-        _turnsView = new TurnsView(turnManager);
+        _actionController = new ActionController(table);
+        _turnsView = new TurnsView(_table);
     }
 
     public void PlayTurn()

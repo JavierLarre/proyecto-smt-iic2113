@@ -4,7 +4,6 @@ public struct PlayerState
 {
     public int PlayerNumber;
     public Team Team;
-    public int UsedSkills;
-    public ICollection<IFighterModel> FightersInTurnOrder;
     public TeamState TeamState;
+    public int UsedSkills;
 }

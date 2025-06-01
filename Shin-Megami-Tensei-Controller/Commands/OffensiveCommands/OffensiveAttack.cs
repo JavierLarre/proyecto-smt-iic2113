@@ -9,19 +9,15 @@ public abstract class OffensiveAttack: IFighterCommand
 {
     private const double PhysicalDamageMultiplier = 0.0114;
     
-    private Table _table;
-    private IFighterModel _attacker;
+    private Table _table = null!;
+    private IFighterModel _attacker = new EmptyFighter();
     private IFighterModel _target = new EmptyFighter();
     private IAffinityController _affinity = new NeutralAffinity();
 
-    protected OffensiveAttack(Table table)
+    public void Execute(Table table)
     {
         _table = table;
         _attacker = _table.GetGameState().CurrentFighter;
-    }
-
-    public void Execute()
-    {
         _target = GetTargetFromUser();
         _affinity = AffinityFactory.FromString(GetAffinityString());
         ApplyAttack();
@@ -44,8 +40,11 @@ public abstract class OffensiveAttack: IFighterCommand
     private void ApplyAttack()
     {
         double damage = CalculateDamage();
-        _affinity.RecieveAttack(_target, damage);
-        _affinity.ConsumeTurns();
+        TurnsModel turnsModel = _table.GetGameState().TurnsModel;
+        _affinity.SetTarget(_target);
+        _affinity.SetDamage(damage);
+        _affinity.RecieveAttack(_table);
+        _affinity.ConsumeTurns(turnsModel);
     }
 
     
@@ -59,7 +58,8 @@ public abstract class OffensiveAttack: IFighterCommand
 
     private IFighterModel GetTargetFromUser()
     {
-        SingleEnemyTarget targetController = new SingleEnemyTarget(_table);
+        var controllerBuilder = new SingleFighterMenuControllerBuilder(_table);
+        var targetController = controllerBuilder.BuildFromAliveEnemyTeam();
         return targetController.GetTarget();
     }
 

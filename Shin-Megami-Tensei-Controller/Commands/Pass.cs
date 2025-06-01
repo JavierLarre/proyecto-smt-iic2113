@@ -5,9 +5,9 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public class Pass: IFighterCommand 
 {
-    public void Execute()
+    public void Execute(Table table)
     {
-        TurnsModel turnManager = Table.GetInstance().GetTurnManager();
-        turnManager.ConsumeAndGainTurn();
+        TurnsModel turnsModel = table.GetGameState().TurnsModel;
+        turnsModel.ConsumeAndGainTurn();
     }
 }

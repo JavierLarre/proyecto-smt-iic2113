@@ -5,9 +5,9 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public class SamuraiInvoke: AbstractInvoke
 {
-    protected override int GetSummonPosition()
+
+    protected override int GetSummonPosition(Table table)
     {
-        Table table = Table.GetInstance();
         var summonablePositionsController = new SummonablePositionsController(table);
         return summonablePositionsController.GetPositionFromUser();
     }

@@ -6,23 +6,22 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public abstract class AbstractInvoke: IFighterCommand
 {
-    private Table _table = Table.GetInstance();
     
-    public void Execute()
+    public void Execute(Table table)
     {
-        var summonController = new SummonController(_table);
+        var summonController = new SummonController(table);
         summonController.AskUserForTarget();
-        int atPosition = GetSummonPosition();
+        int atPosition = GetSummonPosition(table);
         summonController.SummonAt(atPosition);
-        ConsumeTurns();
+        TurnsModel turnsModel = table.GetGameState().TurnsModel;
+        ConsumeTurns(turnsModel);
     }
 
-    private void ConsumeTurns()
+    private static void ConsumeTurns(TurnsModel turnsModel)
     {
-        TurnsModel turnManager = _table.GetTurnManager();
-        turnManager.ConsumeAndGainTurn();
+        turnsModel.ConsumeAndGainTurn();
     }
 
-    protected abstract int GetSummonPosition();
+    protected abstract int GetSummonPosition(Table table);
 
 }

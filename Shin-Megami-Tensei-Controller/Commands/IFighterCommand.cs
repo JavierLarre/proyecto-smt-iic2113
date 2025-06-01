@@ -6,5 +6,5 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public interface IFighterCommand
 {
-    public void Execute();
+    public void Execute(Table table); 
 }

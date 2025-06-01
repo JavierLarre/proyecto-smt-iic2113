@@ -1,23 +1,18 @@
 ﻿using Shin_Megami_Tensei_Model;
-using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 
 namespace Shin_Megami_Tensei.Fighters;
 
-public class ResistAffinity: IAffinityController
+public class ResistAffinity: AbstractAffinity
 {
-    private int _resistedDamage;
-    public void RecieveAttack(IFighterModel target, double damage)
+
+    public override void ConsumeTurns(TurnsModel turnsModel)
     {
-        _resistedDamage = GameConstants.Truncate(damage * 0.5);
-        target.SetHp(target.GetState().CurrentHp - _resistedDamage);
+        turnsModel.ConsumeTurn();
     }
 
-    public void ConsumeTurns()
+    public override int GetDamageDone() => GameConstants.Truncate(Damage * 0.5);
+    public override int GetPriority()
     {
-        Table table = Table.GetInstance();
-        TurnsModel turnManager = table.GetTurnManager();
-        turnManager.ConsumeTurn();
+        throw new NotImplementedException();
     }
-
-    public int GetDamageDone() => _resistedDamage;
 }

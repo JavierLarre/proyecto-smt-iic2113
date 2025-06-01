@@ -1,33 +1,33 @@
 ﻿using Shin_Megami_Tensei_Model;
 using Shin_Megami_Tensei_Model.Fighters;
-using Shin_Megami_Tensei_View.Views;
 using Shin_Megami_Tensei_View.Views.ConsoleView.BattleViews;
 using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
-using Shin_Megami_Tensei.Fighters.Actions;
+using Shin_Megami_Tensei.TargetTypes;
 
 namespace Shin_Megami_Tensei;
 
-public class SummonController: IViewController
+public class SummonController
 {
     private Table _table;
-    private GameState _gameState;
-    private int _summonPosition;
-    private SummonFighterMenu _summonMenu;
     private IFighterModel _choosenTarget = new EmptyFighter();
-    private ICollection<IFighterModel> _targets;
+    private SingleFighterMenuController _menuController;
 
     public SummonController(Table table)
     {
         _table = table;
-        _gameState = _table.GetGameState();
-        _targets = _gameState.Reserve.Where(fighter => fighter.IsAlive()).ToList();
-        _summonMenu = new SummonFighterMenu(_targets);
-        _summonMenu.SetInput(this);
+        var gameState = _table.GetGameState();
+        var currentTeamAliveReserve = gameState
+            .CurrentPlayerState
+            .TeamState
+            .AliveReserve;
+        var summonMenu = new SummonFighterMenu(currentTeamAliveReserve);
+        _menuController = new SingleFighterMenuController(summonMenu);
+        _menuController.SetFighters(currentTeamAliveReserve);
     }
 
     public void AskUserForTarget()
     {
-        _summonMenu.GetChoice();
+        _choosenTarget = _menuController.GetTarget();
     }
 
     public void SummonAt(IFighterModel summonTarget, int summonPosition)
@@ -39,15 +39,5 @@ public class SummonController: IViewController
     public void SummonAt(int summonPosition)
     {
         SummonAt(_choosenTarget, summonPosition);
-    }
-
-    public void OnInput(string input)
-    {
-        bool GetFighterByName(IFighterModel fighter)
-        {
-            return fighter.GetState().Name == input;
-        }
-
-        _choosenTarget = _targets.First(GetFighterByName);
     }
 }

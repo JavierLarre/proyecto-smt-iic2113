@@ -2,23 +2,23 @@
 
 namespace Shin_Megami_Tensei.Fighters;
 
-public class DrainAffinity: IAffinityController
+public class DrainAffinity: AbstractAffinity
 {
-    private int _healedHp;
-    
-    public void RecieveAttack(IFighterModel target, double damage)
+
+    public override void RecieveAttack(Table table)
     {
-        int targetHp = target.GetState().CurrentHp;
-        _healedHp = GameConstants.Truncate(damage);
-        target.SetHp(targetHp + _healedHp);
+        int targetHp = Target.GetState().CurrentHp;
+        int healedHp = GetDamageDone();
+        Target.SetHp(targetHp + healedHp);
     }
 
-    public int GetDamageDone() => _healedHp;
-
-    public void ConsumeTurns()
+    public override int GetPriority()
     {
-        Table table = Table.GetInstance();
-        TurnsModel turnManager = table.GetTurnManager();
-        turnManager.ConsumeAll();
+        throw new NotImplementedException();
+    }
+
+    public override void ConsumeTurns(TurnsModel turnsModel)
+    {
+        turnsModel.ConsumeAll();
     }
 }

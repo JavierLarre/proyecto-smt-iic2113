@@ -2,7 +2,6 @@
 using Shin_Megami_Tensei_Model.Fighters;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
-using Shin_Megami_Tensei_View.Views.ConsoleView.Skills;
 using Shin_Megami_Tensei.Battles;
 
 namespace Shin_Megami_Tensei_View.Views.ConsoleView.AffinityView;

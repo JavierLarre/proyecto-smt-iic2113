@@ -8,6 +8,7 @@ public struct TeamState
     public ICollection<IFighterModel> AliveTargets;
     public ICollection<IFighterModel> Reserve;
     public ICollection<IFighterModel> AliveReserve;
+    public ICollection<IFighterModel> DeadFighters;
     public IFighterModel LastSummonedFighter;
     public IFighterModel LastReservedFighter;
 }

@@ -27,7 +27,9 @@ public abstract class OffensiveSkillType: ISkillType
     {
         _attacker = table.GetGameState().CurrentFighter;
         double baseDamage = GetSkillDamage();
-        _affinity.RecieveAttack(_target, baseDamage);
+        _affinity.SetDamage(baseDamage);
+        _affinity.SetTarget(_target);
+        _affinity.RecieveAttack(table);
     }
 
     public IAffinityController GetAffinityFrom(IFighterModel target)

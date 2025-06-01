@@ -27,7 +27,7 @@ public class RoundController
 
     private void DisplayRoundStart()
     {
-        Player currentPlayer = _table.GetCurrentPlayer();
+        Player currentPlayer = _table.GetGameState().CurrentPlayer;
         StartRoundView roundView = new StartRoundView(currentPlayer);
         roundView.Display();
     }

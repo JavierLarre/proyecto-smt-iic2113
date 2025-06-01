@@ -1,5 +1,4 @@
 ﻿using Shin_Megami_Tensei_Model;
-using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
 namespace Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 
@@ -14,13 +13,13 @@ public class AllySkillTarget: ISkillTargets
             new AliveAlliesTarget();
     }
     
-    public ICollection<IFighterModel> GetTargets()
+    public ICollection<IFighterModel> GetTargets(Table table)
     {
-        return _allyTargets.GetTargets();
+        return _allyTargets.GetTargets(table);
     }
 
     private static bool DoesSkillRevive(string skillName)
     {
-        return skillName.Contains("ecarm") || skillName.Contains("Sabbatma");
+        return skillName.Contains("ecarm");
     }
 }

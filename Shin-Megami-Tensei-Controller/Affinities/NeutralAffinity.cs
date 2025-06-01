@@ -1,24 +1,16 @@
 ﻿using Shin_Megami_Tensei_Model;
-using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 
 namespace Shin_Megami_Tensei.Fighters;
 
-public class NeutralAffinity: IAffinityController
+public class NeutralAffinity: AbstractAffinity
 {
-    private int _damageDone;
-    public void RecieveAttack(IFighterModel target, double damage)
+    public override int GetPriority()
     {
-        _damageDone = GameConstants.Truncate(damage);
-        int targetHp = target.GetState().CurrentHp;
-        target.SetHp(targetHp - _damageDone);
+        throw new NotImplementedException();
     }
 
-    public int GetDamageDone() => _damageDone;
-
-    public void ConsumeTurns()
+    public override void ConsumeTurns(TurnsModel turnsModel)
     {
-        Table table = Table.GetInstance();
-        TurnsModel turnManager = table.GetTurnManager();
-        turnManager.ConsumeTurn();
+        turnsModel.ConsumeTurn();
     }
 }

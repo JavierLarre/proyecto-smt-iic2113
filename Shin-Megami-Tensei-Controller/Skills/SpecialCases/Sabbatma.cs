@@ -34,7 +34,7 @@ public class Sabbatma: ISkillController
 
     private void ConsumeMp()
     {
-        IFighterModel currentFighter = _table.GetCurrentFighter();
-        currentFighter.SetMp(currentFighter.GetCurrentMp() - _skillData.Cost);
+        IFighterModel currentFighter = _table.GetGameState().CurrentFighter;
+        currentFighter.SetMp(currentFighter.GetState().CurrentMp - _skillData.Cost);
     }
 }

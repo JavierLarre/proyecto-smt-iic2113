@@ -35,12 +35,6 @@ public class SummonPositionsMenu: AbstractOptionsMenu
         // o no me debería preocupar?
         return positionInfo;
     }
-
-    public int GetPosition()
-    {
-        string choice = GetChoice();
-        return int.Parse(choice);
-    }
     
     protected override string GetSeparator() => "-";
 }

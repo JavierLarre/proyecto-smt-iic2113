@@ -3,21 +3,17 @@ using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 
 namespace Shin_Megami_Tensei.Fighters;
 
-public class WeakAffinity: IAffinityController
+public class WeakAffinity: AbstractAffinity
 {
-    private int _increasedDamage;
-    public void RecieveAttack(IFighterModel target, double damage)
+
+    public override void ConsumeTurns(TurnsModel turnsModel)
     {
-        _increasedDamage = GameConstants.Truncate(damage * 1.5);
-        target.SetHp(target.GetState().CurrentHp - _increasedDamage);
+        turnsModel.ConsumeFullAndGain();
     }
 
-    public void ConsumeTurns()
+    public override int GetDamageDone() => GameConstants.Truncate(Damage * 1.5);
+    public override int GetPriority()
     {
-        Table table = Table.GetInstance();
-        TurnsModel turnManager = table.GetTurnManager();
-        turnManager.ConsumeFullAndGain();
+        throw new NotImplementedException();
     }
-
-    public int GetDamageDone() => _increasedDamage;
 }

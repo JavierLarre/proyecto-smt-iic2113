@@ -13,11 +13,11 @@ public class MultiHitSkill: ISkillHits
         _lowerBound = lowerBound;
         _upperBound = upperBound;
     }
-    public int GetHits()
+    public int GetHits(Table table)
     {
         if (_cachedHits != -1)
             return _cachedHits;
-        int amountSkillsUsed = GetAmountSkillsUsed();
+        int amountSkillsUsed = GetAmountSkillsUsed(table);
         int offset = GetOffset(amountSkillsUsed);
         _cachedHits = _lowerBound + offset;
         return _cachedHits;
@@ -28,10 +28,11 @@ public class MultiHitSkill: ISkillHits
         return amountSkillsUsed % (_upperBound - _lowerBound + 1);
     }
 
-    private static int GetAmountSkillsUsed()
+    private static int GetAmountSkillsUsed(Table table)
     {
-        Table table = Table.GetInstance();
-        int amountSkillsUsed = table.GetCurrentPlayerUsedSkillsCount();
+        int amountSkillsUsed = table.GetGameState()
+            .CurrentPlayerState
+            .UsedSkills;
         return amountSkillsUsed;
     }
 }

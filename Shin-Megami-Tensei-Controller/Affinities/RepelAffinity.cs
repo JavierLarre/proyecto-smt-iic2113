@@ -1,25 +1,23 @@
 ﻿using Shin_Megami_Tensei_Model;
-using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 
 namespace Shin_Megami_Tensei.Fighters;
 
-public class RepelAffinity: IAffinityController
+public class RepelAffinity: AbstractAffinity
 {
-    private int _repelledDamage;
-    public void RecieveAttack(IFighterModel target, double damage)
+    public override void RecieveAttack(Table table)
     {
-        Table table = Table.GetInstance();
         IFighterModel attacker = table.GetGameState().CurrentFighter;
-        _repelledDamage = GameConstants.Truncate(damage);
-        attacker.SetHp(attacker.GetState().CurrentHp - _repelledDamage);
+        int repelledDamage = GetDamageDone();
+        attacker.SetHp(attacker.GetState().CurrentHp - repelledDamage);
     }
 
-    public void ConsumeTurns()
+    public override void ConsumeTurns(TurnsModel turnsModel)
     {
-        Table table = Table.GetInstance();
-        TurnsModel turnManager = table.GetTurnManager();
-        turnManager.ConsumeAll();
+        turnsModel.ConsumeAll();
     }
 
-    public int GetDamageDone() => _repelledDamage;
+    public override int GetPriority()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -4,7 +4,10 @@ namespace Shin_Megami_Tensei.Fighters;
 
 public interface IAffinityController
 {
-    public void RecieveAttack(IFighterModel target, double damage);
-    public void ConsumeTurns(); //todo: cambiarlo a turnModel
+    public void SetTarget(IFighterModel target);
+    public void SetDamage(double damage);
+    public void RecieveAttack(Table table);
+    public void ConsumeTurns(TurnsModel turnsModel);
     public int GetDamageDone();
+    public int GetPriority();
 }

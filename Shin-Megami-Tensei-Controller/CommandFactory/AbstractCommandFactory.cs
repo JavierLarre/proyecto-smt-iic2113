@@ -3,16 +3,16 @@ using Shin_Megami_Tensei.Fighters.Actions;
 
 namespace Shin_Megami_Tensei.Fighters;
 
-public abstract class AbstractFighterController: IFighterController //todo: eliminar clase innecesaria
+public abstract class AbstractCommandFactory: ICommandFactory
 {
+
 
     public  IFighterCommand GetCommand(string commandName)
     {
-        Table table = Table.GetInstance();
         return commandName switch
         {
-            "Atacar" => new PhysAttack(table),
-            "Disparar" => new ShootAttack(table),
+            "Atacar" => new PhysAttack(),
+            "Disparar" => new ShootAttack(),
             "Usar Habilidad" => new UseSkill(),
             "Invocar" => GetInvoke(),
             "Pasar Turno" => new Pass(),

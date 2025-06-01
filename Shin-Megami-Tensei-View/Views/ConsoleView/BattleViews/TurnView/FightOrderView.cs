@@ -7,13 +7,12 @@ namespace Shin_Megami_Tensei_View.Views.ConsoleView.BattleViews;
 
 public class FightOrderView: IView
 {
-    private Table _table = Table.GetInstance();
     private ConsoleBattleView _view = BattleViewSingleton.GetBattleView();
     private IEnumerable<IFighterModel> _fightOrder;
 
-    public FightOrderView()
+    public FightOrderView(GameState gameState)
     {
-        _fightOrder = _table.GetCurrentPlayerFightOrder();
+        _fightOrder = gameState.FightersInTurnOrder;
     }
 
     public void Display()
@@ -29,7 +28,7 @@ public class FightOrderView: IView
         for (int i = 0; i < fighters.Length; i++)
         {
             IFighterModel fighter = fighters[i];
-            _view.WriteLine($"{i+1}-{fighter.GetUnitData().Name}");
+            _view.WriteLine($"{i+1}-{fighter.GetState().Name}");
         }
     }
 }

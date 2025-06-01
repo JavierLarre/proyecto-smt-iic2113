@@ -7,14 +7,13 @@ public class SkillMenu: AbstractOptionsMenu
     
     public SkillMenu(IFighterModel fighter)
     {
-        var mpLeft = fighter.GetCurrentMp();
-        var skills = fighter.GetUnitData().Skills.Where(skill => skill.Cost <= mpLeft);
+        var skills = fighter.GetState().UsableSkills;
         foreach (SkillData skill in skills)
         {
             AddOption(skill.Name, skill.ToString());
         }
         AddCancelOption();
-        SetHeader($"Seleccione una habilidad para que {fighter.GetUnitData().Name} use");
+        SetHeader($"Seleccione una habilidad para que {fighter.GetState().Name} use");
     }
     protected override string GetSeparator() => "-";
 }

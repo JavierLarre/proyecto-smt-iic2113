@@ -1,33 +1,37 @@
 ﻿using Shin_Megami_Tensei_Model;
+using Shin_Megami_Tensei_Model.Fighters;
+using Shin_Megami_Tensei_View.Views;
 using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 using Shin_Megami_Tensei.Fighters.Skills;
 
 namespace Shin_Megami_Tensei.Fighters.Actions;
 
-public class UseSkill: IFighterCommand
+public class UseSkill: IFighterCommand, IViewController
 {
-    private IFighterModel _fighter = Table.GetInstance().GetCurrentFighter();
+    private Table _table = null!;
+    private IFighterModel _caster = new EmptyFighter();
 
-    public void Execute()
+    public void Execute(Table table)
     {
-        string skillName = GetSkillNameFromUser();
-        SkillData choice = _fighter.GetUnitData().Skills
-            .First(skill => skill.Name == skillName);
-        ISkillController controller = SkillControllerFactory.BuildFromData(choice);
-        controller.UseSkill(Table.GetInstance());
-    }
-
-    private string GetSkillNameFromUser()
-    {
+        _table = table;
+        _caster = table.GetGameState().CurrentFighter;
+        IViewInput skillMenu = new SkillMenu(_caster);
+        skillMenu.SetInput(this);
         try
         {
-            IOptionMenu skillMenu = new SkillMenu(_fighter);
-            string skillName = skillMenu.GetChoice();
-            return skillName;
+            skillMenu.Display();
         }
-        catch (OptionException)
+        catch (OptionException e)
         {
             throw new FighterCommandException();
         }
+    }
+
+    public void OnInput(string input)
+    {
+        SkillData choice = _caster.GetState().Skills
+            .First(skill => skill.Name == input);
+        ISkillController controller = SkillControllerFactory.FromData(choice);
+        controller.UseSkill(_table);
     }
 }

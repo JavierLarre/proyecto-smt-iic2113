@@ -19,14 +19,14 @@ public class SummonablePositionsController: IViewController
         var positions = GetPositions();
         SummonPositionsMenu summonPositionsMenu = new SummonPositionsMenu(positions);
         summonPositionsMenu.SetInput(this);
-        summonPositionsMenu.GetChoice();
+        summonPositionsMenu.Display();
         return _position;
     }
     
     private IEnumerable<IFighterModel> GetPositions()
     {
-        var frontRow = _gameState.FrontRow;
-        var swapablePositions = frontRow.Where(fighter => fighter.CanBeSwapped());
+        var frontRow = _gameState.CurrentPlayerState.TeamState.FrontRow;
+        var swapablePositions = frontRow.Where(fighter => fighter.GetState().CanBeSwapped);
         return swapablePositions;
     }
 

@@ -1,4 +1,5 @@
 ﻿using Shin_Megami_Tensei_Model;
+using Shin_Megami_Tensei_Model.Fighters;
 using Shin_Megami_Tensei_View.Views.ConsoleView;
 using Shin_Megami_Tensei.Fighters.Actions;
 using Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
@@ -10,7 +11,7 @@ public class Invitation: ISkillController
     private SkillData _skillData;
     private Table _table = null!;
     private GameState _gameState;
-    private IFighterModel _target = null!;
+    private IFighterModel _target = new EmptyFighter();
     private bool _targetWasDead;
 
     public Invitation(SkillData skill) => _skillData = skill;
@@ -20,7 +21,7 @@ public class Invitation: ISkillController
         _table = table;
         _gameState = _table.GetGameState();
 
-        SelectTarget();
+        SelectTarget(table);
         _targetWasDead = !_target.GetState().IsAlive;
 
         Summon();
@@ -65,9 +66,9 @@ public class Invitation: ISkillController
         return summonPositions.GetPositionFromUser();
     }
 
-    private void SelectTarget()
+    private void SelectTarget(Table table)
     {
         var reserveTarget = new ReserveTarget();
-        _target = reserveTarget.GetTargets().First();
+        _target = reserveTarget.GetTargets(table).First();
     }
 }

@@ -1,28 +1,31 @@
 ﻿using Shin_Megami_Tensei_Model;
 using Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
+using Shin_Megami_Tensei.TargetTypes;
 
 namespace Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 
 public class ReviveSkillTarget: ISkillTargets
 {
-    private IFighterModel? _target;
+    private SingleFighterMenuController? _controller;
     
-    public ICollection<IFighterModel> GetTargets()
+    public ICollection<IFighterModel> GetTargets(Table table)
     {
-        if (_target is null)
-            InitializeTarget();
-        return [_target!];
+        if (_controller is null)
+        {
+            InitializeController(table);
+        }
+        return [_controller!.GetTarget()];
     }
 
-    private void InitializeTarget()
+    private void InitializeController(Table table)
     {
-        Table table = Table.GetInstance();
-        Team team = table.GetCurrentPlayer().GetTeam();
-        var deadUnits = team.GetReserve().
-            Where(fighter => !fighter.IsAlive()).ToList();
-        if (!team.GetLeader().IsAlive())
-            deadUnits.Insert(0, team.GetLeader());
-        ReviveMenu menu = new ReviveMenu(deadUnits);
-        _target = menu.GetTarget();
+        GameState gameState = table.GetGameState();
+        var deadFighters = gameState
+            .CurrentPlayerState
+            .TeamState
+            .DeadFighters;
+        ReviveMenu menu = new ReviveMenu(gameState, deadFighters);
+        _controller = new SingleFighterMenuController(menu);
+        _controller.SetFighters(deadFighters);
     }
 }

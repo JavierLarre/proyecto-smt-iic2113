@@ -3,7 +3,7 @@ using Shin_Megami_Tensei.Battles;
 
 namespace Shin_Megami_Tensei_View.Views.ConsoleView.OptionMenu;
 
-public abstract class AbstractOptionsMenu: IOptionMenu
+public abstract class AbstractOptionsMenu: IViewInput
 {
     private readonly List<string> _optionsNames = [];
     private readonly List<string> _optionsDisplays = [];
@@ -20,14 +20,13 @@ public abstract class AbstractOptionsMenu: IOptionMenu
             string formattedOption = $"{i + 1}{GetSeparator()}{option}";
             view.WriteLine(formattedOption);
         }
-    }
-    
-    public string GetChoice()
-    {
-        Display();
         string userInput = GetOptionFromChoice();
-        OnInput(userInput);
-        return userInput;
+        _inputController.OnInput(userInput);
+    }
+
+    public void SetInput(IViewController viewController)
+    {
+        _inputController = viewController;
     }
     
     private string GetOptionFromChoice()
@@ -39,9 +38,7 @@ public abstract class AbstractOptionsMenu: IOptionMenu
         return _optionsNames[choiceIndex - 1];
     }
 
-    protected abstract string GetSeparator();
-
-    protected void SetHeader(string header) => _header = header;
+    protected void SetHeader(string header) => _header = header; //todo: abstraer header
 
     protected void AddOption(string name, string display)
     {
@@ -54,13 +51,5 @@ public abstract class AbstractOptionsMenu: IOptionMenu
         AddOption("Cancelar", "Cancelar");
     }
 
-    public void OnInput(string input)
-    {
-        _inputController.OnInput(input);
-    }
-
-    public void SetInput(IViewController viewController)
-    {
-        _inputController = viewController;
-    }
+    protected abstract string GetSeparator();
 }

@@ -9,7 +9,14 @@ namespace Shin_Megami_Tensei.Battles;
 
 public class ActionController: IViewController
 {
-    private Table _table = Table.GetInstance();
+    private Table _table;
+    private IFighterModel _currentFighter;
+
+    public ActionController(Table table)
+    {
+        _table = table;
+        _currentFighter = _table.GetGameState().CurrentFighter;
+    }
     
     public void PlayAction()
     {
@@ -28,21 +35,21 @@ public class ActionController: IViewController
     public void OnInput(string input)
     {
         IFighterCommand fighterCommand = GetCommandFromAction(input);
-        fighterCommand.Execute();
+        fighterCommand.Execute(_table);
     }
 
     private void ExecuteCommandFromUser()
     {
-        IFighterModel currentFighter = _table.GetCurrentFighter();
-        ActionView actionView = new ActionView(currentFighter, this);
+        _currentFighter = _table.GetGameState().CurrentFighter;
+        ActionView actionView = new ActionView(_currentFighter, this);
         actionView.Display();
     }
 
     private IFighterCommand GetCommandFromAction(string action)
     {
-        IFighterModel currentFighter = _table.GetCurrentFighter();
-        IFighterController controller = FighterControllerFactory
-            .GetController(currentFighter);
-        return controller.GetCommand(action);
+        // Un factory no debe ser tan complicado, verdad?
+        CommandFactoryBuilder factoryBuilder = new CommandFactoryBuilder(_table);
+        ICommandFactory factory = factoryBuilder.FromFighter(_currentFighter);
+        return factory.GetCommand(action);
     }
 }

@@ -4,12 +4,17 @@ namespace Shin_Megami_Tensei.Fighters.Actions;
 
 public class DemonInvoke: AbstractInvoke
 {
-    protected override int GetSummonPosition()
+
+    protected override int GetSummonPosition(Table table)
     {
-        Table table = Table.GetInstance();
-        IFighterModel currentDemon = table.GetCurrentFighter();
-        int atPosition = table.GetCurrentPlayer().GetTeam()
-            .GetFrontRow().ToList().IndexOf(currentDemon);
+        GameState gameState = table.GetGameState();
+        IFighterModel currentDemon = gameState.CurrentFighter;
+        List<IFighterModel> frontRow = gameState
+            .CurrentPlayerState
+            .TeamState
+            .FrontRow
+            .ToList();
+        int atPosition = frontRow.IndexOf(currentDemon);
         return atPosition;
     }
 }

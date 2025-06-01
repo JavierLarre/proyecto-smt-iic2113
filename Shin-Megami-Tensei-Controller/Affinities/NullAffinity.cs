@@ -2,20 +2,19 @@
 
 namespace Shin_Megami_Tensei.Fighters;
 
-public class NullAffinity: IAffinityController
+public class NullAffinity: AbstractAffinity
 {
-    public void RecieveAttack(IFighterModel target, double damage)
+    public override void RecieveAttack(Table table) { }
+
+    public override void ConsumeTurns(TurnsModel turnsModel)
     {
-        
+        turnsModel.ConsumeTurn();
+        turnsModel.ConsumeTurn();
     }
 
-    public void ConsumeTurns()
+    public override int GetDamageDone() => 0;
+    public override int GetPriority()
     {
-        Table table = Table.GetInstance();
-        TurnsModel turnManager = table.GetTurnManager();
-        turnManager.ConsumeTurn();
-        turnManager.ConsumeTurn();
+        throw new NotImplementedException();
     }
-
-    public int GetDamageDone() => 0;
 }

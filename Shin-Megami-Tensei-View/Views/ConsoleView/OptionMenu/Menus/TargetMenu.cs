@@ -15,7 +15,7 @@ public class TargetMenu: AbstractFighterTargetMenu
             AddOption(targetView.GetName(), targetView.GetInfo());
         }
         AddCancelOption();
-        SetHeader($"Seleccione un objetivo para {attacker.GetUnitData().Name}");
+        SetHeader($"Seleccione un objetivo para {attacker.GetState().Name}");
     }
 
     protected override string GetSeparator() => "-";
