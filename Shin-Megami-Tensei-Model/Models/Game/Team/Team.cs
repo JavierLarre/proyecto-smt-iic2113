@@ -74,6 +74,7 @@ public class Team: AbstractModel, IModelObserver
         foreach (IFighterModel fighter in _frontRow)
             if (!fighter.GetState().IsAlive)
                 fighter.AddToReserve(this);
+        SortReserve();
     }
 
     public void MoveToReserve(IFighterModel fighter)

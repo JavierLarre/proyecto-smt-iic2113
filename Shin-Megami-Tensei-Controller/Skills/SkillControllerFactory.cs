@@ -1,5 +1,6 @@
 ﻿using Shin_Megami_Tensei_Model;
 using Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
+using Shin_Megami_Tensei.Skills.SpecialCases;
 
 namespace Shin_Megami_Tensei.Fighters.Skills;
 
@@ -12,6 +13,7 @@ public static class SkillControllerFactory
         {
             "Invitation" => new Invitation(skill),
             "Sabbatma" => new Sabbatma(skill),
+            "Bad Company" => new BadCompany(skill),
             _ => GetCommonSkill(skill)
         };
     }
