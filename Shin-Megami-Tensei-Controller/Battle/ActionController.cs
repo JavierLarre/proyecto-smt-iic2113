@@ -25,6 +25,12 @@ public class ActionController: IViewController
         }
     }
 
+    public void OnInput(string input)
+    {
+        IFighterCommand fighterCommand = GetCommandFromAction(input);
+        fighterCommand.Execute();
+    }
+
     private void ExecuteCommandFromUser()
     {
         IFighterModel currentFighter = _table.GetCurrentFighter();
@@ -38,11 +44,5 @@ public class ActionController: IViewController
         IFighterController controller = FighterControllerFactory
             .GetController(currentFighter);
         return controller.GetCommand(action);
-    }
-
-    public void OnInput(string input)
-    {
-        IFighterCommand fighterCommand = GetCommandFromAction(input);
-        fighterCommand.Execute();
     }
 }

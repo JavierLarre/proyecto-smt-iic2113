@@ -10,8 +10,8 @@ public static class FighterControllerFactory
     {
         return fighter switch
         {
-            Demon => new DemonController(fighter),
-            Samurai => new SamuraiController(fighter),
+            Demon => new DemonController(),
+            Samurai => new SamuraiController(),
             _ => throw new ArgumentException("Fighter Type not found")
         };
     }

@@ -5,17 +5,8 @@ namespace Shin_Megami_Tensei.Fighters.Demons;
 
 public class DemonController: AbstractFighterController
 {
-    public DemonController(IFighterModel fighter) : base(fighter) { }
-
-    public override IFighterCommand GetCommand(string commandName)
+    protected override AbstractInvoke GetInvoke()
     {
-        return commandName switch
-        {
-            "Atacar" => new PhysAttack(),
-            "Usar Habilidad" => new UseSkill(),
-            "Invocar" => new DemonInvoke(),
-            "Pasar Turno" => new Pass(),
-            _ => throw new ArgumentException("Action Not Found")
-        };
+        return new DemonInvoke();
     }
 }

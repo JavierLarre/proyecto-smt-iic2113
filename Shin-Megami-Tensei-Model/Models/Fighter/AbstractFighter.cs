@@ -39,6 +39,7 @@ public abstract class AbstractFighter: AbstractModel, IFighterModel
         return new FighterState
         {
             Name = _unitData.Name,
+            Stats = _unitData.Stats,
             Affinities = _unitData.Affinities,
             CurrentHp = _hp.Get(),
             MaxHp = _unitData.Stats.Hp,
