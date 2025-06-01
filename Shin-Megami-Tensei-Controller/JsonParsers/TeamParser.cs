@@ -67,7 +67,7 @@ public class TeamParser
 
     private static string[] GetSamuraiSkills(string line)
     {
-        Regex skillPattern = new Regex(@"^\[Samurai\] [A-Za-z\-]+ \((?<skills>[A-Za-z\-,\s]+)\)");
+        Regex skillPattern = new Regex(@"^\[Samurai\] [A-Za-z\-]+ \((?<skills>[A-Za-z\-,\s']+)\)");
         Match match = skillPattern.Match(line);
         return match.Groups["skills"].Value.Split(",");
     }

@@ -20,10 +20,6 @@ public class SummonController
             .CurrentPlayerState
             .TeamState
             .AliveReserve;
-        foreach (IFighterModel fighterModel in currentTeamAliveReserve)
-        {
-            Console.WriteLine(fighterModel.GetState().FilePriority);
-        }
         var summonMenu = new SummonFighterMenu(currentTeamAliveReserve);
         _menuController = new SingleFighterMenuController(summonMenu);
         _menuController.SetFighters(currentTeamAliveReserve);

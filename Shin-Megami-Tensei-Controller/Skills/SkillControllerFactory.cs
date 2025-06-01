@@ -14,6 +14,8 @@ public static class SkillControllerFactory
             "Invitation" => new Invitation(skill),
             "Sabbatma" => new Sabbatma(skill),
             "Bad Company" => new BadCompany(skill),
+            "Trafuri" => new Trafuri(),
+            "Defender's Gaze" => new DefendersGaze(skill),
             _ => GetCommonSkill(skill)
         };
     }

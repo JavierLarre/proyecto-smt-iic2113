@@ -58,12 +58,6 @@ public class BadCompany: ISkillController
 
     private void TrySaveStrongestFighter()
     {
-        foreach (IFighterModel model in _reserve)
-        {
-            Console.WriteLine(model.GetState().Name);
-            Console.WriteLine(model.GetState().FilePriority);
-            Console.WriteLine(model.GetState().Stats.Str);
-        }
 
         IFighterModel? strongestFighter = _reserve.MaxBy(fighter => fighter.GetState().Stats.Str);
         if (strongestFighter is null) 

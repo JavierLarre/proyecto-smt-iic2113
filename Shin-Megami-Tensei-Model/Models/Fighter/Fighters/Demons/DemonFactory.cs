@@ -2,6 +2,7 @@
 
 public class DemonFactory: AbstractFighterFactory
 {
+    private static int _filePriority;
     private const string JsonFile = "monsters.json";
 
     private static readonly IList<DemonDataFromJson> Data = GetData();
@@ -9,11 +10,6 @@ public class DemonFactory: AbstractFighterFactory
     private static IList<DemonDataFromJson> GetData()
     {
         return JsonDeserializer.Deserialize<DemonDataFromJson>(JsonFile);
-    }
-
-    private int GetDataIndex(DemonDataFromJson data)
-    {
-        return Data.IndexOf(data);
     }
     
     private DemonDataFromJson FindDataByName(string name) =>
@@ -29,21 +25,16 @@ public class DemonFactory: AbstractFighterFactory
         return BuildDemon(demonData);
     }
 
-    public IEnumerable<IFighterModel> GetDemonLibrary()
-    {
-        return Data.Select(BuildDemon);
-    }
-
     private Demon BuildDemon(DemonDataFromJson data)
     {
-        UnitData unitData = new UnitData()
+        UnitData unitData = new UnitData
         {
             Affinities = BuildAffinitiesFrom(data.affinity),
             Stats = BuildStatsFrom(data.stats),
             Name = data.name,
             Skills = GetSkillsFromNames(data.skills),
             FightOptions = Demon.FightOptions,
-            FilePriority = GetDataIndex(data)
+            FilePriority = _filePriority++
         };
         return new Demon(unitData);
     }
