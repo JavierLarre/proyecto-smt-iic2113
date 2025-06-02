@@ -30,35 +30,49 @@ public class FightOrder: AbstractModel
 
     public void UpdateFightOrderFrom(Team team)
     {
-        if (AreListsEqual(team.GetTeamState().FightersInOrder)) 
-            return;
         TeamState teamState = team.GetTeamState();
         IFighterModel leader = teamState.Leader;
-        if (!_fightersInOrder.Contains(leader) && leader.GetState().IsAlive)
+        IFighterModel newFighter = teamState.LastSummonedFighter;
+
+        if (AreListsEqual(teamState.FightersInOrder)) 
+            return;
+        if (ShouldLeaderBeAdded(leader))
         {
             _fightersInOrder.AddLast(leader);
-            return;
         }
-        IFighterModel newFighter = teamState.LastSummonedFighter;
-        IFighterModel previousFighter = teamState.LastReservedFighter;
-        if (_fightersInOrder.Contains(previousFighter))
-            RemovePreviousFighter(previousFighter, newFighter);
+        else if (IsOrderOutOfDate(teamState))
+        {
+            RemovePreviousFighter(teamState);
+        }
         else
+        {
             _fightersInOrder.AddLast(newFighter);
+        }
+    }
+
+    private bool IsOrderOutOfDate(TeamState teamState)
+    {
+        IFighterModel previousFighter = teamState.LastReservedFighter;
+        return _fightersInOrder.Contains(previousFighter);
+    }
+
+    private bool ShouldLeaderBeAdded(IFighterModel leader)
+    {
+        return !_fightersInOrder.Contains(leader) && leader.GetState().IsAlive;
     }
 
     private bool AreListsEqual(ICollection<IFighterModel> fighters)
     {
-        bool sameSize = fighters.Count == _fightersInOrder.Count;
-        if (!sameSize) return false;
         HashSet<IFighterModel> teamFighters = fighters.ToHashSet();
         HashSet<IFighterModel> fightersInOrder = _fightersInOrder.ToHashSet();
         bool haveSameElements = teamFighters.SetEquals(fightersInOrder);
         return haveSameElements;
     }
 
-    private void RemovePreviousFighter(IFighterModel previousFighter, IFighterModel newFighter)
+    private void RemovePreviousFighter(TeamState teamState)
     {
+        IFighterModel previousFighter = teamState.LastReservedFighter;
+        IFighterModel newFighter = teamState.LastSummonedFighter;
         var node = _fightersInOrder.Find(previousFighter)!;
         _fightersInOrder.AddAfter(node, newFighter);
         _fightersInOrder.Remove(node);
