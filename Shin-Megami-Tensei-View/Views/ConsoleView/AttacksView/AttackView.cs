@@ -72,6 +72,7 @@ public class AttackView: ITypeView
             "Ice" => "lanza hielo",
             "Elec" => "lanza electricidad",
             "Force" => "lanza viento",
+            "Almighty" => "lanza un ataque todo poderoso",
             _ => ""
         };
     }
