@@ -33,11 +33,12 @@ public class Invitation: ISkillController
 
     private void HealTarget()
     {
+        if (!_targetWasDead) 
+            return;
         HealSkillType type = new HealSkillType(_skillData);
         type.SetTarget(_target);
         type.ApplyEffect(_table);
         type.SetCaster(_gameState.CurrentFighter);
-        if (!_targetWasDead) return;
         ITypeView actionView = type.GetActionView();
         actionView.Display();
         actionView.DisplayEnding();

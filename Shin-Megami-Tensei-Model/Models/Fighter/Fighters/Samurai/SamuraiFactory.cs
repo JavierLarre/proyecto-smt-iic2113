@@ -25,11 +25,6 @@ public class SamuraiFactory: AbstractFighterFactory
             FightOptions = Samurai.FightOptions,
             FilePriority = -1
         };
-        Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        foreach (SkillData skill in unitData.Skills)
-        {
-            Console.WriteLine(skill.Name);
-        }
         return new Samurai(unitData);
     }
     

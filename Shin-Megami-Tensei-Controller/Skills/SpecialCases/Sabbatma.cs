@@ -19,7 +19,6 @@ public class Sabbatma: ISkillController
         _table = table;
         Summon();
         _table.GetGameState().TurnsModel.ConsumeTurn();
-        ConsumeMp();
         _table.IncreaseCurrentPlayerUsedSkillsCount();
     }
 
@@ -29,6 +28,7 @@ public class Sabbatma: ISkillController
         var summonablePositions = new SummonablePositionsController(_table);
         summonController.AskUserForTarget();
         int atPosition = summonablePositions.GetPositionFromUser();
+        ConsumeMp();
         summonController.SummonAt(atPosition);
     }
 

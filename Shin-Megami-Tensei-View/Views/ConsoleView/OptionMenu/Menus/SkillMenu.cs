@@ -12,12 +12,6 @@ public class SkillMenu: AbstractOptionsMenu
         {
             AddOption(skill.Name, skill.ToString());
         }
-
-        foreach (SkillData skill in fighter.GetState().Skills)
-        {
-            Console.WriteLine(skill.Name);
-            Console.WriteLine(skill.Cost);
-        }
         AddCancelOption();
         SetHeader($"Seleccione una habilidad para que {fighter.GetState().Name} use");
     }
