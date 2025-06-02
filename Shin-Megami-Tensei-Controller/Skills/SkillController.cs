@@ -1,7 +1,5 @@
 ﻿using Shin_Megami_Tensei_Model;
 using Shin_Megami_Tensei_View.Views.ConsoleView;
-using Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
-using Shin_Megami_Tensei.Battles;
 using Shin_Megami_Tensei.Fighters.Skills.SkillHits;
 using Shin_Megami_Tensei.Fighters.Skills.SkillTargets;
 using Shin_Megami_Tensei.Fighters.Skills.SkillTypes;
