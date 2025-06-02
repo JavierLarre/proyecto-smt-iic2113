@@ -28,35 +28,10 @@ public class Team: AbstractModel, IModelObserver
             LastReservedFighter = _lastReserved,
             LastSummonedFighter = _lastSummoned,
             DeadFighters = GetDeadFighters(),
-            AliveReserve = _reserve.Where(fighter => fighter.GetState().IsAlive).ToList()
+            AliveReserve = GetAliveReserve()
         };
     }
-
-    private ICollection<IFighterModel> GetDeadFighters()
-    {
-        IFighterModel[] leaderList = [_frontRow[0]];
-        var allFighters = leaderList.Concat(_reserve);
-        var deadFighters = allFighters.Where(fighter => !fighter.GetState().IsAlive);
-        return deadFighters.ToList();
-    }
-
-    private void SubscribeToFighters()
-    {
-        var allFighters = _frontRow.Concat(_reserve);
-        foreach (IFighterModel fighter in allFighters)
-            fighter.AddObserver(this);
-    }
-
-
-    private IEnumerable<IFighterModel> GetFightOrder()
-    {
-        var order = GetAliveFront()
-            .OrderBy(fighter => fighter.GetState().Stats.Spd * -1);
-        return order;
-    }
     
-    public IFighterModel GetLeader() => _frontRow[0];
-    public IEnumerable<IFighterModel> GetFrontRow() => _frontRow;
     public void Summon(IFighterModel inFighter, int atPosition)
     {
         _reserve.Remove(inFighter);
@@ -75,6 +50,7 @@ public class Team: AbstractModel, IModelObserver
             if (!fighter.GetState().IsAlive)
                 fighter.AddToReserve(this);
         SortReserve();
+        UpdateObservers();
     }
 
     public void MoveToReserve(IFighterModel fighter)
@@ -86,6 +62,21 @@ public class Team: AbstractModel, IModelObserver
         SortReserve();
         _frontRow[fighterIndex] = new EmptyFighter();
         _lastReserved = fighter;
+    }
+
+    private ICollection<IFighterModel> GetAliveReserve()
+    {
+        return _reserve
+            .Where(fighter => fighter.GetState().IsAlive)
+            .ToList();
+    }
+
+    private ICollection<IFighterModel> GetDeadFighters()
+    {
+        IFighterModel[] leaderList = [_frontRow[0]];
+        var allFighters = leaderList.Concat(_reserve);
+        var deadFighters = allFighters.Where(fighter => !fighter.GetState().IsAlive);
+        return deadFighters.ToList();
     }
 
     private IEnumerable<IFighterModel> GetAliveFront()
@@ -100,5 +91,20 @@ public class Team: AbstractModel, IModelObserver
         var sortedReserve = _reserve
             .OrderBy(fighter => fighter.GetState().FilePriority);
         _reserve = sortedReserve.ToList();
+    }
+
+    private void SubscribeToFighters()
+    {
+        var allFighters = _frontRow.Concat(_reserve);
+        foreach (IFighterModel fighter in allFighters)
+            fighter.AddObserver(this);
+    }
+
+
+    private IEnumerable<IFighterModel> GetFightOrder()
+    {
+        var order = GetAliveFront()
+            .OrderBy(fighter => fighter.GetState().Stats.Spd * -1);
+        return order;
     }
 }

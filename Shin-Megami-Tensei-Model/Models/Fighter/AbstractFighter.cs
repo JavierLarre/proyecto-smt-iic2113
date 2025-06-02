@@ -43,9 +43,6 @@ public abstract class AbstractFighter: AbstractModel, IFighterModel
     }
     
     public void SetMp(int value) => _mp.Set(value);
-    
-    public abstract void AddToReserve(Team team);
-    protected abstract bool CanBeSwapped();
     private bool IsAlive() => _hp.Get() > 0;
 
     private ICollection<SkillData> GetUsableSkills()
@@ -55,4 +52,7 @@ public abstract class AbstractFighter: AbstractModel, IFighterModel
             .Where(skill => skill.Cost <= _mp.Get())
             .ToList();
     }
+    
+    public abstract void AddToReserve(Team team);
+    protected abstract bool CanBeSwapped();
 }

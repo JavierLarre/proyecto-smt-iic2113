@@ -3,7 +3,7 @@ using Shin_Megami_Tensei_View.Views.ConsoleView.Fighters;
 
 namespace Shin_Megami_Tensei_View.Views.ConsoleView.Battle;
 
-public class TeamView
+public class TeamView //todo: cambiarlo a Iview
 {
     private Team _team;
     private IFighterView _leader;
@@ -11,7 +11,7 @@ public class TeamView
     public TeamView(Team team)
     {
         _team = team;
-        _leader = FighterViewFactory.FromFighter(_team.GetLeader());
+        _leader = FighterViewFactory.FromFighter(_team.GetTeamState().Leader);
     }
 
     public string GetLeaderName() => _leader.GetName();
@@ -25,7 +25,7 @@ public class TeamView
 
 
     private IEnumerable<IFighterView> GetFrontRow() =>
-        _team.GetFrontRow().Select(FighterViewFactory.FromFighter);
+        _team.GetTeamState().FrontRow.Select(FighterViewFactory.FromFighter);
 
     private string GetFighterPosition(IFighterView fighter, int position)
     {

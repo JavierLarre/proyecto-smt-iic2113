@@ -1,5 +1,4 @@
-﻿using Shin_Megami_Tensei_Model.Fighters;
-
+﻿
 namespace Shin_Megami_Tensei_Model;
 
 public class FightOrder: AbstractModel
@@ -31,13 +30,31 @@ public class FightOrder: AbstractModel
 
     public void UpdateFightOrderFrom(Team team)
     {
+        if (AreListsEqual(team.GetTeamState().FightersInOrder)) 
+            return;
         TeamState teamState = team.GetTeamState();
+        IFighterModel leader = teamState.Leader;
+        if (!_fightersInOrder.Contains(leader) && leader.GetState().IsAlive)
+        {
+            _fightersInOrder.AddLast(leader);
+            return;
+        }
         IFighterModel newFighter = teamState.LastSummonedFighter;
         IFighterModel previousFighter = teamState.LastReservedFighter;
         if (_fightersInOrder.Contains(previousFighter))
             RemovePreviousFighter(previousFighter, newFighter);
         else
             _fightersInOrder.AddLast(newFighter);
+    }
+
+    private bool AreListsEqual(ICollection<IFighterModel> fighters)
+    {
+        bool sameSize = fighters.Count == _fightersInOrder.Count;
+        if (!sameSize) return false;
+        HashSet<IFighterModel> teamFighters = fighters.ToHashSet();
+        HashSet<IFighterModel> fightersInOrder = _fightersInOrder.ToHashSet();
+        bool haveSameElements = teamFighters.SetEquals(fightersInOrder);
+        return haveSameElements;
     }
 
     private void RemovePreviousFighter(IFighterModel previousFighter, IFighterModel newFighter)
