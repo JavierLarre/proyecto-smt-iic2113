@@ -12,10 +12,7 @@ public class DrainAffinity: AbstractAffinity
         Target.SetHp(targetHp + healedHp);
     }
 
-    public override int GetPriority()
-    {
-        throw new NotImplementedException();
-    }
+    public override int GetPriority() => 4;
 
     public override void ConsumeTurns(TurnsModel turnsModel)
     {

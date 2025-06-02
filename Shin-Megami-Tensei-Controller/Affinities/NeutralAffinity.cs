@@ -4,10 +4,7 @@ namespace Shin_Megami_Tensei.Fighters;
 
 public class NeutralAffinity: AbstractAffinity
 {
-    public override int GetPriority()
-    {
-        throw new NotImplementedException();
-    }
+    public override int GetPriority() => 0;
 
     public override void ConsumeTurns(TurnsModel turnsModel)
     {

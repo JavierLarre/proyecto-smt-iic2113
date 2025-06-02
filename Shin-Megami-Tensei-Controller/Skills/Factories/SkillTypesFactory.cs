@@ -17,6 +17,7 @@ public static class SkillTypesFactory
             "Heal" => new HealSkillType(skillData),
             "Ailment" => new AilmentSkillType(),
             "Light" => new LightType(),
+            "Almighty" => new AlmightySkillType(skillData),
             _ => throw new ArgumentException("Type Not Found", skillData.Type)
         };
     }

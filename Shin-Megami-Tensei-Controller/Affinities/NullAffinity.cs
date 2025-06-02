@@ -13,8 +13,5 @@ public class NullAffinity: AbstractAffinity
     }
 
     public override int GetDamageDone() => 0;
-    public override int GetPriority()
-    {
-        throw new NotImplementedException();
-    }
+    public override int GetPriority() => 3;
 }

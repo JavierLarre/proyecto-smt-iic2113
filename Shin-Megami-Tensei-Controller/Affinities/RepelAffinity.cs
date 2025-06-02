@@ -16,8 +16,5 @@ public class RepelAffinity: AbstractAffinity
         turnsModel.ConsumeAll();
     }
 
-    public override int GetPriority()
-    {
-        throw new NotImplementedException();
-    }
+    public override int GetPriority() => 4;
 }

@@ -11,7 +11,7 @@ public static class SkillTargetsFactory
             "Single" => new SingleSkillTarget(),
             "Ally" => new AllySkillTarget(skill.Name),
             "Party" => new PartyTargets(),
-            "All" => new AllTargets(),
+            "All" => new AllEnemiesTargets(),
             _ => throw new ArgumentException("Target Not Implemented", skill.Target)
         };
     }

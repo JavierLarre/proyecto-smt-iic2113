@@ -36,6 +36,8 @@ public class SkillController: ISkillController
     private void ApplyEffectsOnTargets()
     {
         var targets = _targets.GetTargets(_table);
+        ITypeView typeView = _type.GetActionView();
+        typeView.StartDisplay();
         foreach (IFighterModel target in targets)
             SingularApplyEffect(target);
         
@@ -45,7 +47,6 @@ public class SkillController: ISkillController
     {
         _type.SetTarget(target);
         ITypeView typeView = _type.GetActionView();
-        typeView.StartDisplay();
         int hits = _hits.GetHits(_table);
         for (int i = 0; i < hits; i++)
         {
@@ -77,13 +78,9 @@ public class SkillController: ISkillController
 
     private IAffinityController GetPrioritizedAffinity()
     {
-        IAffinityController prioritizedAffinity = new NeutralAffinity();
-        foreach (IFighterModel target in _targets.GetTargets(_table))
-        {
-            prioritizedAffinity = _type.GetAffinityFrom(target);
-            // int priority = prioritizedAffinity.GetPriority();
-        }
-
+        var targets = _targets.GetTargets(_table);
+        var afffinities = targets.Select(_type.GetAffinityFrom);
+        var prioritizedAffinity = afffinities.MaxBy(affinity => affinity.GetPriority())!;
         return prioritizedAffinity;
     }
 

@@ -11,8 +11,5 @@ public class ResistAffinity: AbstractAffinity
     }
 
     public override int GetDamageDone() => GameConstants.Truncate(Damage * 0.5);
-    public override int GetPriority()
-    {
-        throw new NotImplementedException();
-    }
+    public override int GetPriority() => 0;
 }
